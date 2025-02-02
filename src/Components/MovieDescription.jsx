@@ -1,7 +1,6 @@
 import Modal from "react-modal";
 import { BsBookmark } from "react-icons/bs";
 import { useState } from "react";
-import CustomAlert from "./CustomAlert";
 
 const MovieModal = ({ isOpen, movie, onClose }) => {
   const customStyles = {
@@ -51,12 +50,6 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
             >
               <BsBookmark color="white" size={30} />
               Add to Favourites
-              {showAlert && (
-                <CustomAlert
-                  message="Added to favourite Movies !!"
-                  onClose={() => setShowAlert(false)}
-                />
-              )}
             </button>
 
             <span>
