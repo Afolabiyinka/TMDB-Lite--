@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 import { getLatestMovies } from "../Services/API";
 import MovieCard from "../Components/MovieCard";
-
-import { ToastContainer, toast, Bounce } from "react-toastify";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
-  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
