@@ -1,3 +1,4 @@
+import React from "react";
 import MovieModal from "./MovieDescription";
 
 const MovieCard = ({ movie }) => {
