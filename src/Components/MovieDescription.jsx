@@ -1,6 +1,5 @@
 import Modal from "react-modal";
 import { BsBookmark } from "react-icons/bs";
-import { useState } from "react";
 
 const MovieModal = ({ isOpen, movie, onClose }) => {
   const customStyles = {
@@ -25,12 +24,6 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
     },
   };
 
-  const handleFavourites = () => {
-    setShowAlert(true);
-  };
-
-  const [showAlert, setShowAlert] = useState(false);
-
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
       <div className="h-full w-full bg-orange-400 flex flex-col md:flex-row">
@@ -44,10 +37,7 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
           <h3>{movie.release_date}</h3>
           <p>{movie.overview}</p>
           <span>
-            <button
-              className="flex justify-center bg-red-500 p-2 rounded-md items-center hover:px-8 transition-all hover:bg-gradient-to-r hover:from-red-500 duration-300 hover:to-yellow-500"
-              onClick={handleFavourites}
-            >
+            <button className="flex justify-center bg-red-500 p-2 rounded-md items-center hover:px-8 transition-all hover:bg-gradient-to-r hover:from-red-500 duration-300 hover:to-yellow-500">
               <BsBookmark color="white" size={30} />
               Add to Favourites
             </button>
