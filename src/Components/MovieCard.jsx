@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import MovieModal from "./MovieDescription";
 
 const MovieCard = ({ movie }) => {
