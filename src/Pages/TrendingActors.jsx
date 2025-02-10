@@ -15,7 +15,7 @@
 //         setActors(popularActors);
 //       } catch (err) {
 //         console.log(err);
-//         setLoading(false)
+//         setLoading(false);
 //         setError(true);
 //       } finally {
 //         console.log("hello");
@@ -24,12 +24,22 @@
 //     loadPopularActors();
 //   }, []);
 //   return (
-//     {loading ? <h1>Loading</h1> :  <div className="h-screen w-screen">
-//         {actors.map((actor) => (
-//           <Actor actor={actor} key={actor.id} />
-//         ))}
-//       </div>}
-
+//     <div>
+//       {loading ? (
+//         <h1>Loading</h1>
+//       ) : (
+//         <div className="h-screen w-screen">
+//           {actors.map((actor) => (
+//             <Actor actor={actor} key={actor.id} />
+//           ))}
+//         </div>
+//         if (error) {
+//         return (
+//             <h1>No Actors Available</h1>
+//         )
+//         }
+//       )}
+//     </div>
 //   );
 // };
 

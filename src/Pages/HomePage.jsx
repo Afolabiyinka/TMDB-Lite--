@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { getLatestMovies } from "../Services/API";
 import MovieCard from "../Components/MovieCard";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { useTheme } from "../Contexts/ThemeContext";
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const loadLatestMovies = async () => {
@@ -14,19 +16,6 @@ const HomePage = () => {
         setLoading(true);
         setMovies(latestMovies);
       } catch (err) {
-        // setError(
-        //   toast.error("Couldn't connect to our servers!", {
-        //     position: "top-center",
-        //     autoClose: 5000,
-        //     hideProgressBar: false,
-        //     closeOnClick: false,
-        //     pauseOnHover: true,
-        //     draggable: true,
-        //     progress: undefined,
-        //     theme: "dark",
-        //     transition: Bounce,
-        //   })
-        // );
         console.error(err);
       } finally {
         setLoading(false);
@@ -36,7 +25,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div>
+    <div className={`homepage ${theme}`}>
       {loading ? (
         <DotLottieReact
           src="https://lottie.host/27577e84-d8de-4288-a090-48bf46d002bc/aREEtT36RE.lottie"
@@ -44,7 +33,7 @@ const HomePage = () => {
           autoplay
         />
       ) : (
-        <div className="bg-[#0B0C10] min-h-screen w-full grid gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="min-h-screen w-full grid gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {movies.map((movie) => (
             <MovieCard movie={movie} key={movie.id} />
           ))}

@@ -1,8 +1,10 @@
 import React from "react";
 import MovieModal from "./MovieDescription";
+import { useTheme } from "../Contexts/ThemeContext";
 
 const MovieCard = ({ movie }) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const { theme } = useTheme();
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -13,7 +15,11 @@ const MovieCard = ({ movie }) => {
   };
 
   return (
-    <div className="bg-[#191919] rounded-md shadow-lg w-full overflow-hidden flex flex-col p-1 gap-1 transition-all duration-300">
+    <div
+      className={`movie-card ${theme} rounded-md border-2 ${
+        theme === "dark" ? "border-gray-700" : "border-gray-300"
+      }`}
+    >
       {/* Movie Poster */}
       <img
         src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`}
@@ -22,24 +28,18 @@ const MovieCard = ({ movie }) => {
       />
 
       {/* Movie Info */}
-      <div className="flex flex-col justify-center gap-2 p-2 bg-[#191919]] rounded-md text-white items-start">
+      <div className="flex flex-col justify-center gap-2 p-2 rounded-md items-start">
         <span>
           <h1 className="text-2xl overflow-hidden transition-transform duration-500">
             {movie.title}
-            {/* <p>{movie.id}</p> */}
           </h1>
           <p className="text-xs">{movie.release_date.split("-")[0]}</p>
         </span>
         <span>
           <button
-            className=" py-2 rounded-md duration-300  px-8 transition-all bg-gradient-to-r from-red-500 to-yellow-500 hover:px-14"
+            className="py-2 rounded-md duration-300 px-8 transition-all bg-gradient-to-r from-red-500 to-yellow-500 hover:px-14"
             onClick={handleOpenModal}
           >
-            <MovieModal
-              isOpen={isOpen}
-              movie={movie}
-              onClose={handleCloseModal}
-            />
             View
           </button>
           {isOpen && (

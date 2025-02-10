@@ -36,21 +36,18 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
           <h1 className="text-2xl md:text-4xl font-serif">{movie.title}</h1>
           <h3>{movie.release_date}</h3>
           <p>{movie.overview}</p>
-          <span>
+          <div className="flex flex-col md:flex-row gap-2">
             <button className="flex justify-center bg-red-500 p-2 rounded-md items-center hover:px-8 transition-all hover:bg-gradient-to-r hover:from-red-500 duration-300 hover:to-yellow-500">
               <BsBookmark color="white" size={30} />
-              Add to Favourites
+              <span className="ml-2">Add to Favourites</span>
             </button>
-
-            <span>
-              <button
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                onClick={onClose}
-              >
-                Close
-              </button>
-            </span>
-          </span>
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              onClick={onClose}
+            >
+              Close
+            </button>
+          </div>
         </div>
       </div>
     </Modal>
