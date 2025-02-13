@@ -26,7 +26,7 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
-      <div className="h-full w-full bg-orange-400 flex flex-col md:flex-row">
+      <div className="h-full w-full bg-orange-400 flex flex-col md:flex-row overflow-hidden">
         <img
           src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
           alt={movie.title}

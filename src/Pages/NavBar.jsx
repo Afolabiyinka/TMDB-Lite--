@@ -8,7 +8,7 @@ const NavBar = () => {
   const [icon, setIcon] = useState(true);
 
   return (
-    <div className="h-[10vh] bg-[#080d11] text-white flex items-center justify-between px-4">
+    <div className={`h-[10vh] {theme} flex items-center justify-between px-4`}>
       <h1>TDMB Lite ✨</h1>
       <ModeToggle />
     </div>
