@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 
 // DropdownMenu component
 export const DropdownMenu = ({ children }) => {
