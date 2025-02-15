@@ -1,8 +1,5 @@
 import { ModeToggle } from "../Contexts/ModeToggle";
 
-import { useTheme } from "../Contexts/ThemeContext";
-import { useState } from "react";
-
 const NavBar = () => {
   // const { setTheme } = useTheme();
   // const [icon, setIcon] = useState(true);
