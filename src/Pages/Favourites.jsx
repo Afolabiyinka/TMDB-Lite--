@@ -15,7 +15,6 @@ const Favourites = () => {
       try {
         setLoading(true);
       } catch (err) {
-        s;
       } finally {
         setTimeout(() => setLoading(false), 2000);
       }
