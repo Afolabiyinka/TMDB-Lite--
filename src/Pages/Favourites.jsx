@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useTheme } from "../Contexts/ThemeContext";
 import Lottie from "lottie-react";
 import loadingAnimation from "../Assets/LoadingAnimations.json";
-import MovieCard from "../Components/Movie Components/MovieCard";
-import errorAnimation from "../Assets/ErrorAnimation.json";
+// import MovieCard from "../Components/Movie Components/MovieCard";
+// import errorAnimation from "../Assets/ErrorAnimation.json";
 
 const Favourites = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
   const { theme } = useTheme();
 
   useEffect(() => {

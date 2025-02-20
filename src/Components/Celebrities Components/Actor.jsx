@@ -37,7 +37,7 @@ const Actor = ({ actor }) => {
 
         {isOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-[#191919] p-5 rounded-md shadow-lg relative max-w-md w-full text-white">
+            <div className="bg-[#191919] p-5 rounded-md shadow-lg relative max-w-md w-fit text-white">
               <button
                 className="absolute top-2 right-2 text-2xl"
                 onClick={handleCloseModal}
