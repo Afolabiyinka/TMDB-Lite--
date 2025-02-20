@@ -1,57 +1,84 @@
 import { useState, useEffect } from "react";
-import { getLatestMovies } from "../Services/API";
-import MovieCard from "../Components/MovieCard";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { getLatestMovies, searchMovies } from "../Services/API";
+import MovieCard from "../Components/Movie Components/MovieCard";
 import { useTheme } from "../Contexts/ThemeContext";
+import Lottie from "lottie-react";
+import loadingAnimation from "../Assets/LoadingAnimations.json";
+import errorAnimation from "../Assets/ErrorAnimation.json";
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const { theme } = useTheme();
 
   useEffect(() => {
     const loadLatestMovies = async () => {
       try {
+        setLoading(true);
         const latestMovies = await getLatestMovies();
         setMovies(latestMovies);
-        setLoading(true);
       } catch (err) {
         setError(true);
-        console.error(err);
       } finally {
         setTimeout(() => {
           setLoading(false);
-        }, 2000); // Adjust the delay duration as needed (2000ms = 2 seconds)
+        }, 2000);
       }
     };
     loadLatestMovies();
   }, []);
 
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+    if (loading) return;
+    setLoading(true);
+    try {
+      const searchResults = await searchMovies(searchQuery);
+      setMovies(searchResults);
+      setError(null);
+    } catch (err) {
+      console.log(err);
+      setError("Failed to load movies");
+    }
+  };
+
   return (
-    <div className={`homepage ${theme}`}>
+    <div
+      className={` ${theme} flex flex-col justify-center items-center h-full`}
+    >
+      {/* <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          placeholder="Search for movies...."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="rounded-md py-[0.5rem] px-[1rem] outline-none"
+        />
+        <button>Search</button>
+      </form> */}
       {loading ? (
         <div className="flex justify-center items-center flex-col min-h-screen">
-          <DotLottieReact
-            src="https://lottie.host/27577e84-d8de-4288-a090-48bf46d002bc/aREEtT36RE.lottie"
-            loop
-            autoplay
+          <Lottie
+            animationData={loadingAnimation}
             style={{ width: "200px", height: "200px" }}
           />
-          <h1 className={` ${theme}`}>Loading...</h1>
+          <h1 className={` ${theme}`}>Loading Movies...</h1>
         </div>
       ) : error ? (
-        <div className="flex justify-center items-center flex-col min-h-screen">
-          <DotLottieReact
-            src="https://lottie.host/7a8bf9e6-3d48-4076-99a9-7ddbfb371d70/0dDxtcZn3L.lottie"
-            loop
-            autoplay
-            style={{ width: "200px", height: "200px" }}
+        <div className="flex justify-center items-center flex-col min-h-screen gap-4">
+          <Lottie
+            animationData={errorAnimation}
+            style={{ width: "100px", height: "100px" }}
           />
-          <h1 className={`text-2xl ${theme}`}>No Movies Found</h1>
+          <h1 className={`text-2xl ${theme}`}>
+            Couldn't connect to our servers ⚠
+          </h1>
         </div>
       ) : (
-        <div className="min-h-screen w-full grid gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className=" h-[90vh] w-full grid gap-12  md:grid-cols-3 lg:grid-cols-3 p-4">
           {movies.map((movie) => (
             <MovieCard movie={movie} key={movie.id} />
           ))}

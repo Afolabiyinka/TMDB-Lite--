@@ -4,17 +4,21 @@ import Favourites from "./Pages/Favourites";
 import TrendingActors from "./Pages/TrendingActors";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./Contexts/ThemeContext";
+// import Login from "./Pages/Login";
+// import Footer from "./Pages/Footer";
 
 function App() {
   return (
     <>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
         <NavBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/favourites" element={<Favourites />} />
           <Route path="/trending-actors" element={<TrendingActors />} />
+          {/* <Route path="/auth" element={<Login />} /> */}
         </Routes>
+        {/* <Footer /> */}
       </ThemeProvider>
     </>
   );

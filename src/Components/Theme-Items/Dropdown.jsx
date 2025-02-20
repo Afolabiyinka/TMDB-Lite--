@@ -2,7 +2,11 @@ import React, { useRef, useEffect } from "react";
 
 // DropdownMenu component
 export const DropdownMenu = ({ children }) => {
-  return <div className="relative inline-block text-left">{children}</div>;
+  return (
+    <div className="relative inline-block text-left transition-all">
+      {children}
+    </div>
+  );
 };
 
 // DropdownMenuTrigger component
@@ -10,7 +14,9 @@ export const DropdownMenuTrigger = ({ children, asChild, onClick }) => {
   return asChild ? (
     React.cloneElement(children, { onClick })
   ) : (
-    <button onClick={onClick}>{children}</button>
+    <button onClick={onClick} className="transition-all">
+      {children}
+    </button>
   );
 };
 
@@ -53,7 +59,7 @@ export const DropdownMenuContent = ({ children, align = "start", isOpen }) => {
 export const DropdownMenuItem = ({ children, onClick }) => {
   return (
     <div
-      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer"
+      className="  py-2 text-sm text-gray-700 flex justify-between px-2 hover:bg-gray-100 hover:text-gray-900 cursor-pointer"
       role="menuitem"
       tabIndex="-1"
       onClick={onClick}

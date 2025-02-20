@@ -1,6 +1,6 @@
 import React from "react";
 import MovieModal from "./MovieDescription";
-import { useTheme } from "../Contexts/ThemeContext";
+import { useTheme } from "../../Contexts/ThemeContext";
 
 const MovieCard = ({ movie }) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -16,21 +16,21 @@ const MovieCard = ({ movie }) => {
 
   return (
     <div
-      className={`movie-card ${theme} rounded-md border-2 ${
-        theme === "dark" ? "border-gray-700" : "border-gray-300"
-      }`}
+      className={`movie-card ${theme} rounded-lg border-2  ${
+        theme === "dark" ? "bg-[#252525]" : "bg-white"
+      } ${theme === "dark" ? "border-black" : "border-gray-100"}`}
     >
       {/* Movie Poster */}
       <img
-        src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`}
+        src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
         alt={movie.title}
-        className="w-full h-72 object-cover hover:scale-95 transition-all"
+        className="w-full h-96 transition-all rounded-lg"
       />
 
       {/* Movie Info */}
       <div className="flex flex-col justify-center gap-2 p-2 rounded-md items-start">
         <span>
-          <h1 className="text-2xl overflow-hidden transition-transform duration-500">
+          <h1 className="text-xl font- transition-transform duration-500">
             {movie.title}
           </h1>
           <p className="text-xs">{movie.release_date.split("-")[0]}</p>

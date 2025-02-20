@@ -9,12 +9,18 @@ export const getLatestMovies = async () => {
   return data.results;
 };
 
-export const searchMovies = async () => {};
+// export const searchMovies = async (query) => {
+//   const response = await fetch(
+//     `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
+//       query
+//     )}`
+//   );
+// };
 
 export const getPopularPeople = async () => {
   const response = await fetch(
-    `${BASE_URL}trending/person/day?api_key=${API_KEY}`
+    `${BASE_URL}/trending/person/day?api_key=${API_KEY}`
   );
-  const actors = await response.json();
-  return actors.results;
+  const actor = await response.json();
+  return actor.results;
 };
