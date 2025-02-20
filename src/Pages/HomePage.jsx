@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getLatestMovies, searchMovies } from "../Services/API";
+import { getLatestMovies } from "../Services/API";
 import MovieCard from "../Components/Movie Components/MovieCard";
 import { useTheme } from "../Contexts/ThemeContext";
 import Lottie from "lottie-react";
