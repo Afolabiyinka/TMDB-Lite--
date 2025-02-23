@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-
+import { useTheme } from "../../Contexts/ThemeContext";
 const Actor = ({ actor }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme } = useTheme();
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -12,19 +13,23 @@ const Actor = ({ actor }) => {
   };
 
   return (
-    <div className="bg-[#191919] rounded-md shadow-lg w-full overflow-hidden flex flex-col p-2 gap-2 transition-all duration-300">
+    <div
+      className={`${theme} rounded-md shadow-lg w-full flex flex-col p-2 gap-2 transition-all duration-300`}
+    >
       {/* Actor Profile */}
       <img
         src={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`}
         alt={actor.original_name}
-        className="w-full h-72 object-cover rounded-md"
+        className="w-full h-96 object-cover rounded-md"
       />
 
       {/* Actor Info */}
-      <div className="flex flex-col justify-center gap-2 p-3 bg-[#191919] rounded-md text-white">
+      <div
+        className={`flex flex-col justify-center gap-2 p-3 ${theme} rounded-md text-white`}
+      >
         <div>
           <h1 className="text-2xl font-bold">{actor.original_name}</h1>
-          <p className="text-sm text-gray-400">{actor.media_type || "Actor"}</p>
+          {/* <p className="text-sm text-gray-400">{actor.media_type}</p> */}
           <p className="text-sm text-gray-400">{actor.known_for_department}</p>
         </div>
 
@@ -36,8 +41,12 @@ const Actor = ({ actor }) => {
         </button>
 
         {isOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-[#191919] p-5 rounded-md shadow-lg relative max-w-md w-fit text-white">
+          <div
+            className={`fixed inset-0 flex items-center justify-center ${theme} bg-opacity-50 z-50`}
+          >
+            <div
+              className={` p-5 rounded-md shadow-lg relative max-w-md w-fit text-white`}
+            >
               <button
                 className="absolute top-2 right-2 text-2xl"
                 onClick={handleCloseModal}

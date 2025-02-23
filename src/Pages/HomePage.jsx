@@ -47,7 +47,7 @@ const HomePage = () => {
 
   return (
     <div
-      className={` ${theme} flex flex-col justify-center items-center h-full`}
+      className={` ${theme} flex flex-col justify-center items-center h-fit`}
     >
       {/* <form onSubmit={handleSearch}>
         <input
