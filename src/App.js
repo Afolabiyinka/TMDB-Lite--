@@ -5,7 +5,7 @@ import TrendingActors from "./Pages/TrendingActors";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "./Contexts/ThemeContext";
 
-import Footer from "./Pages/Footer";
+// import Footer from "./Pages/Footer";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
           {/* <Route path="/auth" element={<Login />} /> */}
         </Routes>
       </ThemeProvider>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
