@@ -57,8 +57,8 @@ const MobileNavBar = () => {
               Celebrities
               <Video />
             </Link>
+            <ModeToggle />
           </DropdownMenuItem>
-          <ModeToggle />
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

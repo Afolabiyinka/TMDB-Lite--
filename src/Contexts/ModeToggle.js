@@ -24,7 +24,7 @@ export function ModeToggle() {
   };
 
   return (
-    <div className="hidden lg:grid">
+    <div className=" lg:grid">
       <DropdownMenu>
         <DropdownMenuTrigger asChild onClick={handleToggle}>
           <Button size="icon">
