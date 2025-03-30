@@ -19,20 +19,21 @@ const HomePage = () => {
         setLoading(true);
         const popularMovies = await getLatestMovies();
         setMovies(popularMovies);
+        setError(null); // Clear error on successful fetch
       } catch (err) {
         setError("Failed to load movies...");
+        console.log(err);
       } finally {
-        setTimeout(() => setLoading(false), 1000);
+        setLoading(false);
       }
     };
 
     loadPopularMovies();
-  }, [searchQuery]);
+  }, [searchQuery]); // Re-run when searchQuery changes
 
   useEffect(() => {
     const handleSearch = async () => {
       if (!searchQuery.trim()) return;
-      if (loading) return;
 
       try {
         setLoading(true);
@@ -40,13 +41,13 @@ const HomePage = () => {
         setMovies(searchResults);
         setError(null);
       } catch (err) {
-        setLoading(false);
-        console.log(err);
         setError("Failed to search movies...");
+        console.log(err);
       } finally {
         setLoading(false);
       }
     };
+
     handleSearch();
   }, [searchQuery]);
 
