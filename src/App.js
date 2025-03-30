@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { theme, ThemeProvider } from "@material-tailwind/react";
 import NavBar from "./Pages/NavBar";

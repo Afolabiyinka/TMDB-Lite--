@@ -20,7 +20,6 @@ const HomePage = () => {
         const popularMovies = await getLatestMovies();
         setMovies(popularMovies);
       } catch (err) {
-        console.log(err);
         setError("Failed to load movies...");
       } finally {
         setTimeout(() => setLoading(false), 1000);
