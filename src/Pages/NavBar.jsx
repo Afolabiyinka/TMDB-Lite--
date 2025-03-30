@@ -1,57 +1,101 @@
-import React from "react";
-import { ModeToggle } from "../Contexts/ModeToggle";
-import { useTheme } from "../Contexts/ThemeContext";
-import { Link } from "react-router-dom";
-import { Home, HeartIcon, Video } from "lucide-react";
-import MobileNavBar from "./MobileNavBar";
-import tmdbLogo from "../Assets/Images/the real logo.svg";
+import * as React from "react";
+import {
+  IconButton,
+  Typography,
+  Collapse,
+  Navbar,
+  Input,
+} from "@material-tailwind/react";
+import tmdbLogo from "../Assets/the real logo.svg";
+import { Search, Video, Home, User, X, Menu, Heart } from "lucide-react";
 
-const NavBar = () => {
-  const { theme } = useTheme();
+const LINKS = [
+  {
+    icon: Home,
+    title: "Home",
+    href: "/",
+  },
+
+  {
+    icon: Heart,
+    title: "Favourites",
+    href: "/Favourites",
+  },
+  {
+    icon: Video,
+    title: "Celebrities",
+    href: "/celebrities",
+  },
+  {
+    icon: User,
+    title: "Account",
+    href: "#",
+  },
+];
+
+function NavList() {
+  return (
+    <ul className="mt-4 flex flex-col gap-x-6 gap-y-2 lg:mt-0 lg:flex-row lg:items-center">
+      {LINKS.map(({ icon: Icon, title, href }) => (
+        <li key={title}>
+          <Typography
+            as="a"
+            href={href}
+            type="medium"
+            className="flex items-center gap-x-2 p-1 hover:text-primary"
+          >
+            <Icon className="h-4 w-4" />
+            {title}
+          </Typography>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export default function NavBar() {
+  const [openNav, setOpenNav] = React.useState(false);
+
+  React.useEffect(() => {
+    window.addEventListener(
+      "resize",
+      () => window.innerWidth >= 960 && setOpenNav(false)
+    );
+  }, []);
 
   return (
-    <div
-      className={`h-[10vh] ${theme}  w-full  flex items-center justify-between px-4 `}
-    >
-      <Link to="/">
-        <h1 className="text-xl transition-all duration-500 font-bold hover:text-blue-600 ">
-          <img
-            src={tmdbLogo}
-            alt="Tmdb Logo"
-            className="h-[100px] w-[100px] hover:scale-110 transition-all duration-300"
-          />
-        </h1>
-      </Link>
-      {/*Desktop Navbar*/}
-      <ul className=" hidden lg:flex gap-8">
-        <li>
-          <Link
-            to="/"
-            className="flex gap-2 rounded-md py-1 px-2 hover:transition-all hover:bg-gradient-to-r hover:from-red-500 duration-300 focus:to-yellow-500"
-          >
-            <Home />
-            Home
-          </Link>
-        </li>
-        <Link
-          to="/Favourites"
-          className="flex gap-2 rounded-md px-2 py-1 hover:transition-all hover:bg-gradient-to-r focus:from-red-500 duration-300 focus:to-yellow-500"
+    <Navbar className="mx-auto w-full max-w-screen-xl rounded-2xl">
+      <div className="flex items-center">
+        <img
+          src={tmdbLogo}
+          alt="Tmdb Mini"
+          height={100}
+          width={100}
+          className="mr-3 mx-3"
+        />
+        <hr className="ml-1 mr-1.5 hidden h-5 w-px border-l border-t-0 border-secondary-dark lg:block" />
+        <div className="hidden lg:block">
+          <NavList />
+        </div>
+        <div className="ml-auto w-40">
+          <Input size="md" type="search" placeholder="Search here...">
+            <Input.Icon>
+              <Search className="h-full w-full" />
+            </Input.Icon>
+          </Input>
+        </div>
+        <IconButton
+          size="sm"
+          variant="ghost"
+          onClick={() => setOpenNav(!openNav)}
+          className="ml-1 grid lg:hidden"
         >
-          <HeartIcon />
-          Favourites
-        </Link>
-        <Link
-          to="/trending-actors"
-          className="flex gap-2 rounded-md px-2 py-1 hover:transition-all hover:bg-gradient-to-r hover:from-red-500 duration-300 hover:to-yellow-500"
-        >
-          <Video />
-          Celebrites
-        </Link>
-      </ul>
-      <ModeToggle />
-      <MobileNavBar />
-    </div>
+          {openNav ? <X size={30} /> : <Menu size={30} />}
+        </IconButton>
+      </div>
+      <Collapse open={openNav}>
+        <NavList />
+      </Collapse>
+    </Navbar>
   );
-};
-
-export default NavBar;
+}

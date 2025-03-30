@@ -3,14 +3,14 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider } from "./Contexts/ThemeContext";
+import { ThemeFather } from "./Contexts/ThemeContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider>
+      <ThemeFather>
         <App />
-      </ThemeProvider>
+      </ThemeFather>
     </BrowserRouter>
   </React.StrictMode>
 );
