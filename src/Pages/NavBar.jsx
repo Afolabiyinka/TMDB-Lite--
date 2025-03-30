@@ -104,7 +104,7 @@ export default function NavBar() {
             size="md"
             type="search"
             placeholder="Search Movies..."
-            className="w-[10rem] h-[2rem] md:w-[17rem] md:h-[2.5rem]"
+            className="w-[9.5rem] h-[2rem] md:w-[17rem] md:h-[2.5rem]"
           >
             <Input.Icon>
               <Search className="h-full w-full" />

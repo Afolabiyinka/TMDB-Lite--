@@ -1,6 +1,12 @@
-// src/service-worker.js
-const CACHE_NAME = "app-cache-v1";
-const urlsToCache = ["/", "/index.html", "/favicon.ico"];
+const CACHE_NAME = "app-cache-v2";
+const urlsToCache = [
+  "/",
+  "/index.html",
+  "/favicon.ico",
+  "/manifest.json",
+  "/icons/icon-192x192.png",
+  "/icons/icon-512x512.png",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
