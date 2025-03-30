@@ -1,26 +1,16 @@
-function App() {
-  const [darkMode, setDarkMode] = useState(false);
+import { Switch, Typography } from "@material-tailwind/react";
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.documentElement.classList.toggle("dark");
-  };
-
+export default function SwitchWithLabel() {
   return (
-    <ThemeProvider value={theme}>
-      <div
-        className={`min-h-screen flex flex-col items-center justify-center p-6 transition-all ${
-          darkMode ? "bg-darkBg text-darkText" : "bg-white text-black"
-        }`}
+    <div className="flex items-center gap-2">
+      <Switch id="switch" />
+      <Typography
+        as="label"
+        htmlFor="switch"
+        className="cursor-pointer text-foreground"
       >
-        <h1 className="text-3xl font-bold mb-4">Material Tailwind Theme</h1>
-        <Button className="mb-4">Themed Button</Button>
-        <Button onClick={toggleDarkMode} className="bg-secondary text-black">
-          Toggle Dark Mode
-        </Button>
-      </div>
-    </ThemeProvider>
+        Dark Mode
+      </Typography>
+    </div>
   );
 }
-
-export default App;

@@ -8,6 +8,7 @@ import {
 } from "@material-tailwind/react";
 import tmdbLogo from "../Assets/the real logo.svg";
 import { Search, Video, Home, User, X, Menu, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const LINKS = [
   {
@@ -38,20 +39,38 @@ function NavList() {
     <ul className="mt-4 flex flex-col gap-x-6 gap-y-2 lg:mt-0 lg:flex-row lg:items-center">
       {LINKS.map(({ icon: Icon, title, href }) => (
         <li key={title}>
-          <Typography
-            as="a"
-            href={href}
-            type="medium"
-            className="flex items-center gap-x-2 p-1 hover:text-primary"
-          >
-            <Icon className="h-4 w-4" />
-            {title}
-          </Typography>
+          <Link to={href}>
+            <Typography
+              as="a"
+              type="medium"
+              className="flex items-center gap-x-2 p-1 hover:text-primary"
+            >
+              <Icon className="h-4 w-4" />
+              {title}
+            </Typography>
+          </Link>
         </li>
       ))}
     </ul>
   );
 }
+// export const handleSearch = async (e) => {
+//   e.preventDefault();
+//   const searchQuery = sessionStorage.getItem("searchQuery");
+//   if (!searchQuery.trim()) return;
+//   if (loading) return;
+//   setLoading(true);
+//   try {
+//     const searchResults = await searchMovies(searchQuery);
+//     setMovies(searchResults);
+//     setError(null);
+//   } catch (err) {
+//     console.log(err);
+//     setError("Failed to search movies...");
+//   } finally {
+//     setLoading(false);
+//   }
+// };
 
 export default function NavBar() {
   const [openNav, setOpenNav] = React.useState(false);
@@ -66,19 +85,27 @@ export default function NavBar() {
   return (
     <Navbar className="mx-auto w-full max-w-screen-xl rounded-2xl">
       <div className="flex items-center">
-        <img
-          src={tmdbLogo}
-          alt="Tmdb Mini"
-          height={100}
-          width={100}
-          className="mr-3 mx-3"
-        />
+        <Link to="/">
+          <img
+            src={tmdbLogo}
+            alt="Tmdb Mini"
+            height={100}
+            width={100}
+            className="mr-3 mx-3"
+          />
+        </Link>
+
         <hr className="ml-1 mr-1.5 hidden h-5 w-px border-l border-t-0 border-secondary-dark lg:block" />
         <div className="hidden lg:block">
           <NavList />
         </div>
-        <div className="ml-auto w-40">
-          <Input size="md" type="search" placeholder="Search here...">
+        <div className="ml-auto w-40 md:w-72">
+          <Input
+            size="md"
+            type="search"
+            placeholder="Search Movies..."
+            className="w-[10rem] h-[2rem] md:w-[17rem] md:h-[2.5rem]"
+          >
             <Input.Icon>
               <Search className="h-full w-full" />
             </Input.Icon>

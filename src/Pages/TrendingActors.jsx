@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { getPopularPeople } from "../Services/API";
 import Actor from "../Components/Celebrities Components/Actor";
-import loadingAnimation from "../Assets/LoadingAnimations.json";
-import errorAnimation from "../Assets/ErrorAnimation.json";
+import { Spinner } from "@material-tailwind/react";
 import Lottie from "lottie-react";
+import errorAnimation from "../Assets/ErrorAnimation.json";
 
 const TrendingActors = () => {
   const [actors, setActors] = useState([]);
@@ -29,11 +29,8 @@ const TrendingActors = () => {
   return (
     <div>
       {loading ? (
-        <div className="flex justify-center items-center flex-col min-h-screen">
-          <Lottie
-            animationData={loadingAnimation}
-            style={{ width: "200px", height: "200px" }}
-          />
+        <div className="flex justify-center items-center gap-4 flex-col min-h-screen">
+          <Spinner className="h-16 w-16" />
           <p>Loading Actors..</p>
         </div>
       ) : error ? (

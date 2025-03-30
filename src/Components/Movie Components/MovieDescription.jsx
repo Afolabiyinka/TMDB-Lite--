@@ -1,73 +1,57 @@
-import Modal from "react-modal";
-import { BsBookmark } from "react-icons/bs";
-import { useTheme } from "../../Contexts/ThemeContext";
-import { useState } from "react";
+import React from "react";
 
 const MovieModal = ({ isOpen, movie, onClose }) => {
-  const { theme } = useTheme();
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      padding: "0",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      width: "90%",
-      maxWidth: "900px",
-      height: "auto",
-      maxHeight: "95vh",
-      border: "none",
-      borderRadius: "10px",
-      boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-  };
-  const [votes, setVotes] = useState(0);
-
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
-      <div className="w-full bg-orange-400 flex flex-col md:flex-row rounded-md overflow-hidden">
-        <img
-          src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-          alt={movie.title}
-          className="w-full rounded-lg md:w-1/2 object-cover h-64 md:h-auto"
-        />
-        <div
-          className={` ${theme} rounded-md h-full justify-center p-4 md:p-10 gap-3 flex flex-col`}
-        >
-          <h1 className="text-2xl md:text-4xl font-sans font-bold">
-            {movie.title}
-          </h1>
-          <h3>{movie.release_date}</h3>
-          <p>{movie.overview}</p>
-          <span>
-            <p
-              className="text-xs border-2 p-2 w-fit rounded-lg cursor-pointer hover:px-8 transition-all hover:bg-gradient-to-r hover:from-red-500 duration-300 hover:to-yellow-500"
-              onClick={() => setVotes(votes + 1)}
-            >
-              {votes} : votes
-            </p>
-          </span>
-          <div className="flex flex-col md:flex-row gap-2">
-            <button className="flex justify-center bg-red-500 p-2 rounded-md items-center hover:px-5 transition-all hover:bg-gradient-to-r hover:from-red-500 duration-300 hover:to-yellow-500">
-              <BsBookmark color="white" size={30} />
-              <span className="ml-2">Add to Favourites</span>
+    <div
+      className={`fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 ${
+        isOpen ? "block" : "hidden"
+      }`}
+    >
+      <div className="bg-white rounded-lg shadow-xl overflow-hidden w-[95%] max-w-4xl flex flex-col sm:flex-row max-h-[97%] md:max-h-[90%]">
+        <div className="w-full sm:w-2/5 h-64 sm:h-auto">
+          {movie?.poster_path && (
+            <img
+              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+              alt={movie?.title || "Movie poster"}
+              className="w-full h-full object-cover"
+            />
+          )}
+        </div>
+
+        <div className="flex flex-col p-4 sm:p-6 w-full sm:w-3/5 h-full">
+          <h2 className="text-xl sm:text-2xl font-bold mb-2">{movie?.title}</h2>
+
+          <div className="flex items-center gap-4 mb-4 text-sm">
+            <span className="flex items-center">
+              <svg
+                className="w-4 h-4 text-yellow-500 mr-1"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+              {movie?.vote_average?.toFixed(1)}/10
+            </span>
+          </div>
+
+          <div className="overflow-y-auto flex-grow mb-4">
+            <p className="text-gray-700 mb-4">{movie?.overview}</p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 mt-auto">
+            <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors">
+              Add To Favorites
             </button>
             <button
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
               onClick={onClose}
+              className="bg-gray-200 text-gray-800 py-2 px-4 rounded hover:bg-gray-300 transition-colors"
             >
               Close
             </button>
           </div>
         </div>
       </div>
-    </Modal>
+    </div>
   );
 };
 
