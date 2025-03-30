@@ -5,18 +5,22 @@ import HomePage from "./Pages/HomePage";
 import Favourites from "./Pages/Favourites";
 import TrendingActors from "./Pages/TrendingActors";
 import { SearchProvider } from "./Contexts/SearchContext";
+import ErrorSection from "./Pages/NotFound";
 
 function App() {
   return (
-    <div className="p-2">
+    <div className=" p-2 flex flex-col items-center px-1">
       <ThemeProvider value={theme}>
         <SearchProvider>
-          <NavBar />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/favourites" element={<Favourites />} />
-            <Route path="/celebrities" element={<TrendingActors />} />
-          </Routes>
+          <NavBar className="" />
+          <div>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/favourites" element={<Favourites />} />
+              <Route path="/celebrities" element={<TrendingActors />} />
+              <Route path="*" element={<ErrorSection />} />
+            </Routes>
+          </div>
         </SearchProvider>
       </ThemeProvider>
     </div>

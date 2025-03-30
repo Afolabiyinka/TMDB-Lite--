@@ -67,7 +67,7 @@ const HomePage = () => {
           <h1 className={`text-2xl`}>Couldn't connect to our servers ⚠</h1>
         </div>
       ) : (
-        <div className="w-full flex flex-col ">
+        <div className="w-full flex flex-col mt-16 ">
           <div className="grid gap-12 md:grid-cols-3 lg:grid-cols-3 px-1 py-3">
             {movies.map((movie) => (
               <MovieCard movie={movie} key={movie.id} />

@@ -19,7 +19,9 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
         </div>
 
         <div className="flex flex-col p-4 sm:p-6 w-full sm:w-3/5 h-full">
-          <h2 className="text-xl sm:text-2xl font-bold mb-2">{movie?.title}</h2>
+          <h2 className="text-xl sm:text-2xl font-bold mb-2">
+            {movie?.title || movie?.name || "Untitled"}
+          </h2>
 
           <div className="flex items-center gap-4 mb-4 text-sm">
             <span className="flex items-center">

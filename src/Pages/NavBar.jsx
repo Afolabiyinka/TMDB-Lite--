@@ -30,7 +30,7 @@ const LINKS = [
   {
     icon: User,
     title: "Account",
-    href: "#",
+    href: "/Account",
   },
 ];
 
@@ -77,7 +77,7 @@ export default function NavBar() {
   };
 
   return (
-    <Navbar className="mx-auto w-full max-w-screen-xl rounded-2xl">
+    <Navbar className="mx-auto w-full max-w-screen-xl rounded-2xl fixed z-50 ">
       <div className="flex items-center">
         <Link to="/">
           <img
