@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
-import { getLatestMovies } from "../Services/API";
+import { getLatestMovies, searchMovies } from "../Services/API";
 import MovieCard from "../Components/Movie Components/MovieCard";
 import Lottie from "lottie-react";
-// import loadingAnimation from "../Assets/LoadingAnimations.json";
 import { Spinner } from "@material-tailwind/react";
 import errorAnimation from "../Assets/ErrorAnimation.json";
+import { useSearch } from "../Contexts/SearchContext";
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+
+  const { searchQuery } = useSearch();
 
   useEffect(() => {
     const loadPopularMovies = async () => {
@@ -26,10 +28,31 @@ const HomePage = () => {
     };
 
     loadPopularMovies();
-  }, []);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    const handleSearch = async () => {
+      if (!searchQuery.trim()) return;
+      if (loading) return;
+
+      try {
+        setLoading(true);
+        const searchResults = await searchMovies(searchQuery);
+        setMovies(searchResults);
+        setError(null);
+      } catch (err) {
+        setLoading(false);
+        console.log(err);
+        setError("Failed to search movies...");
+      } finally {
+        setLoading(false);
+      }
+    };
+    handleSearch();
+  }, [searchQuery]);
 
   return (
-    <div className={` flex flex-col justify-center items-center h-fit`}>
+    <div className={`flex flex-col justify-center items-center h-fit`}>
       {loading ? (
         <div className="flex justify-center items-center gap-4 flex-col min-h-screen">
           <Spinner className="h-16 w-16" />

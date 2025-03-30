@@ -1,4 +1,5 @@
 import * as React from "react";
+import { createContext } from "react";
 import {
   IconButton,
   Typography,
@@ -9,6 +10,7 @@ import {
 import tmdbLogo from "../Assets/the real logo.svg";
 import { Search, Video, Home, User, X, Menu, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useSearch } from "../Contexts/SearchContext";
 
 const LINKS = [
   {
@@ -16,7 +18,6 @@ const LINKS = [
     title: "Home",
     href: "/",
   },
-
   {
     icon: Heart,
     title: "Favourites",
@@ -34,12 +35,12 @@ const LINKS = [
   },
 ];
 
-function NavList() {
+function NavList({ closeMenu }) {
   return (
     <ul className="mt-4 flex flex-col gap-x-6 gap-y-2 lg:mt-0 lg:flex-row lg:items-center">
       {LINKS.map(({ icon: Icon, title, href }) => (
         <li key={title}>
-          <Link to={href}>
+          <Link to={href} onClick={closeMenu}>
             <Typography
               as="a"
               type="medium"
@@ -54,33 +55,27 @@ function NavList() {
     </ul>
   );
 }
-// export const handleSearch = async (e) => {
-//   e.preventDefault();
-//   const searchQuery = sessionStorage.getItem("searchQuery");
-//   if (!searchQuery.trim()) return;
-//   if (loading) return;
-//   setLoading(true);
-//   try {
-//     const searchResults = await searchMovies(searchQuery);
-//     setMovies(searchResults);
-//     setError(null);
-//   } catch (err) {
-//     console.log(err);
-//     setError("Failed to search movies...");
-//   } finally {
-//     setLoading(false);
-//   }
-// };
 
 export default function NavBar() {
   const [openNav, setOpenNav] = React.useState(false);
 
+  const { searchQuery, setSearchQuery } = useSearch();
+
   React.useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false)
-    );
+    const handleResize = () => {
+      if (window.innerWidth >= 960) {
+        setOpenNav(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const closeMenu = () => {
+    if (window.innerWidth < 960) {
+      setOpenNav(false);
+    }
+  };
 
   return (
     <Navbar className="mx-auto w-full max-w-screen-xl rounded-2xl">
@@ -96,21 +91,26 @@ export default function NavBar() {
         </Link>
 
         <hr className="ml-1 mr-1.5 hidden h-5 w-px border-l border-t-0 border-secondary-dark lg:block" />
+
         <div className="hidden lg:block">
-          <NavList />
+          <NavList closeMenu={closeMenu} />
         </div>
+
         <div className="ml-auto w-40 md:w-72">
           <Input
             size="md"
             type="search"
             placeholder="Search Movies..."
             className="w-[9.5rem] h-[2rem] md:w-[17rem] md:h-[2.5rem]"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           >
             <Input.Icon>
               <Search className="h-full w-full" />
             </Input.Icon>
           </Input>
         </div>
+
         <IconButton
           size="sm"
           variant="ghost"
@@ -120,8 +120,9 @@ export default function NavBar() {
           {openNav ? <X size={30} /> : <Menu size={30} />}
         </IconButton>
       </div>
+
       <Collapse open={openNav}>
-        <NavList />
+        <NavList closeMenu={closeMenu} />
       </Collapse>
     </Navbar>
   );
