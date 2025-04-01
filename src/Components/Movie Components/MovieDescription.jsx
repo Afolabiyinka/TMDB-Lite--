@@ -10,7 +10,7 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
         isOpen ? "block" : "hidden"
       }`}
     >
-      <div className="bg-white rounded-lg shadow-xl overflow-hidden w-[95%] max-w-4xl flex flex-col sm:flex-row max-h-[97%] md:max-h-[60%]">
+      <div className="bg-white rounded-lg shadow-xl overflow-hidden w-[95%] max-w-4xl flex flex-col sm:flex-row max-h-[97%] md:max-h-[70%]">
         <div className="w-full sm:w-2/5 h-64 sm:h-auto">
           {movie?.poster_path && (
             <img
@@ -44,7 +44,7 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
             <p className="text-gray-700 mb-4">{movie?.overview}</p>
             {/* <p>{movie?.media_type}</p>   */}
           </div>
-          <div>
+          <div className="flex gap-1 items-center py-1">
             <ThumbsUp onClick={() => setVotes(votes + 1)} />
             {movie.vote_count?.toFixed(votes)}
           </div>
