@@ -19,10 +19,10 @@ export default function MovieCard({ movie }) {
         as="img"
         src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`}
         alt="profile-picture"
-        className="h-80 object-cover hover:scale-105"
+        className="h-80 object-fill hover:scale-105"
       />
       <Card.Body className="p-3">
-        <Typography type="h5" className="text-base">
+        <Typography type="h5" className="text-base overflow-hidden">
           {movie.title}
         </Typography>
         <Typography className="text-sm text-foreground">

@@ -1,25 +1,46 @@
-// import React from "react";
-// import { Github, Instagram } from "lucide-react";
-// import { FaWhatsapp } from "react-icons/fa";
+import { Typography } from "@material-tailwind/react";
+import tmLogo from "../Assets/the real logo.svg";
+import { Link } from "react-router-dom";
 
-// const Footer = () => {
-//   return (
-//     <div className="h-[7vh] flex justify-center items-center gap-3">
-//       <h1>Made with ❤ from</h1>
-//       <a href="">Offixial_SM</a>
-//       <span className="flex gap-3 bg-gray-200 px-2 py-1 rounded-lg">
-//         <a href="" target="_blank">
-//           <Github />
-//         </a>
-//         <a href="" target="_blank">
-//           <Instagram color="red" />
-//         </a>
-//         <a href="" target="_blank">
-//           <FaWhatsapp size={27} color="green" />
-//         </a>
-//       </span>
-//     </div>
-//   );
-// };
+const LINKS = [
+  {
+    title: "About Us",
+    href: "#",
+  },
+  {
+    title: "License",
+    href: "#",
+  },
+  {
+    title: "Contribute",
+    href: "#",
+  },
+  {
+    title: "Contact Us",
+    href: "#",
+  },
+];
 
-// export default Footer;
+export default function Footer() {
+  return (
+    <footer className="w-full px-4">
+      <div className="flex w-full flex-row flex-wrap items-center justify-center gap-x-12 gap-y-3 text-center md:justify-between">
+        <Link to="/">
+          <img src={tmLogo} alt="brand" className="w-[120px] h-[30px]" />
+        </Link>
+
+        <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
+          {LINKS.map(({ title, href }, key) => (
+            <li key={key}>
+              <Link to={href}>
+                <Typography as="a" href={href} className="hover:text-primary">
+                  {title}
+                </Typography>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </footer>
+  );
+}

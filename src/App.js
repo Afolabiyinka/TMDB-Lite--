@@ -5,7 +5,15 @@ import HomePage from "./Pages/HomePage";
 import Favourites from "./Pages/Favourites";
 import TrendingActors from "./Pages/TrendingActors";
 import { SearchProvider } from "./Contexts/SearchContext";
-import ErrorSection from "./Pages/NotFound";
+import Footer from "./Pages/Footer";
+import ComingSoonSection from "./Pages/Coming Soon";
+
+//Importin genre related stuff
+import ActionMovies from "./Pages/Genres/ActionMovies";
+import GenreNav from "./Pages/Genres/GenreNavigation";
+import RomanceMovies from "./Pages/Genres/RomanceMovies";
+import ComedyMovies from "./Pages/Genres/ComedyMovies";
+import HorrorMovies from "./Pages/Genres/HorrorMovies";
 
 function App() {
   return (
@@ -14,13 +22,24 @@ function App() {
         <SearchProvider>
           <NavBar className="" />
           <div>
+            <GenreNav />
+          </div>
+
+          <div>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/favourites" element={<Favourites />} />
               <Route path="/celebrities" element={<TrendingActors />} />
-              <Route path="*" element={<ErrorSection />} />
+              <Route path="*" element={<ComingSoonSection />} />
+              {/* The routes for the genres */}
+
+              <Route path="/action" element={<ActionMovies />} />
+              <Route path="/romance" element={<RomanceMovies />} />
+              <Route path="/comedy" element={<ComedyMovies />} />
+              <Route path="/horror" element={<HorrorMovies />} />
             </Routes>
           </div>
+          <Footer />
         </SearchProvider>
       </ThemeProvider>
     </div>

@@ -17,7 +17,6 @@ const TrendingActors = () => {
         const popularActors = await getPopularPeople();
         setActors(popularActors);
       } catch (err) {
-        console.log(err);
         setError(true);
       } finally {
         setTimeout(() => setLoading(false), 2000);
@@ -39,10 +38,10 @@ const TrendingActors = () => {
             animationData={errorAnimation}
             style={{ width: "100px", height: "100px" }}
           />
-          <p>Error loading actors.</p>
+          <p className="text-2xl">Error loading actors.</p>
         </div>
       ) : (
-        <div className="w-full grid gap-12  md:grid-cols-3 lg:grid-cols-3 p-4 h-[90vh]">
+        <div className="w-full grid gap-12  md:grid-cols-3 lg:grid-cols-3 p-4 mt-12 ">
           {actors.map((actor, index) => (
             <Actor key={index} actor={actor} />
           ))}

@@ -20,6 +20,7 @@ function ErrorSection() {
           color="blue-gray"
           className="mt-6 !text-3xl font-bold !leading-snug md:!text-4xl"
         >
+          Opps! <br />
           Page not Found!
         </Typography>
         <Typography className="mt-4 mb-10 text-lg text-gray-500 md:max-w-md">

@@ -1,53 +1,31 @@
 import { useState, useEffect } from "react";
-import { getLatestMovies, searchMovies } from "../Services/API";
-import MovieCard from "../Components/Movie Components/MovieCard";
+import MovieCard from "../../Components/Movie Components/MovieCard";
 import Lottie from "lottie-react";
 import { Spinner } from "@material-tailwind/react";
-import errorAnimation from "../Assets/ErrorAnimation.json";
-import { useSearch } from "../Contexts/SearchContext";
+import errorAnimation from "../../Assets/ErrorAnimation.json";
+import { getRomanceMovies } from "../../Services/GetGenres";
 
-const HomePage = () => {
+const RomanceMovies = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const { searchQuery } = useSearch();
-
   useEffect(() => {
-    const loadPopularMovies = async () => {
+    const loadRomanceMovies = async () => {
       try {
         setLoading(true);
-        const popularMovies = await getLatestMovies();
-        setMovies(popularMovies);
+        const romanceMovies = await getRomanceMovies();
+        setMovies(romanceMovies);
         setError(null);
       } catch (err) {
         setError("Failed to load movies...");
       } finally {
-        setLoading(false);
+        setTimeout(() => setLoading(false), 500);
       }
     };
 
-    loadPopularMovies();
-  }, [searchQuery]);
-
-  useEffect(() => {
-    const handleSearch = async () => {
-      if (!searchQuery.trim()) return;
-
-      try {
-        setLoading(true);
-        const searchResults = await searchMovies(searchQuery);
-        setMovies(searchResults);
-        setError(null);
-      } catch (err) {
-        setError("Failed to search movies...");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    handleSearch();
-  }, [searchQuery]);
+    loadRomanceMovies();
+  }, []);
 
   return (
     <div className={`flex flex-col justify-center items-center h-fit`}>
@@ -64,7 +42,7 @@ const HomePage = () => {
           <h1 className={`text-2xl`}>{error}</h1>
         </div>
       ) : (
-        <div className="w-full flex flex-col mt-3 ">
+        <div className="w-full flex flex-col ">
           <div className="grid gap-12 md:grid-cols-3 lg:grid-cols-3 px-1 py-3">
             {movies.map((movie) => (
               <MovieCard movie={movie} key={movie.id} />
@@ -76,4 +54,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default RomanceMovies;

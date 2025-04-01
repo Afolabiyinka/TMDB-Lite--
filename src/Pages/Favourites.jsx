@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Spinner } from "@material-tailwind/react";
-// import MovieCard from "../Components/Movie Components/MovieCard";
-// import errorAnimation from "../Assets/ErrorAnimation.json";
+import { motion } from "framer-motion";
 
 const Favourites = () => {
   const [loading, setLoading] = useState(false);
@@ -13,7 +12,7 @@ const Favourites = () => {
         setLoading(true);
       } catch (err) {
       } finally {
-        setTimeout(() => setLoading(false), 2000);
+        setTimeout(() => setLoading(false), 1000);
       }
     };
     getFavourites();
@@ -30,7 +29,15 @@ const Favourites = () => {
         <div
           className={`px-[4rem]  h-[50%] py-[2rem] rounded-md  bg-[rgba(255, 255, 255, 0.05)] flex justify-center items-center flex-col text-center border-gray-400`}
         >
-          <h1 className="text-2xl"> You have no favourites</h1>
+          <motion.h1
+            className="text-2xl"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            {" "}
+            You have no favourites
+          </motion.h1>
           <p>
             Start adding movies to your favorites and they will appear here!
           </p>
