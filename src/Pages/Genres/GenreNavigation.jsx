@@ -17,6 +17,7 @@ export default function GenreNav() {
           <Chip
             key={name}
             variant="ghost"
+            isPill={false}
             className="flex items-center gap-1 px-2 py-1"
           >
             <Icon className="h-5 w-5 sm:h-6 sm:w-6" />

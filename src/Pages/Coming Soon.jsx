@@ -1,5 +1,5 @@
 import { Typography, Button, Input } from "@material-tailwind/react";
-import { Clapperboard } from "lucide-react";
+
 import { motion } from "framer-motion";
 
 export default function ComingSoonSection() {
