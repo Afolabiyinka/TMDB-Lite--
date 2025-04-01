@@ -6,7 +6,7 @@ export default function GenreNav() {
   const navigate = useNavigate();
 
   return (
-    <div className="mt-[4.5rem] px-4">
+    <div className="mt-[3.9rem] px-4 ">
       <div className="flex flex-wrap justify-center md:justify-start gap-2 overflow-x-auto py-2">
         {[
           { name: "Action", icon: Swords, path: "/action" },

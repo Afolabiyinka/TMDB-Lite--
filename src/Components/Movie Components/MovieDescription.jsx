@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import { ThumbsUp } from "lucide-react";
 
 const MovieModal = ({ isOpen, movie, onClose }) => {
+  const [votes, setVotes] = useState(0);
+
   return (
     <div
       className={`fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 ${
@@ -40,6 +43,10 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
             <p>{movie?.release_date}</p>
             <p className="text-gray-700 mb-4">{movie?.overview}</p>
             {/* <p>{movie?.media_type}</p>   */}
+          </div>
+          <div>
+            <ThumbsUp onClick={() => setVotes(votes + 1)} />
+            {movie.vote_count?.toFixed(votes)}
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 mt-auto">
