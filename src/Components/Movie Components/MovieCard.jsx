@@ -17,7 +17,7 @@ export default function MovieCard({ movie }) {
     <Card className="max-w-xl overflow-hidden">
       <Card.Header
         as="img"
-        src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`}
+        src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
         alt="profile-picture"
         className="h-80 object-fill hover:scale-105"
       />
