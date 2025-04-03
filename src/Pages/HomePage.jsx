@@ -65,7 +65,7 @@ const HomePage = () => {
         </div>
       ) : (
         <div className="w-full flex flex-col  ">
-          <div className="grid gap-12 md:grid-cols-3 lg:grid-cols-3 px-1 py-3">
+          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3 py-3">
             {movies.map((movie) => (
               <MovieCard movie={movie} key={movie.id} />
             ))}
