@@ -15,7 +15,6 @@ export default function MovieCard({ movie }) {
 
   return (
     <Card className=" overflow-hidden w-80">
-===
       <Card.Header
         as="img"
         src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
