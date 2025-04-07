@@ -26,7 +26,7 @@ export default function MovieCard({ movie }) {
           {movie.title}
         </Typography>
         <Typography className="text-sm text-foreground">
-          {movie.release_date}
+          {movie.release_date.split("-")[0]}
         </Typography>
       </Card.Body>
       <Card.Footer className="p-2">

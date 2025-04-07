@@ -1,5 +1,4 @@
 import { Typography, Button, Input } from "@material-tailwind/react";
-
 import { motion } from "framer-motion";
 
 export default function ComingSoonSection() {
@@ -17,7 +16,7 @@ export default function ComingSoonSection() {
           </Typography>
           <Typography className="max-w-3xl  mx-auto">
             We&apos;re excited to introduce our latest innovation that will
-            change the way you watch movies 🥰. Stay tuned as we put the
+            change the way you watch movies 🎬. Stay tuned as we put the
             finishing touches on this game-changing product.
           </Typography>
           <div className="flex flex-col sm:flex-row max-w-md w-full gap-x-2 gap-y-4 mt-4 mx-auto">

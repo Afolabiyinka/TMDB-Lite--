@@ -41,7 +41,7 @@ const TrendingActors = () => {
           <p className="text-2xl">Error loading actors.</p>
         </div>
       ) : (
-        <div className="w-full grid gap-12  md:grid-cols-3 lg:grid-cols-3 p-4 mt-12 ">
+        <div className="w-full grid gap-12 md:grid-cols-3 lg:grid-cols-3  mt-2 ">
           {actors.map((actor, index) => (
             <Actor key={index} actor={actor} />
           ))}
