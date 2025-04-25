@@ -16,7 +16,6 @@ import GenreNav from "./Pages/Genres/GenreNavigation";
 import RomanceMovies from "./Pages/Genres/RomanceMovies";
 import ComedyMovies from "./Pages/Genres/ComedyMovies";
 import HorrorMovies from "./Pages/Genres/HorrorMovies";
-import Card from "./RandomStyle";
 
 function App() {
   return (
@@ -34,7 +33,6 @@ function App() {
               <Route path="/favourites" element={<Favourites />} />
               <Route path="/celebrities" element={<TrendingActors />} />
               <Route path="*" element={<ComingSoonSection />} />
-              <Route path="random" element={<Card />} />
 
               <Route path="/action" element={<ActionMovies />} />
               <Route path="/romance" element={<RomanceMovies />} />
