@@ -10,7 +10,7 @@ const ThemeProviderContext = createContext(initialState);
 export function ThemeFather({
   children,
   defaultTheme = "light",
-  storageKey = "vite-ui-theme",
+  storageKey = "tmdb-theme",
   ...props
 }) {
   const [theme, setTheme] = useState(

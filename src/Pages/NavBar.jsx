@@ -10,7 +10,7 @@ import tmdbLogo from "../Assets/the real logo.svg";
 import { Search, Video, Home, User, X, Menu, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSearch } from "../Contexts/SearchContext";
-
+import { ModeToggle } from "../Contexts/ModeToggle";
 const LINKS = [
   {
     icon: Home,
@@ -36,7 +36,7 @@ const LINKS = [
 
 function NavList({ closeMenu }) {
   return (
-    <ul className="mt-4 flex flex-col gap-x-6 gap-y-2 lg:mt-0 lg:flex-row lg:items-center">
+    <ul className="mt-4 flex flex-col gap-x-4 gap-y-2 lg:mt-0 lg:flex-row lg:items-center">
       {LINKS.map(({ icon: Icon, title, href }) => (
         <li key={title}>
           <Link to={href} onClick={closeMenu}>
@@ -109,6 +109,9 @@ export default function NavBar() {
             </Input.Icon>
           </Input>
         </div>
+        <div className="hidden lg:block">
+          <ModeToggle />
+        </div>
 
         <IconButton
           size="sm"
@@ -122,6 +125,10 @@ export default function NavBar() {
 
       <Collapse open={openNav}>
         <NavList closeMenu={closeMenu} />
+        <span className="flex gap-1 items-center">
+          <ModeToggle id="modeToggle" />
+          <label htmlFor="modeToggle">Change Theme</label>
+        </span>
       </Collapse>
     </Navbar>
   );

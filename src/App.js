@@ -1,6 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import { theme, ThemeProvider } from "@material-tailwind/react";
+
 import NavBar from "./Pages/NavBar";
+import ScrollBtn from "./Components/ScrollBtn";
 import HomePage from "./Pages/HomePage";
 import Favourites from "./Pages/Favourites";
 import TrendingActors from "./Pages/TrendingActors";
@@ -14,6 +16,7 @@ import GenreNav from "./Pages/Genres/GenreNavigation";
 import RomanceMovies from "./Pages/Genres/RomanceMovies";
 import ComedyMovies from "./Pages/Genres/ComedyMovies";
 import HorrorMovies from "./Pages/Genres/HorrorMovies";
+import Card from "./RandomStyle";
 
 function App() {
   return (
@@ -31,7 +34,7 @@ function App() {
               <Route path="/favourites" element={<Favourites />} />
               <Route path="/celebrities" element={<TrendingActors />} />
               <Route path="*" element={<ComingSoonSection />} />
-              {/* The routes for the genres */}
+              <Route path="random" element={<Card />} />
 
               <Route path="/action" element={<ActionMovies />} />
               <Route path="/romance" element={<RomanceMovies />} />
@@ -42,6 +45,7 @@ function App() {
           <Footer />
         </SearchProvider>
       </ThemeProvider>
+      <ScrollBtn />
     </div>
   );
 }

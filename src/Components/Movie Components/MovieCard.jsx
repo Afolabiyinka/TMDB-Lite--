@@ -14,25 +14,25 @@ export default function MovieCard({ movie }) {
   };
 
   return (
-    <Card className=" overflow-hidden w-80">
+    <Card className=" overflow-hidden w-[22rem] md:w-[25rem]">
       <Card.Header
         as="img"
         src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
         alt="profile-picture"
-        className="h-80 object-fill hover:scale-105"
+        className="h-80 object-fill"
       />
-      <Card.Body className="p-3">
+      <Card.Body className="p-2">
         <Typography type="h5" className="text-base overflow-hidden">
           {movie.title}
         </Typography>
-        <Typography className="text-sm text-foreground">
+        <Typography className="text-sm">
           {movie.release_date.split("-")[0]}
         </Typography>
       </Card.Body>
       <Card.Footer className="p-2">
         <span>
           <Button
-            className="py-2 text-sm rounded-md duration-300 px-6 transition-all bg-gradient-to-r from-red-500 to-yellow-500 hover:px-10"
+            className="py-2 text-sm rounded-md duration-300 px-12 transition-all bg-gradient-to-r from-red-500 to-yellow-500 hover:px-14"
             onClick={handleOpenModal}
           >
             View
