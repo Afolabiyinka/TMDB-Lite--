@@ -3,6 +3,7 @@ import { theme, ThemeProvider } from "@material-tailwind/react";
 
 import NavBar from "./Pages/NavBar";
 import ScrollBtn from "./Components/ScrollBtn";
+import Login from "./Pages/Login";
 import HomePage from "./Pages/HomePage";
 import Favourites from "./Pages/Favourites";
 import TrendingActors from "./Pages/TrendingActors";
@@ -16,31 +17,37 @@ import GenreNav from "./Pages/Genres/GenreNavigation";
 import RomanceMovies from "./Pages/Genres/RomanceMovies";
 import ComedyMovies from "./Pages/Genres/ComedyMovies";
 import HorrorMovies from "./Pages/Genres/HorrorMovies";
+import UserDetails from "./Pages/UserDetails";
+import { UserProvider } from "./Contexts/UserContext";
 
 function App() {
   return (
     <div className=" p-2 flex flex-col items-center px-1">
       <ThemeProvider value={theme}>
         <SearchProvider>
-          <NavBar className="" />
-          <div>
-            <GenreNav />
-          </div>
+          <UserProvider>
+            <NavBar className="" />
+            <div>
+              <GenreNav />
+            </div>
 
-          <div>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/favourites" element={<Favourites />} />
-              <Route path="/celebrities" element={<TrendingActors />} />
-              <Route path="*" element={<ComingSoonSection />} />
+            <div>
+              <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/favourites" element={<Favourites />} />
+                <Route path="/celebrities" element={<TrendingActors />} />
+                <Route path="/account" element={<UserDetails />} />
+                <Route path="/home" element={<HomePage />} />
+                <Route path="*" element={<ComingSoonSection />} />
 
-              <Route path="/action" element={<ActionMovies />} />
-              <Route path="/romance" element={<RomanceMovies />} />
-              <Route path="/comedy" element={<ComedyMovies />} />
-              <Route path="/horror" element={<HorrorMovies />} />
-            </Routes>
-          </div>
-          <Footer />
+                <Route path="/action" element={<ActionMovies />} />
+                <Route path="/romance" element={<RomanceMovies />} />
+                <Route path="/comedy" element={<ComedyMovies />} />
+                <Route path="/horror" element={<HorrorMovies />} />
+              </Routes>
+            </div>
+            <Footer />
+          </UserProvider>
         </SearchProvider>
       </ThemeProvider>
       <ScrollBtn />

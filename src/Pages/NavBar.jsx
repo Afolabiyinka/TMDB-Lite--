@@ -15,7 +15,7 @@ const LINKS = [
   {
     icon: Home,
     title: "Home",
-    href: "/",
+    href: "/home",
   },
   {
     icon: Heart,
@@ -79,7 +79,7 @@ export default function NavBar() {
   return (
     <Navbar className="mx-auto w-full max-w-screen-xl rounded-2xl fixed z-50 ">
       <div className="flex items-center">
-        <Link to="/">
+        <Link to="/home">
           <img
             src={tmdbLogo}
             alt="Tmdb Mini"
