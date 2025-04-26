@@ -1,13 +1,22 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useUser } from "../Contexts/UserContext";
-import { Avatar } from "@material-tailwind/react";
+import { Avatar, Button, Spinner } from "@material-tailwind/react";
+import { useState } from "react";
 
 const UserDetails = () => {
   const { user } = useUser();
-
+  const [loggedOut, setLoggedOut] = useState(false);
+  const navigate = useNavigate();
+  function handleLogOut() {
+    setLoggedOut(true);
+    setTimeout(() => {
+      localStorage.removeItem("TmdbUser");
+      navigate("/");
+    }, 3000);
+  }
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center">
-      <div className="rounded-xl p-8 shadow-md flex flex-col items-center max-w-md w-full">
+      <div className="rounded-xl p-8 shadow-md flex flex-col items-center gap-3 max-w-md w-full">
         <div className="mb-6">
           <Avatar
             src={user.picture}
@@ -15,10 +24,16 @@ const UserDetails = () => {
             className="w-24 h-24 border-4 border-opacity-20"
           />
         </div>
-
         <h1 className="text-2xl font-bold mb-2">Welcome back</h1>
         <p className="text-xl">{user.name}</p>
-
+        <Button
+          className="bg-red-500 hover:bg-red-700"
+          size="lg"
+          isFullWidth
+          onClick={handleLogOut}
+        >
+          {loggedOut ? <Spinner /> : " Log Out"}
+        </Button>
         <div className="w-full mt-6 pt-6 border-t flex justify-center">
           <p className="italic">Enjoy your experience</p>
         </div>
