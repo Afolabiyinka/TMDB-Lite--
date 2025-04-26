@@ -1,8 +1,12 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 const userContext = createContext();
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState("");
+  useEffect(() => {
+    const storedUser = localStorage.getItem("TmdbUser");
+    if (storedUser) setUser(JSON.parse(storedUser));
+  });
   return (
     <userContext.Provider value={{ user, setUser }}>
       {children}

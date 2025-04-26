@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 const initialState = {
-  theme: "light",
+  theme: "system",
   setTheme: () => null,
 };
 

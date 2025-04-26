@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { theme, ThemeProvider } from "@material-tailwind/react";
 
 import NavBar from "./Pages/NavBar";
@@ -21,16 +21,22 @@ import UserDetails from "./Pages/UserDetails";
 import { UserProvider } from "./Contexts/UserContext";
 
 function App() {
+  const location = useLocation();
+  const hideNavbaRoute = ["/", "/favourites", "/account"];
+
   return (
     <div className=" p-2 flex flex-col items-center px-1">
       <ThemeProvider value={theme}>
         <SearchProvider>
           <UserProvider>
-            <NavBar className="" />
-            <div>
-              <GenreNav />
-            </div>
-
+            {!hideNavbaRoute.includes(location.pathname) && (
+              <>
+                <NavBar className="" />
+                <div>
+                  <GenreNav />
+                </div>
+              </>
+            )}
             <div>
               <Routes>
                 <Route path="/" element={<Login />} />
