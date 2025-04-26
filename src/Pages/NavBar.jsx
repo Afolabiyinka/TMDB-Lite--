@@ -77,7 +77,7 @@ export default function NavBar() {
   };
 
   return (
-    <Navbar className="mx-auto w-full max-w-screen-xl rounded-2xl fixed z-50 ">
+    <Navbar className="mx-auto w-full max-w-screen-xl rounded-2xl">
       <div className="flex items-center">
         <Link to="/home">
           <img

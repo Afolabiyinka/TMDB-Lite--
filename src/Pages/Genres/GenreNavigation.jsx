@@ -6,7 +6,7 @@ export default function GenreNav() {
   const navigate = useNavigate();
 
   return (
-    <div className="mt-[3.9rem] px-4">
+    <div className="mt-2 px-4">
       <div className="flex flex-wrap justify-center md:justify-start gap-2 py-2">
         {[
           { name: "Home", icon: Home, path: "/" },

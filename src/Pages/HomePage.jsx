@@ -5,19 +5,27 @@ import Lottie from "lottie-react";
 import { Spinner } from "@material-tailwind/react";
 import errorAnimation from "../Assets/ErrorAnimation.json";
 import { useSearch } from "../Contexts/SearchContext";
+import Pagination from "../Components/Pagination";
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [currentPage, setCurentPage] = useState(1);
 
+  function handlePrevPage() {
+    setCurentPage((prev) => prev - 1);
+  }
+  function handleNextPage() {
+    setCurentPage((prev) => prev + 1);
+  }
   const { searchQuery } = useSearch();
 
   useEffect(() => {
     const loadPopularMovies = async () => {
       try {
         setLoading(true);
-        const popularMovies = await getLatestMovies();
+        const popularMovies = await getLatestMovies(currentPage);
         setMovies(popularMovies);
         setError(null);
       } catch (err) {
@@ -28,7 +36,7 @@ const HomePage = () => {
     };
 
     loadPopularMovies();
-  }, [searchQuery]);
+  }, [searchQuery, currentPage]);
 
   useEffect(() => {
     const handleSearch = async () => {
@@ -72,6 +80,11 @@ const HomePage = () => {
           </div>
         </div>
       )}
+      <Pagination
+        currentPage={currentPage}
+        handlePrevPage={handlePrevPage}
+        handleNextPage={handleNextPage}
+      />
     </div>
   );
 };
