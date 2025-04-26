@@ -6,7 +6,7 @@ export function UserProvider({ children }) {
   useEffect(() => {
     const storedUser = localStorage.getItem("TmdbUser");
     if (storedUser) setUser(JSON.parse(storedUser));
-  });
+  }, []);
   return (
     <userContext.Provider value={{ user, setUser }}>
       {children}

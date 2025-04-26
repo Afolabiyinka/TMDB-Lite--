@@ -13,18 +13,15 @@ const Login = () => {
   useEffect(() => {
     const storedUser = localStorage.getItem("TmdbUser");
     if (storedUser) {
+      setUser(JSON.parse(storedUser));
       navigate("/home");
     }
-  }, []);
+  }, [navigate, setUser]);
 
   const success = (credentials) => {
     const decodedUser = jwtDecode(credentials.credential);
     setUser(decodedUser);
-    let storedUser = localStorage.setItem(
-      "TmdbUser",
-      JSON.stringify(decodedUser)
-    );
-    setUser(storedUser);
+    localStorage.setItem("TmdbUser", JSON.stringify(decodedUser));
     navigate("/home");
   };
 
