@@ -1,16 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { ThumbsUp } from "lucide-react";
+import { useFavourites } from "../../Contexts/MovieContext";
+import { toast } from "react-toastify";
+import { Bookmark } from "lucide-react";
 
 const MovieModal = ({ isOpen, movie, onClose }) => {
   const [votes, setVotes] = useState(0);
+  const { addToFavourites, removeFromFavourites, isFavourite } =
+    useFavourites();
 
   useEffect(() => {
     setVotes(movie.vote_count || 0);
   }, [movie]);
 
+  const onFavouriteClick = (e) => {
+    e.preventDefault();
+    if (isFavourite(movie.id)) {
+      removeFromFavourites(movie.id);
+      toast.info("Removed from favourites");
+    } else {
+      addToFavourites(movie);
+      toast.success("Added to favourites");
+    }
+  };
+
   return (
     <div
-      className={`fixed inset-0 flex justify-center items-center  bg-opacity-50 z-50 ${
+      className={`fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50 ${
         isOpen ? "block" : "hidden"
       }`}
     >
@@ -57,9 +73,15 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 mt-auto">
-            <button className="bg-blue-600  py-2 px-4 rounded hover:bg-blue-700 transition-colors">
-              Add To Favorites
-            </button>
+            <span>
+              <Bookmark
+                size={35}
+                // className="bg-blue-600 py-2 px-4 rounded hover:bg-blue-700 transition-colors"
+                onClick={onFavouriteClick}
+              />{" "}
+              <p>{isFavourite ? "Add Favourite" : "Remove from favourite"}</p>
+            </span>
+
             <button
               onClick={onClose}
               className="bg-gray-200 text-gray-800 py-2 px-4 rounded hover:bg-gray-300 transition-colors"

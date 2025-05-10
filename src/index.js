@@ -5,6 +5,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeFather } from "./Contexts/ThemeContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { FavouritesProvider } from "./Contexts/MovieContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -12,7 +13,9 @@ root.render(
     <GoogleOAuthProvider clientId="33915265717-slgkk1llr3kvebm9spnfbvv4te8vhk08.apps.googleusercontent.com">
       <BrowserRouter>
         <ThemeFather>
-          <App />
+          <FavouritesProvider>
+            <App />
+          </FavouritesProvider>
         </ThemeFather>
       </BrowserRouter>
     </GoogleOAuthProvider>

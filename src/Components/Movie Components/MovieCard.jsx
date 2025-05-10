@@ -1,6 +1,7 @@
 import { useState } from "react";
 import MovieModal from "./MovieDescription";
 import { Card, Typography, Button } from "@material-tailwind/react";
+// import { useFavourites } from "../../Contexts/MovieContext";yy
 
 export default function MovieCard({ movie }) {
   const [isOpen, setIsOpen] = useState(false);

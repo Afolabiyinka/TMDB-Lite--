@@ -6,6 +6,8 @@ import { Spinner } from "@material-tailwind/react";
 import errorAnimation from "../Assets/ErrorAnimation.json";
 import { useSearch } from "../Contexts/SearchContext";
 import Pagination from "../Components/Pagination";
+import GenreNav from "./Genres/GenreNavigation";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
@@ -20,6 +22,14 @@ const HomePage = () => {
     setCurentPage((prev) => prev + 1);
   }
   const { searchQuery } = useSearch();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("TmdbUser");
+    if (storedUser) return;
+    else {
+      navigate("/");
+    }
+  });
 
   useEffect(() => {
     const loadPopularMovies = async () => {
@@ -57,8 +67,13 @@ const HomePage = () => {
     handleSearch();
   }, [searchQuery]);
 
+  const navigate = useNavigate();
+
   return (
     <div className={`flex flex-col justify-center items-center h-fit`}>
+      <div>
+        <GenreNav />
+      </div>
       {loading ? (
         <div className="flex justify-center items-center gap-4 flex-col min-h-screen">
           <Spinner className="h-16 w-16" />

@@ -15,10 +15,12 @@ const UserDetails = () => {
     }, 3000);
   }
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center">
+    <div className="w-screen h-screen flex gap-3 justify-center items-center">
       <div className="rounded-xl p-8 shadow-md flex flex-col items-center gap-3 max-w-md w-full">
         <div className="mb-6">
           <Avatar
+            size="lg"
+            shape="circular"
             src={user.picture}
             alt={user.name}
             className="w-24 h-24 border-4 border-opacity-20"
@@ -38,8 +40,7 @@ const UserDetails = () => {
           <p className="italic">Enjoy your experience</p>
         </div>
       </div>
-
-      <p className="mt-8 text-sm">© 2025 Your Company</p>
+      <div className="w-[50%] shadow-xl h-[70%]"></div>
     </div>
   );
 };
