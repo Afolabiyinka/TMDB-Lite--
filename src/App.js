@@ -4,6 +4,7 @@ import TrendingActors from "./Pages/TrendingActors";
 import { SearchProvider } from "./Contexts/SearchContext";
 import Footer from "./Pages/Footer";
 import ComingSoonSection from "./Pages/Coming Soon";
+import { Route, Routes } from "react-router-dom";
 
 //Importin genre related stuff
 import ActionMovies from "./Pages/Genres/ActionMovies";
