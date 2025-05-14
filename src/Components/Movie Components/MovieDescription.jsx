@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { ThumbsUp } from "lucide-react";
+import { ThumbsUp, Bookmark, X, Calendar, Star, Clock } from "lucide-react";
 import { useFavourites } from "../../Contexts/MovieContext";
 import { toast } from "react-toastify";
-import { Bookmark } from "lucide-react";
 
 const MovieModal = ({ isOpen, movie, onClose }) => {
   const [votes, setVotes] = useState(0);
@@ -10,81 +9,152 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
     useFavourites();
 
   useEffect(() => {
-    setVotes(movie.vote_count || 0);
+    setVotes(movie?.vote_count || 0);
   }, [movie]);
 
-  const onFavouriteClick = (e) => {
+  const handleFavouriteClick = (e) => {
     e.preventDefault();
-    if (isFavourite(movie.id)) {
-      removeFromFavourites(movie.id);
-      toast.info("Removed from favourites");
+    if (isFavourite(movie?.id)) {
+      removeFromFavourites(movie?.id);
+      toast.info("Removed from favourites", {
+        icon: "🗑️",
+        position: "bottom-right",
+        className: "bg-gray-800 text-white",
+      });
     } else {
       addToFavourites(movie);
-      toast.success("Added to favourites");
+      toast.success("Added to favourites", {
+        icon: "❤️",
+        position: "bottom-right",
+        className: "bg-gray-800 text-white",
+      });
     }
   };
 
+  const movieInFavorites = movie?.id ? isFavourite(movie.id) : false;
+
+  if (!isOpen || !movie) return null;
+
+  // Format the release date if it exists
+  const formattedDate = movie?.release_date
+    ? new Date(movie.release_date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : null;
+
   return (
-    <div
-      className={`fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50 ${
-        isOpen ? "block" : "hidden"
-      }`}
-    >
-      <div className="rounded-lg shadow-xl bg-inherit backdrop-blur-3xl overflow-hidden w-full max-w-4xl flex flex-col sm:flex-row max-h-[97%] md:max-h-[70%]">
-        <div className="w-full sm:w-2/5 h-64 sm:h-auto">
-          {movie?.poster_path && (
-            <img
-              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-              alt={movie?.title || "Movie poster"}
-              className="w-full h-full object-cover"
-            />
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm px-4 transition-all duration-300">
+      <div
+        className="relative w-full max-w-5xl md:max-h-[78vh] overflow-hidden bg-gray-900 rounded-xl shadow-2xl flex flex-col md:flex-row animate-fadeIn"
+        style={{
+          animation: "fadeIn 0.3s ease-out",
+        }}
+      >
+        {/* Poster Section with gradient overlay */}
+        <div className="w-full md:w-2/5 h-64 md:h-auto relative overflow-hidden">
+          {movie?.poster_path ? (
+            <>
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent z-10"></div>
+              <img
+                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                alt={`${movie?.title || movie?.name} Poster`}
+                className="object-cover w-full h-full transition-transform duration-700 hover:scale-105"
+              />
+            </>
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gray-800 text-gray-400">
+              No poster available
+            </div>
           )}
         </div>
 
-        <div className="flex flex-col p-4 sm:p-6 w-full sm:w-3/5 h-full">
-          <h2 className="text-xl sm:text-2xl font-bold mb-2">
+        {/* Content Section */}
+        <div className="w-full md:w-3/5 flex flex-col p-6 md:p-8 bg-gray-900 text-gray-100">
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-gray-400 hover:text-red-400 transition-colors duration-200 p-1 rounded-full hover:bg-gray-800"
+            aria-label="Close"
+          >
+            <X size={20} />
+          </button>
+
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight">
             {movie?.title || movie?.name || "Untitled"}
           </h2>
 
-          <div className="flex items-center gap-4 mb-4 text-sm">
-            <span className="flex items-center">
-              <svg
-                className="w-4 h-4 text-yellow-500 mr-1"
-                fill="currentColor"
-                viewBox="0 0 20 20"
+          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-300 mb-6">
+            {/* Rating */}
+            <div className="flex items-center bg-gray-800 rounded-full px-3 py-1">
+              <Star className="w-4 h-4 text-yellow-400 mr-1" />
+              <span>{movie?.vote_average?.toFixed(1) || "N/A"}</span>
+            </div>
+
+            {/* Release Date */}
+            {formattedDate && (
+              <div className="flex items-center bg-gray-800 rounded-full px-3 py-1">
+                <Calendar className="w-4 h-4 text-blue-400 mr-1" />
+                <span>{formattedDate}</span>
+              </div>
+            )}
+
+            {/* Runtime if available */}
+            {movie?.runtime && (
+              <div className="flex items-center bg-gray-800 rounded-full px-3 py-1">
+                <Clock className="w-4 h-4 text-green-400 mr-1" />
+                <span>{movie.runtime} min</span>
+              </div>
+            )}
+          </div>
+
+          {/* Overview with custom scrollbar */}
+          <div className="flex-grow overflow-y-auto text-gray-300 mb-6 pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+            <p className="leading-relaxed">
+              {movie?.overview || "No overview available."}
+            </p>
+          </div>
+
+          {/* Interaction Buttons */}
+          <div className="border-t border-gray-700 pt-4 mt-2">
+            <div className="flex items-center justify-between">
+              {/* Vote Button */}
+              <div className="flex items-center gap-2">
+                <button
+                  className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 transition-colors px-4 py-2 rounded-lg"
+                  onClick={() => setVotes((prev) => prev + 1)}
+                >
+                  <ThumbsUp size={18} className="text-blue-400" />
+                  <span className="font-medium">{votes}</span>
+                </button>
+              </div>
+
+              {/* Favorite Button */}
+              <button
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                  movieInFavorites
+                    ? "bg-blue-600 hover:bg-blue-700 text-white"
+                    : "bg-gray-800 hover:bg-gray-700 text-gray-300"
+                }`}
+                onClick={handleFavouriteClick}
               >
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-              {movie?.vote_average}
-            </span>
-          </div>
+                <Bookmark
+                  size={18}
+                  className={
+                    movieInFavorites ? "fill-white text-white" : "text-gray-300"
+                  }
+                />
+                <span className="text-sm">
+                  {movieInFavorites ? "Saved" : "Save"}
+                </span>
+              </button>
+            </div>
 
-          <div className="overflow-y-auto flex-grow mb-4">
-            <p>{movie?.release_date}</p>
-            <p className="mb-4">{movie?.overview}</p>
-          </div>
-
-          <div className="flex gap-2 items-center py-2">
-            <ThumbsUp
-              className="cursor-pointer text-blue-500 hover:text-blue-700 transition-transform transform hover:scale-110"
-              onClick={() => setVotes((prevVotes) => prevVotes + 1)}
-            />
-            <span className="text-lg font-medium">{votes}</span>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-3 mt-auto">
-            <span>
-              <Bookmark
-                size={35}
-                // className="bg-blue-600 py-2 px-4 rounded hover:bg-blue-700 transition-colors"
-                onClick={onFavouriteClick}
-              />{" "}
-              <p>{isFavourite ? "Add Favourite" : "Remove from favourite"}</p>
-            </span>
-
+            {/* Close Button */}
             <button
               onClick={onClose}
-              className="bg-gray-200 text-gray-800 py-2 px-4 rounded hover:bg-gray-300 transition-colors"
+              className="w-full mt-4 bg-gray-800 hover:bg-gray-700 text-gray-300 px-4 py-2 rounded-lg transition-colors"
             >
               Close
             </button>

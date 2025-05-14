@@ -6,6 +6,9 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeFather } from "./Contexts/ThemeContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { FavouritesProvider } from "./Contexts/MovieContext";
+import { HomePageProvider } from "./Contexts/HomePageContext";
+import { SearchProvider } from "./Contexts/SearchContext";
+import { UserProvider } from "./Contexts/UserContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,7 +17,13 @@ root.render(
       <BrowserRouter>
         <ThemeFather>
           <FavouritesProvider>
-            <App />
+            <SearchProvider>
+              <HomePageProvider>
+                <UserProvider>
+                  <App />
+                </UserProvider>
+              </HomePageProvider>
+            </SearchProvider>
           </FavouritesProvider>
         </ThemeFather>
       </BrowserRouter>
