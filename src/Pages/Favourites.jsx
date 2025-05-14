@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Spinner } from "@material-tailwind/react";
+
 import { motion } from "framer-motion";
 import { useFavourites } from "../Contexts/MovieContext";
 import MovieCard from "../Components/Movie Components/MovieCard";

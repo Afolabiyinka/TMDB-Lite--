@@ -104,7 +104,7 @@ export default function NavBar() {
           <div className="flex items-center">
             <Link to="/home" className="flex items-center">
               <div className="relative mr-2"></div>
-              <img src={tmdbLogo} className="h-8 w-[10rem]" />
+              <img src={tmdbLogo} className="h-8 w-[10rem]" alt="Tmdb-Logo" />
             </Link>
           </div>
 

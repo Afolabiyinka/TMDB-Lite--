@@ -3,19 +3,13 @@ import { Card, Typography, Badge } from "@material-tailwind/react";
 import { Film, Star, Award } from "lucide-react";
 
 export default function Actor({ actor }) {
-  const [isHovered, setIsHovered] = useState(false);
-
   // Calculate popularity rating - TMDB generally provides this on a 0-100 scale
   const popularity = actor.popularity
     ? Math.min(10, Math.round(actor.popularity / 10))
     : null;
 
   return (
-    <Card
-      className="overflow-hidden w-full sm:w-64 md:w-80 transition-all duration-300 hover:shadow-xl group relative cursor-pointer"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <Card className="overflow-hidden w-full sm:w-64 md:w-80 transition-all duration-300 hover:shadow-xl group relative cursor-pointer">
       {/* Hover overlay effect */}
       <div
         className={`absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300 z-10`}
