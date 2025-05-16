@@ -142,11 +142,13 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
                 <Bookmark
                   size={18}
                   className={
-                    movieInFavorites ? "fill-white text-white" : "text-gray-300"
+                    movieInFavorites
+                      ? "fill-white text-white transition-all duration-200"
+                      : "text-gray-300"
                   }
                 />
                 <span className="text-sm">
-                  {movieInFavorites ? "Saved" : "Save"}
+                  {movieInFavorites ? "Saved" : ""}
                 </span>
               </button>
             </div>

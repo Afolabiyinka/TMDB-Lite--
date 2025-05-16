@@ -96,7 +96,7 @@ export default function NavBar() {
   return (
     <nav
       className={`sticky top-0 z-50 w-full transition-all duration-300 rounded-full ${
-        isScrolled ? " shadow-md backdrop-blur-md" : ""
+        isScrolled ? " shadow-md backdrop-blur-sm" : ""
       }`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -151,9 +151,7 @@ export default function NavBar() {
                 <button
                   onClick={toggleSearchInput}
                   className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
-                >
-                  <X className="h-4 w-4" />
-                </button>
+                ></button>
               </div>
             </div>
 

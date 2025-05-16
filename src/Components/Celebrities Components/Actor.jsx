@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Card, Typography, Badge } from "@material-tailwind/react";
 import { Film, Star, Award } from "lucide-react";
 

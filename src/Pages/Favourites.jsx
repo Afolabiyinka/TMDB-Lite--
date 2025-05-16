@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { motion } from "framer-motion";
 import { useFavourites } from "../Contexts/MovieContext";
 import MovieCard from "../Components/Movie Components/MovieCard";
@@ -11,8 +10,7 @@ const Favourites = () => {
 
   useEffect(() => {
     setLoading(true);
-    const timer = setTimeout(() => setLoading(false), 1000);
-    return () => clearTimeout(timer);
+    setTimeout(() => setLoading(false), 1000);
   }, []);
 
   return (
@@ -41,10 +39,14 @@ const Favourites = () => {
           </motion.p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 py-10">
-          {favourites.map((favourite) => (
-            <MovieCard key={favourite.id} movie={favourite} />
-          ))}
+        <div className="py-3">
+          <h1 className="text-4xl mb-3">Your Favourites</h1>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {favourites.map((favourite) => (
+              <MovieCard key={favourite.id} movie={favourite} />
+            ))}
+          </div>
         </div>
       )}
     </div>

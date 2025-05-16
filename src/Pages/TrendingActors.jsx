@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getPopularPeople } from "../Services/API";
 import Actor from "../Components/Celebrities Components/Actor";
-import { Spinner } from "@material-tailwind/react";
+import Loader from "../Components/Loader";
 import Lottie from "lottie-react";
 import errorAnimation from "../Assets/ErrorAnimation.json";
 
@@ -29,7 +29,7 @@ const TrendingActors = () => {
     <div>
       {loading ? (
         <div className="flex justify-center items-center gap-4 flex-col min-h-screen">
-          <Spinner className="h-16 w-16" />
+          <Loader />
           <p>Loading Actors..</p>
         </div>
       ) : error ? (

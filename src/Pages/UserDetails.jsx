@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../Contexts/UserContext";
-import { Avatar, Button, Spinner } from "@material-tailwind/react";
+import { Avatar, Button } from "@material-tailwind/react";
 import { useState } from "react";
+import Loader from "../Components/Loader";
 
 const UserDetails = () => {
   const { user } = useUser();
@@ -15,7 +16,7 @@ const UserDetails = () => {
     }, 3000);
   }
   return (
-    <div className="w-screen h-screen flex gap-3 justify-center items-center">
+    <div className="w-screen h-screen flex flex-col md:flex-row gap-3 justify-center items-center">
       <div className="rounded-xl p-8 shadow-md flex flex-col items-center gap-3 max-w-md w-full">
         <div className="mb-6">
           <Avatar
@@ -34,13 +35,13 @@ const UserDetails = () => {
           isFullWidth
           onClick={handleLogOut}
         >
-          {loggedOut ? <Spinner /> : " Log Out"}
+          {loggedOut ? <Loader /> : " Log Out"}
         </Button>
         <div className="w-full mt-6 pt-6 border-t flex justify-center">
           <p className="italic">Enjoy your experience</p>
         </div>
       </div>
-      <div className="w-[50%] shadow-xl h-[70%]"></div>
+      <div className="md:w-[50%] shadow-xl h-[70%]"></div>
     </div>
   );
 };
