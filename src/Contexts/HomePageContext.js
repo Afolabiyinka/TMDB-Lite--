@@ -13,7 +13,7 @@ export function HomePageProvider({ children }) {
   // Routing helpers
   const navigate = useNavigate();
   const location = useLocation();
-  const showSearchParams = ["/movies"];
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   // State management
