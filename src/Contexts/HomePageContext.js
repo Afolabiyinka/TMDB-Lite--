@@ -1,6 +1,6 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useLocation } from "react-router-dom";
 
 import { useSearch } from "./SearchContext";
 import { getLatestMovies, searchMovies } from "../Services/API";
@@ -9,15 +9,18 @@ const HomeContext = createContext();
 export const UseHome = () => useContext(HomeContext);
 
 export function HomePageProvider({ children }) {
+  //Getting the seacrh input from the seacch Context
   const { searchQuery } = useSearch();
-  const navigate = useNavigate();
 
+  //Url related magic
+  const navigate = useNavigate();
+  const location = useLocation();
+  const showSearchParams = ["/movies"];
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
   const initialPage = parseInt(searchParams.get("page") || 1);
   const [currentPage, setCurentPage] = useState(initialPage);
 
@@ -29,7 +32,10 @@ export function HomePageProvider({ children }) {
   }
 
   useEffect(() => {
-    setSearchParams({ page: currentPage });
+    {
+      showSearchParams.includes(location.pathname) &&
+        setSearchParams({ page: currentPage });
+    }
   }, [currentPage, setSearchParams]);
 
   useEffect(() => {

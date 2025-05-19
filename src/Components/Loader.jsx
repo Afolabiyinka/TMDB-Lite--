@@ -41,6 +41,8 @@ const StyledWrapper = styled.div`
   .jimu-primary-loading:after,
   .jimu-primary-loading {
     background: #076fe5;
+    border-radius: 20px;
+
     -webkit-animation: loading-keys-app-loading 0.8s infinite ease-in-out;
     animation: loading-keys-app-loading 0.8s infinite ease-in-out;
     width: 13.6px;

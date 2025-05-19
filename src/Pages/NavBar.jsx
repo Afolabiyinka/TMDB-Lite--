@@ -11,7 +11,7 @@ const LINKS = [
   {
     icon: Home,
     title: "Home",
-    href: "/home",
+    href: "/movies",
   },
   {
     icon: Heart,
@@ -102,7 +102,7 @@ export default function NavBar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <Link to="/home" className="flex items-center">
+            <Link to="/movies" className="flex items-center">
               <div className="relative mr-2"></div>
               <img src={tmdbLogo} className="h-8 w-[10rem]" alt="Tmdb-Logo" />
             </Link>
@@ -122,7 +122,7 @@ export default function NavBar() {
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
-                  navigate("/home");
+                  navigate("/movies");
                 }}
               />
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
@@ -144,7 +144,7 @@ export default function NavBar() {
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
-                    navigate("/home");
+                    navigate("/movies");
                   }}
                 />
                 <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />

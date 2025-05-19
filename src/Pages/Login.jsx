@@ -14,7 +14,7 @@ const Login = () => {
     const storedUser = localStorage.getItem("TmdbUser");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
-      navigate("/home");
+      navigate("/movies");
     }
   }, [navigate, setUser]);
 
@@ -22,7 +22,7 @@ const Login = () => {
     const decodedUser = jwtDecode(credentials.credential);
     setUser(decodedUser);
     localStorage.setItem("TmdbUser", JSON.stringify(decodedUser));
-    navigate("/home");
+    navigate("/movies");
   };
 
   const error = () => {

@@ -2,14 +2,14 @@ import { Chip } from "@material-tailwind/react";
 import { Swords, Heart, Ghost, Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-export default function GenreNav() {
+export default function GenreNav({}) {
   const navigate = useNavigate();
 
   return (
     <div className="mt-2 px-4">
       <div className="flex flex-wrap justify-center md:justify-start gap-2 py-2">
         {[
-          { name: "Home", icon: Home, path: "/" },
+          { name: "Home", icon: Home, path: "/movies" },
           { name: "Action", icon: Swords, path: "/action" },
           { name: "Romance", icon: Heart, path: "/romance" },
           { name: "Horror", icon: Ghost, path: "/horror" },

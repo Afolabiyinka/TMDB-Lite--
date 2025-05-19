@@ -36,7 +36,7 @@ function App() {
             <Route path="/favourites" element={<Favourites />} />
             <Route path="/celebrities" element={<TrendingActors />} />
             <Route path="/account" element={<UserDetails />} />
-            <Route path="/home" element={<HomePage />} />
+            <Route path="/movies" element={<HomePage />} />
             <Route path="*" element={<ComingSoonSection />} />
             <Route path="/random" element={<ImageUploader />} />
 
