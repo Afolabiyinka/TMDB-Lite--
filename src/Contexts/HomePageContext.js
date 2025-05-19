@@ -34,7 +34,8 @@ export function HomePageProvider({ children }) {
 
   // Update URL with current page if on allowed paths
   useEffect(() => {
-    if (showSearchParams.includes(location.pathname)) {
+    const allowedPaths = ["/movies"];
+    if (allowedPaths.includes(location.pathname)) {
       setSearchParams({ page: currentPage });
     }
   }, [currentPage, location.pathname, setSearchParams]);
