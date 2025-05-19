@@ -2,7 +2,7 @@ import { Chip } from "@material-tailwind/react";
 import { Swords, Heart, Ghost, Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-export default function GenreNav({}) {
+export default function GenreNav() {
   const navigate = useNavigate();
 
   return (
