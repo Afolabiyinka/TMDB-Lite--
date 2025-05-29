@@ -14,7 +14,8 @@ const Pagination = ({
       <IconButton
         onClick={handlePrevPage}
         color="secondary"
-        variant="solid"
+        variant="outline"
+        isCircular
         disabled={currentPage === 1}
         className="disabled:bg-gray-400 px-3 py-1"
       >
@@ -29,7 +30,8 @@ const Pagination = ({
       <IconButton
         onClick={handleNextPage}
         color="secondary"
-        variant="solid"
+        variant="outline"
+        isCircular
         disabled={currentPage === maxPages}
         className="disabled:bg-gray-400 px-3 py-1 "
       >

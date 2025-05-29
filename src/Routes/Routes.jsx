@@ -1,5 +1,4 @@
-import React from "react";
-import { Routes, Route, Redirect, Switch } from "react-router-dom";
+import { Routes, Route, Switch } from "react-router-dom";
 const Routes = () => {
   return (
     <div>

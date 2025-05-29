@@ -17,6 +17,7 @@ import ComedyMovies from "./Pages/Genres/ComedyMovies";
 import HorrorMovies from "./Pages/Genres/HorrorMovies";
 import UserDetails from "./Pages/UserDetails";
 import ImageUploader from "./Pages/Random";
+import AccountCustomSlotProps from "./Pages/Account";
 
 function App() {
   const location = useLocation();
@@ -35,7 +36,7 @@ function App() {
             <Route path="/" element={<Login />} />
             <Route path="/favourites" element={<Favourites />} />
             <Route path="/celebrities" element={<TrendingActors />} />
-            <Route path="/account" element={<UserDetails />} />
+            <Route path="/account" element={<AccountCustomSlotProps />} />
             <Route path="/movies" element={<HomePage />} />
             <Route path="*" element={<ComingSoonSection />} />
             <Route path="/random" element={<ImageUploader />} />
