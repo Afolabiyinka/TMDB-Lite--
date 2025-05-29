@@ -15,7 +15,7 @@ import ActionMovies from "./Pages/Genres/ActionMovies";
 import RomanceMovies from "./Pages/Genres/RomanceMovies";
 import ComedyMovies from "./Pages/Genres/ComedyMovies";
 import HorrorMovies from "./Pages/Genres/HorrorMovies";
-import UserDetails from "./Pages/UserDetails";
+
 import ImageUploader from "./Pages/Random";
 import AccountCustomSlotProps from "./Pages/Account";
 
