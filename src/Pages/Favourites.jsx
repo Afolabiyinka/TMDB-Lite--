@@ -21,7 +21,7 @@ const Favourites = () => {
           <p>Loading Favourites...</p>
         </div>
       ) : favourites.length === 0 ? (
-        <div className="px-6 py-8 rounded-md bg-[rgba(255,255,255,0.05)] flex justify-center items-center flex-col text-center">
+        <div className="px-6 py-8 rounded-md flex justify-center items-center flex-col text-center">
           <motion.h1
             className="text-2xl"
             initial={{ opacity: 0, scale: 0.8 }}

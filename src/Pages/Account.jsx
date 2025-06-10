@@ -4,11 +4,13 @@ import { Account } from "@toolpad/core/Account";
 import { AppProvider } from "@toolpad/core/AppProvider";
 import { useUser } from "../Contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../Contexts/ThemeContext";
 
 export default function AccountCustomSlotProps() {
   const [session, setSession] = React.useState(null);
   const navigate = useNavigate();
   const { user } = useUser();
+  // const { theme } = useTheme();
 
   // ✅ Restore session from localStorage on first load
   React.useEffect(() => {
@@ -51,7 +53,11 @@ export default function AccountCustomSlotProps() {
 
   return (
     <div className="h-screen">
-      <AppProvider authentication={authentication} session={session}>
+      <AppProvider
+        authentication={authentication}
+        session={session}
+        
+      >
         <Account
           slotProps={{
             signInButton: {
@@ -59,6 +65,7 @@ export default function AccountCustomSlotProps() {
             },
             signOutButton: {
               color: "success",
+
               startIcon: <ArrowBigLeft />,
             },
             preview: {

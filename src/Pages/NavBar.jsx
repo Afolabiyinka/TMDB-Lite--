@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Search, Video, Home, User, X, Menu, Heart } from "lucide-react";
 import { useSearch } from "../Contexts/SearchContext";
@@ -32,6 +32,8 @@ const LINKS = [
 ];
 
 function NavList({ closeMenu }) {
+  const location = useLocation();
+
   return (
     <ul className="mt-4 flex flex-col gap-y-3 lg:mt-0 lg:flex-row lg:items-center lg:gap-x-6">
       {LINKS.map(({ icon: Icon, title, href }) => (
@@ -39,12 +41,16 @@ function NavList({ closeMenu }) {
           <Link
             to={href}
             onClick={closeMenu}
-            className="flex items-center gap-x-2 p-2 text-sm font-medium transition-colors duration-300  group"
+            className="flex items-center gap-x-2 p-2 text-sm font-medium transition-colors duration-100 group"
           >
-            <div className="flex items-center justify-center rounded-full bg-gray-100 p-2 group-hover:bg-red-100 dark:bg-gray-800 dark:group-hover:bg-red-900">
+            <div
+              className={`"flex items-center justify-center" ${location.pathname === href ? "rounded-lg  bg-gray-100 p-2 dark:bg-gray-800 " : ""}`}
+            >
               <Icon className="h-4 w-4" />
             </div>
-            <span className="ml-1 transition-transform duration-300 group-hover:translate-x-1">
+            <span
+              className={`ml-1 transition-transform duration-300 group-hover:translate-x-1 `}
+            >
               {title}
             </span>
           </Link>
@@ -118,7 +124,7 @@ export default function NavBar() {
               <input
                 type="search"
                 placeholder="Search movies..."
-                className="w-64 rounded-full border border-gray-300 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
+                className="w-64 rounded-full border border-gray-300 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
