@@ -33,7 +33,7 @@ const HomePage = () => {
           <h1 className={`text-2xl`}>{error}</h1>
         </div>
       ) : (
-        <div className="w-full flex flex-col  ">
+        <div className="w-full flex flex-col px-8 ">
           <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3 py-3 justify-center items-center">
             {movies.map((movie) => (
               <MovieCard movie={movie} key={movie.id} />
