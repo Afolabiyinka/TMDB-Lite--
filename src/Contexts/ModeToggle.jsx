@@ -38,7 +38,11 @@ export function ModeToggle() {
         </MenuTrigger>
 
         {isOpen && (
-          <MenuContent className="flex flex-col cursor-pointer mt-3">
+          <MenuContent
+            className="flex flex-col cursor-pointer mt-3"
+            color="primary"
+            variant="ghost"
+          >
             <span
               className="flex justify-between cursor-pointer active:bg-gray-500 p-2 rounded-lg"
               onClick={() => handleClick("light")}

@@ -97,6 +97,7 @@ export default function NavBar() {
 
   const toggleSearchInput = () => {
     setShowSearchInput(!showSearchInput);
+    setOpenNav(false);
   };
 
   return (
@@ -176,7 +177,10 @@ export default function NavBar() {
 
             {/* Mobile menu button */}
             <button
-              onClick={() => setOpenNav(!openNav)}
+              onClick={() => {
+                setOpenNav(!openNav);
+                setShowSearchInput(false);
+              }}
               className="rounded-full p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200 lg:hidden"
             >
               {openNav ? (
