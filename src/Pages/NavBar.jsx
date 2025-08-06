@@ -102,8 +102,8 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full transition-all duration-300 rounded-xl shadow-sm ${
-        isScrolled ? " shadow-md backdrop-blur-lg" : ""
+      className={`sticky top-0 z-50 w-full transition-all duration-300 rounded-xl shadow-md ${
+        isScrolled ? " shadow-sm backdrop-blur-lg" : ""
       }`}
     >
       <div className="max-w-7xl px-4 sm:px-6 lg:px-8">

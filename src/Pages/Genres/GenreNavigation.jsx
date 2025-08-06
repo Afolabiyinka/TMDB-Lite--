@@ -16,7 +16,7 @@ export default function GenreNav() {
         ].map(({ name, icon: Icon, path }) => (
           <Chip
             key={name}
-            variant="solid"
+            variant="ghost"
             color="secondary"
             // isPill={false}
             className="flex items-center justify-center gap-1 px-2 py-1  sm:w-auto"

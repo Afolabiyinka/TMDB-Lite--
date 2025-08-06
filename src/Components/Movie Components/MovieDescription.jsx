@@ -47,7 +47,7 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm px-4 transition-all duration-300">
       <div
-        className="relative h-[99vh] w-full md:h-[97vh] max-w-5xl overflow-hidden bg-gray-900 rounded-xl shadow-2xl flex flex-col md:flex-row animate-fadeIn"
+        className="relative h-[97vh] w-full md:h-[95vh] max-w-5xl overflow-hidden bg-gray-900 rounded-xl shadow-2xl flex flex-col md:flex-row animate-fadeIn"
         // style={{
         //   animation: "fadeIn 0.3s ease-out",
         // }}
@@ -71,7 +71,7 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
         </div>
 
         {/* Content Section */}
-        <div className="w-full md:w-2/5 flex flex-col p-6 md:p-8 bg-gray-900 text-gray-100">
+        <div className="w-full md:w-1/2 flex h-[60%] md:h-full flex-col p-6 md:p-8 backdrop-blur-xl text-gray-100">
           {/* Close Button */}
           <button
             onClick={onClose}
@@ -99,18 +99,10 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
                 <span>{formattedDate}</span>
               </div>
             )}
-
-            {/* Runtime if available */}
-            {movie?.runtime && (
-              <div className="flex items-center bg-gray-800 rounded-full px-3 py-1">
-                <Clock className="w-4 h-4 text-green-400 mr-1" />
-                <span>{movie.runtime} min</span>
-              </div>
-            )}
           </div>
 
           {/* Overview with custom scrollbar */}
-          <div className="flex-grow overflow-y-auto text-gray-300 mb-6 pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+          <div className="flex-grow overflow-y-scroll  md:w-full text-gray-300  pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
             <p className="leading-relaxed">
               {movie?.overview || "No overview available."}
             </p>
