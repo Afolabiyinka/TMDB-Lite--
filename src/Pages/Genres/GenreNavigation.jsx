@@ -16,12 +16,12 @@ export default function GenreNav() {
         ].map(({ name, icon: Icon, path }) => (
           <Chip
             key={name}
-            variant="ghost"
+            variant="solid"
             color="secondary"
             // isPill={false}
-            className="flex items-center justify-center gap-1 px-2 py-1 w-[calc(33.333%-0.5rem)] sm:w-auto"
+            className="flex items-center justify-center gap-1 px-2 py-1  sm:w-auto"
           >
-            <Icon className="h-8 w-8 sm:h-6 sm:w-6" />
+            <Icon className="sm:h-6 sm:w-6" />
             <Chip.Label
               className="cursor-pointer text-sm sm:text-base"
               onClick={() => navigate(path)}

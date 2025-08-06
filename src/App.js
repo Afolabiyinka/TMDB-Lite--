@@ -24,11 +24,11 @@ function App() {
   const hideNavbarRoutes = ["/"];
 
   return (
-    <div className="p-2 flex flex-col items-center px-1">
+    <div className="p-3 flex flex-col">
       <ThemeProvider value={theme}>
         {!hideNavbarRoutes.includes(location.pathname) && (
           <>
-            <NavBar className="" />
+            <NavBar />
           </>
         )}
         <div>
