@@ -47,13 +47,13 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm px-4 transition-all duration-300">
       <div
-        className="relative w-full max-w-5xl md:max-h-[78vh] overflow-hidden bg-gray-900 rounded-xl shadow-2xl flex flex-col md:flex-row animate-fadeIn"
-        style={{
-          animation: "fadeIn 0.3s ease-out",
-        }}
+        className="relative h-[99vh] w-full md:h-[97vh] max-w-5xl overflow-hidden bg-gray-900 rounded-xl shadow-2xl flex flex-col md:flex-row animate-fadeIn"
+        // style={{
+        //   animation: "fadeIn 0.3s ease-out",
+        // }}
       >
         {/* Poster Section with gradient overlay */}
-        <div className="w-full md:w-2/5 h-64 md:h-auto relative overflow-hidden">
+        <div className="w-full md:w-2/5 h-72 md:h-auto relative overflow-hidden">
           {movie?.poster_path ? (
             <>
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent z-10"></div>
@@ -71,7 +71,7 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
         </div>
 
         {/* Content Section */}
-        <div className="w-full md:w-3/5 flex flex-col p-6 md:p-8 bg-gray-900 text-gray-100">
+        <div className="w-full md:w-2/5 flex flex-col p-6 md:p-8 bg-gray-900 text-gray-100">
           {/* Close Button */}
           <button
             onClick={onClose}
