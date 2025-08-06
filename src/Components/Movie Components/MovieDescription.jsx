@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ThumbsUp, Bookmark, X, Calendar, Star, Clock } from "lucide-react";
+import { ThumbsUp, Bookmark, X, Calendar, Star } from "lucide-react";
 import { useFavourites } from "../../Contexts/MovieContext";
 import { toast } from "react-toastify";
 
