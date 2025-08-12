@@ -40,7 +40,7 @@ export function ModeToggle() {
         {isOpen && (
           <MenuContent
             className="flex flex-col cursor-pointer mt-3"
-            color="primary"
+            color="secondary"
             variant="ghost"
           >
             <span

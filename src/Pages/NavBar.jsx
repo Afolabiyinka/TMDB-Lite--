@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Search, Video, Home, User, X, Menu, Heart } from "lucide-react";
@@ -102,7 +101,7 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full transition-all duration-300 rounded-xl shadow-md ${
+      className={`sticky top-0 z-50 w-full transition-all duration-300 rounded-2xl shadow-md ${
         isScrolled ? " shadow-sm backdrop-blur-lg" : ""
       }`}
     >
@@ -125,7 +124,7 @@ export default function NavBar() {
               <input
                 type="search"
                 placeholder="Search movies..."
-                className="w-64 rounded-full border border-gray-300 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
+                className="w-64 rounded-full border border-gray-300 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-500 dark:border-gray-700 dark:bg-gray-700 dark:text-gray-200"
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
@@ -154,10 +153,10 @@ export default function NavBar() {
                     navigate("/movies");
                   }}
                 />
-                <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400 " />
                 <button
                   onClick={toggleSearchInput}
-                  className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+                  className="absolute right-3 top-2.5 ml-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
                 ></button>
               </div>
             </div>
@@ -165,13 +164,13 @@ export default function NavBar() {
             {/* Mobile search button */}
             <button
               onClick={toggleSearchInput}
-              className="rounded-full p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200 lg:hidden"
+              className="rounded-full p-2 ml-4 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200 lg:hidden"
             >
-              <Search className="h-5 w-5" />
+              <Search className="h-6 w-6" />
             </button>
 
             {/* Theme toggle */}
-            <div className="ml-2">
+            <div className="">
               <ModeToggle />
             </div>
 

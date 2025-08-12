@@ -70,12 +70,10 @@ export default function MovieCard({ movie }) {
         <IconButton
           variant="outline"
           color="secondary"
-          className={`${isFavourite(movie.id) ? "bg-white" : ""}  p-2  rounded-xl`}
+          onClick={handleFavouriteClick}
+          className={`${isFavourite(movie.id) ? "bg-white" : "bg-gray-200"}  p-2  rounded-xl`}
         >
-          <Heart
-            fill={`${isFavourite ? "red" : ""} `}
-            onClick={handleFavouriteClick}
-          />
+          <Heart fill={`${isFavourite ? "red" : "white"} `} />
         </IconButton>
       </div>
 

@@ -33,7 +33,7 @@ const TrendingActors = () => {
           <p>Loading Actors..</p>
         </div>
       ) : error ? (
-        <div className="flex justify-center items-center flex-col min-h-screen">
+        <div className="flex justify-center items-center gap-4 flex-col min-h-screen">
           <Lottie
             animationData={errorAnimation}
             style={{ width: "100px", height: "100px" }}

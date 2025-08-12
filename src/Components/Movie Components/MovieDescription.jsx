@@ -45,13 +45,8 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
     : null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm px-4 transition-all duration-300">
-      <div
-        className="relative h-[97vh] w-full md:h-[95vh] max-w-5xl overflow-hidden bg-gray-900 rounded-xl shadow-2xl flex flex-col md:flex-row animate-fadeIn"
-        // style={{
-        //   animation: "fadeIn 0.3s ease-out",
-        // }}
-      >
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-md px-4 transition-all duration-300">
+      <div className="relative h-[96vh] w-full md:h-[95vh] max-w-5xl overflow-hidden rounded-xl shadow-2xl flex flex-col md:flex-row animate-fadeIn">
         {/* Poster Section with gradient overlay */}
         <div className="w-full md:w-2/5 h-72 md:h-auto relative overflow-hidden">
           {movie?.poster_path ? (
@@ -71,7 +66,7 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
         </div>
 
         {/* Content Section */}
-        <div className="w-full md:w-1/2 flex h-[60%] md:h-full flex-col p-6 md:p-8 backdrop-blur-xl text-gray-100">
+        <div className="w-full md:w-[60%] flex h-[60%] md:h-fit flex-col p-6 md:p-8  text-gray-100">
           {/* Close Button */}
           <button
             onClick={onClose}
@@ -102,7 +97,7 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
           </div>
 
           {/* Overview with custom scrollbar */}
-          <div className="flex-grow overflow-y-scroll  md:w-full text-gray-300  pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
+          <div className="flex-grow overflow-y-scroll h-fit md:w-full text-gray-300  pr-2 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
             <p className="leading-relaxed">
               {movie?.overview || "No overview available."}
             </p>
@@ -146,12 +141,14 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
             </div>
 
             {/* Close Button */}
-            <button
-              onClick={onClose}
-              className="w-full mt-4 bg-gray-800 hover:bg-gray-700 text-gray-300 px-4 py-2 rounded-lg transition-colors"
-            >
-              Close
-            </button>
+            <span>
+              <button
+                onClick={onClose}
+                className="w-full mt-4 bg-gray-800 hover:bg-gray-700 text-gray-300 px-4 py-2 rounded-lg transition-colors"
+              >
+                Close
+              </button>
+            </span>
           </div>
         </div>
       </div>

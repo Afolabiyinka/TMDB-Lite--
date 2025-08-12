@@ -7,23 +7,16 @@ const LINKS = [
     title: "About Us",
     href: "#",
   },
-  {
-    title: "License",
-    href: "#",
-  },
+
   {
     title: "Contribute",
-    href: "#",
-  },
-  {
-    title: "Contact Us",
     href: "#",
   },
 ];
 
 export default function Footer() {
   return (
-    <footer className="w-full px-4">
+    <footer className="w-full px-4 shadow-sm">
       <div className="flex w-full flex-row flex-wrap items-center justify-center gap-x-12 gap-y-3 text-center md:justify-between">
         <Link to="/">
           <img src={tmLogo} alt="brand" className="w-[120px] h-[30px]" />
