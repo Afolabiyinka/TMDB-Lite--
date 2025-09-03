@@ -39,26 +39,26 @@ export function ModeToggle() {
 
         {isOpen && (
           <MenuContent
-            className="flex flex-col cursor-pointer mt-3"
+            className="flex flex-col cursor-pointer mt-3 bg-gray-500 text-white"
             color="secondary"
-            variant="ghost"
+            variant="solid"
           >
             <span
-              className="flex justify-between cursor-pointer active:bg-gray-500 p-2 rounded-lg"
+              className="flex justify-between cursor-pointer hover:bg-gray-500 p-2 rounded-lg hover:border"
               onClick={() => handleClick("light")}
             >
               Light <Sun />
             </span>
 
             <span
-              className="flex justify-between cursor-pointer active:bg-gray-500 p-2 rounded-lg"
+              className="flex justify-between cursor-pointer hover:bg-gray-500 p-2 rounded-lg hover:border"
               onClick={() => handleClick("dark")}
             >
               Dark <Moon />
             </span>
 
             <span
-              className="flex justify-between cursor-pointer active:bg-gray-500 p-2 rounded-lg"
+              className="flex justify-between cursor-pointer hover:bg-gray-500 p-2 rounded-lg hover:border"
               onClick={() => handleClick("system")}
             >
               System <Laptop />
