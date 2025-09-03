@@ -24,7 +24,7 @@ function App() {
   const hideNavbarRoutes = ["/"];
 
   return (
-    <div className="p-3 flex flex-col">
+    <div className="p-3 flex flex-col items-center justify-center">
       <ThemeProvider value={theme}>
         {!hideNavbarRoutes.includes(location.pathname) && (
           <>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ThumbsUp, Bookmark, X, Calendar, Star } from "lucide-react";
+import { ThumbsUp, X, Calendar, Star, Heart } from "lucide-react";
 import { useFavourites } from "../../Contexts/MovieContext";
 import { toast } from "react-toastify";
 
@@ -126,7 +126,7 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
                 }`}
                 onClick={handleFavouriteClick}
               >
-                <Bookmark
+                <Heart
                   size={18}
                   className={
                     movieInFavorites

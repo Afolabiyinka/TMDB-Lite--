@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import MovieCard from "../../Components/Movie Components/MovieCard";
 import Lottie from "lottie-react";
-import { Spinner } from "@material-tailwind/react";
 import errorAnimation from "../../Assets/ErrorAnimation.json";
 import { getHorrorMovies } from "../../Services/GetGenres";
+import Loader from "../../Components/Loader";
 
 const HorrorMovies = () => {
   const [movies, setMovies] = useState([]);
@@ -31,7 +31,7 @@ const HorrorMovies = () => {
     <div className={`flex flex-col justify-center items-center h-fit`}>
       {loading ? (
         <div className="flex justify-center items-center gap-4 flex-col min-h-screen">
-          <Spinner className="h-16 w-16" />
+          <Loader />
         </div>
       ) : error ? (
         <div className="flex justify-center items-center flex-col min-h-screen gap-4">

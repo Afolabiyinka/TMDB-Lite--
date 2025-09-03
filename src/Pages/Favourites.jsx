@@ -14,7 +14,7 @@ const Favourites = () => {
   }, []);
 
   return (
-    <div className="min-h-[90vh] text-center flex justify-center items-center px-4">
+    <div className="min-h-[90vh] text-center flex justify-center items-center w-full">
       {loading ? (
         <div className="flex justify-center items-center gap-4 flex-col min-h-screen">
           <Loader />
@@ -42,7 +42,7 @@ const Favourites = () => {
         <div className="py-3">
           <h1 className="text-4xl mb-3">Your Favourites</h1>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-1">
             {favourites.map((favourite) => (
               <MovieCard key={favourite.id} movie={favourite} />
             ))}
