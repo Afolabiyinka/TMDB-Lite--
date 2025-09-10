@@ -14,7 +14,7 @@ const Favourites = () => {
   }, []);
 
   return (
-    <div className="min-h-[90vh] text-center flex justify-center items-center w-full">
+    <div className=" text-center flex justify-center items-center w-full">
       {loading ? (
         <div className="flex justify-center items-center gap-4 flex-col min-h-screen">
           <Loader />

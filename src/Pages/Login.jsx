@@ -31,7 +31,7 @@ const Login = () => {
 
   return (
     <motion.div
-      className="w-screen h-screen flex flex-col justify-center items-center px-4"
+      className="w-full h-screen flex flex-col justify-center items-center px-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.7 }}

@@ -23,7 +23,7 @@ export default function MovieCard({ movie }) {
   };
 
   return (
-    <Card className="overflow-hidden w-[22rem] md:w-[24rem] shadow-lg bg-gray-50 p-1 dark:bg-gray-900">
+    <Card className="overflow-hidden w-[22rem] md:w-[24rem] shadow-lg bg-gray-50 p-1 dark:bg-gray-900 ">
       {/* Image Section */}
       <div className="h-80 overflow-hidden">
         {movie.poster_path ? (

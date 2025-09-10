@@ -46,7 +46,7 @@ const MovieModal = ({ isOpen, movie, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-md px-4 transition-all duration-300">
-      <div className="relative h-[96vh] w-full md:h-[95vh] max-w-5xl overflow-hidden rounded-xl shadow-2xl flex flex-col md:flex-row animate-fadeIn">
+      <div className="relative h-[96vh] z-50 w-full md:h-[95vh] max-w-5xl overflow-hidden rounded-xl shadow-2xl flex flex-col md:flex-row animate-fadeIn">
         {/* Poster Section with gradient overlay */}
         <div className="w-full md:w-2/5 h-72 md:h-auto relative overflow-hidden">
           {movie?.poster_path ? (
