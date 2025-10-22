@@ -16,7 +16,6 @@ const HomePage = () => {
   } = useHomePage();
   return (
     <div className={`flex flex-col justify-center items-center h-fit`}>
-      <div>{/* <GenreNav /> */}</div>
       {loading ? (
         <div className="flex justify-center items-center gap-4 flex-col min-h-screen">
           <Loader />
