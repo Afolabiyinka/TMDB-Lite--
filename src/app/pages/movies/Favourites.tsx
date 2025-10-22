@@ -8,11 +8,6 @@ const Favourites = () => {
   const [loading, setLoading] = useState(false);
   const { favourites } = useFavourites();
 
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => setLoading(false), 1000);
-  }, [favourites]);
-
   return (
     <div className=" text-center flex justify-center items-center w-full">
       {loading ? (
@@ -42,7 +37,7 @@ const Favourites = () => {
         <div className="py-3">
           <h1 className="text-4xl mb-3">Your Favourites</h1>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-1">
+          <div className="w-screen  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 p-1">
             {favourites.map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
