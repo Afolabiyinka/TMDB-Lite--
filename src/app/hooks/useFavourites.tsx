@@ -14,7 +14,7 @@ interface FavouritesContextType {
 }
 
 interface FavouritesProviderProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const FavouritesContext = createContext<FavouritesContextType | null>(null);

@@ -13,7 +13,7 @@ const Login = () => {
     const storedUser = localStorage.getItem("TmdbUser");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
-      navigate("/movies");
+      navigate("/app/movies");
     }
   }, [navigate, setUser]);
 
