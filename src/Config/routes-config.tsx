@@ -1,8 +1,4 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Navigate,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "../app/pages/auth/Login";
 import HomePage from "../app/pages/movies/HomePage";
 import Favourites from "../app/pages/movies/Favourites";

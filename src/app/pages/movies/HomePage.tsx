@@ -1,7 +1,6 @@
 import Lottie from "lottie-react";
 import errorAnimation from "../../../Assets/ErrorAnimation.json";
 import Pagination from "../../components/Pagination";
-import GenreNav from "../Genres/GenreNavigation";
 import Loader from "../../components/Loader";
 import MovieCard from "../../components/movie/MovieCard";
 import useHomePage from "../../hooks/useHomePage";

@@ -16,7 +16,7 @@ const MovieModal = ({ isOpen, movie, onClose }: MovieModalProps) => {
 
   useEffect(() => {
     setVotes(movie?.vote_count || 0);
-  }, [movie?.id]);
+  }, [movie.id]);
 
   if (!isOpen || !movie) return null;
 
