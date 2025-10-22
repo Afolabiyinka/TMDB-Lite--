@@ -1,59 +1,51 @@
-import { useContext, createContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
-
 import { useSearch } from "./SearchContext";
-import { getLatestMovies, searchMovies } from "../Services/API";
+import { getLatestMovies, searchMovies } from "../services/API";
 
-const HomeContext = createContext();
-export const UseHome = () => useContext(HomeContext);
+export interface MovieType {
+  id: number | string;
+  title?: string;
+  poster?: string;
+  [key: string]: any;
+}
 
-export function HomePageProvider({ children }) {
+export default function useHomePage() {
   const { searchQuery } = useSearch();
-
-  // Routing helpers
   const navigate = useNavigate();
   const location = useLocation();
-
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // State management
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const initialPage = parseInt(searchParams.get("page") || 1);
-  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [movies, setMovies] = useState<MovieType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-  // Page navigation handlers
-  function handlePrevPage() {
-    setCurrentPage((prev) => Math.max(prev - 1, 1));
-  }
+  const initialPage = parseInt(searchParams.get("page") || "1", 10);
+  const [currentPage, setCurrentPage] = useState<number>(initialPage);
 
-  function handleNextPage() {
-    setCurrentPage((prev) => prev + 1);
-  }
+  const handlePrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+  const handleNextPage = () => setCurrentPage((prev) => prev + 1);
 
-  // Update URL with current page if on allowed paths
+  // Sync page with URL
   useEffect(() => {
     const allowedPaths = ["/movies"];
     if (allowedPaths.includes(location.pathname)) {
-      setSearchParams({ page: currentPage });
+      setSearchParams({ page: currentPage.toString() });
     }
   }, [currentPage, location.pathname, setSearchParams]);
 
-  // Redirect to login if user not found
+  // Redirect if not logged in
   useEffect(() => {
     const storedUser = localStorage.getItem("TmdbUser");
-    if (!storedUser) {
-      navigate("/");
-    }
+    if (!storedUser) navigate("/");
   }, [navigate]);
 
-  // Scroll to top when page changes
+  // Scroll top when page changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   }, [currentPage]);
 
-  // Fetch either popular or searched movies
+  // Fetch movies
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -66,7 +58,7 @@ export function HomePageProvider({ children }) {
           setMovies(popularMovies);
         }
         setError(null);
-      } catch (err) {
+      } catch {
         setError("Failed to load movies...");
       } finally {
         setLoading(false);
@@ -76,7 +68,7 @@ export function HomePageProvider({ children }) {
     fetchMovies();
   }, [searchQuery, currentPage]);
 
-  const value = {
+  return {
     movies,
     loading,
     error,
@@ -84,6 +76,4 @@ export function HomePageProvider({ children }) {
     handleNextPage,
     handlePrevPage,
   };
-
-  return <HomeContext.Provider value={value}>{children}</HomeContext.Provider>;
 }

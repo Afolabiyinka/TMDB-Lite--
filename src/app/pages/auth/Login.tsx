@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
-import tmLogo from "../Assets/the real logo.svg";
+import tmLogo from "../../../Assets/the real logo.svg";
 import { GoogleLogin } from "@react-oauth/google";
-import { useUser } from "../Contexts/UserContext";
-import { jwtDecode } from "jwt-decode";
+import { useUser } from "../../hooks/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { setUser } = useUser();
+  const { setUser, success, error } = useUser();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,17 +16,6 @@ const Login = () => {
       navigate("/movies");
     }
   }, [navigate, setUser]);
-
-  const success = (credentials) => {
-    const decodedUser = jwtDecode(credentials.credential);
-    setUser(decodedUser);
-    localStorage.setItem("TmdbUser", JSON.stringify(decodedUser));
-    navigate("/movies");
-  };
-
-  const error = () => {
-    console.log("Something went wrong with Google Login");
-  };
 
   return (
     <motion.div

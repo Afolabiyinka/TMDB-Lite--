@@ -12,7 +12,9 @@
     "@material-tailwind/react": "^3.0.0-beta.24",
     "@mui/material": "^7.1.0",
     "@react-oauth/google": "^0.12.1",
+    "@tanstack/react-query": "^5.90.5",
     "@toolpad/core": "^0.15.0",
+    "@types/node": "^24.8.1",
     "classnames": "^2.5.1",
     "cra-template": "1.2.0",
     "framer-motion": "^12.6.2",
@@ -23,6 +25,7 @@
     "react": "^18.0.0",
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18.0.0",
+    "react-flip-move": "^3.0.5",
     "react-icons": "^5.4.0",
     "react-modal": "^3.16.3",
     "react-router-dom": "^7.1.1",
@@ -58,6 +61,9 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "tailwindcss": "^3.4.17"
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.9.3"
   }
 }

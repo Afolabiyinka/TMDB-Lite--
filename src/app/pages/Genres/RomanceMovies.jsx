@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import MovieCard from "../../Components/Movie Components/MovieCard";
+import MovieCard from "../../components/movie/MovieCard";
 import Lottie from "lottie-react";
 import errorAnimation from "../../Assets/ErrorAnimation.json";
 import { getRomanceMovies } from "../../Services/GetGenres";

@@ -1,10 +1,9 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Search, Video, Home, User, X, Menu, Heart } from "lucide-react";
-import { useSearch } from "../Contexts/SearchContext";
-import { ModeToggle } from "../Contexts/ModeToggle";
-
-import tmdbLogo from "../Assets/the real logo.svg";
+import { useSearch } from "../../hooks/SearchContext";
+import { ModeToggle } from "../../hooks/ModeToggle";
+import tmdbLogo from "../../../Assets/the real logo.svg";
 
 const LINKS = [
   {
@@ -101,7 +100,7 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full transition-all duration-300 rounded-2xl shadow-md ${
+      className={`sticky top-0 z-50 w-full transition-all duration-300 p-1 rounded-full mt-2 border border-gray-500 shadow-md mx-2 ${
         isScrolled ? " shadow-sm backdrop-blur-lg" : ""
       }`}
     >
@@ -124,14 +123,14 @@ export default function NavBar() {
               <input
                 type="search"
                 placeholder="Search movies..."
-                className="w-64 rounded-full border border-gray-300 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-500 dark:border-gray-700 dark:bg-gray-700 dark:text-gray-200"
+                className="w-72 rounded-full border border-gray-300 bg-gray-50 py-3 pl-10 pr-4 text-sm focus:border-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-500 dark:border-gray-700 dark:bg-gray-700 dark:text-gray-200"
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
                   navigate("/movies");
                 }}
               />
-              <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+              <Search className="absolute left-3 top-2.5 h-6 w-6 text-black" />
             </div>
 
             {/* Mobile Search Input */}

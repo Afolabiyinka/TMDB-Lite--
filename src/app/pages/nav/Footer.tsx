@@ -1,4 +1,5 @@
 import { Typography } from "@material-tailwind/react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const LINKS = [
@@ -13,7 +14,7 @@ const LINKS = [
   },
 ];
 
-export default function Footer() {
+const Footer: React.FC = () => {
   return (
     <footer className="w-full px-4">
       <div className="flex w-full flex-row flex-wrap items-center justify-center gap-x-12 gap-y-3 text-center md:justify-between">
@@ -33,4 +34,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

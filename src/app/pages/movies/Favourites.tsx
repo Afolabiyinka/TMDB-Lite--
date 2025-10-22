@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useFavourites } from "../Contexts/MovieContext";
-import MovieCard from "../Components/Movie Components/MovieCard";
-import Loader from "../Components/Loader";
+import { useFavourites } from "../../hooks/useFavourites";
+import MovieCard from "../../components/movie/MovieCard";
+import Loader from "../../components/Loader";
 
 const Favourites = () => {
   const [loading, setLoading] = useState(false);
@@ -11,7 +11,7 @@ const Favourites = () => {
   useEffect(() => {
     setLoading(true);
     setTimeout(() => setLoading(false), 1000);
-  }, []);
+  }, [favourites]);
 
   return (
     <div className=" text-center flex justify-center items-center w-full">
@@ -21,7 +21,7 @@ const Favourites = () => {
           <p>Loading Favourites...</p>
         </div>
       ) : favourites.length === 0 ? (
-        <div className="px-6 py-8 rounded-md flex justify-center items-center flex-col text-center">
+        <div className="px-6 py-8 rounded-md flex justify-center  items-center flex-col text-center h-screen">
           <motion.h1
             className="text-2xl"
             initial={{ opacity: 0, scale: 0.8 }}
@@ -43,8 +43,8 @@ const Favourites = () => {
           <h1 className="text-4xl mb-3">Your Favourites</h1>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-1">
-            {favourites.map((favourite) => (
-              <MovieCard key={favourite.id} movie={favourite} />
+            {favourites.map((movie) => (
+              <MovieCard key={movie.id} movie={movie} />
             ))}
           </div>
         </div>

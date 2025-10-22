@@ -1,10 +1,10 @@
-import MovieCard from "../Components/Movie Components/MovieCard";
 import Lottie from "lottie-react";
-import errorAnimation from "../Assets/ErrorAnimation.json";
-import Pagination from "../Components/Pagination";
-import GenreNav from "./Genres/GenreNavigation";
-import { UseHome } from "../Contexts/HomePageContext";
-import Loader from "../Components/Loader";
+import errorAnimation from "../../../Assets/ErrorAnimation.json";
+import Pagination from "../../components/Pagination";
+import GenreNav from "../Genres/GenreNavigation";
+import Loader from "../../components/Loader";
+import MovieCard from "../../components/movie/MovieCard";
+import useHomePage from "../../hooks/useHomePage";
 
 const HomePage = () => {
   const {
@@ -14,12 +14,10 @@ const HomePage = () => {
     currentPage,
     handleNextPage,
     handlePrevPage,
-  } = UseHome();
+  } = useHomePage();
   return (
     <div className={`flex flex-col justify-center items-center h-fit`}>
-      <div>
-        <GenreNav />
-      </div>
+      <div>{/* <GenreNav /> */}</div>
       {loading ? (
         <div className="flex justify-center items-center gap-4 flex-col min-h-screen">
           <Loader />
@@ -34,8 +32,8 @@ const HomePage = () => {
         </div>
       ) : (
         <div className="w-full flex flex-col px-8 ">
-          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3 py-3 justify-center items-center">
-            {movies.map((movie) => (
+          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center items-center">
+            {movies.map((movie: any) => (
               <MovieCard movie={movie} key={movie.id} />
             ))}
           </div>

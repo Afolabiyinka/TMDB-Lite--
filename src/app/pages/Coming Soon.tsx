@@ -1,20 +1,19 @@
 import { Typography, Button, Input } from "@material-tailwind/react";
 import { motion } from "framer-motion";
+import React from "react";
 
-export default function ComingSoonSection() {
+const ComingSoonSection: React.FC = () => {
   return (
     <section className="flex min-h-screen min-w-screen items-center justify-center">
-      <div className=" mx-auto flex flex-col justify-center">
+      <div className="mx-auto flex flex-col justify-center">
         <motion.div
           className="my-auto flex flex-col items-center justify-center text-center"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.2, ease: "easeOut" }}
         >
-          <Typography as="h2" type="h3">
-            Get Ready for Something Amazing!
-          </Typography>
-          <Typography className="max-w-3xl  mx-auto">
+          <Typography as="h2">Get Ready for Something Amazing!</Typography>
+          <Typography className="max-w-3xl mx-auto">
             We&apos;re excited to introduce our latest innovation that will
             change the way you watch movies 🎬. Stay tuned as we put the
             finishing touches on this game-changing product.
@@ -36,4 +35,6 @@ export default function ComingSoonSection() {
       </div>
     </section>
   );
-}
+};
+
+export default ComingSoonSection;

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import MovieCard from "../../Components/Movie Components/MovieCard";
+import MovieCard from "../../components/movie/MovieCard";
 import Lottie from "lottie-react";
-import Loader from "../../Components/Loader";
 import errorAnimation from "../../Assets/ErrorAnimation.json";
-import { getActionMovies } from "../../Services/GetGenres";
+import { getHorrorMovies } from "../../Services/GetGenres";
+import Loader from "../../Components/Loader";
 
-const ActionMovies = () => {
+const HorrorMovies = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -14,8 +14,8 @@ const ActionMovies = () => {
     const loadActionMovies = async () => {
       try {
         setLoading(true);
-        const actionMovies = await getActionMovies();
-        setMovies(actionMovies);
+        const horrorMovies = await getHorrorMovies();
+        setMovies(horrorMovies);
         setError(null);
       } catch (err) {
         setError("Failed to load movies...");
@@ -31,7 +31,7 @@ const ActionMovies = () => {
     <div className={`flex flex-col justify-center items-center h-fit`}>
       {loading ? (
         <div className="flex justify-center items-center gap-4 flex-col min-h-screen">
-          <Loader className="h-16 w-16" />
+          <Loader />
         </div>
       ) : error ? (
         <div className="flex justify-center items-center flex-col min-h-screen gap-4">
@@ -54,4 +54,4 @@ const ActionMovies = () => {
   );
 };
 
-export default ActionMovies;
+export default HorrorMovies;

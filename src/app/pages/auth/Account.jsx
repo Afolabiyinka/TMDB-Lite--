@@ -2,11 +2,10 @@ import * as React from "react";
 import { ArrowBigLeft } from "lucide-react";
 import { Account } from "@toolpad/core/Account";
 import { AppProvider } from "@toolpad/core/AppProvider";
-import { useUser } from "../Contexts/UserContext";
+import { useUser } from "../../hooks/AuthContext";
 import { useNavigate } from "react-router-dom";
-// import { useTheme } from "../Contexts/ThemeContext";
 
-export default function AccountCustomSlotProps() {
+export default function AccountPage() {
   const [session, setSession] = React.useState(null);
   const navigate = useNavigate();
   const { user } = useUser();
