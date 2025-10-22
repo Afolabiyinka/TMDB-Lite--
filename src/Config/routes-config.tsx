@@ -15,6 +15,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import Layout from "../app/Layout";
 import { ThemeFather } from "../app/hooks/ThemeContext";
 import React from "react";
+import TrendingActors from "../app/pages/TrendingActors";
 
 const RoutesConfig: React.FC = () => {
   const router = createBrowserRouter([
@@ -65,6 +66,10 @@ const RoutesConfig: React.FC = () => {
               <AccountPage />
             </AuthProvider>
           ),
+        },
+        {
+          path: "celebrities",
+          Component: TrendingActors,
         },
         {
           path: "*",

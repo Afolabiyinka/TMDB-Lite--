@@ -9,23 +9,23 @@ const LINKS = [
   {
     icon: Home,
     title: "Home",
-    href: "/movies",
+    href: "/app/movies",
   },
   {
     icon: Heart,
     title: "Favourites",
-    href: "/Favourites",
+    href: "/app/Favourites",
   },
 
   {
     icon: Video,
     title: "Celebrities",
-    href: "/celebrities",
+    href: "/app/celebrities",
   },
   {
     icon: User,
     title: "Account",
-    href: "/Account",
+    href: "/app/Account",
   },
 ];
 
@@ -42,7 +42,11 @@ function NavList({ closeMenu }) {
             className="flex items-center gap-x-2 p-2 text-sm font-medium transition-colors duration-100 group"
           >
             <div
-              className={`"flex items-center justify-center" ${location.pathname === href ? "rounded-lg  bg-gray-100 p-2 dark:bg-gray-800 " : ""}`}
+              className={`"flex items-center justify-center" ${
+                location.pathname === href
+                  ? "rounded-lg  bg-gray-100 p-2 dark:bg-gray-800 "
+                  : ""
+              }`}
             >
               <Icon className="h-4 w-4" />
             </div>
