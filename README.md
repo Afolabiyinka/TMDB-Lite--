@@ -113,4 +113,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-_This project uses the TMDB API but is not endorsed or certified by TMDB._
+_This project uses the TMDB API but is not endorsed or certified by TMDB!!._
