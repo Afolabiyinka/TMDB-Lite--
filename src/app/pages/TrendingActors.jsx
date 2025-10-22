@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { getPopularPeople } from "../Services/API";
-import Actor from "../Components/Celebrities Components/Actor";
-import Loader from "../Components/Loader";
+// import { getPopularPeople } from "../Services/API";
+// import Actor from "../Components/Celebrities Components/Actor";
+// import Loader from "../Components/Loader";
+import { getPopularPeople } from "../services/API";
+import Loader from "../components/Loader";
+import Actor from "../components/Celebrities Components/Actor";
 import Lottie from "lottie-react";
-import errorAnimation from "../Assets/ErrorAnimation.json";
+import errorAnimation from "../../Assets/ErrorAnimation.json";
 
 const TrendingActors = () => {
   const [actors, setActors] = useState([]);
