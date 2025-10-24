@@ -1,13 +1,31 @@
 import React, { useState } from "react";
-import { Card, Typography } from "@material-tailwind/react";
+import {
+  Card,
+  Typography,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+  TooltipArrow,
+} from "@material-tailwind/react";
 import MovieModal from "./MovieModal";
+import { Heart } from "lucide-react";
+import { useFavourites } from "../../hooks/useFavourites";
+import { ToastContainer, toast } from "react-toastify";
+
+// interface Movie {
+//   id?: number | string;
+//   title?: string;
+//   poster_path?: string;
+//   release_date?: string;
+// }
 
 interface Movie {
-  id?: number | string;
+  id: string | number;
   title?: string;
+  name?: string;
   poster_path?: string;
   release_date?: string;
-  overview?: string;
+  [key: string]: any;
 }
 
 interface MovieCardProps {
@@ -19,6 +37,36 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
 
   const handleOpenModal = () => setIsOpen(true);
   const handleCloseModal = () => setIsOpen(false);
+
+  const { addToFavourites, removeFromFavourites, isFavourite } =
+    useFavourites();
+
+  const handleFavouriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!movie) return;
+
+    const toastStyle = {
+      closeButton: false,
+      style: {
+        background: "black",
+        backdropFilter: "blur(10rem)",
+        borderRadius: "50px",
+        padding: "20px",
+        color: "white",
+        marginTop: "10px",
+      },
+    };
+
+    if (isFavourite(movie.id)) {
+      removeFromFavourites(movie.id);
+      toast.info("Removed from favourites", toastStyle);
+    } else {
+      addToFavourites(movie);
+      toast.success("Added to favourites", toastStyle);
+    }
+  };
+
+  const movieInFavorites = movie?.id ? isFavourite(movie.id) : false;
 
   return (
     <>
@@ -47,20 +95,49 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
         </div>
 
         {/* Text Info */}
-        <div className="p-3 text-left flex flex-col items-start">
-          <Typography
-            variant="h5"
-            className="text-gray-800 dark:text-gray-100 text-xl font-medium break-words"
-          >
-            {movie.title}
-          </Typography>
-          <Typography
-            variant="small"
-            className="text-gray-600 dark:text-gray-400"
-          >
-            {movie.release_date ? movie.release_date.split("-")[0] : "N/A"}
-          </Typography>
+        <div className="flex justify-between items-centerx p-2">
+          <div className="p-3 text-left flex flex-col items-start">
+            <Typography
+              variant="h5"
+              className="text-gray-800 dark:text-gray-100 text-xl font-medium break-words"
+            >
+              {movie.title}
+            </Typography>
+            <Typography
+              variant="small"
+              className="text-gray-600 dark:text-gray-400"
+            >
+              {movie.release_date ? movie.release_date.split("-")[0] : "N/A"}
+            </Typography>
+          </div>
+
+          <Tooltip>
+            <TooltipTrigger>
+              <button
+                className={`hover:border rounded-full w-16 flex justify-center items-center h-16`}
+                onClick={handleFavouriteClick}
+              >
+                <Heart
+                  size={40}
+                  className={
+                    movieInFavorites
+                      ? "fill-red-500 text-red-500 transition-all duration-200"
+                      : "text-gray-300"
+                  }
+                />
+              </button>
+            </TooltipTrigger>
+            <TooltipArrow />
+            <TooltipContent className="p-3 px-5 font-bold text-[1rem] rounded-full">
+              {movieInFavorites ? "Remove from favourite" : "Add to favourite"}
+            </TooltipContent>
+          </Tooltip>
         </div>
+        <ToastContainer
+          hideProgressBar
+          autoClose={1000}
+          position="top-center"
+        />
       </Card>
 
       {/* Modal */}

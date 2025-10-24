@@ -31,6 +31,10 @@ const RoutesConfig: React.FC = () => {
       ),
     },
     {
+      path: "*",
+      Component: ComingSoonSection,
+    },
+    {
       path: "/",
       element: <Navigate to="/auth/login" replace />,
     },

@@ -2,19 +2,16 @@ import { Card, Typography, Badge } from "@material-tailwind/react";
 import { Film, Star, Award } from "lucide-react";
 
 export default function Actor({ actor }) {
-  // Calculate popularity rating - TMDB generally provides this on a 0-100 scale
   const popularity = actor.popularity
     ? Math.min(10, Math.round(actor.popularity / 10))
     : null;
 
   return (
-    <Card className="overflow-hidden w-full sm:w-64 md:w-80 transition-all duration-300 hover:shadow-xl group relative cursor-pointer">
-      {/* Hover overlay effect */}
+    <Card className="overflow-hidden w-full sm:w-64 md:w-full transition-all duration-300 hover:shadow-xl group relative cursor-pointer">
       <div
         className={`absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300 z-10`}
       />
 
-      {/* Popularity Badge */}
       {popularity && (
         <div className="absolute top-3 left-3 z-20">
           <Badge
@@ -29,7 +26,6 @@ export default function Actor({ actor }) {
         </div>
       )}
 
-      {/* Featured Badge (if they're popular) */}
       {actor.popularity > 80 && (
         <div className="absolute top-3 right-3 z-20">
           <Badge
@@ -59,7 +55,6 @@ export default function Actor({ actor }) {
           <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/70" />
         </Card.Header>
 
-        {/* Actor's known movies (if any) */}
         {actor.known_for && actor.known_for.length > 0 && (
           <div className="absolute bottom-0 left-0 right-0 p-2 bg-black/60 backdrop-blur-sm transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-20">
             <Typography className="text-white text-xs font-medium mb-1">
@@ -80,7 +75,6 @@ export default function Actor({ actor }) {
         )}
       </div>
 
-      {/* Card Body with Actor Info */}
       <Card.Body className="p-3 relative z-10">
         <Typography
           variant="h5"
@@ -98,7 +92,6 @@ export default function Actor({ actor }) {
           )}
         </Typography>
 
-        {/* Character name if provided */}
         {actor.character && (
           <Typography className="text-xs text-gray-500 dark:text-gray-500 mt-1 italic">
             as {actor.character}

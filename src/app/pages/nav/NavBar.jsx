@@ -104,14 +104,14 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full transition-all duration-300 p-1 rounded-full mt-2 border border-gray-500 shadow-md mx-2 ${
-        isScrolled ? " shadow-sm backdrop-blur-lg" : ""
+      className={`sticky top-0 z-50 w-full transition-all duration-300 p-1 rounded-3xl md:rounded-full mt-2  shadow-md mx-2 ${
+        isScrolled ? " shadow-sm backdrop-blur-lg top-2" : ""
       }`}
     >
       <div className="max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <Link to="/movies" className="flex items-center">
+            <Link to="/app/movies" className="flex items-center">
               <div className="relative mr-2"></div>
               <img src={tmdbLogo} className="h-8 w-[10rem]" alt="Tmdb-Logo" />
             </Link>
@@ -131,10 +131,10 @@ export default function NavBar() {
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
-                  navigate("/movies");
+                  navigate("/app/movies");
                 }}
               />
-              <Search className="absolute left-3 top-2.5 h-6 w-6 text-black" />
+              <Search className="absolute left-3 top-2.5 h-5 w-5 " />
             </div>
 
             {/* Mobile Search Input */}
@@ -153,7 +153,7 @@ export default function NavBar() {
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
-                    navigate("/movies");
+                    navigate("/app/movies");
                   }}
                 />
                 <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400 " />

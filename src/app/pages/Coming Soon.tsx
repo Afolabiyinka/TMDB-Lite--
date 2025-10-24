@@ -1,11 +1,12 @@
 import { Typography, Button, Input } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ComingSoonSection: React.FC = () => {
   return (
     <section className="flex min-h-screen min-w-screen items-center justify-center">
-      <div className="mx-auto flex flex-col justify-center">
+      <div className="mx-auto flex flex-col justify-center items-center gap-10">
         <motion.div
           className="my-auto flex flex-col items-center justify-center text-center"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -32,6 +33,9 @@ const ComingSoonSection: React.FC = () => {
             </Button>
           </div>
         </motion.div>
+        <Link to={`/app/movies`}>
+          <Button className="rounded-full p-3 px-16">Back Home</Button>
+        </Link>
       </div>
     </section>
   );

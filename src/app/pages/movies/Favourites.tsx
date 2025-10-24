@@ -34,10 +34,10 @@ const Favourites = () => {
           </motion.p>
         </div>
       ) : (
-        <div className="py-3">
+        <div className="py-3 flex flex-col items-center  h-full w-screen">
           <h1 className="text-4xl mb-3">Your Favourites</h1>
 
-          <div className="w-screen  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 p-1">
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-5">
             {favourites.map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
