@@ -133,11 +133,6 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
             </TooltipContent>
           </Tooltip>
         </div>
-        <ToastContainer
-          hideProgressBar
-          autoClose={1000}
-          position="top-center"
-        />
       </Card>
 
       {/* Modal */}
