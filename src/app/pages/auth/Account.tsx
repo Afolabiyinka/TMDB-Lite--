@@ -40,17 +40,15 @@ const AccountPage: React.FC = () => {
   }
 
   return (
-    <div className="h-screen w-screen flex flex-col items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white shadow-lg rounded-2xl p-6 w-full max-w-sm text-center">
+    <div className="h-screen w-screen flex flex-col items-center justify-center p-4">
+      <div className=" shadow-lg rounded-2xl p-6 w-full max-w-sm text-center">
         <img
           src={storedUser.picture}
           alt={storedUser.name}
-          className="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-2 border-gray-200"
+          className="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-2"
         />
-        <h2 className="text-xl font-semibold text-gray-800">
-          {storedUser.name}
-        </h2>
-        <p className="text-gray-500 mb-6">{storedUser.email}</p>
+        <h2 className="text-xl font-semibold">{storedUser.name}</h2>
+        <p className="mb-6">{storedUser.email}</p>
         <button
           onClick={handleSignOut}
           disabled={isLoading}

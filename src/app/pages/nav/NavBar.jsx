@@ -44,7 +44,7 @@ function NavList({ closeMenu }) {
             <div
               className={`"flex items-center justify-center" ${
                 location.pathname === href
-                  ? "rounded-lg  bg-gray-100 p-2 dark:bg-gray-800 "
+                  ? "rounded-full  bg-black text-white p-2 dark:bg-white dark:text-black "
                   : ""
               }`}
             >
@@ -127,7 +127,7 @@ export default function NavBar() {
               <input
                 type="search"
                 placeholder="Search movies..."
-                className="w-72 rounded-full border border-gray-300 bg-gray-50 py-3 pl-10 pr-4 text-sm focus:border-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-500 dark:border-gray-700 dark:bg-gray-700 dark:text-gray-200"
+                className="w-72 rounded-full border border-gray-300 bg-gray-50 py-3 pl-10 pr-4 text-sm  text-gray-500 focus:border-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-500 dark:border-gray-700 dark:bg-black dark:text-white"
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
@@ -149,7 +149,7 @@ export default function NavBar() {
                 <input
                   type="search"
                   placeholder="Search movies..."
-                  className="w-full rounded-full border border-gray-300 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
+                  className="w-full rounded-full border border-gray-300 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 dark:border-gray-700 dark:bg-gray-400 dark:text-gray-200"
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
