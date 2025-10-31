@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 // import { getPopularPeople } from "../Services/API";
 // import Actor from "../Components/Celebrities Components/Actor";
 // import Loader from "../Components/Loader";
-import { getPopularPeople } from "../services/API";
+import { getPopularPeople } from "../services/Request";
 import Loader from "../components/Loader";
 import Actor from "../components/Celebrities Components/Actor";
 import Lottie from "lottie-react";

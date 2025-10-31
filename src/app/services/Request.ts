@@ -1,15 +1,8 @@
-const API_KEY = "77a443f6655b62e7dfaf1f26d5ea79d6";
-const BASE_URL = "https://api.themoviedb.org/3";
+//Importing the api keys
+const API_KEY = process.env.REACT_APP_API_KEY!;
+const BASE_URL = process.env.REACT_APP_BASE_URL!;
 
-export const getLatestMovies = async (page = 1) => {
-  const response = await fetch(
-    `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${page}`
-  );
-  const data = await response.json();
-  return data.results;
-};
-
-export const searchMovies = async (query) => {
+export const searchMovies = async (query: string) => {
   const response = await fetch(
     `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
       query

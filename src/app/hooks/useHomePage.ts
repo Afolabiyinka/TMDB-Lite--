@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { useSearch } from "./SearchContext";
-import { getLatestMovies, searchMovies } from "../services/API";
+import { getLatestMovies, searchMovies } from "../services/Request";
 
 export interface MovieType {
   id: number | string;
@@ -11,7 +11,13 @@ export interface MovieType {
 }
 
 export default function useHomePage() {
+
+
+
+
   const { searchQuery } = useSearch();
+
+  //Url and routing related stuff
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -26,24 +32,29 @@ export default function useHomePage() {
   const handlePrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const handleNextPage = () => setCurrentPage((prev) => prev + 1);
 
+
+
+ 
+
+
   // Sync page with URL
-  useEffect(() => {
-    const allowedPaths = ["/movies"];
-    if (allowedPaths.includes(location.pathname)) {
-      setSearchParams({ page: currentPage.toString() });
-    }
-  }, [currentPage, location.pathname, setSearchParams]);
+  // useEffect(() => {
+  //   const allowedPaths = ["/movies"];
+  //   if (allowedPaths.includes(location.pathname)) {
+  //     setSearchParams({ page: currentPage.toString() });
+  //   }
+  // }, [currentPage, location.pathname, setSearchParams]);
 
-  // Redirect if not logged in
-  useEffect(() => {
-    const storedUser = localStorage.getItem("TmdbUser");
-    if (!storedUser) navigate("/");
-  }, [navigate]);
+  // // Redirect if not logged in
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem("TmdbUser");
+  //   if (!storedUser) navigate("/");
+  // }, [navigate]);
 
-  // Scroll top when page changes
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
-  }, [currentPage]);
+  // // Scroll top when page changes
+  // useEffect(() => {
+  //   window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+  // }, [currentPage]);
 
   // Fetch movies
   useEffect(() => {
@@ -67,6 +78,9 @@ export default function useHomePage() {
 
     fetchMovies();
   }, [searchQuery, currentPage]);
+  useEffect(() => {
+
+  }, [searchQuery, currentPage])
 
   return {
     movies,

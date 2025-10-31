@@ -42,7 +42,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
     useFavourites();
 
   const handleFavouriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+    e.stopPropagation();
     if (!movie) return;
 
     const toastStyle = {
