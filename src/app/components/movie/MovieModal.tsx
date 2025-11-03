@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ThumbsUp, X, Calendar, Star, Heart } from "lucide-react";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { useFavourites } from "../../hooks/useFavourites";
 
 interface MovieModalProps {
@@ -148,12 +148,6 @@ const MovieModal = ({ isOpen, movie, onClose }: MovieModalProps) => {
               Close
             </button>
           </div>
-
-          <ToastContainer
-            hideProgressBar
-            autoClose={1000}
-            position="top-center"
-          />
         </div>
       </div>
     </div>
