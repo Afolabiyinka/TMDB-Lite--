@@ -51,6 +51,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
         background: "black",
         backdropFilter: "blur(10rem)",
         borderRadius: "50px",
+        padding: "20px",
         color: "white",
         marginTop: "10px",
       },
