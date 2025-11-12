@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { getPopularPeople } from "../Services/API";
-// import Actor from "../Components/Celebrities Components/Actor";
-// import Loader from "../Components/Loader";
+
 import { getPopularPeople } from "../services/Request";
 import Loader from "../components/Loader";
 import Actor from "../components/Celebrities Components/Actor";
@@ -29,7 +27,7 @@ const TrendingActors = () => {
   }, []);
 
   return (
-    <div>
+    <div className="w-screen">
       {loading ? (
         <div className="flex justify-center items-center gap-4 flex-col min-h-screen">
           <Loader />
@@ -44,7 +42,7 @@ const TrendingActors = () => {
           <p className="text-2xl">Error loading actors.</p>
         </div>
       ) : (
-        <div className="w-full grid gap-12 md:grid-cols-3 lg:grid-cols-3  mt-2 ">
+        <div className="w-full grid gap-12 md:grid-cols-3 lg:grid-cols-4  mt-2 ">
           {actors.map((actor, index) => (
             <Actor key={index} actor={actor} />
           ))}
