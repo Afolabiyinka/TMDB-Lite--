@@ -9,6 +9,13 @@ export const getLatestMovies = async (page = 1) => {
   const data = await response.json();
   return data.results;
 };
+export const getMovieReviews = async (id: any) => {
+  const response = await fetch(
+    `${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}`
+  );
+  const data = await response.json();
+  return data.results;
+};
 
 export const searchMovies = async (query: string) => {
   const response = await fetch(

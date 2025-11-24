@@ -16,6 +16,7 @@ import Layout from "../app/Layout";
 import { ThemeFather } from "../app/hooks/ThemeContext";
 import React from "react";
 import TrendingActors from "../app/pages/TrendingActors";
+import MoviePage from "../app/components/movie/MovieModal";
 
 const RoutesConfig: React.FC = () => {
   const router = createBrowserRouter([
@@ -54,6 +55,11 @@ const RoutesConfig: React.FC = () => {
           path: "movies",
           index: true,
           Component: HomePage,
+        },
+        {
+          path: "movie/:id",
+          index: true,
+          Component: MoviePage,
         },
         {
           path: "favourites",

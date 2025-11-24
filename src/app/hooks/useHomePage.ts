@@ -56,6 +56,7 @@ export default function useHomePage() {
         } else {
           const popularMovies = await getLatestMovies(currentPage);
           setMovies(popularMovies);
+          console.log(popularMovies);
         }
         setError(null);
       } catch {

@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   Card,
   Typography,
@@ -7,18 +6,11 @@ import {
   TooltipTrigger,
   TooltipArrow,
 } from "@material-tailwind/react";
-import MovieModal from "./MovieModal";
 import { Heart } from "lucide-react";
 import { useFavourites } from "../../hooks/useFavourites";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
-// interface Movie {
-//   id?: number | string;
-//   title?: string;
-//   poster_path?: string;
-//   release_date?: string;
-// }
-
+import { useNavigate } from "react-router-dom";
 interface Movie {
   id: string | number;
   title?: string;
@@ -33,10 +25,7 @@ interface MovieCardProps {
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleOpenModal = () => setIsOpen(true);
-  const handleCloseModal = () => setIsOpen(false);
+  const navigate = useNavigate();
 
   const { addToFavourites, removeFromFavourites, isFavourite } =
     useFavourites();
@@ -71,7 +60,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
     <>
       <Card
         className="overflow-hidden shadow-lg rounded-3xl bg-inherit cursor-pointer hover:scale-[1.02] transition-transform duration-300"
-        onClick={handleOpenModal}
+        onClick={() => navigate(`/app/movie/${movie.id}`)}
       >
         {/* Image Section */}
         <div className="h-[21rem] overflow-hidden w-full">
@@ -133,11 +122,6 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
           </Tooltip>
         </div>
       </Card>
-
-      {/* Modal */}
-      {isOpen && (
-        <MovieModal isOpen={isOpen} onClose={handleCloseModal} movie={movie} />
-      )}
     </>
   );
 };
