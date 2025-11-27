@@ -40,13 +40,8 @@ const MoviePage = () => {
   });
   //Movie Reviews
 
-  if (!movie) return null;
-  if (movieLoading)
-    return (
-      <div className="h-screen border w-full">
-        <Loader />
-      </div>
-    );
+  if (movieLoading) return <Loader />;
+
   if (movieError)
     return (
       <div className="flex justify-center items-center flex-col gap-4">
@@ -57,6 +52,8 @@ const MoviePage = () => {
         <h1 className={`text-2xl`}>{movieError.message}</h1>
       </div>
     );
+
+  if (!movie) return <div>No movie found</div>;
 
   const toastStyle = {
     closeButton: false,
@@ -210,18 +207,21 @@ const MoviePage = () => {
           </div>
           <div>
             {recLoading ? (
-              <div>{<Loader />}</div>
+              <Loader />
             ) : recError ? (
               <div>{recError.message}</div>
             ) : (
               <div>
-                <h3 className="text-3xl tracking-wide">More like this </h3>
-                <span className="flex  w-fil gap-5 h-[26rem] overflow-x-auto p-6 ">
-                  {recommendations.slice(0, 10).map((rec: any) => (
-                    <div key={rec.id} className="flex-shrink-0 w-64">
-                      <MovieCard movie={rec} />
-                    </div>
-                  ))}
+                <h3 className="text-3xl tracking-wide">More like this</h3>
+
+                <span className="flex w-full gap-5 h-[26rem] overflow-x-auto p-6">
+                  {(recommendations?.results ?? [])
+                    .slice(0, 10)
+                    .map((rec: any) => (
+                      <div key={rec.id} className="flex-shrink-0 w-64">
+                        <MovieCard movie={rec} />
+                      </div>
+                    ))}
                 </span>
               </div>
             )}
