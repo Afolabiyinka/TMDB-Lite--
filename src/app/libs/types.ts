@@ -1,11 +1,10 @@
-import { ReactNode } from "react";
+import { type ReactNode } from "react";
 export interface MovieType {
   id: number | string;
   title?: string;
   poster?: string;
-  [key: string]: any; // ✅ Allows unlimited extra fields without TypeScript stress
+  [key: string]: any;
 }
-
 
 export interface favouritesFunctionProps {
   movieId: number | string;

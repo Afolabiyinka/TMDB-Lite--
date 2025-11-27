@@ -2,7 +2,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Search, Video, Home, User, X, Menu, Heart } from "lucide-react";
 import { useSearch } from "../../hooks/SearchContext";
-import { ModeToggle } from "../../hooks/ModeToggle";
+import { ModeToggle } from "../../hooks/ModeToggle.tsx";
 import tmdbLogo from "../../../Assets/the real logo.svg";
 
 const LINKS = [

@@ -1,13 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import {
-  ThumbsUp,
-  Calendar,
-  Star,
-  Heart,
-  ArrowLeft,
-  Play,
-  ChevronDown,
-} from "lucide-react";
+import { ThumbsUp, Calendar, Star, Heart, ArrowLeft, Play } from "lucide-react";
 import errorAnimation from "../../../Assets/ErrorAnimation.json";
 import { toast } from "react-toastify";
 import { useFavourites } from "../../hooks/useFavourites";

@@ -1,4 +1,3 @@
-import React from "react";
 import { IconButton, Typography } from "@material-tailwind/react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -38,7 +37,6 @@ const Pagination = ({
         onClick={handleNextPage}
         color="secondary"
         variant="outline"
-        // isCircular
         size="xl"
         disabled={currentPage === maxPages}
         className="disabled:bg-gray-400 px-5 py-1 rounded-3xl "

@@ -1,4 +1,4 @@
-import React, {
+import {
   createContext,
   useContext,
   useEffect,
@@ -13,10 +13,10 @@ interface ThemeContextType {
 }
 
 // Initial state
-const initialState: ThemeContextType = {
-  theme: "system",
-  setTheme: () => {},
-};
+// const initialState: ThemeContextType = {
+//   theme: "system",
+//   setTheme: () => {},
+// };
 
 // Create context
 const ThemeProviderContext = createContext<ThemeContextType | undefined>(

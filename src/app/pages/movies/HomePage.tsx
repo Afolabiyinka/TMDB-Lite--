@@ -5,7 +5,6 @@ import Loader from "../../components/Loader";
 import MovieCard from "../../components/movie/MovieCard";
 import useMovies from "../../hooks/useMovies";
 import GenreNav from "../Genres/GenreNavigation";
-import { useQuery } from "@tanstack/react-query";
 
 const HomePage = () => {
   const {

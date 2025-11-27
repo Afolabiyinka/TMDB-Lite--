@@ -15,13 +15,13 @@ export function ModeToggle() {
   const { theme } = useTheme();
   const [isOpen, setIsOpen] = useState(true);
 
-  function handleClick(theme) {
+  function handleClick(theme: any) {
     setTheme(theme);
     setIsOpen(false);
   }
   return (
     <div className="lg:grid">
-      <Menu className="mt-3">
+      <Menu>
         <MenuTrigger>
           <IconButton
             color="secondary"
@@ -41,7 +41,6 @@ export function ModeToggle() {
           <MenuContent
             className="flex flex-col cursor-pointer mt-3 bg-gray-500 text-white"
             color="secondary"
-            variant="solid"
           >
             <span
               className="flex justify-between cursor-pointer hover:bg-gray-500 p-2 rounded-lg hover:border"

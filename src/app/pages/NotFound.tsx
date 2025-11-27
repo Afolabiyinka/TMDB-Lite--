@@ -1,4 +1,3 @@
-import React from "react";
 import { Typography, Button } from "@material-tailwind/react";
 import { Flag } from "lucide-react";
 import { useNavigate } from "react-router-dom";

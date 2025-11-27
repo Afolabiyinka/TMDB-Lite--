@@ -1,5 +1,5 @@
 import { Card, Typography, Badge } from "@material-tailwind/react";
-import { Film, Star, Award } from "lucide-react";
+import { Star, Award } from "lucide-react";
 
 interface actor {
   actor: {
