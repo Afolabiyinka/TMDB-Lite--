@@ -167,7 +167,7 @@ const MoviePage = () => {
 
           {/* ACTION BUTTONS */}
           <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-2 justify-center mt-4    ">
-            {/* Likes */}
+            {/* Likes Button*/}
             <span className="flex gap-3 w-full">
               <IconButton
                 className="flex items-center justify-center gap-2 p-2"
