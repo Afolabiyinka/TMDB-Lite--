@@ -2,20 +2,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useFavourites } from "../../hooks/useFavourites";
 import MovieCard from "../../components/movie/MovieCard";
-import Loader from "../../components/Loader";
 
 const Favourites = () => {
-  const [loading, setLoading] = useState(false);
   const { favourites } = useFavourites();
 
   return (
     <div className=" text-center flex justify-center items-center w-full">
-      {loading ? (
-        <div className="flex justify-center items-center gap-4 flex-col min-h-screen">
-          <Loader />
-          <p>Loading Favourites...</p>
-        </div>
-      ) : favourites.length === 0 ? (
+      {favourites.length === 0 ? (
         <div className="px-6 py-8 rounded-md flex justify-center  items-center flex-col text-center h-screen">
           <motion.h1
             className="text-2xl"

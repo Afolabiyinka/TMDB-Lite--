@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { getPopularPeople } from "../services/Request";
 import Loader from "../components/Loader";
