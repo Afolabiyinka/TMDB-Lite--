@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { ThumbsUp, Calendar, Star, Heart, ArrowLeft, Play } from "lucide-react";
 import errorAnimation from "../../../Assets/ErrorAnimation.json";
 import { toast } from "react-toastify";
@@ -6,12 +7,15 @@ import { useFavourites } from "../../hooks/useFavourites";
 import {
   getMovieDetails,
   getParticularRecomendations,
+  getMovieTrailer,
 } from "../../services/Request";
 import { useQuery } from "@tanstack/react-query";
 import Lottie from "lottie-react";
 import { Button, Chip, IconButton } from "@material-tailwind/react";
-import MovieCard from "./MovieCard";
-import Loader from "../Loader";
+import Loader from "../../components/Loader";
+import Recommendations from "../../components/movie/sub-components/recommendations";
+import Genres from "../../components/movie/sub-components/genre";
+import { motion } from "framer-motion";
 
 const MoviePage = () => {
   const { addToFavourites, removeFromFavourites, isFavourite } =
@@ -19,6 +23,7 @@ const MoviePage = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
+
   // Movie details
   const {
     data: movie,
@@ -38,9 +43,20 @@ const MoviePage = () => {
     queryKey: ["recommendations", id],
     queryFn: () => getParticularRecomendations(id),
   });
-  //Movie Reviews
 
-  if (movieLoading) return <Loader />;
+  const { data: trailer, error: noTrailer } = useQuery({
+    queryKey: ["trailer", id],
+    queryFn: () => getMovieTrailer(id),
+  });
+
+  const [trailerOpen, setTrailerOpen] = useState(false);
+
+  if (movieLoading)
+    return (
+      <div className="h-screen w-screen">
+        <Loader />
+      </div>
+    );
 
   if (movieError)
     return (
@@ -59,8 +75,7 @@ const MoviePage = () => {
     closeButton: false,
     style: {
       background: "black",
-      backdropFilter: "blur(10rem)",
-      Radius: "50px",
+      backdropFilter: "blur(10px)",
       padding: "20px",
       color: "white",
       marginTop: "10px",
@@ -127,20 +142,7 @@ const MoviePage = () => {
           </h1>
 
           {/* the movie genre */}
-          <div className="w-full">
-            <span className="grid grid-cols-3 md:grid-cols-5 gap-3">
-              {movie.genres.map((genre: { name: string; id: number }) => (
-                <Chip
-                  variant="outline"
-                  key={genre.id}
-                  color="secondary"
-                  className="flex items-center justify-center gap-1 w-full py-2.5 sm:w-auto"
-                >
-                  {genre.name}
-                </Chip>
-              ))}
-            </span>
-          </div>
+          <Genres movie={movie} />
           <div className="flex  gap-4 text-sm">
             <Chip
               className="flex items-center  p-2 px-4"
@@ -200,30 +202,44 @@ const MoviePage = () => {
                 </p>
               </Button>
             </span>
-            <Button isPill size="xl" color="secondary">
+            <Button
+              isPill
+              size="xl"
+              color="secondary"
+              onClick={() => setTrailerOpen(!trailerOpen)}
+            >
               <Play className="mr-2 h-4 w-4 stroke-2" />
               Watch Trailer
             </Button>
           </div>
+
+          {trailerOpen && trailer && (
+            <div className="w-full h-[500px] md:h-[600px] border">
+              <iframe
+                className="w-full h-full rounded-xl"
+                src={`https://www.youtube.com/embed/${trailer.key}`}
+                title="Movie Trailer"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          )}
+
           <div>
             {recLoading ? (
-              <Loader />
+              <div className="h-full w-full">
+                <Loader />
+              </div>
             ) : recError ? (
               <div>{recError.message}</div>
             ) : (
-              <div>
-                <h3 className="text-3xl tracking-wide">More like this</h3>
-
-                <span className="flex w-full gap-5 h-[26rem] overflow-x-auto p-6">
-                  {(recommendations?.results ?? [])
-                    .slice(0, 10)
-                    .map((rec: any) => (
-                      <div key={rec.id} className="flex-shrink-0 w-64">
-                        <MovieCard movie={rec} />
-                      </div>
-                    ))}
-                </span>
-              </div>
+              <motion.div
+                initial={{ x: -10, opacity: 0.7 }}
+                viewport={{ amount: "all" }}
+                animate={{ x: 1, opacity: 1 }}
+              >
+                <Recommendations recommendations={recommendations} />
+              </motion.div>
             )}
           </div>
         </div>

@@ -3,6 +3,7 @@ import {
   RouterProvider,
   Navigate,
 } from "react-router-dom";
+import { lazy } from "react";
 import Login from "../app/pages/auth/Login";
 import HomePage from "../app/pages/movies/HomePage";
 import Favourites from "../app/pages/movies/Favourites";
@@ -16,7 +17,7 @@ import Layout from "../app/Layout";
 import { ThemeFather } from "../app/hooks/ThemeContext";
 import React from "react";
 import TrendingActors from "../app/pages/TrendingActors";
-import MoviePage from "../app/components/movie/MovieModal";
+import MoviePage from "../app/pages/movies/MoviePage";
 
 const RoutesConfig: React.FC = () => {
   const router = createBrowserRouter([

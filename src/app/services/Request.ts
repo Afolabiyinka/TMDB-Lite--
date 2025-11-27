@@ -41,3 +41,10 @@ export const getParticularRecomendations = async (id: any) => {
   const movieDetails = await response.json();
   return movieDetails.results;
 };
+export const getMovieTrailer = async (id: any) => {
+  const url = `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
+
+  const response = await fetch(url);
+  const movieTrailer = await response.json();
+  return movieTrailer.results;
+};

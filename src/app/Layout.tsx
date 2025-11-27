@@ -24,7 +24,7 @@ const Layout = () => {
         <ToastContainer
           hideProgressBar
           autoClose={1000}
-          theme="colored"
+          // theme="colored"
           position="top-center"
         />
       </span>
