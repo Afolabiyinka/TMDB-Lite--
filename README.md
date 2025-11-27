@@ -1,116 +1,73 @@
-# TMDB Lite 🎬
+# React + TypeScript + Vite
 
-### A lightweight web application for exploring movies and TV shows using The Movie Database (TMDB) API.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-![TMDB Lite Preview](./src/Assets/Images/Tmdb%20Screenshot.png)
+Currently, two official plugins are available:
 
-## 🚀 Features
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-✅ Browse popular movies and TV shows  
-✅ Search for specific movies or TV series  
-✅ View detailed information about each title  
-✅ Responsive design for seamless viewing across devices
+## React Compiler
 
-## 🛠️ Tech Stack
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-### Frontend:
+## Expanding the ESLint configuration
 
-- **React.js** - A JavaScript library for building user interfaces
-- **Tailwind CSS** - A utility-first CSS framework for rapid UI development
-- **API**: [The Movie Database (TMDB) API](https://www.themoviedb.org/documentation/api)
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## 📦 Installation
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-### Prerequisites
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-- Node.js (version 14.x or later)
-- npm or yarn
-
-### Working with the repository
-
-```bash
-# Clone the repository
-git clone https://github.com/Afolabiyinka/TMDB-Lite-.git
-
-# Navigate to project directory
-cd TMDB-Lite-
-
-# Install dependencies
-npm install
-
-# Start the development server
-npm start
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-The application will be available at [http://localhost:3000](http://localhost:3000)
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-## 🧰 Available Scripts
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-- `npm start` - Runs the app in development mode
-- `npm test` - Launches the test runner
-- `npm run build` - Creates a production build
-- `npm run eject` - Ejects the Create React App configuration
-
-## 📂 Project Structure
-
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-TMDB-Lite/
-├── public/
-├── src/
-│   ├── Assets/
-│   │   └── Images/
-│   ├── Components/
-│   ├── Pages/
-│   ├── Context/
-│   ├── Hooks/
-│   ├── Services/
-│   ├── App.js
-│   └── index.js
-└── package.json
-```
-
-## 📌 Roadmap
-
-### Future Enhancements:
-
-- **Improved UI/UX**
-  - Redesigning the theme context
-  - Enhanced visual components
-- **User Authentication**
-  - Personal watchlists
-  - Rating system
-- **Media Features**
-  - Movie trailers integration
-  - Behind the scenes content
-- **Personalization**
-  - Adding Favorites functionality to save movies
-  - Custom recommendation algorithm
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 👏 Acknowledgments
-
-- [The Movie Database (TMDB)](https://www.themoviedb.org/) for providing the API
-- The open-source community for inspiration and resources
-
----
-
-### 📱 Connect
-
-- Portfolio: [your-portfolio-url.com](https://your-portfolio-url.com)
-- GitHub: [Afolabiyinka](https://github.com/Afolabiyinka)
-- LinkedIn: [your-linkedin](https://linkedin.com/in/your-linkedin)
-
----
-
-_This project uses the TMDB API but is not endorsed or certified by TMDB!!._

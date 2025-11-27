@@ -4,7 +4,6 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-  TooltipArrow,
 } from "@material-tailwind/react";
 import { Heart } from "lucide-react";
 import { useFavourites } from "../../hooks/useFavourites";
@@ -87,7 +86,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
           <div className="p-3 text-left flex flex-col items-start">
             <Typography
               variant="h5"
-              className="text-gray-800 dark:text-gray-100 text-xl font-medium break-words"
+              className="text-gray-800 dark:text-gray-100 text-xl font-medium break-words truncate"
             >
               {movie.title}
             </Typography>
@@ -115,7 +114,6 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
                 />
               </button>
             </TooltipTrigger>
-            <TooltipArrow />
             <TooltipContent className="p-3 px-5 font-bold text-[1rem] rounded-full">
               {movieInFavorites ? "Remove from favourite" : "Add to favourite"}
             </TooltipContent>

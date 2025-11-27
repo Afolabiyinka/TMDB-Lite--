@@ -34,7 +34,7 @@ const ComingSoonSection: React.FC = () => {
           </div>
         </motion.div>
         <Link to={`/app/movies`}>
-          <Button className="rounded-full p-3 px-16">Back Home</Button>
+          <p className="rounded-full p-3 px-16 text-blue-500">Back Home</p>
         </Link>
       </div>
     </section>

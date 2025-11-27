@@ -3,23 +3,25 @@ import errorAnimation from "../../../Assets/ErrorAnimation.json";
 import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
 import MovieCard from "../../components/movie/MovieCard";
-import useHomePage from "../../hooks/useHomePage";
+import useMovies from "../../hooks/useMovies";
 import GenreNav from "../Genres/GenreNavigation";
+import { useQuery } from "@tanstack/react-query";
 
 const HomePage = () => {
   const {
     movies,
-    loading,
+    isLoading,
     error,
     currentPage,
     handleNextPage,
     handlePrevPage,
-  } = useHomePage();
+  } = useMovies();
+
   return (
     <div>
       <GenreNav />
       <div className={`flex flex-col justify-center items-center h-fit`}>
-        {loading ? (
+        {isLoading ? (
           <div className="flex justify-center items-center gap-4 flex-col min-h-screen">
             <Loader />
           </div>
@@ -29,7 +31,7 @@ const HomePage = () => {
               animationData={errorAnimation}
               style={{ width: "100px", height: "100px" }}
             />
-            <h1 className={`text-2xl`}>{error}</h1>
+            <h1 className={`text-2xl`}>{error.message}</h1>
           </div>
         ) : (
           <div className="w-full flex flex-col px-8 ">

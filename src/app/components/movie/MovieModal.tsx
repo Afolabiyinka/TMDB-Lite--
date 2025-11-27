@@ -1,51 +1,81 @@
-import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ThumbsUp, X, Calendar, Star, Heart, ArrowLeft } from "lucide-react";
+import {
+  ThumbsUp,
+  Calendar,
+  Star,
+  Heart,
+  ArrowLeft,
+  Play,
+  ChevronDown,
+} from "lucide-react";
+import errorAnimation from "../../../Assets/ErrorAnimation.json";
 import { toast } from "react-toastify";
 import { useFavourites } from "../../hooks/useFavourites";
-import useHomePage from "../../hooks/useHomePage";
-import { getMovieReviews } from "../../services/Request";
+import {
+  getMovieDetails,
+  getParticularRecomendations,
+} from "../../services/Request";
+import { useQuery } from "@tanstack/react-query";
+import Lottie from "lottie-react";
+import { Button, Chip, IconButton } from "@material-tailwind/react";
+import MovieCard from "./MovieCard";
+import Loader from "../Loader";
 
 const MoviePage = () => {
-  const [votes, setVotes] = useState(0);
-  const [reviews, setReviws] = useState([]);
-  const [fectchedInfo, setFetchedInfo] = useState<any>([]);
-  const { addToFavourites, removeFromFavourites, isFavourite, favourites } =
+  const { addToFavourites, removeFromFavourites, isFavourite } =
     useFavourites();
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const { movies } = useHomePage();
+  // Movie details
+  const {
+    data: movie,
+    isLoading: movieLoading,
+    error: movieError,
+  } = useQuery({
+    queryKey: ["movieDetails", id],
+    queryFn: () => getMovieDetails(id),
+  });
 
-  useEffect(() => {
-    async function getReviews(id: any) {
-      try {
-        const reviewsData = await getMovieReviews(id);
-        setReviws(reviewsData);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    getReviews(id);
-  }, [id]);
-
-  const movie: any = movies.find((u) => u.id === Number(id));
-
-  useEffect(() => {
-    setVotes(movie?.vote_count || 0);
-  }, []);
+  // Movie recommendations
+  const {
+    data: recommendations,
+    isLoading: recLoading,
+    error: recError,
+  } = useQuery({
+    queryKey: ["recommendations", id],
+    queryFn: () => getParticularRecomendations(id),
+  });
+  //Movie Reviews
 
   if (!movie) return null;
+  if (movieLoading)
+    return (
+      <div className="h-screen border w-full">
+        <Loader />
+      </div>
+    );
+  if (movieError)
+    return (
+      <div className="flex justify-center items-center flex-col gap-4">
+        <Lottie
+          animationData={errorAnimation}
+          style={{ width: "100px", height: "100px" }}
+        />
+        <h1 className={`text-2xl`}>{movieError.message}</h1>
+      </div>
+    );
 
   const toastStyle = {
     closeButton: false,
     style: {
       background: "black",
       backdropFilter: "blur(10rem)",
-      borderRadius: "50px",
+      Radius: "50px",
       padding: "20px",
       color: "white",
       marginTop: "10px",
+      borderRadius: "40px",
     },
   };
 
@@ -70,26 +100,29 @@ const MoviePage = () => {
     : null;
 
   return (
-    <div className="w-full  p-6 md:p-10">
-      <button
+    <div className="w-full h-full  p-6 md:p-10">
+      <Button
+        variant="solid"
+        isPill
+        color="primary"
         onClick={() => navigate(-1)}
-        className="mb-6 w-full p-2  flex items-center gap-2 text-xl rounded-xl hover:-translate-x-2"
+        className="mb-6  border  flex items-center gap-2 text-xl rounded-xl hover:-translate-x-2"
       >
         <ArrowLeft
           size={40}
           className="stroke-[1px] hover:group-[]:translate-x-4"
         />
         Back
-      </button>
+      </Button>
 
-      <div className="flex flex-col md:flex-row gap-10">
+      <div className="flex flex-col md:flex-row gap-10 min-h-screen">
         {/* Poster */}
         <div className="w-full md:w-1/3 rounded-xl overflow-hidden shadow-lg">
           {movie?.poster_path ? (
             <img
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
               alt="Poster"
-              className="w-full h-full object-cover"
+              className="w-full object-cover"
             />
           ) : (
             <div className="w-full h-full dark:bg-gray-800 flex items-center justify-center">
@@ -99,60 +132,107 @@ const MoviePage = () => {
         </div>
 
         {/* Info */}
-        <div className="flex-1 flex flex-col gap-6">
-          <h1 className="text-3xl md:text-4xl font-bold">
+        <div className="flex-1 flex flex-col gap-6 w-full lg:w-1/2">
+          <h1 className="text-3xl md:text-5xl tracking-wide font-bold">
             {movie?.title || movie?.name}
           </h1>
 
-          <div className="flex flex-wrap gap-4 text-sm">
-            <div className="flex items-center dark:bg-gray-800 rounded-full px-3 py-1">
-              <Star className="w-4 h-4 text-yellow-400 mr-1" />
-              {movie?.vote_average?.toFixed(1)}
-            </div>
+          {/* the movie genre */}
+          <div className="w-full">
+            <span className="grid grid-cols-3 md:grid-cols-5 gap-3">
+              {movie.genres.map((genre: { name: string; id: number }) => (
+                <Chip
+                  variant="outline"
+                  key={genre.id}
+                  color="secondary"
+                  className="flex items-center justify-center gap-1 w-full py-2.5 sm:w-auto"
+                >
+                  {genre.name}
+                </Chip>
+              ))}
+            </span>
+          </div>
+          <div className="flex  gap-4 text-sm">
+            <Chip
+              className="flex items-center  p-2 px-4"
+              color="secondary"
+              variant="ghost"
+            >
+              <Star className="text-yellow-400 mr-1 stroke-[1px]" />
+              <p> {movie?.vote_average?.toFixed(1)}</p>
+            </Chip>
 
             {formattedDate && (
-              <div className="flex items-center dark:bg-gray-800 rounded-full px-3 py-1">
+              <Chip
+                className="flex items-center px-6 py-1"
+                color="secondary"
+                variant="ghost"
+              >
                 <Calendar className="w-4 h-4 text-blue-400 mr-1" />
                 {formattedDate}
-              </div>
+              </Chip>
             )}
           </div>
 
           <p className="leading-relaxed text-xl ">{movie?.overview}</p>
-          {/* 
-          <div>
-            {reviews.map((review: any) => (
-              <span>
-                <span>{review.author}</span>
-                <span>{review.author_details.name}</span>
-              </span>
-            ))}
-          </div> */}
-          <div className="flex items-center gap-4 mt-4">
-            {/* Likes */}
-            <button
-              className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg"
-              onClick={() => setVotes((prev) => prev + 1)}
-            >
-              <ThumbsUp size={18} className="text-blue-400" />
-              {votes}
-            </button>
 
-            {/* Favourite */}
-            <button
-              onClick={handleFavouriteClick}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg ${
-                movieInFavorites
-                  ? "bg-blue-600 hover:bg-blue-700"
-                  : "dark:bg-gray-800 hover:bg-gray-700"
-              }`}
-            >
-              <Heart
-                size={18}
-                className={movieInFavorites ? "fill-red-500 text-red-500" : ""}
-              />
-              {movieInFavorites ? "Saved" : "Save"}
-            </button>
+          {/* ACTION BUTTONS */}
+          <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-2 justify-center mt-4    ">
+            {/* Likes */}
+            <span className="flex gap-3 w-full">
+              <IconButton
+                className="flex items-center justify-center gap-2 p-2"
+                isCircular
+                size="xl"
+                color="secondary"
+                variant="outline"
+              >
+                <ThumbsUp size={25} className="text-blue-400" />
+              </IconButton>
+              {/* Favourite */}
+              <Button
+                isPill
+                size="xl"
+                color="secondary"
+                variant={`${movieInFavorites ? "gradient" : "outline"}`}
+                onClick={handleFavouriteClick}
+                className={`flex items-center gap-2`}
+              >
+                <Heart
+                  size={18}
+                  className={
+                    movieInFavorites ? "fill-red-500 text-red-500" : ""
+                  }
+                />
+                <p className="font-bold">
+                  {movieInFavorites
+                    ? "Saved to favourites"
+                    : "Save to favourites"}
+                </p>
+              </Button>
+            </span>
+            <Button isPill size="xl" color="secondary">
+              <Play className="mr-2 h-4 w-4 stroke-2" />
+              Watch Trailer
+            </Button>
+          </div>
+          <div>
+            {recLoading ? (
+              <div>{<Loader />}</div>
+            ) : recError ? (
+              <div>{recError.message}</div>
+            ) : (
+              <div>
+                <h3 className="text-3xl tracking-wide">More like this </h3>
+                <span className="flex  w-fil gap-5 h-[26rem] overflow-x-auto p-6 ">
+                  {recommendations.slice(0, 10).map((rec: any) => (
+                    <div key={rec.id} className="flex-shrink-0 w-64">
+                      <MovieCard movie={rec} />
+                    </div>
+                  ))}
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>

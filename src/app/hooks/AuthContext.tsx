@@ -3,13 +3,13 @@ import {
   useContext,
   useState,
   useEffect,
-  ReactNode,
-  Dispatch,
-  SetStateAction,
+  type ReactNode,
+  type Dispatch,
+  type SetStateAction,
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { CredentialResponse } from "@react-oauth/google";
+import { type CredentialResponse } from "@react-oauth/google";
 
 interface User {
   name?: string;

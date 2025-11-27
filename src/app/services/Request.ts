@@ -1,17 +1,10 @@
 //Importing the api keys
-const API_KEY = process.env.REACT_APP_API_KEY!;
-const BASE_URL = process.env.REACT_APP_BASE_URL!;
+const API_KEY = import.meta.env.VITE_API_KEY!;
+const BASE_URL = import.meta.env.VITE_BASE_URL!;
 
 export const getLatestMovies = async (page = 1) => {
   const response = await fetch(
     `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${page}`
-  );
-  const data = await response.json();
-  return data.results;
-};
-export const getMovieReviews = async (id: any) => {
-  const response = await fetch(
-    `${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}`
   );
   const data = await response.json();
   return data.results;
@@ -33,4 +26,18 @@ export const getPopularPeople = async () => {
   );
   const actor = await response.json();
   return actor.results;
+};
+export const getMovieDetails = async (id: any) => {
+  const url = `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`;
+
+  const response = await fetch(url);
+  const movieDetails = await response.json();
+  return movieDetails;
+};
+export const getParticularRecomendations = async (id: any) => {
+  const url = `${BASE_URL}/movie/${id}/recommendations?api_key=${API_KEY}&language=en-US`;
+
+  const response = await fetch(url);
+  const movieDetails = await response.json();
+  return movieDetails.results;
 };
