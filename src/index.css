@@ -12,25 +12,21 @@
 }
 * {
   scroll-behavior: smooth;
-  transition: all 0.6s;
+  /* transition: all 0.6s; */
   scrollbar-width: thin; /* Firefox */
   scrollbar-color: gray transparent;
 }
 
 /* WebKit browsers (Chrome, Safari, Edge) */
 *::-webkit-scrollbar {
-  width: 8px; /* thickness */
+  width: 8px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: gray; /* thumb color */
+  background-color: gray;
   border-radius: 999px;
 }
 
 *::-webkit-scrollbar-track {
-  background: transparent; /* remove background */
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  background-color: #3730a3; /* hover effect */
+  background: transparent;
 }

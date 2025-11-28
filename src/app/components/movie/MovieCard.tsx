@@ -51,9 +51,35 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   return (
     <>
       <Card
-        className="overflow-hidden shadow-lg rounded-3xl bg-inherit cursor-pointer hover:scale-[1.02] transition-transform duration-300"
+        className="overflow-hidden relative shadow-lg rounded-3xl bg-inherit cursor-pointer hover:scale-[1.02] transition-transform duration-300"
         onClick={() => navigate(`/movie/${movie.id}`)}
       >
+        <span className="absolute top-2 right-2">
+          <Tooltip placement="top-end">
+            <TooltipTrigger>
+              <button
+                className={`hover:border rounded-full w-16 flex justify-center items-center h-16`}
+                onClick={handleFavouriteClick}
+              >
+                <Heart
+                  size={40}
+                  className={
+                    movieInFavorites
+                      ? "fill-red-500 text-red-500 transition-all duration-200"
+                      : "text-gray-300"
+                  }
+                />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>
+                {movieInFavorites
+                  ? "Remove from favourite"
+                  : "Add to favourite"}
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </span>
         {/* Image Section */}
         <div className="h-[21rem] overflow-hidden w-full">
           {movie.poster_path ? (
@@ -90,27 +116,6 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
               {movie.release_date ? movie.release_date.split("-")[0] : "N/A"}
             </Typography>
           </div>
-
-          <Tooltip>
-            <TooltipTrigger>
-              <button
-                className={`hover:border rounded-full w-16 flex justify-center items-center h-16`}
-                onClick={handleFavouriteClick}
-              >
-                <Heart
-                  size={40}
-                  className={
-                    movieInFavorites
-                      ? "fill-red-500 text-red-500 transition-all duration-200"
-                      : "text-gray-300"
-                  }
-                />
-              </button>
-            </TooltipTrigger>
-            <TooltipContent className="p-3 px-5 font-bold text-[1rem] rounded-full">
-              {movieInFavorites ? "Remove from favourite" : "Add to favourite"}
-            </TooltipContent>
-          </Tooltip>
         </div>
       </Card>
     </>

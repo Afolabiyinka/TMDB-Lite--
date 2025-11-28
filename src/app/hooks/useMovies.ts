@@ -25,7 +25,7 @@ export default function useMovies() {
 
   // Sync page with URL
   useEffect(() => {
-    const allowedPaths = ["/movies"];
+    const allowedPaths = ["/"];
     if (allowedPaths.includes(location.pathname)) {
       setSearchParams({ page: currentPage.toString() });
     }

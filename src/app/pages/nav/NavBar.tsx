@@ -44,7 +44,7 @@ function NavList({ closeMenu }: { closeMenu: () => void }) {
             <div
               className={`"flex items-center justify-center" ${
                 location.pathname === href
-                  ? "rounded-full bg-black text-white p-2 dark:bg-white dark:text-black "
+                  ? "rounded-full bg-black text-white p-2 transition-all duration-500 dark:bg-white dark:text-black "
                   : ""
               }`}
             >

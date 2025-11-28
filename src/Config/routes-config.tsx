@@ -49,8 +49,11 @@ const RoutesConfig: FC = () => {
       ),
       children: [
         {
-          path: "movies",
           index: true,
+          Component: HomePage,
+        },
+        {
+          path: "movies",
           Component: HomePage,
         },
         {

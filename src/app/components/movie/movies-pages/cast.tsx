@@ -27,17 +27,22 @@ const Cast = ({ casts, castsLoading, noCast }: CastsProps) => {
               profile_path: string;
               character: string;
             }) => (
-              <div className="w-[9rem] shadow-lg rounded-xl flex flex-col overflow-hidden h-full">
-                <img
-                  className="w-full h-36 object-cover shadow-lg bg-red-400"
-                  src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
-                  // alt={cast.name}
-                />
-                <div className="p-2 flex flex-col items-center text-center">
-                  <p className="font-semibold text-sm">{cast.name}</p>
-                  <p className="text-xs text-gray-500">as {cast.character}</p>
+              <a
+                target="_blank"
+                href={`https://www.google.com/search?q=${cast.name}`}
+              >
+                <div className="w-[9rem] shadow-lg rounded-xl flex flex-col overflow-hidden h-full">
+                  <img
+                    className="w-full h-36 object-cover shadow-lg bg-red-400"
+                    src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
+                    // alt={cast.name}
+                  />
+                  <div className="p-2 flex flex-col items-center text-center">
+                    <p className="font-semibold text-sm">{cast.name}</p>
+                    <p className="text-xs text-gray-500">as {cast.character}</p>
+                  </div>
                 </div>
-              </div>
+              </a>
             )
           )}
         </motion.div>

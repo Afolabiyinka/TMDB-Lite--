@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ThumbsUp, Calendar, Star, Heart, ArrowLeft, Play } from "lucide-react";
 import errorAnimation from "../../../Assets/ErrorAnimation.json";
 import { toast } from "react-toastify";
@@ -14,6 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 import Lottie from "lottie-react";
 import { Button, Chip, IconButton } from "@material-tailwind/react";
 import Loader from "../../components/Loader";
+import { motion } from "framer-motion";
 
 //Importing the sub pages
 import Recommendations from "../../components/movie/movies-pages/recommendations";
@@ -60,6 +61,9 @@ const MoviePage = () => {
     queryFn: () => getMovieCredits(id),
   });
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [id]);
   const [trailerOpen, setTrailerOpen] = useState(false);
 
   if (movieLoading)
@@ -113,7 +117,12 @@ const MoviePage = () => {
     : null;
 
   return (
-    <div className="w-full h-full  p-6 md:p-10">
+    <motion.div
+      className="w-full h-full  p-6 md:p-10"
+      initial={{ y: 100 }}
+      animate={{ y: 1 }}
+      transition={{ duration: 0.2 }}
+    >
       <Button
         variant="solid"
         isPill
@@ -270,7 +279,7 @@ const MoviePage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
