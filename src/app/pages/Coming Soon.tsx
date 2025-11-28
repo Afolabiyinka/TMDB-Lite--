@@ -33,7 +33,7 @@ const ComingSoonSection: React.FC = () => {
             </Button>
           </div>
         </motion.div>
-        <Link to={`/app/movies`}>
+        <Link to={`/movies`}>
           <p className="rounded-full p-3 px-16 text-blue-500">Back Home</p>
         </Link>
       </div>

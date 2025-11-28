@@ -45,7 +45,7 @@ export function AuthProvider({ children }: UserProviderProps) {
     const decodedUser = jwtDecode<User>(credentials.credential);
     setUser(decodedUser);
     localStorage.setItem("TmdbUser", JSON.stringify(decodedUser));
-    navigate("/app/movies");
+    navigate("/movies");
   };
 
   const error = () => {

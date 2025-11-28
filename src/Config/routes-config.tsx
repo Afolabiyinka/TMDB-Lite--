@@ -1,25 +1,24 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Navigate,
-} from "react-router-dom";
-import { lazy } from "react";
-import Login from "../app/pages/auth/Login";
-import HomePage from "../app/pages/movies/HomePage";
-import Favourites from "../app/pages/movies/Favourites";
-import ComingSoonSection from "../app/pages/Coming Soon";
-import AccountPage from "../app/pages/auth/Account";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { lazy, type FC } from "react";
+
+// Importing the hooks and contexts
 import { SearchProvider } from "../app/hooks/SearchContext";
 import { AuthProvider } from "../app/hooks/AuthContext";
 import { FavouritesProvider } from "../app/hooks/useFavourites";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import Layout from "../app/Layout";
 import { ThemeFather } from "../app/hooks/ThemeContext";
-import React from "react";
-import TrendingActors from "../app/pages/TrendingActors";
-import MoviePage from "../app/pages/movies/MoviePage";
 
-const RoutesConfig: React.FC = () => {
+//Lazy Loading the pages
+const Layout = lazy(() => import("../app/Layout"));
+const MoviePage = lazy(() => import("../app/pages/movies/MoviePage"));
+const AccountPage = lazy(() => import("../app/pages/auth/Account"));
+const Favourites = lazy(() => import("../app/pages/movies/Favourites"));
+const Login = lazy(() => import("../app/pages/auth/Login"));
+const HomePage = lazy(() => import("../app/pages/movies/HomePage"));
+const TrendingActors = lazy(() => import("../app/pages/TrendingActors"));
+const ComingSoonSection = lazy(() => import("../app/pages/Coming Soon"));
+
+const RoutesConfig: FC = () => {
   const router = createBrowserRouter([
     {
       path: "/auth/login",
@@ -36,12 +35,9 @@ const RoutesConfig: React.FC = () => {
       path: "*",
       Component: ComingSoonSection,
     },
+
     {
       path: "/",
-      element: <Navigate to="/auth/login" replace />,
-    },
-    {
-      path: "/app",
       Component: () => (
         <SearchProvider>
           <ThemeFather>

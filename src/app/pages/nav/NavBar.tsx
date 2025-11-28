@@ -9,23 +9,23 @@ const LINKS = [
   {
     icon: Home,
     title: "Home",
-    href: "/app/movies",
+    href: "/movies",
   },
   {
     icon: Heart,
     title: "Favourites",
-    href: "/app/Favourites",
+    href: "/favourites",
   },
 
   {
     icon: Video,
     title: "Celebrities",
-    href: "/app/celebrities",
+    href: "/celebrities",
   },
   {
     icon: User,
     title: "Account",
-    href: "/app/Account",
+    href: "/account",
   },
 ];
 
@@ -44,7 +44,7 @@ function NavList({ closeMenu }: { closeMenu: () => void }) {
             <div
               className={`"flex items-center justify-center" ${
                 location.pathname === href
-                  ? "rounded-full  bg-black text-white p-2 dark:bg-white dark:text-black "
+                  ? "rounded-full bg-black text-white p-2 dark:bg-white dark:text-black "
                   : ""
               }`}
             >
@@ -111,7 +111,7 @@ export default function NavBar() {
       <div className="max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <Link to="/app/movies" className="flex items-center">
+            <Link to="/movies" className="flex items-center">
               <div className="relative mr-2"></div>
               <img src={tmdbLogo} className="h-8 w-[10rem]" alt="Tmdb-Logo" />
             </Link>
@@ -131,7 +131,7 @@ export default function NavBar() {
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
-                  navigate("/app/movies");
+                  navigate("/movies");
                 }}
               />
               <Search className="absolute left-3 top-2.5 h-5 w-5 " />
@@ -153,7 +153,7 @@ export default function NavBar() {
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
-                    navigate("/app/movies");
+                    navigate("/movies");
                   }}
                 />
                 <Search className="absolute left-3 top-2.5 h-4 w-4" />

@@ -8,16 +8,9 @@ import {
 import { Heart } from "lucide-react";
 import { useFavourites } from "../../hooks/useFavourites";
 import { toast } from "react-toastify";
+import { type Movie } from "../../libs/types";
 
 import { useNavigate } from "react-router-dom";
-interface Movie {
-  id: string | number;
-  title?: string;
-  name?: string;
-  poster_path?: string;
-  release_date?: string;
-  [key: string]: any;
-}
 
 interface MovieCardProps {
   movie: Movie;
@@ -59,7 +52,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
     <>
       <Card
         className="overflow-hidden shadow-lg rounded-3xl bg-inherit cursor-pointer hover:scale-[1.02] transition-transform duration-300"
-        onClick={() => navigate(`/app/movie/${movie.id}`)}
+        onClick={() => navigate(`/movie/${movie.id}`)}
       >
         {/* Image Section */}
         <div className="h-[21rem] overflow-hidden w-full">

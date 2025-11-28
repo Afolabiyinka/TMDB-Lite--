@@ -4,7 +4,6 @@ import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
 import MovieCard from "../../components/movie/MovieCard";
 import useMovies from "../../hooks/useMovies";
-import GenreNav from "../Genres/GenreNavigation";
 
 const HomePage = () => {
   const {
@@ -18,7 +17,6 @@ const HomePage = () => {
 
   return (
     <div>
-      <GenreNav />
       <div className={`flex flex-col justify-center items-center h-fit`}>
         {isLoading ? (
           <div className="flex justify-center items-center gap-4 flex-col min-h-screen">
@@ -34,7 +32,7 @@ const HomePage = () => {
           </div>
         ) : (
           <div className="w-full flex flex-col px-8 ">
-            <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center items-center">
+            <div className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center items-center">
               {movies.map((movie: any) => (
                 <MovieCard movie={movie} key={movie.id} />
               ))}

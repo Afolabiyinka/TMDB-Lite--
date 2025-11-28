@@ -16,7 +16,7 @@ const LINKS = [
 
 const Footer: React.FC = () => {
   return (
-    <footer className="w-full px-4">
+    <footer className="w-full px-4 p-2">
       <div className="flex w-full flex-row flex-wrap items-center justify-center gap-x-12 gap-y-3 text-center md:justify-between">
         <Link to="/">TMDB-Mini</Link>
 

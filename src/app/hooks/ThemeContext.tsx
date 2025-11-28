@@ -12,12 +12,6 @@ interface ThemeContextType {
   setTheme: (theme: "light" | "dark" | "system") => void;
 }
 
-// Initial state
-// const initialState: ThemeContextType = {
-//   theme: "system",
-//   setTheme: () => {},
-// };
-
 // Create context
 const ThemeProviderContext = createContext<ThemeContextType | undefined>(
   undefined
@@ -72,7 +66,6 @@ export function ThemeFather({
   );
 }
 
-// Hook
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext);
   if (!context) {

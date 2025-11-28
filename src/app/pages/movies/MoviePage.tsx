@@ -8,14 +8,17 @@ import {
   getMovieDetails,
   getParticularRecomendations,
   getMovieTrailer,
+  getMovieCredits,
 } from "../../services/Request";
 import { useQuery } from "@tanstack/react-query";
 import Lottie from "lottie-react";
 import { Button, Chip, IconButton } from "@material-tailwind/react";
 import Loader from "../../components/Loader";
-import Recommendations from "../../components/movie/sub-components/recommendations";
-import Genres from "../../components/movie/sub-components/genre";
-import { motion } from "framer-motion";
+
+//Importing the sub pages
+import Recommendations from "../../components/movie/movies-pages/recommendations";
+import Genres from "../../components/movie/movies-pages/genre";
+import Cast from "../../components/movie/movies-pages/cast";
 
 const MoviePage = () => {
   const { addToFavourites, removeFromFavourites, isFavourite } =
@@ -48,6 +51,14 @@ const MoviePage = () => {
     queryKey: ["trailer", id],
     queryFn: () => getMovieTrailer(id),
   });
+  const {
+    data: casts,
+    error: noCast,
+    isLoading: castsLoading,
+  } = useQuery({
+    queryKey: ["casts", id],
+    queryFn: () => getMovieCredits(id),
+  });
 
   const [trailerOpen, setTrailerOpen] = useState(false);
 
@@ -68,8 +79,6 @@ const MoviePage = () => {
         <h1 className={`text-2xl`}>{movieError.message}</h1>
       </div>
     );
-
-  if (!movie) return <div>No movie found</div>;
 
   const toastStyle = {
     closeButton: false,
@@ -121,12 +130,12 @@ const MoviePage = () => {
 
       <div className="flex flex-col md:flex-row gap-10 min-h-screen">
         {/* Poster */}
-        <div className="w-full md:w-1/3 rounded-xl overflow-hidden shadow-lg">
+        <div className="w-full md:w-1/3 rounded-xl overflow-hidden">
           {movie?.poster_path ? (
             <img
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
               alt="Poster"
-              className="w-full object-cover"
+              className="w-full object-cover rounded-xl"
             />
           ) : (
             <div className="w-full h-full dark:bg-gray-800 flex items-center justify-center">
@@ -168,7 +177,7 @@ const MoviePage = () => {
           <p className="leading-relaxed text-xl ">{movie?.overview}</p>
 
           {/* ACTION BUTTONS */}
-          <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-2 justify-center mt-4    ">
+          <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-2 justify-center mt-4 w-full p-1">
             {/* Likes Button*/}
             <span className="flex gap-3 w-full">
               <IconButton
@@ -225,21 +234,38 @@ const MoviePage = () => {
             </div>
           )}
 
-          <div>
-            {recLoading ? (
-              <div className="h-full w-full">
-                <Loader />
-              </div>
-            ) : recError ? (
-              <div>{recError.message}</div>
-            ) : (
-              <motion.div
-                initial={{ x: -10, opacity: 0.7 }}
-                viewport={{ amount: "all" }}
-                animate={{ x: 1, opacity: 1 }}
-              >
-                <Recommendations recommendations={recommendations} />
-              </motion.div>
+          {/* //Getting the casts and shii */}
+
+          <Cast casts={casts} castsLoading={castsLoading} noCast={noCast} />
+
+          <Recommendations
+            recommendations={recommendations}
+            recLoading={recLoading}
+            recError={recError}
+          />
+
+          <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 p-6 mt-8">
+            {movie.production_companies.map(
+              (company: { id: number; logo_path: string; name: string }) => (
+                <div
+                  key={company.id}
+                  className="flex items-center gap-3 p-4 w-full border-none"
+                >
+                  {company.logo_path ? (
+                    <img
+                      src={`https://image.tmdb.org/t/p/w200${company.logo_path}`}
+                      alt={company.name}
+                      className="h-6 w-auto max-w-[80px] object-contain bg-white rounded"
+                    />
+                  ) : (
+                    <div className="h-6 w-[80px] bg-white rounded" />
+                  )}
+
+                  <p className="text-sm font-medium whitespace-nowrap">
+                    {company.name}
+                  </p>
+                </div>
+              )
             )}
           </div>
         </div>

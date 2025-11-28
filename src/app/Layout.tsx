@@ -3,28 +3,26 @@ import Footer from "./pages/nav/Footer";
 import NavBar from "./pages/nav/NavBar";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { useUser } from "./hooks/AuthContext";
+import ScrollBtn from "./components/ScrollBtn";
 
 const Layout = () => {
   const navigate = useNavigate();
-  const { setUser } = useUser();
   useEffect(() => {
     const storedUser = localStorage.getItem("TmdbUser");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-      navigate("/app/movies");
+    if (!storedUser) {
+      navigate("/auth/login");
     }
-  }, [navigate, setUser]);
+  }, []);
   return (
     <div className="flex flex-col justify-center items-center w-full h-full">
       <NavBar />
       <Outlet />
+      <ScrollBtn />
       <Footer />
       <span>
         <ToastContainer
           hideProgressBar
           autoClose={1000}
-          // theme="colored"
           position="top-center"
         />
       </span>

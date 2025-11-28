@@ -25,7 +25,7 @@ export default function useMovies() {
 
   // Sync page with URL
   useEffect(() => {
-    const allowedPaths = ["/app/movies"];
+    const allowedPaths = ["/movies"];
     if (allowedPaths.includes(location.pathname)) {
       setSearchParams({ page: currentPage.toString() });
     }
@@ -34,7 +34,7 @@ export default function useMovies() {
   // Redirect if not logged in
   useEffect(() => {
     const storedUser = localStorage.getItem("TmdbUser");
-    if (!storedUser) navigate("/");
+    if (!storedUser) navigate("/auth/login");
   }, [navigate]);
 
   // Scroll top when page changes
@@ -52,7 +52,6 @@ export default function useMovies() {
     try {
       if (data) {
         setMovies(data);
-        console.log(movies);
       }
     } catch (err) {
       console.log(err);

@@ -17,7 +17,7 @@ export default function Actor({ actor }: actor) {
     : null;
 
   return (
-    <Card className="overflow-hidden w-full sm:w-64 md:w-full transition-all duration-300 hover:shadow-xl group relative cursor-pointer">
+    <Card className="w-full overflow-hidden shadow-lg rounded-3xl bg-inherit cursor-pointer hover:scale-[1.02] transition-transform duration-300">
       <div
         className={`absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300 z-10`}
       />
