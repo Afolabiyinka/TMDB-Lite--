@@ -188,12 +188,24 @@ const MoviePage = () => {
           {/* ACTION BUTTONS */}
           <div className="flex gap-4 mt-4 w-full p-2">
             {/* Likes Button */}
-            <IconButton variant="ghost" isCircular color="secondary" size="xl">
-              <ThumbsUp size={40} className="" />
-            </IconButton>
+            <Tooltip>
+              <Tooltip.Trigger>
+                <IconButton
+                  variant="ghost"
+                  isCircular
+                  color="secondary"
+                  size="xl"
+                >
+                  <ThumbsUp size={40} className="" />
+                </IconButton>
+              </Tooltip.Trigger>
+              <Tooltip.Content>
+                <p>Like this movie</p>
+              </Tooltip.Content>
+            </Tooltip>
 
             {/* Favourite */}
-            <Tooltip placement="top-end">
+            <Tooltip>
               <Tooltip.Trigger>
                 <IconButton
                   variant="ghost"

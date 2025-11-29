@@ -6,16 +6,18 @@ import { SearchProvider } from "../app/hooks/SearchContext";
 import { AuthProvider } from "../app/hooks/AuthContext";
 import { FavouritesProvider } from "../app/hooks/useFavourites";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import SearchPage from "../app/pages/search/SearchPage";
 
 //Lazy Loading the pages
 const Layout = lazy(() => import("../app/Layout"));
 const MoviePage = lazy(() => import("../app/pages/movies/MoviePage"));
 const AccountPage = lazy(() => import("../app/pages/auth/Account"));
-const Favourites = lazy(() => import("../app/pages/movies/Favourites"));
+const Favourites = lazy(() => import("../app/pages/favourites/Favourites"));
 const Login = lazy(() => import("../app/pages/auth/Login"));
 const HomePage = lazy(() => import("../app/pages/movies/HomePage"));
 const TrendingActors = lazy(() => import("../app/pages/TrendingActors"));
 const ComingSoonSection = lazy(() => import("../app/pages/Coming Soon"));
+const Searchresults = lazy(() => import("../app/pages/search/SearchPage"));
 
 const RoutesConfig: FC = () => {
   const router = createBrowserRouter([
@@ -57,6 +59,10 @@ const RoutesConfig: FC = () => {
           path: "movie/:id",
           index: true,
           Component: MoviePage,
+        },
+        {
+          path: "search",
+          Component: SearchPage,
         },
         {
           path: "favourites",

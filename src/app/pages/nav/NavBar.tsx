@@ -1,9 +1,9 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Search, Video, Home, User, X, Menu, Heart } from "lucide-react";
-import { useSearch } from "../../hooks/SearchContext";
 import { ModeToggle } from "../../hooks/ModeToggle.tsx";
 import tmdbLogo from "../../../Assets/the real logo.svg";
+import { useSearch } from "../../hooks/SearchContext.tsx";
 
 const LINKS = [
   {
@@ -66,8 +66,20 @@ export default function NavBar() {
   const navigate = useNavigate();
   const [openNav, setOpenNav] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { searchQuery, setSearchQuery } = useSearch();
   const [showSearchInput, setShowSearchInput] = useState(false);
+  const { searchQuery, setSearchQuery } = useSearch();
+
+  // inside NavBar
+
+  useEffect(() => {
+    const trimmedQuery = searchQuery.trim();
+    if (trimmedQuery.length > 0) {
+      navigate({
+        pathname: "/search",
+        search: `?q=${encodeURIComponent(trimmedQuery)}`,
+      });
+    }
+  }, [searchQuery, navigate]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -131,7 +143,6 @@ export default function NavBar() {
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
-                  navigate("/movies");
                 }}
               />
               <Search className="absolute left-3 top-2.5 h-5 w-5 " />
@@ -153,7 +164,6 @@ export default function NavBar() {
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
-                    navigate("/movies");
                   }}
                 />
                 <Search className="absolute left-3 top-2.5 h-4 w-4" />

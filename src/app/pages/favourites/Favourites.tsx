@@ -27,9 +27,14 @@ const Favourites = () => {
         </div>
       ) : (
         <div className="py-3 flex flex-col items-center  h-full w-screen">
-          <h1 className="text-4xl mb-3">Movies you've added to favourites</h1>
+          <h1 className="text-4xl mb-3">
+            {favourites.length} Movies added to favourites
+          </h1>
 
-          <div className="grid grid-flow-col-dense w-full gap-5 overflow-x-auto p-10">
+          <div
+            // className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-5"
+            className="grid grid-flow-col-dense w-full gap-5 overflow-x-auto p-10"
+          >
             {favourites.map((movie) => (
               <div className="flex-shrink-0 w-80">
                 <MovieCard key={movie.id} movie={movie} />
