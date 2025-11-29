@@ -12,7 +12,7 @@ import {
 } from "../../services/Request";
 import { useQuery } from "@tanstack/react-query";
 import Lottie from "lottie-react";
-import { Button, Chip, IconButton } from "@material-tailwind/react";
+import { Button, Chip, IconButton, Tooltip } from "@material-tailwind/react";
 import Loader from "../../components/Loader";
 import { motion } from "framer-motion";
 
@@ -121,7 +121,7 @@ const MoviePage = () => {
       className="w-full h-full  p-6 md:p-10"
       initial={{ y: 100 }}
       animate={{ y: 1 }}
-      transition={{ duration: 0.2 }}
+      transition={{ duration: 0.6 }}
     >
       <Button
         variant="solid"
@@ -186,48 +186,53 @@ const MoviePage = () => {
           <p className="leading-relaxed text-xl ">{movie?.overview}</p>
 
           {/* ACTION BUTTONS */}
-          <div className="grid grid-cols-1 md:grid-cols-3 items-center gap-2 justify-center mt-4 w-full p-1">
-            {/* Likes Button*/}
-            <span className="flex gap-3 w-full">
-              <IconButton
-                className="flex items-center justify-center gap-2 p-2"
-                isCircular
-                size="xl"
-                color="secondary"
-                variant="outline"
-              >
-                <ThumbsUp size={25} className="text-blue-400" />
-              </IconButton>
-              {/* Favourite */}
-              <Button
-                isPill
-                size="xl"
-                color="secondary"
-                variant={`${movieInFavorites ? "gradient" : "outline"}`}
-                onClick={handleFavouriteClick}
-                className={`flex items-center gap-2`}
-              >
-                <Heart
-                  size={18}
-                  className={
-                    movieInFavorites ? "fill-red-500 text-red-500" : ""
-                  }
-                />
-                <p className="font-bold">
+          <div className="flex gap-4 mt-4 w-full p-2">
+            {/* Likes Button */}
+            <IconButton variant="ghost" isCircular color="secondary" size="xl">
+              <ThumbsUp size={40} className="" />
+            </IconButton>
+
+            {/* Favourite */}
+            <Tooltip placement="top-end">
+              <Tooltip.Trigger>
+                <IconButton
+                  variant="ghost"
+                  isCircular
+                  color="secondary"
+                  size="xl"
+                  className="flex items-center justify-center w-16 h-16"
+                  onClick={handleFavouriteClick}
+                >
+                  <Heart
+                    size={40}
+                    className={`transition-all duration-300 ${
+                      movieInFavorites
+                        ? "text-red-500 fill-red-500 scale-110"
+                        : "text-gray-300"
+                    }`}
+                  />
+                </IconButton>
+              </Tooltip.Trigger>
+              <Tooltip.Content>
+                <p>
                   {movieInFavorites
-                    ? "Saved to favourites"
-                    : "Save to favourites"}
+                    ? "Remove from favourite"
+                    : "Add to favourite"}
                 </p>
-              </Button>
-            </span>
+              </Tooltip.Content>
+            </Tooltip>
+
+            {/* Trailer Button */}
             <Button
               isPill
               size="xl"
+              variant="solid"
               color="secondary"
+              className="w-full"
               onClick={() => setTrailerOpen(!trailerOpen)}
             >
-              <Play className="mr-2 h-4 w-4 stroke-2" />
-              Watch Trailer
+              <Play className="mr-2 h-7 w-7 stroke-2" />
+              <p className="text-xl"> Watch Trailer</p>
             </Button>
           </div>
 
@@ -252,32 +257,31 @@ const MoviePage = () => {
             recLoading={recLoading}
             recError={recError}
           />
-
-          <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 p-6 mt-8">
-            {movie.production_companies.map(
-              (company: { id: number; logo_path: string; name: string }) => (
-                <div
-                  key={company.id}
-                  className="flex items-center gap-3 p-4 w-full border-none"
-                >
-                  {company.logo_path ? (
-                    <img
-                      src={`https://image.tmdb.org/t/p/w200${company.logo_path}`}
-                      alt={company.name}
-                      className="h-6 w-auto max-w-[80px] object-contain bg-white rounded"
-                    />
-                  ) : (
-                    <div className="h-6 w-[80px] bg-white rounded" />
-                  )}
-
-                  <p className="text-sm font-medium whitespace-nowrap">
-                    {company.name}
-                  </p>
-                </div>
-              )
-            )}
-          </div>
         </div>
+      </div>
+      <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 p-6 mt-8 border">
+        {movie.production_companies.map(
+          (company: { id: number; logo_path: string; name: string }) => (
+            <div
+              key={company.id}
+              className="flex items-center gap-3 p-4 w-full border-none"
+            >
+              {company.logo_path ? (
+                <img
+                  src={`https://image.tmdb.org/t/p/w200${company.logo_path}`}
+                  alt={company.name}
+                  className="h-6 w-auto max-w-[80px] object-contain bg-white rounded"
+                />
+              ) : (
+                <div className="h-6 w-[80px] bg-white rounded" />
+              )}
+
+              <p className="text-sm font-medium whitespace-nowrap">
+                {company.name}
+              </p>
+            </div>
+          )
+        )}
       </div>
     </motion.div>
   );

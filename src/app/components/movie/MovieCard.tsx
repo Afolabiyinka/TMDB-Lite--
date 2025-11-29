@@ -54,11 +54,11 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
         className="overflow-hidden relative shadow-lg rounded-3xl bg-inherit cursor-pointer hover:scale-[1.02] transition-transform duration-300"
         onClick={() => navigate(`/movie/${movie.id}`)}
       >
-        <span className="absolute top-2 right-2">
+        <span className="absolute top-2 right-2 z-50">
           <Tooltip placement="top-end">
             <TooltipTrigger>
               <button
-                className={`hover:border rounded-full w-16 flex justify-center items-center h-16`}
+                className={`hover:border  rounded-full w-16 flex justify-center items-center h-16 backdrop-blur-2xl shadow-md`}
                 onClick={handleFavouriteClick}
               >
                 <Heart

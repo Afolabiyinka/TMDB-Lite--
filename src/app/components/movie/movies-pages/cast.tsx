@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Loader from "../../Loader";
 
 interface CastsProps {
   casts: [];
@@ -9,7 +10,9 @@ const Cast = ({ casts, castsLoading, noCast }: CastsProps) => {
   return (
     <div className="relative w-full">
       {castsLoading ? (
-        <div>Loading cast...</div>
+        <div className="p-8">
+          <Loader />
+        </div>
       ) : noCast ? (
         <div>No cast found</div>
       ) : casts.length === 0 ? (
@@ -33,7 +36,7 @@ const Cast = ({ casts, castsLoading, noCast }: CastsProps) => {
               >
                 <div className="w-[9rem] shadow-lg rounded-xl flex flex-col overflow-hidden h-full">
                   <img
-                    className="w-full h-36 object-cover shadow-lg bg-red-400"
+                    className="w-full h-36 object-cover shadow-lg bg-gray-400"
                     src={`https://image.tmdb.org/t/p/w500/${cast.profile_path}`}
                     // alt={cast.name}
                   />

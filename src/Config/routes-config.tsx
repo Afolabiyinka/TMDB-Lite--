@@ -6,7 +6,6 @@ import { SearchProvider } from "../app/hooks/SearchContext";
 import { AuthProvider } from "../app/hooks/AuthContext";
 import { FavouritesProvider } from "../app/hooks/useFavourites";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { ThemeFather } from "../app/hooks/ThemeContext";
 
 //Lazy Loading the pages
 const Layout = lazy(() => import("../app/Layout"));
@@ -40,11 +39,9 @@ const RoutesConfig: FC = () => {
       path: "/",
       Component: () => (
         <SearchProvider>
-          <ThemeFather>
-            <FavouritesProvider>
-              <Layout />
-            </FavouritesProvider>
-          </ThemeFather>
+          <FavouritesProvider>
+            <Layout />
+          </FavouritesProvider>
         </SearchProvider>
       ),
       children: [

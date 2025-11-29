@@ -4,8 +4,10 @@ import NavBar from "./pages/nav/NavBar";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import ScrollBtn from "./components/ScrollBtn";
+import { useThemeStore } from "./store/themeStore";
 
 const Layout = () => {
+  const { theme } = useThemeStore();
   const navigate = useNavigate();
   useEffect(() => {
     const storedUser = localStorage.getItem("TmdbUser");
@@ -13,6 +15,22 @@ const Layout = () => {
       navigate("/auth/login");
     }
   }, []);
+
+  useEffect(() => {
+    document.body.classList.remove("light", "dark");
+    document.body.classList.add(theme);
+    localStorage.setItem("theme", theme);
+
+    if (theme === "system") {
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+        .matches
+        ? "dark"
+        : "light";
+      document.body.classList.add(systemTheme);
+
+      return;
+    }
+  }, [theme]);
   return (
     <div className="flex flex-col justify-center items-center w-full h-full">
       <NavBar />

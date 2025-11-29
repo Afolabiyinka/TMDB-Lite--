@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Moon, Sun, Laptop } from "lucide-react";
+import { useThemeStore, type Theme } from "../store/themeStore";
 
 import {
   Menu,
@@ -8,14 +9,11 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 
-import { useTheme } from "./ThemeContext";
-
 export function ModeToggle() {
-  const { setTheme } = useTheme();
-  const { theme } = useTheme();
+  const { setTheme, theme } = useThemeStore();
   const [isOpen, setIsOpen] = useState(true);
 
-  function handleClick(theme: any) {
+  function handleClick(theme: Theme) {
     setTheme(theme);
     setIsOpen(false);
   }
