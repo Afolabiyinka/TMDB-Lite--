@@ -1,17 +1,17 @@
 // import { create } from "zustand";
 // import type { Movie } from "../libs/types";
 
-// interface favouritesStore {
-//   favourites: Movie[] | any;
-//   setFavourites?: any;
-//   addToFavourites?: (movie: Movie) => void;
-//   removeFromFavourites?: (movie: Movie) => void;
+// interface Store {
+//   : Movie[] | any;
+//   set?: any;
+//   addTo?: (movie: Movie) => void;
+//   removeFrom?: (movie: Movie) => void;
 //   isFavourite?: (movieId: string | number) => boolean;
 // }
 
-// export const useThemeStore = create<favouritesStore>((set, get) => ({
-// favourites: (localStorage.getItem(('Favourites'))) || [],
-// addToFavourites:() => {
+// export const useThemeStore = create<Store>((set, get) => ({
+// : (localStorage.getItem((''))) || [],
+// addTo:() => {
 //    set((state) => {
 
 //    })

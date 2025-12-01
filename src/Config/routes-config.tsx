@@ -6,8 +6,6 @@ import { SearchProvider } from "../app/hooks/SearchContext";
 import { AuthProvider } from "../app/hooks/AuthContext";
 import { FavouritesProvider } from "../app/hooks/useFavourites";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import SearchPage from "../app/pages/search/SearchPage";
-
 //Lazy Loading the pages
 const Layout = lazy(() => import("../app/Layout"));
 const MoviePage = lazy(() => import("../app/pages/movies/MoviePage"));
@@ -62,7 +60,7 @@ const RoutesConfig: FC = () => {
         },
         {
           path: "search",
-          Component: SearchPage,
+          Component: Searchresults,
         },
         {
           path: "favourites",

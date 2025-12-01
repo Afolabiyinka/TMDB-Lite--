@@ -66,7 +66,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
                   className={
                     movieInFavorites
                       ? "fill-red-500 text-red-500 transition-all duration-200"
-                      : "text-gray-300"
+                      : ""
                   }
                 />
               </button>

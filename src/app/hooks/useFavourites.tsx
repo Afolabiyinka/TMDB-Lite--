@@ -6,36 +6,36 @@ interface Movie {
   name?: string;
   [key: string]: any;
 }
-interface FavouritesContextType {
+interface ContextType {
   favourites: Movie[];
   addToFavourites: (movie: Movie) => void;
   removeFromFavourites: (movieId: string | number) => void;
   isFavourite: (movieId: string | number) => boolean;
 }
 
-interface FavouritesProviderProps {
+interface ProviderProps {
   children?: React.ReactNode;
 }
 
-const FavouritesContext = createContext<FavouritesContextType | null>(null);
+const Context = createContext<ContextType | null>(null);
 
 export const useFavourites = () => {
-  const context = useContext(FavouritesContext);
+  const context = useContext(Context);
   if (!context) {
-    throw new Error("useFavourites must be used within a FavouritesProvider");
+    throw new Error("use must be used within a Provider");
   }
   return context;
 };
 
-export const FavouritesProvider = ({ children }: FavouritesProviderProps) => {
+export const FavouritesProvider = ({ children }: ProviderProps) => {
   const [favourites, setFavourites] = useState<Movie[]>(() => {
-    const stored = localStorage.getItem("Favourites");
+    const stored = localStorage.getItem("");
     return stored ? JSON.parse(stored) : [];
   });
 
   useEffect(() => {
-    localStorage.setItem("Favourites", JSON.stringify(favourites));
-  }, [favourites]);
+    localStorage.setItem("favourites", JSON.stringify(favourites));
+  }, []);
 
   const addToFavourites = (movie: Movie) => {
     setFavourites((current) => [...current, movie]);
@@ -49,16 +49,12 @@ export const FavouritesProvider = ({ children }: FavouritesProviderProps) => {
     return favourites.some((movie) => movie.id === movieId);
   };
 
-  const value: FavouritesContextType = {
+  const value: ContextType = {
+    isFavourite,
     addToFavourites,
     removeFromFavourites,
-    isFavourite,
     favourites,
   };
 
-  return (
-    <FavouritesContext.Provider value={value}>
-      {children}
-    </FavouritesContext.Provider>
-  );
+  return <Context.Provider value={value}>{children}</Context.Provider>;
 };

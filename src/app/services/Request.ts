@@ -45,13 +45,21 @@ export const getMovieTrailer = async (id: any) => {
   const url = `${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
 
   const response = await fetch(url);
-  const movieTrailer = await response.json();
-  return movieTrailer.results;
+
+  const data = await response.json();
+
+  const trailers = data.results?.filter(
+    (vid: any) => vid.site === "YouTube" && vid.type === "Trailer"
+  );
+  console.log(trailers);
+
+  return trailers ?? [];
 };
 export const getMovieCredits = async (id: any) => {
   const url = `${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}&language=en-US`;
 
   const response = await fetch(url);
   const movieCredit = await response.json();
+
   return movieCredit.cast;
 };
