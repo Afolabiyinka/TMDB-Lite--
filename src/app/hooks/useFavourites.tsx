@@ -29,12 +29,12 @@ export const useFavourites = () => {
 
 export const FavouritesProvider = ({ children }: ProviderProps) => {
   const [favourites, setFavourites] = useState<Movie[]>(() => {
-    const stored = localStorage.getItem("favourites");
+    const stored = localStorage.getItem("Favourites");
     return stored ? JSON.parse(stored) : [];
   });
 
   useEffect(() => {
-    localStorage.setItem("favourites", JSON.stringify(favourites));
+    localStorage.setItem("Favourites", JSON.stringify(favourites));
   }, []);
 
   const addToFavourites = (movie: Movie) => {
