@@ -29,7 +29,7 @@ export const useFavourites = () => {
 
 export const FavouritesProvider = ({ children }: ProviderProps) => {
   const [favourites, setFavourites] = useState<Movie[]>(() => {
-    const stored = localStorage.getItem("");
+    const stored = localStorage.getItem("favourites");
     return stored ? JSON.parse(stored) : [];
   });
 
