@@ -13,8 +13,8 @@ const LINKS = [
   },
   {
     icon: Heart,
-    title: "",
-    href: "/",
+    title: "Favourites",
+    href: "/favourites",
   },
 
   {

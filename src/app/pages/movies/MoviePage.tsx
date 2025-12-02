@@ -101,10 +101,10 @@ const MoviePage = () => {
   const handleFavouriteClick = () => {
     if (isFavourite(movie.id)) {
       removeFromFavourites(movie.id);
-      toast.info("Removed from ", toastStyle);
+      toast.info("Removed from your favourites", toastStyle);
     } else {
       addToFavourites(movie);
-      toast.success("Added to ", toastStyle);
+      toast.success("Added to your favourites", toastStyle);
     }
   };
 
