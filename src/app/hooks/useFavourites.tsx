@@ -35,7 +35,7 @@ export const FavouritesProvider = ({ children }: ProviderProps) => {
 
   useEffect(() => {
     localStorage.setItem("Favourites", JSON.stringify(favourites));
-  }, []);
+  }, [favourites]);
 
   const addToFavourites = (movie: Movie) => {
     setFavourites((current) => [...current, movie]);

@@ -4,6 +4,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
+  TooltipArrow,
 } from "@material-tailwind/react";
 import { Heart } from "lucide-react";
 import { useFavourites } from "../../hooks/useFavourites";
@@ -54,7 +55,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
         className="overflow-hidden relative shadow-lg rounded-3xl bg-inherit cursor-pointer hover:scale-[1.02] transition-transform duration-300"
         onClick={() => navigate(`/movie/${movie.id}`)}
       >
-        <span className="absolute top-2 right-2 z-50">
+        <span className="absolute top-2 right-2 z-30">
           <Tooltip placement="top-end">
             <TooltipTrigger>
               <button
@@ -63,14 +64,15 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
               >
                 <Heart
                   size={40}
-                  className={
+                  className={`stroke-[1px] ${
                     movieInFavorites
-                      ? "fill-red-500 text-red-500 transition-all duration-200"
+                      ? "fill-red-500 text-red-500 transition-all duration-200 "
                       : ""
-                  }
+                  }`}
                 />
               </button>
             </TooltipTrigger>
+            <TooltipArrow />
             <TooltipContent>
               <p>
                 {movieInFavorites
@@ -80,7 +82,6 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
             </TooltipContent>
           </Tooltip>
         </span>
-        {/* Image Section */}
         <div className="h-[21rem] overflow-hidden w-full">
           {movie.poster_path ? (
             <img
@@ -100,7 +101,6 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
           )}
         </div>
 
-        {/* Text Info */}
         <div className="flex justify-between items-centerx p-2">
           <div className="p-3 text-left flex flex-col items-start">
             <Typography

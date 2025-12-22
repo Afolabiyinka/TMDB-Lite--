@@ -211,7 +211,7 @@ const MoviePage = () => {
               <Tooltip>
                 <Tooltip.Trigger>
                   <IconButton
-                    variant="ghost"
+                    variant={movieInFavorites ? "gradient" : "ghost"}
                     isCircular
                     color="secondary"
                     size="xl"
@@ -251,8 +251,7 @@ const MoviePage = () => {
               </Button>
             </div>
 
-            {/* //Getting the casts and shii */}
-
+            {/* //Getting the casts */}
             <Cast casts={casts} castsLoading={castsLoading} noCast={noCast} />
 
             <Recommendations
@@ -262,7 +261,7 @@ const MoviePage = () => {
             />
           </div>
         </div>
-        <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 p-6 mt-8 border">
+        <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 p-6 mt-8">
           {movie.production_companies.map(
             (company: { id: number; logo_path: string; name: string }) => (
               <div

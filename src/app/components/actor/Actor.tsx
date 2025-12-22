@@ -45,7 +45,11 @@ export default function Actor({ actor }: actor) {
       )}
 
       {/* Card Header with Actor Image */}
-      <div className="relative overflow-hidden">
+      <a
+        target="_blank"
+        href={`https://www.google.com/search?q=${actor.name}`}
+        className="relative overflow-hidden"
+      >
         <Card.Header as="div" className="h-80 overflow-hidden">
           <img
             src={
@@ -77,7 +81,7 @@ export default function Actor({ actor }: actor) {
             </div> */}
           </div>
         )}
-      </div>
+      </a>
 
       <Card.Body className="p-3 relative z-10">
         <Typography

@@ -65,7 +65,7 @@ const TrailerModal = ({ trailer, trialerClose }: TrailerModalProps) => {
         {trailer.map((vid: any) => (
           <SwiperSlide key={vid.id} className="relative">
             <iframe
-              className="w-full h-full rounded-xl"
+              className="w-full h-full rounded-xl border"
               src={`https://www.youtube.com/embed/${vid.key}?autoplay=1&mute=1`}
               title={vid.name || "Movie Trailer"}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
