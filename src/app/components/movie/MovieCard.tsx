@@ -4,7 +4,6 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-  TooltipArrow,
 } from "@material-tailwind/react";
 import { Heart } from "lucide-react";
 import { useFavourites } from "../../hooks/useFavourites";
@@ -72,7 +71,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
                 />
               </button>
             </TooltipTrigger>
-            <TooltipArrow />
+
             <TooltipContent>
               <p>
                 {movieInFavorites
