@@ -1,30 +1,12 @@
-import { useState, useEffect } from "react";
-
-import { getPopularPeople } from "../services/Request";
 import Loader from "../components/Loader";
 import Actor from "../components/actor/Actor";
 import Lottie from "lottie-react";
 import errorAnimation from "../../Assets/ErrorAnimation.json";
+import { useActors } from "../hooks/useActors";
+import type { ActorType } from "../types/actor";
 
 const TrendingActors = () => {
-  const [actors, setActors] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    const loadPopularActors = async () => {
-      setLoading(true);
-      try {
-        const popularActors = await getPopularPeople();
-        setActors(popularActors);
-      } catch (err) {
-        setError(true);
-      } finally {
-        setTimeout(() => setLoading(false), 2000);
-      }
-    };
-    loadPopularActors();
-  }, []);
+  const { loading, error, actors } = useActors();
 
   return (
     <div className="w-screen">
@@ -42,8 +24,8 @@ const TrendingActors = () => {
           <p className="text-2xl">Error loading actors.</p>
         </div>
       ) : (
-        <div className="w-full grid gap-12 md:grid-cols-3 lg:grid-cols-4  mt-2 ">
-          {actors.map((actor, index) => (
+        <div className="w-full grid gap-12 md:grid-cols-3 lg:grid-cols-4  mt-2 p-4">
+          {actors.map((actor: ActorType, index: number) => (
             <Actor key={index} actor={actor} />
           ))}
         </div>

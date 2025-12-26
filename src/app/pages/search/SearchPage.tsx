@@ -1,58 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
-import { searchMovies } from "../../services/Request";
 import Loader from "../../components/Loader";
 import type { Movie } from "../../libs/types";
 import MovieCard from "../../components/movie/MovieCard";
-import { useSearch } from "../../hooks/SearchContext";
-import { Button } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
-import { useEffect } from "react";
 
-import { useLocation } from "react-router-dom";
+import { useSearch } from "../../hooks/useSearch";
+import BackButton from "../../components/BackButton";
 
 const SearchPage = () => {
-  const { searchQuery, setSearchQuery } = useSearch();
-
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const query = queryParams.get("q") || "";
-
-  useEffect(() => {
-    if (query?.trim()) {
-      setSearchQuery(query);
-    }
-  }, [query, setSearchQuery]);
-
-  const {
-    data: searchresults = [],
-    error: searchError,
-    isLoading: searchLoading,
-  } = useQuery({
-    queryKey: ["Searchresults", searchQuery],
-    queryFn: () => searchMovies(searchQuery),
-    enabled: !!searchQuery.trim(),
-  });
+  const { searchError, searchLoading, searchresults } = useSearch();
 
   return (
     <div
       className="w-full p-10 flex flex-col
     "
     >
-      <Link to={"/"} className="w-full p-3 flex justify-end">
-        <Button
-          variant="solid"
-          isPill
-          color="primary"
-          className="mb-6  flex items-center gap-2 text-xl rounded-xl hover:-translate-x-2"
-        >
-          <ArrowLeft
-            size={40}
-            className="stroke-[1px] hover:group-[]:translate-x-4"
-          />
-          Back Home
-        </Button>{" "}
-      </Link>
+      <span>
+        <BackButton />
+      </span>
       {searchLoading ? (
         <div className=" w-screen h-screen flex flex-col justify-center items-center">
           <Loader />

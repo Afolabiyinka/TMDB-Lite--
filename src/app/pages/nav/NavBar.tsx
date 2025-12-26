@@ -1,31 +1,28 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Search, Video, Home, User, X, Menu, Heart } from "lucide-react";
-import { ModeToggle } from "../../hooks/ModeToggle.tsx";
+import { Search, Video, Home, X, Menu, Clapperboard } from "lucide-react";
+import { ModeToggle } from "../../components/ModeToggle.tsx";
 import tmdbLogo from "../../../Assets/the real logo.svg";
-import { useSearch } from "../../hooks/SearchContext.tsx";
+import { Avatar, Input } from "@material-tailwind/react";
+import { useUserStore } from "../../store/userStore.ts";
+import { useSearchStore } from "../../store/searchStore.ts";
 
 const LINKS = [
   {
     icon: Home,
     title: "Home",
-    href: "/movies",
+    href: "/",
   },
   {
-    icon: Heart,
-    title: "Favourites",
-    href: "/favourites",
+    icon: Clapperboard,
+    title: "Want to watch",
+    href: "/want-to-watch",
   },
 
   {
     icon: Video,
     title: "Celebrities",
     href: "/celebrities",
-  },
-  {
-    icon: User,
-    title: "Account",
-    href: "/account",
   },
 ];
 
@@ -67,7 +64,9 @@ export default function NavBar() {
   const [openNav, setOpenNav] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showSearchInput, setShowSearchInput] = useState(false);
-  const { searchQuery, setSearchQuery } = useSearch();
+  const { searchQuery, setSearchQuery } = useSearchStore();
+
+  const { user } = useUserStore();
 
   // inside NavBar
 
@@ -123,7 +122,7 @@ export default function NavBar() {
       <div className="max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <Link to="/movies" className="flex items-center">
+            <Link to="/" className="flex items-center">
               <div className="relative mr-2"></div>
               <img src={tmdbLogo} className="h-8 w-[10rem]" alt="Tmdb-Logo" />
             </Link>
@@ -136,10 +135,10 @@ export default function NavBar() {
           <div className="flex items-center gap-x-4">
             {/* Desktop Search Input */}
             <div className="relative hidden lg:block">
-              <input
+              <Input
                 type="search"
                 placeholder="Search movies..."
-                className="w-72 rounded-full border border-gray-300 bg-gray-50 py-3 pl-10 pr-4 text-sm  text-gray-500 focus:border-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-500 dark:border-gray-700 dark:bg-black dark:text-white"
+                className="w-72 rounded-full  py-3 pl-10 pr-4 text-sm "
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
@@ -152,15 +151,15 @@ export default function NavBar() {
             <div
               className={`absolute left-0 top-16 w-full px-4 py-3 shadow-md transition-all duration-300 ${
                 showSearchInput
-                  ? "translate-y-0 opacity-100"
+                  ? "translate-y-0 dark:bg-black bg-white"
                   : "-translate-y-full opacity-0 pointer-events-none"
               }`}
             >
               <div className="relative">
-                <input
+                <Input
                   type="search"
                   placeholder="Search movies..."
-                  className="w-full rounded-full border py-2 pl-10 pr-4 text-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 "
+                  className="py-3 pl-10 pr-4 text-sm rounded-full"
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value);
@@ -187,6 +186,11 @@ export default function NavBar() {
               <ModeToggle />
             </div>
 
+            <Avatar
+              src={user?.picture}
+              onClick={() => navigate("/account")}
+              className="hidden md:block"
+            />
             {/* Mobile menu button */}
             <button
               onClick={() => {
@@ -211,6 +215,14 @@ export default function NavBar() {
           }`}
         >
           <NavList closeMenu={closeMenu} />
+          <Avatar
+            src={user?.picture}
+            onClick={() => {
+              closeMenu();
+              navigate("/account");
+            }}
+            className="mt-3"
+          />
         </div>
       </div>
     </nav>

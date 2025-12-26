@@ -1,9 +1,8 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ThumbsUp, Calendar, Star, Heart, ArrowLeft, Play } from "lucide-react";
+import { ThumbsUp, Calendar, Star, Heart, Play } from "lucide-react";
 import errorAnimation from "../../../Assets/ErrorAnimation.json";
-import { toast } from "react-toastify";
-import { useFavourites } from "../../hooks/useFavourites";
+import { toast } from "sonner";
 import {
   getMovieDetails,
   getParticularRecomendations,
@@ -21,13 +20,14 @@ import Recommendations from "../../components/movie/movies-pages/recommendations
 import Genres from "../../components/movie/movies-pages/genre";
 import Cast from "../../components/movie/movies-pages/cast";
 import TrailerModal from "../../components/movie/movies-pages/trailer";
+import BackButton from "../../components/BackButton";
+import { useFavouritesStore } from "../../store/favouritesStore";
 
 const MoviePage = () => {
   const { addToFavourites, removeFromFavourites, isFavourite } =
-    useFavourites();
+    useFavouritesStore();
 
   const { id } = useParams();
-  const navigate = useNavigate();
 
   // Movie details
   const {
@@ -86,25 +86,13 @@ const MoviePage = () => {
       </div>
     );
 
-  const toastStyle = {
-    closeButton: false,
-    style: {
-      background: "black",
-      backdropFilter: "blur(10px)",
-      padding: "20px",
-      color: "white",
-      marginTop: "10px",
-      borderRadius: "40px",
-    },
-  };
-
   const handleFavouriteClick = () => {
     if (isFavourite(movie.id)) {
       removeFromFavourites(movie.id);
-      toast.info("Removed from your favourites", toastStyle);
+      toast.info("Removed from your favourites");
     } else {
       addToFavourites(movie);
-      toast.success("Added to your favourites", toastStyle);
+      toast.success("Added to your favourites");
     }
   };
 
@@ -126,19 +114,7 @@ const MoviePage = () => {
         animate={{ y: 1 }}
         transition={{ duration: 0.6 }}
       >
-        <Button
-          variant="solid"
-          isPill
-          color="primary"
-          onClick={() => navigate(-1)}
-          className="mb-6  border  flex items-center gap-2 text-xl rounded-xl hover:-translate-x-2"
-        >
-          <ArrowLeft
-            size={40}
-            className="stroke-[1px] hover:group-[]:translate-x-4"
-          />
-          Back
-        </Button>
+        <BackButton />
 
         <div className="flex flex-col md:flex-row gap-10 min-h-screen">
           {/* Poster */}
@@ -158,7 +134,7 @@ const MoviePage = () => {
 
           {/* Info */}
           <div className="flex-1 flex flex-col gap-6 w-full lg:w-1/2">
-            <h1 className="text-3xl md:text-5xl tracking-wide font-bold">
+            <h1 className="text-3xl md:text-5xl tracking-wider font-bold font-[Bebas Neue]">
               {movie?.title || movie?.name}
             </h1>
 

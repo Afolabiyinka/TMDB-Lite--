@@ -6,43 +6,32 @@ import {
   TooltipTrigger,
 } from "@material-tailwind/react";
 import { Heart } from "lucide-react";
-import { useFavourites } from "../../hooks/useFavourites";
-import { toast } from "react-toastify";
-import { type Movie } from "../../libs/types";
+import { toast } from "sonner";
 
 import { useNavigate } from "react-router-dom";
+import { useFavouritesStore } from "../../store/favouritesStore";
+import type { MovieType } from "../../types/movie";
 
 interface MovieCardProps {
-  movie: Movie;
+  movie: MovieType;
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   const navigate = useNavigate();
 
   const { addToFavourites, removeFromFavourites, isFavourite } =
-    useFavourites();
+    useFavouritesStore();
 
   const handleFavouriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (!movie) return;
 
-    const toastStyle = {
-      closeButton: false,
-      style: {
-        background: "black",
-        backdropFilter: "blur(10rem)",
-        borderRadius: "50px",
-        color: "white",
-        marginTop: "10px",
-      },
-    };
-
     if (isFavourite(movie.id)) {
       removeFromFavourites(movie.id);
-      toast.info("Removed from favourites", toastStyle);
+      toast.info("Removed from favourites");
     } else {
       addToFavourites(movie);
-      toast.success("Added to favourites", toastStyle);
+      toast.success("Added to favourites");
     }
   };
 

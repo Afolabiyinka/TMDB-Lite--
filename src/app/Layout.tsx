@@ -1,4 +1,3 @@
-import { ToastContainer } from "react-toastify";
 import Footer from "./pages/nav/Footer";
 import NavBar from "./pages/nav/NavBar";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -37,13 +36,7 @@ const Layout = () => {
       <Outlet />
       <ScrollBtn />
       <Footer />
-      <span>
-        <ToastContainer
-          hideProgressBar
-          autoClose={1000}
-          position="top-center"
-        />
-      </span>
+      <span></span>
     </div>
   );
 };

@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { useFavourites } from "../../hooks/useFavourites";
 import MovieCard from "../../components/movie/MovieCard";
+import { useFavouritesStore } from "../../store/favouritesStore";
 
 const Favourites = () => {
-  const { favourites } = useFavourites();
+  const { favourites } = useFavouritesStore();
 
   return (
     <div className=" text-center flex justify-center items-center w-full">

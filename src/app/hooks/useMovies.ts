@@ -2,13 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { getLatestMovies } from "../services/Request";
 import { useQuery } from "@tanstack/react-query";
-
-export interface MovieType {
-  id: number | string;
-  title?: string;
-  poster?: string;
-  [key: string]: any;
-}
+import type { MovieType } from "../types/movie";
 
 export default function useMovies() {
   const navigate = useNavigate();

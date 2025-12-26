@@ -2,18 +2,17 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import tmLogo from "../../../Assets/the real logo.svg";
 import { GoogleLogin } from "@react-oauth/google";
-import { useUser } from "../../hooks/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useLogin } from "../../hooks/useLogin";
 
 const Login = () => {
-  const { setUser, success, error } = useUser();
+  const { error, success } = useLogin();
   const navigate = useNavigate();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("TmdbUser");
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
-      navigate("/movies");
+      navigate("/");
     }
   }, []);
 
