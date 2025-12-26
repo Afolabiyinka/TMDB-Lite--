@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Search, Video, Home, X, Menu, Clapperboard } from "lucide-react";
+import { Search, Home, X, Menu, Clapperboard } from "lucide-react";
 import { ModeToggle } from "../../components/ModeToggle.tsx";
 import tmdbLogo from "../../../Assets/the real logo.svg";
 import { Avatar, Input } from "@material-tailwind/react";
@@ -17,12 +17,6 @@ const LINKS = [
     icon: Clapperboard,
     title: "Want to watch",
     href: "/want-to-watch",
-  },
-
-  {
-    icon: Video,
-    title: "Celebrities",
-    href: "/celebrities",
   },
 ];
 
