@@ -4,6 +4,7 @@ import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
 import MovieCard from "../../components/movie/MovieCard";
 import useMovies from "../../hooks/useMovies";
+import type { MovieType } from "../../types/movie";
 
 const HomePage = () => {
   const {
@@ -33,7 +34,7 @@ const HomePage = () => {
         ) : (
           <div className="w-full flex flex-col px-8 ">
             <div className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center items-center">
-              {movies.map((movie: any) => (
+              {movies.map((movie: MovieType) => (
                 <MovieCard movie={movie} key={movie.id} />
               ))}
             </div>

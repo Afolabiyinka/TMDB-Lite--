@@ -1,6 +1,7 @@
 import { Chip } from "@material-tailwind/react";
+import type { MovieType } from "../../../types/movie";
 
-const Genres = ({ movie }: any) => {
+const Genres = ({ movie }: MovieType) => {
   return (
     <div className="w-full">
       <span className="grid grid-cols-3 md:grid-cols-5 gap-3">

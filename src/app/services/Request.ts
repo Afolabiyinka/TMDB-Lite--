@@ -1,8 +1,9 @@
-//Importing the api keys
+import type { MovieType } from "../types/movie";
+//Importing the Variables
 const BASE_URL = import.meta.env.VITE_BASE_URL!;
 const token = import.meta.env.VITE_BEARER_TOKEN!;
 
-export const getLatestMovies = async (page = 1) => {
+export const getLatestMovies = async (page = 1): Promise<MovieType[]> => {
   const response = await fetch(`${BASE_URL}/trending/movie/day?page=${page}`, {
     headers: {
       accept: "application/json",
@@ -13,7 +14,7 @@ export const getLatestMovies = async (page = 1) => {
   return data.results;
 };
 
-export const searchMovies = async (query: string) => {
+export const searchMovies = async (query: string): Promise<MovieType[]> => {
   const response = await fetch(
     `${BASE_URL}/search/movie?query=${encodeURIComponent(query)}`,
     {
@@ -27,7 +28,7 @@ export const searchMovies = async (query: string) => {
   return data.results;
 };
 
-export const getMovieDetails = async (id: any) => {
+export const getMovieDetails = async (id: number): Promise<MovieType> => {
   const url = `${BASE_URL}/movie/${id}&language=en-US`;
 
   const response = await fetch(url, {
@@ -39,7 +40,9 @@ export const getMovieDetails = async (id: any) => {
   const movieDetails = await response.json();
   return movieDetails;
 };
-export const getParticularRecomendations = async (id: any) => {
+export const getParticularRecomendations = async (
+  id: any
+): Promise<MovieType[]> => {
   const url = `${BASE_URL}/movie/${id}/recommendations?language=en-US`;
 
   const response = await fetch(url, {
@@ -51,7 +54,7 @@ export const getParticularRecomendations = async (id: any) => {
   const movieDetails = await response.json();
   return movieDetails.results;
 };
-export const getMovieTrailer = async (id: any) => {
+export const getMovieTrailer = async (id: number) => {
   const url = `${BASE_URL}/movie/${id}/videos?language=en-US`;
 
   const response = await fetch(url, {
@@ -69,7 +72,7 @@ export const getMovieTrailer = async (id: any) => {
 
   return trailers ?? [];
 };
-export const getMovieCredits = async (id: any) => {
+export const getMovieCredits = async (id: number) => {
   const url = `${BASE_URL}/movie/${id}/credits?language=en-US`;
 
   const response = await fetch(url, {

@@ -36,7 +36,6 @@ const Layout = () => {
       <Outlet />
       <ScrollBtn />
       <Footer />
-      <span></span>
     </div>
   );
 };
