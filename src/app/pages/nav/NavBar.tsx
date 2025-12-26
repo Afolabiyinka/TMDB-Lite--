@@ -146,7 +146,6 @@ export default function NavBar() {
               />
               <Search className="absolute left-3 top-2.5 h-5 w-5 " />
             </div>
-
             {/* Mobile Search Input */}
             <div
               className={`absolute left-0 top-16 w-full px-4 py-3 shadow-md transition-all duration-300 ${
@@ -172,7 +171,6 @@ export default function NavBar() {
                 ></button>
               </div>
             </div>
-
             {/* Mobile search button */}
             <button
               onClick={toggleSearchInput}
@@ -180,17 +178,16 @@ export default function NavBar() {
             >
               <Search className="h-6 w-6" />
             </button>
-
+            {/* //Profile pic */}
+            <Avatar
+              src={user?.picture}
+              onClick={() => navigate("/account")}
+              className="hidden md:block cursor-pointer"
+            />
             {/* Theme toggle */}
             <div className="">
               <ModeToggle />
             </div>
-
-            <Avatar
-              src={user?.picture}
-              onClick={() => navigate("/account")}
-              className="hidden md:block"
-            />
             {/* Mobile menu button */}
             <button
               onClick={() => {
