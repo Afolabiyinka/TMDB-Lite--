@@ -27,16 +27,6 @@ export const searchMovies = async (query: string) => {
   return data.results;
 };
 
-export const getPopularPeople = async () => {
-  const response = await fetch(`${BASE_URL}/trending/person/day`, {
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  const actor = await response.json();
-  return actor.results;
-};
 export const getMovieDetails = async (id: any) => {
   const url = `${BASE_URL}/movie/${id}&language=en-US`;
 

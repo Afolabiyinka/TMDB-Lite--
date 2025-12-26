@@ -187,7 +187,7 @@ const MoviePage = () => {
               <Tooltip>
                 <Tooltip.Trigger>
                   <IconButton
-                    variant={movieInFavorites ? "gradient" : "ghost"}
+                    variant="outline"
                     isCircular
                     color="secondary"
                     size="xl"

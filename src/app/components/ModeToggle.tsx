@@ -18,7 +18,7 @@ export function ModeToggle() {
         <Menu.Trigger>
           <IconButton
             color="secondary"
-            variant="solid"
+            variant="outline"
             isCircular={true}
             size="lg"
             onClick={() => setIsOpen(true)}

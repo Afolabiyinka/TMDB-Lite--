@@ -17,7 +17,7 @@ const UserDetails = () => {
   }
   return (
     <div className="w-screen h-screen flex flex-col md:flex-row gap-3 justify-center items-center">
-      <div className="rounded-xl p-8 shadow-md flex flex-col items-center gap-3 max-w-md w-full">
+      <div className="rounded-xl p-8  flex flex-col items-center gap-3 max-w-md w-full">
         <div className="mb-6">
           <Avatar
             size="lg"
@@ -41,7 +41,7 @@ const UserDetails = () => {
           <p className="italic">Enjoy your experience</p>
         </div>
       </div>
-      <div className="md:w-[50%] shadow-xl h-[70%]"></div>
+      {/* <div className="md:w-[50%] shadow-xl h-[70%]"></div> */}
     </div>
   );
 };

@@ -47,11 +47,11 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
           <Tooltip placement="top-end">
             <TooltipTrigger>
               <button
-                className={`hover:border  rounded-full w-16 flex justify-center items-center h-16 backdrop-blur-2xl shadow-md`}
+                className={`hover:border  rounded-full w-14 flex justify-center items-center h-14 backdrop-blur-2xl shadow-md`}
                 onClick={handleFavouriteClick}
               >
                 <Heart
-                  size={40}
+                  size={30}
                   className={`stroke-[1px] ${
                     movieInFavorites
                       ? "fill-red-500 text-red-500 transition-all duration-200 "
@@ -70,7 +70,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
             </TooltipContent>
           </Tooltip>
         </span>
-        <div className="h-[21rem] overflow-hidden w-full">
+        <div className="h-[21rem] w-full">
           {movie.poster_path ? (
             <img
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
@@ -93,7 +93,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
           <div className="p-3 text-left flex flex-col items-start">
             <Typography
               variant="h5"
-              className="text-gray-800 dark:text-gray-100 text-xl font-medium break-words truncate"
+              className="text-gray-800 dark:text-gray-100 text-xl font-medium break-words truncate font-[Bebas Neue]"
             >
               {movie.title}
             </Typography>

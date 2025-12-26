@@ -11,7 +11,6 @@ const AccountPage = lazy(() => import("../app/pages/user/Account"));
 const Favourites = lazy(() => import("../app/pages/favourites/Favourites"));
 const Login = lazy(() => import("../app/pages/user/Login"));
 const HomePage = lazy(() => import("../app/pages/movies/HomePage"));
-const TrendingActors = lazy(() => import("../app/pages/TrendingActors"));
 const Searchresults = lazy(() => import("../app/pages/search/SearchPage"));
 const ErrorSection = lazy(() => import("../app/pages/NotFound"));
 
@@ -51,10 +50,7 @@ export const routes: RouteObject[] = [
         path: "account",
         Component: () => <AccountPage />,
       },
-      {
-        path: "celebrities",
-        Component: TrendingActors,
-      },
+
       {
         path: "*",
         Component: ErrorSection,
