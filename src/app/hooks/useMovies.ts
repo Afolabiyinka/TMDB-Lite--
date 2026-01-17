@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
+import { useSearchParams, useLocation } from "react-router-dom";
 import { getLatestMovies } from "../services/Request";
 import { useQuery } from "@tanstack/react-query";
 import type { MovieType } from "../types/movie";
 
 export default function useMovies() {
-  const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -24,12 +23,6 @@ export default function useMovies() {
       setSearchParams({ page: currentPage.toString() });
     }
   }, [currentPage, location.pathname, setSearchParams]);
-
-  // Redirect if not logged in
-  useEffect(() => {
-    const storedUser = localStorage.getItem("TmdbUser");
-    if (!storedUser) navigate("/auth/login");
-  }, [navigate]);
 
   // Scroll top when page changes
   useEffect(() => {

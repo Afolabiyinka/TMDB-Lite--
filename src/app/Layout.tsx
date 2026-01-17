@@ -1,19 +1,16 @@
 import Footer from "./pages/nav/Footer";
 import NavBar from "./pages/nav/NavBar";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import ScrollBtn from "./components/ScrollBtn";
 import { useThemeStore } from "./store/themeStore";
 
 const Layout = () => {
   const { theme } = useThemeStore();
-  const navigate = useNavigate();
-  useEffect(() => {
-    const storedUser = localStorage.getItem("TmdbUser");
-    if (!storedUser) {
-      navigate("/auth/login");
-    }
-  }, []);
+  const storedUser = localStorage.getItem("TmdbUser");
+  if (!storedUser) {
+    return <Navigate to={"/auth/login"} replace />;
+  }
 
   useEffect(() => {
     document.body.classList.remove("light", "dark");

@@ -1,4 +1,3 @@
-import { Typography } from "@material-tailwind/react";
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -23,11 +22,9 @@ const Footer: React.FC = () => {
         <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
           {LINKS.map(({ title, href }, key) => (
             <li key={key}>
-              <Link to={href}>
-                <Typography as="a" href={href} className="hover:text-primary">
-                  {title}
-                </Typography>
-              </Link>
+              <a href={href} target="_blank" className="hover:text-primary">
+                {title}
+              </a>
             </li>
           ))}
         </ul>
