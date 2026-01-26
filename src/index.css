@@ -9,7 +9,7 @@
 }
 .dark {
   color: white;
-  background: black;
+  background: #0f0e0e;
 }
 * {
   scroll-behavior: smooth;
