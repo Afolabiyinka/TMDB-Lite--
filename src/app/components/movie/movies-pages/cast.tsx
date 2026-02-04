@@ -31,6 +31,7 @@ const Cast = ({ casts, castsLoading, noCast }: CastsProps) => {
               character: string;
             }) => (
               <a
+                key={cast.id}
                 target="_blank"
                 href={`https://www.google.com/search?q=${cast.name}`}
               >
@@ -46,7 +47,7 @@ const Cast = ({ casts, castsLoading, noCast }: CastsProps) => {
                   </div>
                 </div>
               </a>
-            )
+            ),
           )}
         </motion.div>
       )}

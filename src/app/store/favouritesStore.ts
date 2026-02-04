@@ -4,8 +4,8 @@ import type { MovieType } from "../types/movie";
 interface favouritesStore {
   favourites: MovieType[];
   addToFavourites: (movie: MovieType) => void;
-  removeFromFavourites: (movieId: string | number) => void;
-  isFavourite: (id: string | number) => boolean;
+  removeFromFavourites: (movieId: number) => void;
+  isFavourite: (id: number) => boolean;
 }
 
 export const useFavouritesStore = create<favouritesStore>((set, get) => ({

@@ -3,13 +3,7 @@ import { useState, useEffect } from "react";
 import { ThumbsUp, Calendar, Star, Heart, Play } from "lucide-react";
 import errorAnimation from "../../../Assets/ErrorAnimation.json";
 import { toast } from "sonner";
-import {
-  getMovieDetails,
-  getParticularRecomendations,
-  getMovieTrailer,
-  getMovieCredits,
-} from "../../services/Request";
-import { useQuery } from "@tanstack/react-query";
+
 import Lottie from "lottie-react";
 import { Button, Chip, IconButton, Tooltip } from "@material-tailwind/react";
 import Loader from "../../components/Loader";
@@ -22,6 +16,10 @@ import Cast from "../../components/movie/movies-pages/cast";
 import TrailerModal from "../../components/movie/movies-pages/trailer";
 import BackButton from "../../components/BackButton";
 import { useFavouritesStore } from "../../store/favouritesStore";
+import { useMovieDetails } from "../../hooks/movies/useMovieDetails";
+import { useReccomendations } from "../../hooks/movies/useRecoomendations";
+import { useTrailers } from "../../hooks/movies/useTrailer";
+import { useCasts } from "../../hooks/movies/useCasts";
 
 const MoviePage = () => {
   const { addToFavourites, removeFromFavourites, isFavourite } =
@@ -29,52 +27,44 @@ const MoviePage = () => {
 
   const { id } = useParams();
 
-  // Movie details
-  const {
-    data: movie,
-    isLoading: movieLoading,
-    error: movieError,
-  } = useQuery({
-    queryKey: ["movieDetails", id],
-    queryFn: () => getMovieDetails(id),
-  });
+  const movieId = Number(id);
+  //Movie Details
+  const { loading, movieError, movie } = useMovieDetails({ id: movieId });
 
   // Movie recommendations
-  const {
-    data: recommendations,
-    isLoading: recLoading,
-    error: recError,
-  } = useQuery({
-    queryKey: ["recommendations", id],
-    queryFn: () => getParticularRecomendations(id),
+  const { recError, recLoading, recommendations } = useReccomendations({
+    id: movieId,
   });
 
-  const { data: trailers, error: noTrailer } = useQuery({
-    queryKey: ["trailer", id],
-    queryFn: () => getMovieTrailer(id),
-  });
-  const {
-    data: casts,
-    error: noCast,
-    isLoading: castsLoading,
-  } = useQuery({
-    queryKey: ["casts", id],
-    queryFn: () => getMovieCredits(id),
-  });
+  //Movie Trailers
+  const { trailers } = useTrailers({ id: movieId });
+
+  const { casts, castsLoading, noCast } = useCasts({ id: movieId });
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [id]);
 
+  if (!movieId || isNaN(movieId)) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <p>Invalid movie ID</p>
+      </div>
+    );
+  }
+
   const [trailerOpen, setTrailerOpen] = useState(false);
 
-  if (movieLoading)
+  if (loading)
     return (
       <div className="h-screen w-screen">
         <Loader />
       </div>
     );
 
+  if (!movie) {
+    return;
+  }
   if (movieError)
     return (
       <div className="flex justify-center h-screen w-screen items-center flex-col gap-4">
@@ -87,8 +77,10 @@ const MoviePage = () => {
     );
 
   const handleFavouriteClick = () => {
-    if (isFavourite(movie.id)) {
-      removeFromFavourites(movie.id);
+    if (!movie) return;
+
+    if (movieInFavorites) {
+      removeFromFavourites(movieId);
       toast.info("Removed from your favourites");
     } else {
       addToFavourites(movie);
@@ -238,7 +230,7 @@ const MoviePage = () => {
           </div>
         </div>
         <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 p-6 mt-8">
-          {movie.production_companies.map(
+          {movie?.production_companies.map(
             (company: { id: number; logo_path: string; name: string }) => (
               <div
                 key={company.id}
@@ -258,7 +250,7 @@ const MoviePage = () => {
                   {company.name}
                 </p>
               </div>
-            )
+            ),
           )}
         </div>
       </motion.div>

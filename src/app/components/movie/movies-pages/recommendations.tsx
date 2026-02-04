@@ -1,9 +1,10 @@
+import type { MovieType } from "../../../types/movie";
 import Loader from "../../Loader";
 import MovieCard from "../MovieCard";
 import { motion } from "framer-motion";
 
 interface RecommendationsProps {
-  recommendations: [];
+  recommendations: MovieType[];
   recLoading: boolean;
   recError: any;
 }
