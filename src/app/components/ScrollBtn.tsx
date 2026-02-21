@@ -1,3 +1,4 @@
+import { IconButton } from "@material-tailwind/react";
 import { ChevronUp } from "lucide-react";
 import { useState, useEffect } from "react";
 export default function ScrollBtn() {
@@ -23,12 +24,15 @@ export default function ScrollBtn() {
   }
   return (
     isVisible && (
-      <div
-        className="fixed bottom-12 right-5 bg-blue-950 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 z-50 cursor-pointer"
+      <IconButton
+        isCircular
+        size="xl"
+        color="primary"
+        className="fixed bottom-12 right-5  z-50 cursor-pointer"
         onClick={scrollToTop}
       >
         <ChevronUp size={20} />
-      </div>
+      </IconButton>
     )
   );
 }

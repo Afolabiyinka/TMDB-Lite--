@@ -210,7 +210,7 @@ const MoviePage = () => {
                 isPill
                 size="xl"
                 variant="solid"
-                color="secondary"
+                color="primary"
                 className="w-full"
                 onClick={() => setTrailerOpen(!trailerOpen)}
               >

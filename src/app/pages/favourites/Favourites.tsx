@@ -33,8 +33,8 @@ const Favourites = () => {
 
           <div className="flex gap-5 overflow-x-auto p-10 w-full">
             {favourites.map((movie) => (
-              <div className="flex-shrink-0 w-80">
-                <MovieCard key={movie.id} movie={movie} />
+              <div className="flex-shrink-0 w-80" key={movie.id}>
+                <MovieCard movie={movie} />
               </div>
             ))}
           </div>
