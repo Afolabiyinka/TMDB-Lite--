@@ -1,5 +1,5 @@
 import type { MovieType } from "../types/movie";
-//Importing the Variables
+//Importing the Variables from the env file
 const BASE_URL = import.meta.env.VITE_BASE_URL!;
 const token = import.meta.env.VITE_BEARER_TOKEN!;
 
@@ -22,7 +22,7 @@ export const searchMovies = async (query: string): Promise<MovieType[]> => {
         accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
-    }
+    },
   );
   const data = await response.json();
   return data.results;
@@ -41,7 +41,7 @@ export const getMovieDetails = async (id: number): Promise<MovieType> => {
   return movieDetails;
 };
 export const getParticularRecomendations = async (
-  id: any
+  id: any,
 ): Promise<MovieType[]> => {
   const url = `${BASE_URL}/movie/${id}/recommendations?language=en-US`;
 
@@ -67,7 +67,7 @@ export const getMovieTrailer = async (id: number) => {
   const data = await response.json();
 
   const trailers = data.results?.filter(
-    (vid: any) => vid.site === "YouTube" && vid.type === "Trailer"
+    (vid: any) => vid.site === "YouTube" && vid.type === "Trailer",
   );
 
   return trailers ?? [];

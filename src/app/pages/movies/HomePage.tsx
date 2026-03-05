@@ -3,7 +3,7 @@ import errorAnimation from "../../../Assets/ErrorAnimation.json";
 import Pagination from "../../components/Pagination";
 import Loader from "../../components/Loader";
 import MovieCard from "../../components/movie/MovieCard";
-import useMovies from "../../hooks/useMovies";
+import useMovies from "../../hooks/movies/useMovies";
 import type { MovieType } from "../../types/movie";
 
 const HomePage = () => {

@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Avatar, Button } from "@material-tailwind/react";
 import { useState } from "react";
-import Loader from "../components/Loader";
-import { useUserStore } from "../store/userStore";
+import Loader from "../../components/Loader";
+import { useUserStore } from "../../store/userStore";
 
 const UserDetails = () => {
   const { user } = useUserStore();

@@ -12,7 +12,7 @@ const Favourites = lazy(() => import("../app/pages/favourites/Favourites"));
 const Login = lazy(() => import("../app/pages/user/Login"));
 const HomePage = lazy(() => import("../app/pages/movies/HomePage"));
 const Searchresults = lazy(() => import("../app/pages/search/SearchPage"));
-const ErrorSection = lazy(() => import("../app/pages/NotFound"));
+const ErrorSection = lazy(() => import("../app/pages/error/NotFound"));
 
 export const routes: RouteObject[] = [
   {
