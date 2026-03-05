@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import tmLogo from "../../../Assets/the real logo.svg";
 import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
-import { useLogin } from "../../hooks/useLogin";
+import { useLogin } from "../../hooks/auth/useLogin";
 
 const Login = () => {
   const { error, success } = useLogin();

@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
-import { useSearchStore } from "../store/searchStore";
+import { useSearchStore } from "../../store/searchStore";
 import { useEffect } from "react";
-import { searchMovies } from "../services/Request";
+import { searchMovies } from "../../services/Request";
 import { useQuery } from "@tanstack/react-query";
 
 export const useSearch = () => {

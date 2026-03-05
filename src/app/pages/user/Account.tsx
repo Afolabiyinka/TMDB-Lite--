@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowBigLeft } from "lucide-react";
 import { useUserStore } from "../../store/userStore";
-import { useLogin } from "../../hooks/useLogin";
+import { useLogin } from "../../hooks/auth/useLogin";
 
 const AccountPage: React.FC = () => {
   const { user } = useUserStore();

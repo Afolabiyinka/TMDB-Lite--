@@ -2,8 +2,8 @@ import type { CredentialResponse } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import type { User } from "../types/User";
-import { useUserStore } from "../store/userStore";
+import type { User } from "../../types/User";
+import { useUserStore } from "../../store/userStore";
 
 export const useLogin = () => {
   const { setUser } = useUserStore();
