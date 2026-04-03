@@ -7,7 +7,16 @@ const App = () => {
   return (
     <div className="font-[Inter]">
       <RoutesConfig />
-      <Toaster theme={theme} position="top-right" />
+      <Toaster
+        theme={theme}
+        position="top-right"
+        toastOptions={{
+          style: {
+            borderRadius: "100px",
+          },
+        }}
+        richColors
+      />
     </div>
   );
 };

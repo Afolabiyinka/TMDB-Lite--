@@ -8,7 +8,7 @@ export const useMovieDetails = ({ id }: { id: number }) => {
   });
   return {
     movie: data,
-    loading: isLoading,
+    movieLoading: isLoading,
     movieError: error,
   };
 };

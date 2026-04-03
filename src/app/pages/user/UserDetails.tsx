@@ -30,7 +30,8 @@ const UserDetails = () => {
         <h1 className="text-2xl font-bold mb-2">Welcome back</h1>
         <p className="text-xl">{user?.name}</p>
         <Button
-          className="bg-red-500 hover:bg-red-700"
+          color="error"
+          // className="bg-red-500 hover:bg-red-700"
           size="lg"
           isFullWidth
           onClick={handleLogOut}

@@ -6,10 +6,8 @@ import { toast } from "sonner";
 
 import Lottie from "lottie-react";
 import { Button, Chip, IconButton, Tooltip } from "@material-tailwind/react";
-import Loader from "../../components/Loader";
 import { motion } from "framer-motion";
 
-//Importing the sub pages
 import Recommendations from "../../components/movie/movies-pages/recommendations";
 import Genres from "../../components/movie/movies-pages/genre";
 import Cast from "../../components/movie/movies-pages/cast";
@@ -20,30 +18,25 @@ import { useMovieDetails } from "../../hooks/movies/useMovieDetails";
 import { useReccomendations } from "../../hooks/movies/useRecoomendations";
 import { useTrailers } from "../../hooks/movies/useTrailer";
 import { useCasts } from "../../hooks/movies/useCasts";
+import MoviePageSkeleton from "../../components/MoviePageSkeleton";
 
 const MoviePage = () => {
   const { addToFavourites, removeFromFavourites, isFavourite } =
     useFavouritesStore();
-
   const { id } = useParams();
-
   const movieId = Number(id);
-  //Movie Details
-  const { loading, movieError, movie } = useMovieDetails({ id: movieId });
 
-  // Movie recommendations
+  const { movieLoading, movieError, movie } = useMovieDetails({ id: movieId });
   const { recError, recLoading, recommendations } = useReccomendations({
     id: movieId,
   });
-
-  //Movie Trailers
   const { trailers } = useTrailers({ id: movieId });
-
   const { casts, castsLoading, noCast } = useCasts({ id: movieId });
+  const [trailerOpen, setTrailerOpen] = useState(false);
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [id]);
+  // useEffect(() => {
+  //   window.scrollTo({ top: 0, behavior: "smooth" });
+  // }, [id]);
 
   if (!movieId || isNaN(movieId)) {
     return (
@@ -53,18 +46,8 @@ const MoviePage = () => {
     );
   }
 
-  const [trailerOpen, setTrailerOpen] = useState(false);
+  if (movieLoading) return <MoviePageSkeleton />;
 
-  if (loading)
-    return (
-      <div className="h-screen w-screen">
-        <Loader />
-      </div>
-    );
-
-  if (!movie) {
-    return;
-  }
   if (movieError)
     return (
       <div className="flex justify-center h-screen w-screen items-center flex-col gap-4">
@@ -72,13 +55,13 @@ const MoviePage = () => {
           animationData={errorAnimation}
           style={{ width: "100px", height: "100px" }}
         />
-        <h1 className={`text-2xl`}>{movieError.message} movie details</h1>
+        <h1 className="text-2xl">{movieError.message} movie details</h1>
       </div>
     );
 
-  const handleFavouriteClick = () => {
-    if (!movie) return;
+  if (!movie) return null;
 
+  const handleFavouriteClick = () => {
     if (movieInFavorites) {
       removeFromFavourites(movieId);
       toast.info("Removed from your favourites");
@@ -88,7 +71,7 @@ const MoviePage = () => {
     }
   };
 
-  const movieInFavorites = movie?.id ? isFavourite(movie.id) : false;
+  const movieInFavorites = isFavourite(movie.id);
 
   const formattedDate = movie?.release_date
     ? new Date(movie.release_date).toLocaleDateString("en-US", {
@@ -101,13 +84,12 @@ const MoviePage = () => {
   return (
     <>
       <motion.div
-        className="w-full h-full  p-6 md:p-10"
+        className="w-full h-full p-6 md:p-20"
         initial={{ y: 100 }}
         animate={{ y: 1 }}
         transition={{ duration: 0.6 }}
       >
         <BackButton />
-
         <div className="flex flex-col md:flex-row gap-10 min-h-screen">
           {/* Poster */}
           <div className="w-full md:w-1/3 rounded-xl overflow-hidden">
@@ -130,18 +112,17 @@ const MoviePage = () => {
               {movie?.title || movie?.name}
             </h1>
 
-            {/* the movie genre */}
             <Genres movie={movie} />
-            <div className="flex  gap-4 text-sm">
+
+            <div className="flex gap-4 text-sm">
               <Chip
-                className="flex items-center  p-2 px-4"
+                className="flex items-center p-2 px-4"
                 color="secondary"
                 variant="ghost"
               >
                 <Star className="text-yellow-400 mr-1 stroke-[1px]" />
-                <p> {movie?.vote_average?.toFixed(1)}</p>
+                <p>{movie?.vote_average?.toFixed(1)}</p>
               </Chip>
-
               {formattedDate && (
                 <Chip
                   className="flex items-center px-6 py-1"
@@ -154,74 +135,70 @@ const MoviePage = () => {
               )}
             </div>
 
-            <p className="leading-relaxed text-xl ">{movie?.overview}</p>
+            <p className="leading-relaxed text-xl">{movie?.overview}</p>
 
-            {/* ACTION BUTTONS */}
-            <div className="flex gap-4 mt-4 w-full p-2">
-              {/* Likes Button */}
-              <Tooltip>
-                <Tooltip.Trigger>
-                  <IconButton
-                    variant="ghost"
-                    isCircular
-                    color="secondary"
-                    size="xl"
-                  >
-                    <ThumbsUp size={40} className="" />
-                  </IconButton>
-                </Tooltip.Trigger>
-                <Tooltip.Content>
-                  <p>Like this movie</p>
-                </Tooltip.Content>
-              </Tooltip>
+            {/* Action Buttons */}
+            <div className="flex flex-col md:flex-row gap-4 mt-4 w-full p-2">
+              <div className="flex items-center gap-3 border rounded-full px-4 w-max">
+                <Tooltip>
+                  <Tooltip.Trigger>
+                    <IconButton
+                      variant="ghost"
+                      isCircular
+                      color="secondary"
+                      size="xl"
+                    >
+                      <ThumbsUp size={40} className="stroke-[1px]" />
+                    </IconButton>
+                  </Tooltip.Trigger>
+                  <Tooltip.Content>
+                    <p>Like this movie</p>
+                  </Tooltip.Content>
+                </Tooltip>
 
-              {/* Favourite */}
-              <Tooltip>
-                <Tooltip.Trigger>
-                  <IconButton
-                    variant="outline"
-                    isCircular
-                    color="secondary"
-                    size="xl"
-                    className="flex items-center justify-center w-16 h-16"
-                    onClick={handleFavouriteClick}
-                  >
-                    <Heart
-                      size={40}
-                      className={`transition-all duration-300 ${
-                        movieInFavorites
-                          ? "text-red-500 fill-red-500 scale-110"
-                          : "text-gray-300"
-                      }`}
-                    />
-                  </IconButton>
-                </Tooltip.Trigger>
-                <Tooltip.Content>
-                  <p>
-                    {movieInFavorites
-                      ? "Remove from favourite"
-                      : "Add to favourite"}
-                  </p>
-                </Tooltip.Content>
-              </Tooltip>
+                <Tooltip>
+                  <Tooltip.Trigger>
+                    <IconButton
+                      variant="ghost"
+                      isCircular
+                      color="secondary"
+                      className="flex items-center justify-center w-16 h-16"
+                      onClick={handleFavouriteClick}
+                    >
+                      <Heart
+                        size={40}
+                        className={`transition-all duration-300 stroke-[1px] ${
+                          movieInFavorites
+                            ? "text-red-500 fill-red-500 scale-110"
+                            : "text-gray-300"
+                        }`}
+                      />
+                    </IconButton>
+                  </Tooltip.Trigger>
+                  <Tooltip.Content>
+                    <p>
+                      {movieInFavorites
+                        ? "Remove from favourite"
+                        : "Add to favourite"}
+                    </p>
+                  </Tooltip.Content>
+                </Tooltip>
+              </div>
 
-              {/* Trailer Button */}
               <Button
                 isPill
-                size="xl"
+                size="md"
                 variant="solid"
                 color="primary"
                 className="w-full"
                 onClick={() => setTrailerOpen(!trailerOpen)}
               >
-                <Play className="mr-2 h-7 w-7 stroke-2" />
-                <p className="text-xl"> Watch Trailer</p>
+                <Play className="mr-2 h-7 w-7 stroke-[1px]" />
+                <p className="text-xl">Watch trailer</p>
               </Button>
             </div>
 
-            {/* //Getting the casts */}
             <Cast casts={casts} castsLoading={castsLoading} noCast={noCast} />
-
             <Recommendations
               recommendations={recommendations}
               recLoading={recLoading}
@@ -229,6 +206,8 @@ const MoviePage = () => {
             />
           </div>
         </div>
+
+        {/* Production Companies */}
         <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 p-6 mt-8">
           {movie?.production_companies.map(
             (company: { id: number; logo_path: string; name: string }) => (
@@ -245,7 +224,6 @@ const MoviePage = () => {
                 ) : (
                   <div className="h-6 w-[80px] bg-white rounded" />
                 )}
-
                 <p className="text-sm font-medium whitespace-nowrap">
                   {company.name}
                 </p>
@@ -254,6 +232,7 @@ const MoviePage = () => {
           )}
         </div>
       </motion.div>
+
       {trailerOpen && (
         <TrailerModal
           trailer={trailers}

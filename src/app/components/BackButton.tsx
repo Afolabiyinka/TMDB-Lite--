@@ -8,11 +8,12 @@ const BackButton = () => {
       onClick={() => navigate(-1)}
       variant="solid"
       isPill
+      size="lg"
       color="primary"
-      className="mb-6  flex items-center gap-2 text-xl rounded-xl hover:-translate-x-2"
+      className="mb-6 flex items-center gap-2 text-xl rounded-xl"
     >
       <ArrowLeft
-        size={40}
+        size={30}
         className="stroke-[1px] hover:group-[]:translate-x-4"
       />
       Back
