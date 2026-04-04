@@ -16,15 +16,17 @@ export function ModeToggle() {
     <div className="lg:grid">
       <Menu>
         <Menu.Trigger>
-          <IconButton
-            color="secondary"
-            variant="outline"
-            isCircular={true}
-            size="lg"
-            onClick={() => setIsOpen(true)}
-          >
-            {theme === "light" ? <Sun /> : <Moon />}
-          </IconButton>
+          <span>
+            <IconButton
+              color="secondary"
+              variant="outline"
+              isCircular={true}
+              size="lg"
+              onClick={() => setIsOpen(true)}
+            >
+              {theme === "light" ? <Sun /> : <Moon />}
+            </IconButton>
+          </span>
         </Menu.Trigger>
 
         {isOpen && (
