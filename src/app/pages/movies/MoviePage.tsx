@@ -18,7 +18,7 @@ import { useMovieDetails } from "../../hooks/movies/useMovieDetails";
 import { useReccomendations } from "../../hooks/movies/useRecoomendations";
 import { useTrailers } from "../../hooks/movies/useTrailer";
 import { useCasts } from "../../hooks/movies/useCasts";
-import MoviePageSkeleton from "../../components/MoviePageSkeleton";
+import MoviePageSkeleton from "../../components/movie/MoviePageSkeleton";
 
 const MoviePage = () => {
   const { addToFavourites, removeFromFavourites, isFavourite } =
@@ -34,9 +34,9 @@ const MoviePage = () => {
   const { casts, castsLoading, noCast } = useCasts({ id: movieId });
   const [trailerOpen, setTrailerOpen] = useState(false);
 
-  // useEffect(() => {
-  //   window.scrollTo({ top: 0, behavior: "smooth" });
-  // }, [id]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [id]);
 
   if (!movieId || isNaN(movieId)) {
     return (
