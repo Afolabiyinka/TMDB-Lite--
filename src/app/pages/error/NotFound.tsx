@@ -1,5 +1,5 @@
 import { Typography, Button } from "@material-tailwind/react";
-import { Flag } from "lucide-react";
+import { ArrowLeft, Frown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -13,7 +13,7 @@ function ErrorSection() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <Flag className="w-20 h-20 mx-auto text-red-500" />
+        <Frown className="mx-auto stroke-[0.5px]" size={100} />
         <Typography
           variant="h1"
           className="mt-6 !text-3xl font-bold !leading-snug md:!text-4xl"
@@ -25,10 +25,8 @@ function ErrorSection() {
           Don&apos;t worry, our team is already on it. Please refresh the page
           or try again later.
         </Typography>
-        <Button
-          className="w-full px-4 md:w-[10rem]"
-          onClick={() => navigate("/")}
-        >
+        <Button isPill size="xl" onClick={() => navigate("/")}>
+          <ArrowLeft className="mr-3" />
           Back Home
         </Button>
       </motion.div>

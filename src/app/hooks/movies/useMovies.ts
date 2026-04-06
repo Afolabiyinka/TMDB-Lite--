@@ -30,7 +30,7 @@ export default function useMovies() {
   }, [currentPage]);
 
   // Fetch movies
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["Movies", currentPage],
     queryFn: () => getLatestMovies(currentPage),
   });
@@ -46,6 +46,7 @@ export default function useMovies() {
   }, [data]);
 
   return {
+    refetch,
     movies,
     isLoading,
     error,

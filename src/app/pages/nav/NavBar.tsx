@@ -129,16 +129,16 @@ export default function NavBar() {
           <div className="flex items-center gap-x-4">
             {/* Desktop Search Input */}
             <div className="relative hidden lg:block">
+              <Search className="absolute left-3 top-3 h-5 w-5" />
               <Input
                 type="search"
                 placeholder="Search movies..."
-                className="w-72 rounded-full  py-3 pl-10 pr-4 text-sm "
+                className="w-72 rounded-full shadow-none py-3 pl-10 pr-4 text-sm "
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
                 }}
               />
-              <Search className="absolute left-3 top-2.5 h-5 w-5 " />
             </div>
             {/* Mobile Search Input */}
             <div

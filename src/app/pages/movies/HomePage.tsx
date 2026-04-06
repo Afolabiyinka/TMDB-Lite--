@@ -5,6 +5,8 @@ import MovieCard from "../../components/movie/MovieCard";
 import useMovies from "../../hooks/movies/useMovies";
 import type { MovieType } from "../../types/movie";
 import MovieCardSkeleton from "../../components/movie/DummyCard";
+import { Button } from "@material-tailwind/react";
+import { RefreshCcw } from "lucide-react";
 
 const HomePage = () => {
   const {
@@ -14,6 +16,7 @@ const HomePage = () => {
     currentPage,
     handleNextPage,
     handlePrevPage,
+    refetch,
   } = useMovies();
 
   return (
@@ -29,9 +32,13 @@ const HomePage = () => {
           <div className="flex justify-center items-center flex-col min-h-screen gap-4">
             <Lottie
               animationData={errorAnimation}
-              style={{ width: "100px", height: "100px" }}
+              style={{ width: "200px", height: "200px" }}
             />
-            <h1 className={`text-2xl`}>{error.message}</h1>
+            <h1 className={`text-3xl`}>Something went wrong</h1>
+            <Button size="xl" isPill onClick={() => refetch()}>
+              <RefreshCcw className="mr-3" />
+              Retry
+            </Button>
           </div>
         ) : (
           <div className="w-full flex flex-col">
