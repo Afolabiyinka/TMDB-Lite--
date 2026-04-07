@@ -2,8 +2,10 @@ import { Mail, Lock, LogIn } from "lucide-react";
 import CustomInput from "../../components/custom-input";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import { useLogin } from "../../hooks/auth/useLogin";
 
 const Login = () => {
+  const { handleLogin, loginData, setLoginData } = useLogin();
   return (
     <div className="h-full w-full flex flex-col justify-center items-center p-4  md:px-8">
       <div className="w-full md:max-w-sm flex flex-col gap-6">
@@ -14,14 +16,24 @@ const Login = () => {
           </p>
         </div>
 
-        <form className="flex flex-col gap-4">
+        <form
+          className="flex flex-col gap-4"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleLogin();
+          }}
+        >
           <CustomInput
+            value={loginData.email}
+            onChange={(e) => setLoginData({ ...loginData, email: e })}
             id="email"
             placeholder="Email"
             type="email"
             icon={<Mail size={18} />}
           />
           <CustomInput
+            value={loginData.password}
+            onChange={(e) => setLoginData({ ...loginData, password: e })}
             id="password"
             placeholder="Password"
             type="password"

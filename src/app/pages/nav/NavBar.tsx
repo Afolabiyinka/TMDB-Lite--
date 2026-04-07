@@ -6,6 +6,7 @@ import tmdbLogo from "../../../Assets/the real logo.svg";
 import { Avatar, Input } from "@material-tailwind/react";
 import { useUserStore } from "../../store/userStore.ts";
 import { useSearchStore } from "../../store/searchStore.ts";
+import CustomInput from "../../components/custom-input.tsx";
 
 const LINKS = [
   {
@@ -128,42 +129,35 @@ export default function NavBar() {
 
           <div className="flex items-center gap-x-4">
             {/* Desktop Search Input */}
-            <div className="relative hidden lg:block">
-              <Search className="absolute left-3 top-3 h-5 w-5" />
-              <Input
-                type="search"
-                placeholder="Search movies..."
-                className="w-72 rounded-full shadow-none py-3 pl-10 pr-4 text-sm "
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                }}
-              />
-            </div>
+
+            <CustomInput
+              placeholder="Search here..."
+              icon={<Search />}
+              type="search"
+              className="hidden lg:flex"
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e);
+              }}
+            />
             {/* Mobile Search Input */}
             <div
-              className={`absolute left-0 top-16 w-full px-4 py-3 shadow-md transition-all duration-300 ${
+              className={`absolute left-0 z-50 top-16 w-full px-4 py-3 shadow-md transition-all duration-300 ${
                 showSearchInput
-                  ? "translate-y-0 dark:bg-black bg-white"
+                  ? "translate-y-0 bg-white dark:bg-transparent dark:backdrop-blur-lg"
                   : "-translate-y-full opacity-0 pointer-events-none"
               }`}
             >
-              <div className="relative">
-                <Input
-                  type="search"
-                  placeholder="Search movies..."
-                  className="py-3 pl-10 pr-4 text-sm rounded-full"
-                  value={searchQuery}
-                  onChange={(e) => {
-                    setSearchQuery(e.target.value);
-                  }}
-                />
-                <Search className="absolute left-3 top-2.5 h-4 w-4" />
-                <button
-                  onClick={toggleSearchInput}
-                  className="absolute right-3 top-2.5 ml-3"
-                ></button>
-              </div>
+              <CustomInput
+                placeholder="Search here..."
+                icon={<Search />}
+                type="search"
+                className=""
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e);
+                }}
+              />
             </div>
             {/* Mobile search button */}
             <button
@@ -174,7 +168,7 @@ export default function NavBar() {
             </button>
             {/* //Profile pic */}
             <Avatar
-              src={user?.picture}
+              src="https://i.pinimg.com/736x/91/53/5b/91535bc90a800b532116028457cdd0f9.jpg"
               onClick={() => navigate("/account")}
               className="hidden md:block cursor-pointer"
             />

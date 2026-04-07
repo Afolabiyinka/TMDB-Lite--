@@ -6,7 +6,7 @@ import Loader from "./app/components/Loader";
 import App from "./App";
 
 // Create a QueryClient instance
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>

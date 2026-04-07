@@ -2,12 +2,13 @@ import { Mail, Lock, User, ArrowRight } from "lucide-react";
 import CustomInput from "../../components/custom-input";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
+import { useSignup } from "../../hooks/auth/useSignUp";
 
 const SignUp = () => {
+  const { handleSignup, setSignUpData, signupData } = useSignup();
   return (
     <div className="h-full w-full flex flex-col justify-center items-center p-4  md:px-8">
       <div className="w-full md:max-w-sm flex flex-col gap-6">
-        {/* Header */}
         <div>
           <h1 className="text-3xl font-bold tracking-tight">New Here?</h1>
           <p className="text-sm text-gray-500 mt-1">
@@ -15,25 +16,36 @@ const SignUp = () => {
           </p>
         </div>
 
-        {/* Form */}
-        <form className="flex flex-col gap-4">
+        <form
+          className="flex flex-col gap-4"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSignup();
+          }}
+        >
           <CustomInput
+            onChange={(e) => setSignUpData({ ...signupData, username: e })}
+            value={signupData.username}
             id="username"
             placeholder="Username"
             type="text"
             icon={<User size={18} />}
           />
           <CustomInput
+            value={signupData.email}
             id="email"
             placeholder="Email"
             type="email"
             icon={<Mail size={18} />}
+            onChange={(e) => setSignUpData({ ...signupData, email: e })}
           />
           <CustomInput
             id="password"
             placeholder="Password"
             type="password"
+            value={signupData.password}
             icon={<Lock size={18} />}
+            onChange={(e) => setSignUpData({ ...signupData, password: e })}
           />
 
           <Button isPill type="submit" size="xl">
@@ -42,7 +54,6 @@ const SignUp = () => {
           </Button>
         </form>
 
-        {/* Footer */}
         <p className="text-sm text-center text-gray-500">
           Already have an account?{" "}
           <Link to="/login" className="font-medium underline">

@@ -7,6 +7,7 @@ interface Props {
   type: "number" | "text" | "email" | "password" | "search";
   id?: string;
   value?: string;
+  className?: string;
 }
 
 const CustomInput = ({
@@ -16,9 +17,12 @@ const CustomInput = ({
   type,
   id,
   value,
+  className,
 }: Props) => {
   return (
-    <div className="flex items-center h-14 w-full border border-gray-300 rounded-full px-3 gap-2 focus-within:ring-2 focus-within:ring-black transition">
+    <div
+      className={`flex items-center h-[3.2rem] w-full border border-gray-300 rounded-full px-3 gap-2 focus-within:ring-2 focus-within:ring-black transition ${className}`}
+    >
       {icon && <span className="text-gray-400">{icon}</span>}
       <input
         placeholder={placeholder}

@@ -1,17 +1,16 @@
 import React from "react";
 import { LogOut } from "lucide-react";
 import { useUserStore } from "../../store/userStore";
-import { useLogin } from "../../hooks/auth/useLogin";
 import { Button } from "@material-tailwind/react";
 
 const AccountPage: React.FC = () => {
   const { user } = useUserStore();
-  const { logout } = useLogin();
+  // const { logout } = useLogin();
 
   if (!user) {
     return (
-      <div className="h-screen flex items-center justify-center bg-gray-100">
-        <p className="text-gray-600">Loading user info...</p>
+      <div className="h-screen w-full flex items-center justify-center">
+        <p className="">Loading user info...</p>
       </div>
     );
   }
@@ -26,7 +25,7 @@ const AccountPage: React.FC = () => {
         />
         <h2 className="text-xl font-semibold">{user.name}</h2>
         <p className="mb-6">{user.email}</p>
-        <Button isPill className="w-full" onClick={logout} color="error">
+        <Button isPill className="w-full" color="error">
           <LogOut size={18} className="mr-3" />
           Log out
         </Button>

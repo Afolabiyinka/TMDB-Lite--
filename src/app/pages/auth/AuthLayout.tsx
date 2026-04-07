@@ -14,7 +14,7 @@ const AuthLayout = () => {
   return (
     <div className="w-full h-screen p-6 flex flex-col md:flex-row justify-center items-center gap-4">
       {/* Left Panel — Movie Slideshow */}
-      <div className="w-full h-full md:block hidden md:w-1/2 rounded-3xl overflow-hidden shadow dark:shadow-white">
+      <div className="w-full h-full md:block hidden md:w-1/2 rounded-3xl overflow-hidden shadow ">
         <Swiper
           modules={[Autoplay]}
           autoplay={{ delay: 10000, disableOnInteraction: false }}
