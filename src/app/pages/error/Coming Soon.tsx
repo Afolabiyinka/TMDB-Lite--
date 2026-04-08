@@ -1,4 +1,5 @@
-import { Typography, Button, Input } from "@material-tailwind/react";
+import CustomInput from "@/app/components/ui/custom-input";
+import { Typography, Button } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -19,16 +20,14 @@ const ComingSoonSection: React.FC = () => {
             change the way you watch movies 🎬. Stay tuned as we put the
             finishing touches on this game-changing product.
           </Typography>
-          <div className="flex flex-col sm:flex-row max-w-md w-full gap-x-2 gap-y-4 mt-4 mx-auto">
-            <Input
-              size="lg"
-              color="secondary"
+          <div className="flex flex-col gap-4 max-w-lg w-full  mt-4">
+            <CustomInput
               type="email"
               id="email"
               placeholder="someone@example.com"
               className="placeholder:text-white/60 text-white"
             />
-            <Button size="lg" color="primary" className="shrink-0">
+            <Button size="lg" color="primary" isPill>
               Notify Me
             </Button>
           </div>

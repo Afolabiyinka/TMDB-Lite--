@@ -1,10 +1,12 @@
 import React from "react";
 import type { LoginPayload } from "../../types/auth";
 import { useMutation } from "@tanstack/react-query";
-import { login } from "../../services/authRequest";
 import { useNavigate } from "react-router-dom";
-import { queryClient } from "../../../main";
-import useToastMessage from "../../libs/useToastMsg";
+import useToastMessage from "@/app/libs/useToastMsg";
+import { login } from "@/app/services/authRequest";
+import { queryClient } from "@/main";
+
+
 export const useLogin = () => {
   const [loginData, setLoginData] = React.useState<LoginPayload>({
     email: "",

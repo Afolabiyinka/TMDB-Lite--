@@ -1,7 +1,7 @@
 import type { MovieType } from "../../types/movie";
 import MovieCard from "../../components/movie/MovieCard";
 
-import BackButton from "../../components/BackButton";
+import BackButton from "../../components/ui/BackButton";
 import { useSearch } from "../../hooks/search/useSearch";
 import MovieCardSkeleton from "../../components/movie/DummyCard";
 
@@ -28,9 +28,7 @@ const SearchPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 w-full">
           {searchresults.length === 0 ? (
             <div className="w-screen h-screen flex flex-col justify-center items-center">
-              <h1 className="text-6xl tracking-widest">
-                No results found!
-              </h1>{" "}
+              <h1 className="text-6xl tracking-widest">No results found!</h1>
             </div>
           ) : (
             searchresults.map((searchresult: MovieType) => (

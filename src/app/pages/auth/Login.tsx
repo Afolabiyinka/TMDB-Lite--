@@ -1,5 +1,5 @@
 import { Mail, Lock, LogIn } from "lucide-react";
-import CustomInput from "../../components/custom-input";
+import CustomInput from "../../components/ui/custom-input";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { useLogin } from "../../hooks/auth/useLogin";

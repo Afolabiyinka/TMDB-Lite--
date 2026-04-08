@@ -1,10 +1,10 @@
 import Lottie from "lottie-react";
-import errorAnimation from "../../../Assets/ErrorAnimation.json";
-import Pagination from "../../components/Pagination";
-import MovieCard from "../../components/movie/MovieCard";
-import useMovies from "../../hooks/movies/useMovies";
-import type { MovieType } from "../../types/movie";
-import MovieCardSkeleton from "../../components/movie/DummyCard";
+import errorAnimation from "@/Assets/ErrorAnimation.json";
+import Pagination from "@/app/components/Pagination";
+import MovieCard from "@/app/components/movie/MovieCard";
+import useMovies from "@/app/hooks/movies/useMovies";
+import type { MovieType } from "@/app/types/movie";
+import MovieCardSkeleton from "@/app/components/movie/DummyCard";
 import { Button } from "@material-tailwind/react";
 import { RefreshCcw } from "lucide-react";
 

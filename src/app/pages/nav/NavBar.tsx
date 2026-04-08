@@ -1,12 +1,12 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Search, Home, X, Menu, Clapperboard } from "lucide-react";
-import { ModeToggle } from "../../components/ModeToggle.tsx";
-import tmdbLogo from "../../../Assets/the real logo.svg";
-import { Avatar, Input } from "@material-tailwind/react";
-import { useUserStore } from "../../store/userStore.ts";
-import { useSearchStore } from "../../store/searchStore.ts";
-import CustomInput from "../../components/custom-input.tsx";
+import { ModeToggle } from "@/app/components/ModeToggle.tsx";
+import tmdbLogo from "@/Assets/the real logo.svg";
+import { Avatar } from "@material-tailwind/react";
+import { useUserStore } from "@/app/store/userStore.ts";
+import { useSearchStore } from "@/app/store/searchStore.ts";
+import CustomInput from "@/app/components/ui/custom-input";
 
 const LINKS = [
   {
@@ -63,8 +63,6 @@ export default function NavBar() {
 
   const { user } = useUserStore();
 
-  // inside NavBar
-
   useEffect(() => {
     const trimmedQuery = searchQuery.trim();
     if (trimmedQuery.length > 0) {
@@ -110,8 +108,8 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full transition-all duration-300 p-1 rounded-3xl md:rounded-full mt-2  mx-2 ${
-        isScrolled ? "backdrop-blur-lg" : ""
+      className={`sticky top-0 z-50 w-full transition-all duration-300 p-1 rounded-3xl md:rounded-full mt-1  mx-2 ${
+        isScrolled && "bg-white dark:bg-[#0f0e0e]"
       }`}
     >
       <div className="max-w-7xl px-4 sm:px-6 lg:px-8">

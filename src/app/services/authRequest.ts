@@ -1,5 +1,5 @@
 
-import { testingEndpoint } from "../constants/api-date";
+import { testingEndpoint } from "../constants/api-data";
 import type { AuthResponse, LoginPayload, SignupPayload } from "../types/auth";
 
 const login = async (payload: LoginPayload): Promise<AuthResponse> => {

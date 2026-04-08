@@ -1,5 +1,5 @@
 import type { MovieType } from "../../../types/movie";
-import Loader from "../../Loader";
+import Loader from "../../ui/Loader";
 import MovieCard from "../MovieCard";
 import { motion } from "framer-motion";
 

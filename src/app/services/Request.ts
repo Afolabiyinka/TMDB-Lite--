@@ -1,6 +1,6 @@
+import { BASE_URL } from "../constants/api-data";
 import type { MovieType } from "../types/movie";
-//Importing the Variables from the env file
-const BASE_URL = import.meta.env.VITE_BASE_URL!;
+
 const token = import.meta.env.VITE_BEARER_TOKEN!;
 
 export const getLatestMovies = async (page = 1): Promise<MovieType[]> => {

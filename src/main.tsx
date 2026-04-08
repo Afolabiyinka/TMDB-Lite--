@@ -2,10 +2,9 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense } from "react";
-import Loader from "./app/components/Loader";
+import Loader from "./app/components/ui/Loader";
 import App from "./App";
 
-// Create a QueryClient instance
 export const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(

@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import type { SignupPayload } from "../../types/auth";
-import { signup } from "../../services/authRequest";
-import { queryClient } from "../../../main";
-import useToastMessage from "../../libs/useToastMsg";
+import { signup } from "@/app/services/authRequest";
+import type { SignupPayload } from "@/app/types/auth";
+import useToastMessage from "@/app/libs/useToastMsg";
+import { queryClient } from "@/main";
 
 export const useSignup = () => {
     const [signupData, setSignUpData] = React.useState<SignupPayload>({

@@ -24,13 +24,13 @@ export default function useMovies() {
     }
   }, [currentPage, location.pathname, setSearchParams]);
 
-  // Scroll top when page changes
+  // Scroll to top when page changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   }, [currentPage]);
 
-  // Fetch movies
-  const { data, isLoading, error, refetch } = useQuery({
+  // Fetch movies for the homepage
+  const { data, isLoading, error, refetch, } = useQuery({
     queryKey: ["Movies", currentPage],
     queryFn: () => getLatestMovies(currentPage),
   });

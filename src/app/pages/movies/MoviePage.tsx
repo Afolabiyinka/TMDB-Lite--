@@ -1,24 +1,28 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ThumbsUp, Calendar, Star, Heart, Play } from "lucide-react";
-import errorAnimation from "../../../Assets/ErrorAnimation.json";
+import {
+  ThumbsUp,
+  Calendar,
+  Star,
+  Heart,
+  Play,
+  RefreshCcw,
+} from "lucide-react";
+import errorAnimation from "@/Assets/ErrorAnimation.json";
 import { toast } from "sonner";
 
 import Lottie from "lottie-react";
 import { Button, Chip, IconButton, Tooltip } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 
-import Recommendations from "../../components/movie/movies-pages/recommendations";
-import Genres from "../../components/movie/movies-pages/genre";
-import Cast from "../../components/movie/movies-pages/cast";
-import TrailerModal from "../../components/movie/movies-pages/trailer";
-import BackButton from "../../components/BackButton";
-import { useFavouritesStore } from "../../store/favouritesStore";
-import { useMovieDetails } from "../../hooks/movies/useMovieDetails";
-import { useReccomendations } from "../../hooks/movies/useRecoomendations";
-import { useTrailers } from "../../hooks/movies/useTrailer";
-import { useCasts } from "../../hooks/movies/useCasts";
-import MoviePageSkeleton from "../../components/movie/MoviePageSkeleton";
+import Recommendations from "@/app/components/movie/movies-pages/recommendations";
+import Genres from "@/app/components/movie/movies-pages/genre";
+import Cast from "@/app/components/movie/movies-pages/cast";
+import TrailerModal from "@/app/components/movie/movies-pages/trailer";
+import BackButton from "@/app/components/ui/BackButton";
+import { useFavouritesStore } from "@/app/store/favouritesStore";
+import { useMovieDetails } from "@/app/hooks/movies/useMovieDetails";
+import MoviePageSkeleton from "@/app/components/movie/MoviePageSkeleton";
 
 const MoviePage = () => {
   const { addToFavourites, removeFromFavourites, isFavourite } =
@@ -26,12 +30,20 @@ const MoviePage = () => {
   const { id } = useParams();
   const movieId = Number(id);
 
-  const { movieLoading, movieError, movie } = useMovieDetails({ id: movieId });
-  const { recError, recLoading, recommendations } = useReccomendations({
-    id: movieId,
-  });
-  const { trailers } = useTrailers({ id: movieId });
-  const { casts, castsLoading, noCast } = useCasts({ id: movieId });
+  const {
+    movieLoading,
+    movieError,
+    movie,
+    casts,
+    castsLoading,
+    noCast,
+    recError,
+    recLoading,
+    recommendations,
+    trailers,
+    refetch,
+  } = useMovieDetails({ id: movieId });
+
   const [trailerOpen, setTrailerOpen] = useState(false);
 
   useEffect(() => {
@@ -41,7 +53,7 @@ const MoviePage = () => {
   if (!movieId || isNaN(movieId)) {
     return (
       <div className="h-screen flex items-center justify-center">
-        <p>Invalid movie ID</p>
+        <p className="text-4xl">Invalid movie ID</p>
       </div>
     );
   }
@@ -53,9 +65,12 @@ const MoviePage = () => {
       <div className="flex justify-center h-screen w-screen items-center flex-col gap-4">
         <Lottie
           animationData={errorAnimation}
-          style={{ width: "100px", height: "100px" }}
+          style={{ width: "200px", height: "200px" }}
         />
-        <h1 className="text-2xl">{movieError.message} movie details</h1>
+        <h1 className="text-4xl">{movieError.message} movie details</h1>
+        <Button isPill size="xl" onClick={() => refetch()}>
+          <RefreshCcw className="h-5 w-6 mr-2" /> Refresh
+        </Button>
       </div>
     );
 

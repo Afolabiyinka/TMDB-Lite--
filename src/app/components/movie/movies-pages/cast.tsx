@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import Loader from "../../Loader";
+import Loader from "../../ui/Loader";
 
 interface CastsProps {
   casts: [];

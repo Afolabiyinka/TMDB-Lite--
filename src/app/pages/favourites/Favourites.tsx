@@ -45,7 +45,7 @@ const Favourites = () => {
           >
             <Link to={"/"}>
               <Button isPill size="xl">
-                <Film size={15} className="mr-2" />
+                <Film size={20} className="mr-2" />
                 Browse Movies
               </Button>
             </Link>

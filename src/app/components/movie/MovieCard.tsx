@@ -35,7 +35,7 @@ const MovieCard = ({ movie }: { movie: MovieType }) => {
 
   return (
     <Card
-      className="overflow-hidden relative rounded-3xl bg-inherit cursor-pointer hover:scale-[1.02] transition-transform duration-300"
+      className="overflow-hidden shadow-none relative border-none hover:border rounded-3xl bg-inherit cursor-pointer hover:scale-[1.02] transition-transform duration-300"
       onClick={() => navigate(`/movie/${movie.id}`)}
     >
       <div className="flex items-center justify-between absolute top-2 w-full p-1 z-30">
@@ -50,7 +50,7 @@ const MovieCard = ({ movie }: { movie: MovieType }) => {
           </Chip>
         </span>
         <span>
-          <Tooltip placement="top-end">
+          <Tooltip>
             <TooltipTrigger>
               <button
                 className={`hover:border  rounded-full w-12 flex justify-center items-center h-12 backdrop-blur-2xl shadow-md`}

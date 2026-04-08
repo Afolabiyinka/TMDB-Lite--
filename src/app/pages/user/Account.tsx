@@ -1,5 +1,5 @@
 import React from "react";
-import { LogOut } from "lucide-react";
+import { Loader2, LogOut } from "lucide-react";
 import { useUserStore } from "../../store/userStore";
 import { Button } from "@material-tailwind/react";
 
@@ -10,7 +10,9 @@ const AccountPage: React.FC = () => {
   if (!user) {
     return (
       <div className="h-screen w-full flex items-center justify-center">
-        <p className="">Loading user info...</p>
+        <span className="">
+          <Loader2 className="animate-spin h-16 w-16 stroke-[2px]" />
+        </span>
       </div>
     );
   }

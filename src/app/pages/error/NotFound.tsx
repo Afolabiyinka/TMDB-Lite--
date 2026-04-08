@@ -3,7 +3,7 @@ import { ArrowLeft, Frown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
-function ErrorSection() {
+function NotFound() {
   const navigate = useNavigate();
 
   return (
@@ -34,4 +34,4 @@ function ErrorSection() {
   );
 }
 
-export default ErrorSection;
+export default NotFound;
