@@ -1,16 +1,29 @@
 import { motion } from "framer-motion";
 import MovieCard from "../../components/movie/MovieCard";
-import { useFavouritesStore } from "../../store/favouritesStore";
 import { Link } from "react-router-dom";
 import { Film, Heart } from "lucide-react";
 import { Button } from "@material-tailwind/react";
+import { useFavourites } from "@/app/hooks/favourites/useFavourites";
+import MovieCardSkeleton from "@/app/components/movie/DummyCard";
 
 const Favourites = () => {
-  const { favourites } = useFavouritesStore();
+  const { data, isLoading } = useFavourites();
+
+  if (isLoading) {
+    return (
+      <div className="w-full border">
+        <div className="flex gap-5 overflow-x-auto p-10 w-full">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <MovieCardSkeleton key={index} />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className=" text-center flex justify-center items-center w-full">
-      {favourites.length === 0 ? (
+      {data?.favourites?.length === 0 ? (
         <div className="flex justify-center items-center flex-col text-center h-screen gap-6">
           <motion.div
             initial={{ opacity: 0, scale: 0.6 }}
@@ -21,7 +34,7 @@ const Favourites = () => {
             <div className="w-24 h-24 rounded-full  border  flex items-center justify-center">
               <Heart size={48} strokeWidth={1} />
             </div>
-            <span className="absolute inset-0 rounded-full border animate-ping duration-1000" />
+            <span className="absolute inset-0 rounded-full border  duration-1000" />
           </motion.div>
 
           <motion.div
@@ -54,11 +67,11 @@ const Favourites = () => {
       ) : (
         <div className="py-3 flex flex-col items-center  h-full w-screen">
           <h1 className="text-4xl mb-3">
-            {favourites.length} Movies added to Favourites
+            {data?.favourites.length} Movies added to Favourites
           </h1>
 
           <div className="flex gap-5 overflow-x-auto p-10 w-full">
-            {favourites.map((movie) => (
+            {data?.favourites?.map((movie) => (
               <div className="flex-shrink-0 w-80" key={movie.id}>
                 <MovieCard movie={movie} />
               </div>

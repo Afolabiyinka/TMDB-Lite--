@@ -108,7 +108,7 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full transition-all duration-300 p-1 rounded-3xl md:rounded-full mt-1  mx-2 ${
+      className={`sticky top-0 z-50 w-full  p-1 rounded-3xl md:rounded-full mt-1  mx-2 ${
         isScrolled && "bg-white dark:bg-[#0f0e0e]"
       }`}
     >
@@ -199,7 +199,7 @@ export default function NavBar() {
         >
           <NavList closeMenu={closeMenu} />
           <Avatar
-            src={user?.picture}
+            src="https://i.pinimg.com/736x/91/53/5b/91535bc90a800b532116028457cdd0f9.jpg"
             onClick={() => {
               closeMenu();
               navigate("/account");

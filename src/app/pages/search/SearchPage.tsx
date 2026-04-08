@@ -4,6 +4,7 @@ import MovieCard from "../../components/movie/MovieCard";
 import BackButton from "../../components/ui/BackButton";
 import { useSearch } from "../../hooks/search/useSearch";
 import MovieCardSkeleton from "../../components/movie/DummyCard";
+import { NoResults } from "../error/empty-search";
 
 const SearchPage = () => {
   const { searchError, searchLoading, searchresults } = useSearch();
@@ -23,13 +24,11 @@ const SearchPage = () => {
           ))}
         </div>
       ) : searchError ? (
-        <div>Error</div>
+        <NoResults />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 w-full">
           {searchresults.length === 0 ? (
-            <div className="w-screen h-screen flex flex-col justify-center items-center">
-              <h1 className="text-6xl tracking-widest">No results found!</h1>
-            </div>
+            <NoResults />
           ) : (
             searchresults.map((searchresult: MovieType) => (
               <MovieCard movie={searchresult} />
