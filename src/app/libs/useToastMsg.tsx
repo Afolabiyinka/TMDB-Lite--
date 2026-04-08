@@ -11,6 +11,11 @@ export default function useToastMessage() {
     toast.error(message);
   };
 
+  const toastInfo = (message: string) => {
+    toast.dismiss();
+    toast.info(message);
+  };
+
   const toastLoading = (message: string) => {
     toast.dismiss();
     toast.loading(message);
@@ -19,5 +24,6 @@ export default function useToastMessage() {
     toastSuccess,
     toastError,
     toastLoading,
+    toastInfo,
   };
 }

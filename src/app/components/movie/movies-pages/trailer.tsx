@@ -1,5 +1,5 @@
 import { Button, IconButton } from "@material-tailwind/react";
-import { ArrowLeft, ArrowRight, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Loader2, X } from "lucide-react";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 
@@ -7,6 +7,7 @@ interface TrailerModalProps {
   trailer: any[];
   trailerOpen: boolean;
   trialerClose: () => void;
+  loading: boolean;
 }
 
 function CustomNavigation() {
@@ -39,7 +40,11 @@ function CustomNavigation() {
   );
 }
 
-const TrailerModal = ({ trailer, trialerClose }: TrailerModalProps) => {
+const TrailerModal = ({
+  trailer,
+  trialerClose,
+  loading,
+}: TrailerModalProps) => {
   return (
     <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
       {/* Close Button */}
@@ -62,18 +67,24 @@ const TrailerModal = ({ trailer, trialerClose }: TrailerModalProps) => {
           rounded-xl shadow-xl overflow-hidden
         "
       >
-        {trailer.map((vid: any) => (
-          <SwiperSlide key={vid.id} className="relative">
-            <iframe
-              className="w-full h-full rounded-xl border"
-              src={`https://www.youtube.com/embed/${vid.key}?autoplay=1&mute=1`}
-              title={vid.name || "Movie Trailer"}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-            <CustomNavigation />
-          </SwiperSlide>
-        ))}
+        {loading ? (
+          <div className="h-full w-full justify-center items-center border">
+            <Loader2 />
+          </div>
+        ) : (
+          trailer.map((vid: any) => (
+            <SwiperSlide key={vid.id} className="relative">
+              <iframe
+                className="w-full h-full rounded-xl border"
+                src={`https://www.youtube.com/embed/${vid.key}?autoplay=1&mute=1`}
+                title={vid.name || "Movie Trailer"}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+              <CustomNavigation />
+            </SwiperSlide>
+          ))
+        )}
       </Swiper>
     </div>
   );
