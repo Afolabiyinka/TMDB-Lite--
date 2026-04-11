@@ -13,12 +13,10 @@
 }
 * {
   scroll-behavior: smooth;
-  /* transition: all 0.6s; */
-  scrollbar-width: thin; /* Firefox */
+  scrollbar-width: thin;
   scrollbar-color: gray transparent;
 }
 
-/* WebKit browsers (Chrome, Safari, Edge) */
 *::-webkit-scrollbar {
   width: 8px;
   display: none;
@@ -33,12 +31,11 @@
   background: transparent;
 }
 .no-scrollbar {
-  overflow-x: scroll; /* or auto */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* For Chrome, Safari, Opera, and newer Edge */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

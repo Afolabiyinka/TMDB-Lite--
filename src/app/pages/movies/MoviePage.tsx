@@ -39,6 +39,7 @@ const MoviePage = () => {
     recommendations,
     trailers,
     refetch,
+    trailerLoading,
   } = useMovieDetails({ id: movieId });
 
   //Favourites Stuff
@@ -252,7 +253,7 @@ const MoviePage = () => {
 
       {trailerOpen && (
         <TrailerModal
-          loading
+          loading={trailerLoading}
           trailer={trailers}
           trailerOpen={trailerOpen}
           trialerClose={() => setTrailerOpen(false)}
