@@ -1,9 +1,9 @@
 
-import { testingEndpoint } from "../constants/api-data";
+import { prodEndpoint, } from "../constants/api-data";
 import type { AuthResponse, LoginPayload, SignupPayload } from "../types/auth";
 
 const login = async (payload: LoginPayload): Promise<AuthResponse> => {
-    const res = await fetch(`${testingEndpoint}api/auth/login`, {
+    const res = await fetch(`${prodEndpoint}api/auth/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -22,7 +22,7 @@ const login = async (payload: LoginPayload): Promise<AuthResponse> => {
 };
 
 const signup = async (payload: SignupPayload): Promise<AuthResponse> => {
-    const res = await fetch(`${testingEndpoint}api/auth/signup`, {
+    const res = await fetch(`${prodEndpoint}api/auth/signup`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

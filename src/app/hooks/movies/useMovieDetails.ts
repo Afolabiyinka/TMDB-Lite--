@@ -33,7 +33,7 @@ export const useMovieDetails = ({ id }: { id: number }) => {
 
   //Fetching the trailer
 
-  const { data: trailers, error: noTrailer } = useQuery({
+  const { data: trailers, error: noTrailer, isLoading: trailerLoading } = useQuery({
     queryKey: ["trailer", id],
     queryFn: () => getMovieTrailer(id),
   });
@@ -50,6 +50,7 @@ export const useMovieDetails = ({ id }: { id: number }) => {
     recError,
     trailers,
     noTrailer,
-    refetch
+    refetch,
+    trailerLoading
   };
 };
