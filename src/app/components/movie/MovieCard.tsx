@@ -7,27 +7,23 @@ import {
   Chip,
 } from "@material-tailwind/react";
 import { Heart, Star } from "lucide-react";
-import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import { useFavouritesStore } from "../../store/favouritesStore";
 import type { MovieType } from "../../types/movie";
+import { useFavourites } from "@/app/hooks/favourites/useFavourites";
 
 const MovieCard = ({ movie }: { movie: MovieType }) => {
   const navigate = useNavigate();
 
-  const { addToFavourites, removeFromFavourites, isFavourite } =
-    useFavouritesStore();
+  const { isFavourite, handleAdd, handleRemove } = useFavourites();
 
   const handleFavouriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (!movie) return;
 
     if (isFavourite(movie.id)) {
-      removeFromFavourites(movie.id);
-      toast.info("Removed from favourites");
+      handleRemove(movie.id);
     } else {
-      addToFavourites(movie);
-      toast.success("Added to favourites");
+      handleAdd(movie);
     }
   };
 

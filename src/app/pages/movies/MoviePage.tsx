@@ -9,7 +9,6 @@ import {
   RefreshCcw,
 } from "lucide-react";
 import errorAnimation from "@/Assets/ErrorAnimation.json";
-import { toast } from "sonner";
 
 import Lottie from "lottie-react";
 import { Button, Chip, IconButton, Tooltip } from "@material-tailwind/react";
@@ -20,13 +19,11 @@ import Genres from "@/app/components/movie/movies-pages/genre";
 import Cast from "@/app/components/movie/movies-pages/cast";
 import TrailerModal from "@/app/components/movie/movies-pages/trailer";
 import BackButton from "@/app/components/ui/BackButton";
-import { useFavouritesStore } from "@/app/store/favouritesStore";
 import { useMovieDetails } from "@/app/hooks/movies/useMovieDetails";
 import MoviePageSkeleton from "@/app/components/movie/MoviePageSkeleton";
+import { useFavourites } from "@/app/hooks/favourites/useFavourites";
 
 const MoviePage = () => {
-  const { addToFavourites, removeFromFavourites, isFavourite } =
-    useFavouritesStore();
   const { id } = useParams();
   const movieId = Number(id);
 
@@ -42,7 +39,25 @@ const MoviePage = () => {
     recommendations,
     trailers,
     refetch,
+    trailerLoading,
   } = useMovieDetails({ id: movieId });
+
+  //Favourites Stuff
+
+  const { isFavourite, handleAdd, handleRemove } = useFavourites();
+
+  const handleFavouriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    if (!movie) return;
+
+    if (isFavourite(movie.id)) {
+      handleRemove(movie.id);
+    } else {
+      handleAdd(movie);
+    }
+  };
+
+  const movieInFavorites = movie?.id ? isFavourite(movie.id) : false;
 
   const [trailerOpen, setTrailerOpen] = useState(false);
 
@@ -75,18 +90,6 @@ const MoviePage = () => {
     );
 
   if (!movie) return null;
-
-  const handleFavouriteClick = () => {
-    if (movieInFavorites) {
-      removeFromFavourites(movieId);
-      toast.info("Removed from your favourites");
-    } else {
-      addToFavourites(movie);
-      toast.success("Added to your favourites");
-    }
-  };
-
-  const movieInFavorites = isFavourite(movie.id);
 
   const formattedDate = movie?.release_date
     ? new Date(movie.release_date).toLocaleDateString("en-US", {
@@ -185,7 +188,7 @@ const MoviePage = () => {
                         className={`transition-all duration-300 stroke-[1px] ${
                           movieInFavorites
                             ? "text-red-500 fill-red-500 scale-110"
-                            : "text-gray-300"
+                            : ""
                         }`}
                       />
                     </IconButton>
@@ -250,6 +253,7 @@ const MoviePage = () => {
 
       {trailerOpen && (
         <TrailerModal
+          loading={trailerLoading}
           trailer={trailers}
           trailerOpen={trailerOpen}
           trialerClose={() => setTrailerOpen(false)}
