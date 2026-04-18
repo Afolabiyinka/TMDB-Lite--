@@ -8,11 +8,11 @@ import MovieCardSkeleton from "@/app/components/movie/DummyCard";
 import ScrollableCardRow from "@/app/components/ScrollableSection";
 
 const Favourites = () => {
-  const { data, isLoading } = useFavourites();
+  const { data, isLoading, error } = useFavourites();
 
-  if (isLoading) {
+  if (isLoading || error) {
     return (
-      <div className="w-screen h-full">
+      <div className="w-screen h-full p-10 flex justify-center items-center">
         <ScrollableCardRow>
           {Array.from({ length: 15 }).map((_, index) => (
             <MovieCardSkeleton key={index} />
@@ -25,41 +25,46 @@ const Favourites = () => {
   return (
     <div className="text-center flex justify-center items-center w-full">
       {data?.favourites?.length === 0 ? (
-        <div className="flex justify-center items-center flex-col text-center h-screen gap-6">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="relative"
-          >
-            <div className="w-24 h-24 rounded-full  border  flex items-center justify-center">
-              <Heart size={48} strokeWidth={1} />
-            </div>
-            <span className="absolute inset-0 rounded-full border  duration-1000" />
-          </motion.div>
+        <div className="flex flex-col items-center justify-center h-screen gap-6 relative overflow-hidden w-full">
 
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
-            className="flex flex-col gap-2"
+            initial={{ opacity: 0, scale: 0.7, rotate: -5 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="relative z-10"
           >
-            <h1 className="text-4xl tracking-widest font-[Bebas Neue] font-semibold">
+            <div className="rounded-full  border shadow-2xl flex items-center justify-center relative overflow-hidden p-10">
+              {/* Icon */}
+              <Heart size={64} className="text-red-500 stroke-[1px]" fill="red" />
+            </div>
+          </motion.div>
+
+          {/* Text */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-center z-10"
+          >
+            <h1 className="text-4xl font-bold tracking-wide">
               No Favourites Yet
             </h1>
-            <p className="text-sm max-w-xs leading-relaxed">
-              Start adding movies to your favourites and they'll appear here.
+            <p className="text-sm  mt-2 max-w-xs">
+              Save movies you love. They’ll appear here like your personal
+              watchlist.
             </p>
           </motion.div>
 
+          {/* CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.28, ease: "easeOut" }}
+            transition={{ delay: 0.35 }}
+            className="z-10"
           >
-            <Link to={"/"}>
-              <Button isPill size="xl">
-                <Film size={20} className="mr-2" />
+            <Link to="/">
+              <Button size="xl" isPill>
+                <Film size={18} className="mr-2" />
                 Browse Movies
               </Button>
             </Link>

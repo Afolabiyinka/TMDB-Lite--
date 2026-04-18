@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useLocation } from "react-router-dom";
-import { getLatestMovies } from "../../services/Request";
+import { getLatestMovies } from "../../services/movieRequest";
 import { useQuery } from "@tanstack/react-query";
 import type { MovieType } from "../../types/movie";
 

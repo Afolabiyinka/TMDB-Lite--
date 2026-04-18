@@ -17,7 +17,7 @@ export const useFavourites = () => {
   });
 
   //Adding a movie to favourites
-  const { mutate: addMutate } = useMutation({
+  const { mutate: addMutate, isPending } = useMutation({
     mutationFn: (movie: MovieType) => addToFavourites(movie),
     onSuccess: (data) => {
       toastSuccess(data.message || "Added to favourites");
@@ -28,9 +28,7 @@ export const useFavourites = () => {
     onError: (data) => {
       toastError(data.message || "Something went wrong");
     },
-    onMutate: () => {
-      toastLoading("Updating favourites...");
-    },
+
   });
 
   //Removing a movie from favourites
@@ -63,5 +61,5 @@ export const useFavourites = () => {
     return data?.favourites?.some((fav: MovieType) => fav.id === movieId);
   };
 
-  return { data, isLoading, error, isFavourite, handleRemove, handleAdd };
+  return { data, isLoading, error, isFavourite, handleRemove, handleAdd, isPending };
 };

@@ -22,10 +22,14 @@ import BackButton from "@/app/components/ui/BackButton";
 import { useMovieDetails } from "@/app/hooks/movies/useMovieDetails";
 import MoviePageSkeleton from "@/app/components/movie/MoviePageSkeleton";
 import { useFavourites } from "@/app/hooks/favourites/useFavourites";
+import { useUser } from "@/app/hooks/user/useUser";
+import { LoginModal } from "@/app/components/LoginModal";
 
 const MoviePage = () => {
   const { id } = useParams();
   const movieId = Number(id);
+  const { fetchedUser, userLoading } = useUser()
+
 
   const {
     movieLoading,
@@ -44,10 +48,17 @@ const MoviePage = () => {
 
   //Favourites Stuff
 
+  const [openLogin, setOpenLogin] = useState(false)
+
   const { isFavourite, handleAdd, handleRemove } = useFavourites();
 
   const handleFavouriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+
+    if (!fetchedUser && !userLoading) {
+      setOpenLogin(true)
+      return
+    }
     if (!movie) return;
 
     if (isFavourite(movie.id)) {
@@ -93,14 +104,16 @@ const MoviePage = () => {
 
   const formattedDate = movie?.release_date
     ? new Date(movie.release_date).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
     : null;
 
   return (
     <>
+      <LoginModal open={openLogin} onClose={() => setOpenLogin(false)} />
+
       <motion.div
         className="w-full h-full p-6 md:p-20"
         initial={{ y: 100 }}
@@ -185,11 +198,10 @@ const MoviePage = () => {
                     >
                       <Heart
                         size={40}
-                        className={`transition-all duration-300 stroke-[1px] ${
-                          movieInFavorites
-                            ? "text-red-500 fill-red-500 scale-110"
-                            : ""
-                        }`}
+                        className={`transition-all duration-300 stroke-[1px] ${movieInFavorites
+                          ? "text-red-500 fill-red-500 scale-110"
+                          : ""
+                          }`}
                       />
                     </IconButton>
                   </Tooltip.Trigger>
