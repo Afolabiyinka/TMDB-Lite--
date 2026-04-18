@@ -11,11 +11,8 @@
   },
   "dependencies": {
     "@material-tailwind/react": "^3.0.0-beta.24",
-    "@react-oauth/google": "^0.12.2",
-    "@supabase/supabase-js": "^2.89.0",
     "@tanstack/react-query": "^5.90.11",
     "framer-motion": "^12.23.24",
-    "jwt-decode": "^4.0.0",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.555.0",
     "react": "^19.2.4",
