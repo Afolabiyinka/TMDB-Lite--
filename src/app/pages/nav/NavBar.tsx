@@ -6,6 +6,7 @@ import tmdbLogo from "@/Assets/the real logo.svg";
 import { Avatar } from "@material-tailwind/react";
 import { useSearchStore } from "@/app/store/searchStore.ts";
 import CustomInput from "@/app/components/ui/custom-input";
+import { useUser } from "@/app/hooks/user/useUser";
 
 const LINKS = [
   {
@@ -33,11 +34,10 @@ function NavList({ closeMenu }: { closeMenu: () => void }) {
             className="flex items-center gap-x-2 p-2 text-sm font-medium transition-colors duration-100 group"
           >
             <div
-              className={`"flex items-center justify-center" ${
-                location.pathname === href
-                  ? "rounded-full bg-black text-white p-2 transition-all duration-500 dark:bg-white dark:text-black "
-                  : ""
-              }`}
+              className={`"flex items-center justify-center" ${location.pathname === href
+                ? "rounded-full bg-black text-white p-2 transition-all duration-500 dark:bg-white dark:text-black "
+                : ""
+                }`}
             >
               <Icon className="h-4 w-4" />
             </div>
@@ -60,6 +60,7 @@ export default function NavBar() {
   const [showSearchInput, setShowSearchInput] = useState(false);
   const { searchQuery, setSearchQuery } = useSearchStore();
 
+  const { fetchedUser } = useUser()
   useEffect(() => {
     const trimmedQuery = searchQuery.trim();
     if (trimmedQuery.length > 0) {
@@ -105,9 +106,8 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full  p-1  mt-1  mx-2 ${
-        isScrolled && "bg-white dark:bg-[#0f0e0e]"
-      }`}
+      className={`sticky top-0 z-50 w-full  p-1  mt-1  mx-2 ${isScrolled && "bg-white dark:bg-[#0f0e0e]"
+        }`}
     >
       <div className="max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
@@ -137,11 +137,10 @@ export default function NavBar() {
             />
             {/* Mobile Search Input */}
             <div
-              className={`absolute left-0 z-50 top-16 w-full px-4 py-3 shadow-md transition-all duration-300 ${
-                showSearchInput
-                  ? "translate-y-0 bg-white dark:bg-transparent dark:backdrop-blur-lg"
-                  : "-translate-y-full opacity-0 pointer-events-none"
-              }`}
+              className={`absolute left-0 z-50 top-16 w-full px-4 py-3 shadow-md transition-all duration-300 ${showSearchInput
+                ? "translate-y-0 bg-white dark:bg-transparent dark:backdrop-blur-lg"
+                : "-translate-y-full opacity-0 pointer-events-none"
+                }`}
             >
               <CustomInput
                 placeholder="Search here..."
@@ -163,8 +162,7 @@ export default function NavBar() {
             </button>
             {/* //Profile pic */}
             <Avatar
-              src="https://i.pinimg.com/736x/91/53/5b/91535bc90a800b532116028457cdd0f9.jpg"
-              onClick={() => navigate("/account")}
+              src={fetchedUser?.picture || `https://api.dicebear.com/9.x/micah/svg?seed=${fetchedUser?.username}`} onClick={() => navigate("/account")}
               className="hidden md:block cursor-pointer"
             />
             {/* Theme toggle */}
@@ -190,14 +188,12 @@ export default function NavBar() {
 
         {/* Mobile menu */}
         <div
-          className={`transform overflow-hidden transition-all duration-300 ease-in-out lg:hidden ${
-            openNav ? "max-h-96 py-4" : "max-h-0"
-          }`}
+          className={`transform overflow-hidden transition-all duration-300 ease-in-out lg:hidden ${openNav ? "max-h-96 py-4" : "max-h-0"
+            }`}
         >
           <NavList closeMenu={closeMenu} />
           <Avatar
-            src="https://i.pinimg.com/736x/91/53/5b/91535bc90a800b532116028457cdd0f9.jpg"
-            onClick={() => {
+            src={fetchedUser?.picture || `https://api.dicebear.com/9.x/micah/svg?seed=${fetchedUser?.username}`} onClick={() => {
               closeMenu();
               navigate("/account");
             }}
