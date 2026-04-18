@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useLogin } from "../../hooks/auth/useLogin";
 
 const Login = () => {
-  const { handleLogin, loginData, setLoginData } = useLogin();
+  const { handleLogin, loginData, setLoginData, loading } = useLogin();
   return (
     <div className="h-full w-full flex flex-col justify-center items-center p-4  md:px-8">
       <div className="w-full md:max-w-sm flex flex-col gap-6">
@@ -40,7 +40,7 @@ const Login = () => {
             icon={<Lock size={18} />}
           />
 
-          <Button isPill type="submit" size="xl">
+          <Button isPill type="submit" size="xl" disabled={loading}>
             <LogIn size={18} className="mr-4" />
             Sign in
           </Button>
