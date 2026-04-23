@@ -161,10 +161,11 @@ export default function NavBar() {
               <Search className="h-6 w-6" />
             </button>
             {/* //Profile pic */}
-            <Avatar
+
+            {fetchedUser && <Avatar
               src={fetchedUser?.picture || `https://api.dicebear.com/9.x/micah/svg?seed=${fetchedUser?.username}`} onClick={() => navigate("/account")}
               className="hidden md:block cursor-pointer"
-            />
+            />}
             {/* Theme toggle */}
             <div className="">
               <ModeToggle />
@@ -192,13 +193,13 @@ export default function NavBar() {
             }`}
         >
           <NavList closeMenu={closeMenu} />
-          <Avatar
+          {fetchedUser && <Avatar
             src={fetchedUser?.picture || `https://api.dicebear.com/9.x/micah/svg?seed=${fetchedUser?.username}`} onClick={() => {
               closeMenu();
               navigate("/account");
             }}
             className="mt-3"
-          />
+          />}
         </div>
       </div>
     </nav>

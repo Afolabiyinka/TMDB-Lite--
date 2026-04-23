@@ -18,7 +18,7 @@ const AuthLayout = () => {
       >
         <Swiper
           modules={[Autoplay]}
-          autoplay={{ delay: 10000, disableOnInteraction: false }}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
           loop
           className="w-full h-full"
@@ -47,10 +47,10 @@ const AuthLayout = () => {
                 <p className="text-sm">
                   {movie?.release_date
                     ? new Date(movie.release_date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
                     : "Release date unknown"}
                 </p>
               </div>

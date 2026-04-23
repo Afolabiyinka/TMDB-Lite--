@@ -23,7 +23,7 @@ const CustomInput = ({
     <div
       className={`flex items-center h-[3.2rem] w-full border border-gray-300 overflow-hidden rounded-full px-3 gap-2 focus-within:ring-2 focus-within:ring-black transition ${className}`}
     >
-      {icon && <span className="text-gray-400">{icon}</span>}
+      {icon && <span className="">{icon}</span>}
       <input
         placeholder={placeholder}
         className="flex-1 h-full bg-transparent outline-none text-sm"
