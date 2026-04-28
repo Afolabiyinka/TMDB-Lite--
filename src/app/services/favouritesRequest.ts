@@ -19,6 +19,19 @@ const getFavourites = async (): Promise<Favourites> => {
     return data
 }
 
+
+const inFavourites = async (id: string | number) => {
+    const res = await fetch(`${prodEndpoint}api/favourites/inFavourites/${id}`, {
+        method: "GET",
+        credentials: "include",
+    })
+    const data = await res.json();
+    if (!res.ok) {
+        throw new Error(data.message || "Something went wrong");
+    }
+    return data
+
+}
 const addToFavourites = async (movie: MovieType) => {
 
     const res = await fetch(`${prodEndpoint}api/favourites/add`, {
@@ -57,4 +70,4 @@ const removeFromFavourites = async (id: number | string) => {
 }
 
 
-export { getFavourites, addToFavourites, removeFromFavourites }
+export { getFavourites, addToFavourites, removeFromFavourites, inFavourites }

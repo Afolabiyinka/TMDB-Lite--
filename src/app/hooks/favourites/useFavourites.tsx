@@ -2,19 +2,32 @@ import useToastMessage from "@/app/libs/useToastMsg";
 import {
   addToFavourites,
   getFavourites,
+  inFavourites,
   removeFromFavourites,
 } from "@/app/services/favouritesRequest";
 import type { MovieType } from "@/app/types/movie";
 import { queryClient } from "@/main";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-export const useFavourites = () => {
+export const useFavourites = ({ id }: { id?: string | number }) => {
   const { toastError, toastLoading, toastSuccess } = useToastMessage();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["favourites"],
     queryFn: getFavourites,
   });
+
+  // Checking if its in favourites
+  const { data: favouriteData } = useQuery({
+    queryKey: ["favourite", id],
+    queryFn: () => {
+      if (!id) throw new Error("Movie id is required");
+      return inFavourites(id);
+    }, enabled: !!id,
+    retry: false
+  });
+
+  const isFavourite = favouriteData?.inFavourites ?? false;
 
   //Adding a movie to favourites
   const { mutate: addMutate, isPending } = useMutation({
@@ -24,9 +37,15 @@ export const useFavourites = () => {
       queryClient.invalidateQueries({
         queryKey: ["favourites"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["favourite", id],
+      });
     },
     onError: (data) => {
       toastError(data.message || "Something went wrong");
+    },
+    onMutate: () => {
+      toastLoading("Updating favourites...");
     },
 
   });
@@ -39,6 +58,9 @@ export const useFavourites = () => {
       toastSuccess(data.message || "Removed from favourites");
       queryClient.invalidateQueries({
         queryKey: ["favourites"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["favourite", id],
       });
     },
     onError: (data) => {
@@ -57,9 +79,6 @@ export const useFavourites = () => {
     removeMutate(id);
   }
 
-  const isFavourite = (movieId: number) => {
-    return data?.favourites?.some((fav: MovieType) => fav.id === movieId);
-  };
 
-  return { data, isLoading, error, isFavourite, handleRemove, handleAdd, isPending };
+  return { data, isLoading, error, handleRemove, handleAdd, isPending, isFavourite };
 };

@@ -50,7 +50,9 @@ const MoviePage = () => {
 
   const [openLogin, setOpenLogin] = useState(false)
 
-  const { isFavourite, handleAdd, handleRemove } = useFavourites();
+  const { isFavourite, handleAdd, handleRemove } = useFavourites({ id: movieId });
+
+
 
   const handleFavouriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -61,14 +63,14 @@ const MoviePage = () => {
     }
     if (!movie) return;
 
-    if (isFavourite(movie.id)) {
+    if (isFavourite) {
       handleRemove(movie.id);
     } else {
       handleAdd(movie);
     }
   };
 
-  const movieInFavorites = movie?.id ? isFavourite(movie.id) : false;
+  const movieInFavorites = isFavourite
 
   const [trailerOpen, setTrailerOpen] = useState(false);
 
@@ -198,7 +200,7 @@ const MoviePage = () => {
                     >
                       <Heart
                         size={40}
-                        className={`transition-all duration-300 stroke-[1px] ${movieInFavorites
+                        className={`transition-all duration-300 stroke-[1px] ${isFavourite
                           ? "text-red-500 fill-red-500 scale-110"
                           : ""
                           }`}

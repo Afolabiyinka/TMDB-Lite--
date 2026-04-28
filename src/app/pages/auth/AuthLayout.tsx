@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import useMovies from "../../hooks/movies/useMovies";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { Autoplay } from "swiper/modules";
@@ -6,10 +6,16 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
+import { useUser } from "@/app/hooks/user/useUser";
 
 const AuthLayout = () => {
   const { movies, error, isLoading } = useMovies();
   const [activeIndex, setActiveIndex] = useState(0);
+  const { fetchedUser } = useUser()
+
+  if (fetchedUser) {
+    return <Navigate to={`/`} />
+  }
 
   return (
     <div className="w-full h-screen p-6 flex flex-col md:flex-row justify-center items-center gap-4">

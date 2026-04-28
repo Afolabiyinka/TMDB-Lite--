@@ -20,7 +20,7 @@ const HomePage = () => {
   } = useMovies();
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full flex justify-center items-center flex-col">
       <div className={`flex flex-col justify-center items-center h-fit`}>
         {isLoading ? (
           <div className="h-full w-full grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center items-center md:px-10 p-4">

@@ -1,17 +1,13 @@
 import {
   Card,
   Typography,
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
+
   Chip,
 } from "@material-tailwind/react";
-import { Heart, Loader2, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import type { MovieType } from "../../types/movie";
-import { useFavourites } from "@/app/hooks/favourites/useFavourites";
 import { useState } from "react";
-import { useUser } from "@/app/hooks/user/useUser";
 import { LoginModal } from "../LoginModal";
 
 const MovieCard = ({ movie }: { movie: MovieType }) => {
@@ -19,25 +15,7 @@ const MovieCard = ({ movie }: { movie: MovieType }) => {
 
   const [openLogin, setOpenLogin] = useState(false)
 
-  const { isFavourite, handleAdd, handleRemove, isPending } = useFavourites();
-  const { fetchedUser, userLoading } = useUser()
-  const handleFavouriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
 
-    if (!fetchedUser && !userLoading) {
-      setOpenLogin(true)
-      return
-    }
-    if (!movie) return;
-
-    if (isFavourite(movie.id)) {
-      handleRemove(movie.id);
-    } else {
-      handleAdd(movie);
-    }
-  };
-
-  const movieInFavorites = movie?.id ? isFavourite(movie.id) : false;
 
   return (
     <>
@@ -59,32 +37,7 @@ const MovieCard = ({ movie }: { movie: MovieType }) => {
               <p className="font-bold">{movie?.vote_average?.toFixed(1)}</p>
             </Chip>
           </span>
-          <span>
-            <Tooltip>
-              <TooltipTrigger>
-                <button
-                  className={`hover:border  rounded-full w-12 flex justify-center items-center h-12 backdrop-blur-2xl shadow-md`}
-                  onClick={handleFavouriteClick}
-                >
-                  {isPending ? <Loader2 className="animate-spin" /> : <Heart
-                    size={30}
-                    className={`stroke-[1px] ${movieInFavorites
-                      ? "fill-red-500 text-red-500 transition-all duration-200 "
-                      : ""
-                      }`}
-                  />}
-                </button>
-              </TooltipTrigger>
 
-              <TooltipContent>
-                <p>
-                  {movieInFavorites
-                    ? "Remove from favourite"
-                    : "Add to favourite"}
-                </p>
-              </TooltipContent>
-            </Tooltip>
-          </span>
         </div>
         <div className="h-[21rem] w-full overflow-hidden">
           {movie.poster_path ? (
