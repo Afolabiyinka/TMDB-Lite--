@@ -3,13 +3,17 @@ import MovieCard from "../../components/movie/MovieCard";
 import { Link } from "react-router-dom";
 import { Film, Heart } from "lucide-react";
 import { Button } from "@material-tailwind/react";
-import { useFavourites } from "@/app/hooks/favourites/useFavourites";
 import MovieCardSkeleton from "@/app/components/movie/DummyCard";
 import ScrollableCardRow from "@/app/components/ScrollableSection";
+import { getFavourites } from "@/app/services/favouritesRequest";
+import { useQuery } from "@tanstack/react-query";
 
 const Favourites = () => {
-  const { data, isLoading, error } = useFavourites();
 
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["favourites"],
+    queryFn: getFavourites,
+  });
   if (isLoading || error) {
     return (
       <div className="w-screen h-full p-10 flex justify-center items-center">
