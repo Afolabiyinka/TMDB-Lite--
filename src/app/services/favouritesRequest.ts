@@ -2,8 +2,8 @@ import { prodEndpoint } from "../constants/api-data";
 import type { Favourites } from "../types/favourites";
 import type { MovieType } from "../types/movie";
 
-const getFavourites = async (): Promise<Favourites> => {
-    const res = await fetch(`${prodEndpoint}api/favourites/`, {
+const getFavourites = async (page: number): Promise<Favourites> => {
+    const res = await fetch(`${prodEndpoint}api/favourites?page=${page}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

@@ -4,31 +4,26 @@ import { Link } from "react-router-dom";
 import { Film, Heart } from "lucide-react";
 import { Button } from "@material-tailwind/react";
 import MovieCardSkeleton from "@/app/components/movie/DummyCard";
-import ScrollableCardRow from "@/app/components/ScrollableSection";
-import { getFavourites } from "@/app/services/favouritesRequest";
-import { useQuery } from "@tanstack/react-query";
+import Pagination from "@/app/components/Pagination";
+import { useFavourites } from "@/app/hooks/favourites/useFavourites";
 
 const Favourites = () => {
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["favourites"],
-    queryFn: getFavourites,
-  });
+
+  const { currentPage, error, favourites, handleNextPage, handlePrevPage, isLoading, data } = useFavourites({})
   if (isLoading || error) {
     return (
-      <div className="w-screen h-full p-10 flex justify-center items-center">
-        <ScrollableCardRow>
-          {Array.from({ length: 15 }).map((_, index) => (
-            <MovieCardSkeleton key={index} />
-          ))}
-        </ScrollableCardRow>
+      <div className="h-full w-full grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center items-center md:px-10 p-4">
+        {Array.from({ length: 10 }).map((_, index) => (
+          <MovieCardSkeleton key={index} />
+        ))}
       </div>
     );
   }
 
   return (
     <div className="text-center flex justify-center items-center w-full">
-      {data?.favourites?.length === 0 ? (
+      {favourites?.length === 0 ? (
         <div className="flex flex-col items-center justify-center h-screen gap-6 relative overflow-hidden w-full">
 
           <motion.div
@@ -77,17 +72,24 @@ const Favourites = () => {
       ) : (
         <div className="py-3 flex flex-col items-center  h-full w-screen p-10">
           <h1 className="text-4xl mb-3">
-            {data?.favourites.length} Movies added to Favourites
+            {data?.total} Movies added to Favourites
           </h1>
 
-          <ScrollableCardRow>
-            {data?.favourites?.map((movie) => (
-              <div className="flex-shrink-0 w-80" key={movie.id}>
-                <MovieCard movie={movie} />
-              </div>
-            ))}
-          </ScrollableCardRow>
+          <div className="w-full flex flex-col">
+            <div className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center p-3 md:px-8 items-center">
+              {favourites.map((movie) => (
+                <MovieCard movie={movie} key={movie.id} />
+              ))}
+            </div>
+          </div>
+          <Pagination
+            currentPage={currentPage}
+            handlePrevPage={handlePrevPage}
+            maxPages={data?.totalPages}
+            handleNextPage={handleNextPage}
+          />
         </div>
+
       )}
     </div>
   );

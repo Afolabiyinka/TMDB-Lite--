@@ -7,6 +7,7 @@ import { Avatar } from "@material-tailwind/react";
 import { useSearchStore } from "@/app/store/searchStore.ts";
 import CustomInput from "@/app/components/ui/custom-input";
 import { useUser } from "@/app/hooks/user/useUser";
+import { useThemeStore } from "@/app/store/themeStore";
 
 const LINKS = [
   {
@@ -39,7 +40,7 @@ function NavList({ closeMenu }: { closeMenu: () => void }) {
                 : ""
                 }`}
             >
-              <Icon className="h-4 w-4" />
+              <Icon className="h-4 w-4" fill="none" strokeWidth={2} />
             </div>
             <span
               className={`ml-1 transition-transform duration-300 group-hover:translate-x-1 `}

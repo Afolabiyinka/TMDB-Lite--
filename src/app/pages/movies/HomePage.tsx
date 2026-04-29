@@ -41,8 +41,10 @@ const HomePage = () => {
             </Button>
           </div>
         ) : (
-          <div className="w-full flex flex-col">
-            <div className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center p-3 md:px-8 items-center">
+          <div className="w-full flex flex-col justify-center items-center space-y-4">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-widest y-4 px-3 md:px-8 font-['Bebas_Neue']">
+              Popular Right Now
+            </h1>            <div className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center p-3 md:px-8 items-center">
               {movies.map((movie: MovieType) => (
                 <MovieCard movie={movie} key={movie.id} />
               ))}

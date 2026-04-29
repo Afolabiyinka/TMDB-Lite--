@@ -7,6 +7,7 @@ import {
   Heart,
   Play,
   RefreshCcw,
+  Loader2,
 } from "lucide-react";
 import errorAnimation from "@/Assets/ErrorAnimation.json";
 
@@ -24,6 +25,8 @@ import MoviePageSkeleton from "@/app/components/movie/MoviePageSkeleton";
 import { useFavourites } from "@/app/hooks/favourites/useFavourites";
 import { useUser } from "@/app/hooks/user/useUser";
 import { LoginModal } from "@/app/components/LoginModal";
+import { useAddFavourites } from "@/app/hooks/favourites/useAddFavourites";
+import { useRemoveFavourite } from "@/app/hooks/favourites/useRemoveFavourite";
 
 const MoviePage = () => {
   const { id } = useParams();
@@ -50,7 +53,10 @@ const MoviePage = () => {
 
   const [openLogin, setOpenLogin] = useState(false)
 
-  const { isFavourite, handleAdd, handleRemove } = useFavourites({ id: movieId });
+  const { isFavourite, checking } = useFavourites({ id: movieId });
+
+  const { handleAdd, isPending } = useAddFavourites({ id: movieId })
+  const { handleRemove, removingFavourite } = useRemoveFavourite({ id: movieId })
 
 
 
@@ -197,14 +203,15 @@ const MoviePage = () => {
                       color="secondary"
                       className="flex items-center justify-center w-16 h-16"
                       onClick={handleFavouriteClick}
+                      disabled={(isPending || checking || removingFavourite)}
                     >
-                      <Heart
+                      {(isPending || checking || removingFavourite) ? <Loader2 size={40} className="animate-spin" /> : <Heart
                         size={40}
                         className={`transition-all duration-300 stroke-[1px] ${isFavourite
                           ? "text-red-500 fill-red-500 scale-110"
                           : ""
                           }`}
-                      />
+                      />}
                     </IconButton>
                   </Tooltip.Trigger>
                   <Tooltip.Content>

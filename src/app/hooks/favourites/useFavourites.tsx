@@ -1,24 +1,56 @@
-import useToastMessage from "@/app/libs/useToastMsg";
 import {
-  addToFavourites,
   getFavourites,
   inFavourites,
-  removeFromFavourites,
 } from "@/app/services/favouritesRequest";
 import type { MovieType } from "@/app/types/movie";
-import { queryClient } from "@/main";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 export const useFavourites = ({ id }: { id?: string | number }) => {
-  const { toastError, toastLoading, toastSuccess } = useToastMessage();
+
+  const location = useLocation()
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const initialPage = parseInt(searchParams.get("page") || "1", 10);
+  const [currentPage, setCurrentPage] = useState<number>(initialPage);
+
+  const handlePrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+  const handleNextPage = () => setCurrentPage((prev) => prev + 1);
+  const [favourites, setFavourites] = useState<MovieType[]>([]);
+
+
+  useEffect(() => {
+    const allowedPaths = ["/want-to-watch"];
+    if (allowedPaths.includes(location.pathname)) {
+      setSearchParams({ page: currentPage.toString() });
+    }
+  }, [currentPage, location.pathname, setSearchParams]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+  }, [currentPage]);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["favourites"],
-    queryFn: getFavourites,
+    queryKey: ["favourites", currentPage],
+    queryFn: () => getFavourites(currentPage),
   });
 
+
+  useEffect(() => {
+    try {
+      if (data) {
+        setFavourites(data.favourites);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, [data]);
+
+
   // Checking if its in favourites
-  const { data: favouriteData } = useQuery({
+  const { data: favouriteData, isLoading: checking } = useQuery({
     queryKey: ["favourite", id],
     queryFn: () => {
       if (!id) throw new Error("Movie id is required");
@@ -29,56 +61,5 @@ export const useFavourites = ({ id }: { id?: string | number }) => {
 
   const isFavourite = favouriteData?.inFavourites ?? false;
 
-  //Adding a movie to favourites
-  const { mutate: addMutate, isPending } = useMutation({
-    mutationFn: (movie: MovieType) => addToFavourites(movie),
-    onSuccess: (data) => {
-      toastSuccess(data.message || "Added to favourites");
-      queryClient.invalidateQueries({
-        queryKey: ["favourites"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["favourite", id],
-      });
-    },
-    onError: (data) => {
-      toastError(data.message || "Something went wrong");
-    },
-    onMutate: () => {
-      toastLoading("Updating favourites...");
-    },
-
-  });
-
-  //Removing a movie from favourites
-
-  const { mutate: removeMutate } = useMutation({
-    mutationFn: (id: string | number) => removeFromFavourites(id),
-    onSuccess: (data) => {
-      toastSuccess(data.message || "Removed from favourites");
-      queryClient.invalidateQueries({
-        queryKey: ["favourites"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["favourite", id],
-      });
-    },
-    onError: (data) => {
-      toastError(data.message || "Something went wrong");
-    },
-    onMutate: () => {
-      toastLoading("Updating favourites...");
-    },
-  });
-
-  function handleAdd(movie: MovieType) {
-    addMutate(movie);
-  }
-
-  function handleRemove(id: number | string) {
-    removeMutate(id);
-  }
-
-
-  return { data, isLoading, error, handleRemove, handleAdd, isPending, isFavourite };
+  return { favourites, isLoading, error, isFavourite, currentPage, handleNextPage, handlePrevPage, data, checking };
 };
