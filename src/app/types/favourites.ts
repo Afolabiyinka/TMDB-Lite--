@@ -7,3 +7,7 @@ export interface Favourites {
     totalPages: number;
 
 }
+
+export interface ResponseType {
+    message: string
+}

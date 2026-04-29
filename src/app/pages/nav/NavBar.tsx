@@ -7,7 +7,6 @@ import { Avatar } from "@material-tailwind/react";
 import { useSearchStore } from "@/app/store/searchStore.ts";
 import CustomInput from "@/app/components/ui/custom-input";
 import { useUser } from "@/app/hooks/user/useUser";
-import { useThemeStore } from "@/app/store/themeStore";
 
 const LINKS = [
   {

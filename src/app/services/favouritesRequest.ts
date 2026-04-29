@@ -1,5 +1,5 @@
 import { prodEndpoint } from "../constants/api-data";
-import type { Favourites } from "../types/favourites";
+import type { Favourites, ResponseType, } from "../types/favourites";
 import type { MovieType } from "../types/movie";
 
 const getFavourites = async (page: number): Promise<Favourites> => {
@@ -20,7 +20,7 @@ const getFavourites = async (page: number): Promise<Favourites> => {
 }
 
 
-const inFavourites = async (id: string | number) => {
+const inFavourites = async (id: string | number): Promise<boolean> => {
     const res = await fetch(`${prodEndpoint}api/favourites/inFavourites/${id}`, {
         method: "GET",
         credentials: "include",
@@ -32,7 +32,7 @@ const inFavourites = async (id: string | number) => {
     return data
 
 }
-const addToFavourites = async (movie: MovieType) => {
+const addToFavourites = async (movie: MovieType): Promise<ResponseType> => {
 
     const res = await fetch(`${prodEndpoint}api/favourites/add`, {
         method: "POST",

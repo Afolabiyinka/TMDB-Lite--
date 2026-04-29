@@ -1,21 +1,23 @@
 import { prodEndpoint } from "../constants/api-data";
+import type { AuthResponse, UserResponse } from "../types/auth";
 import type { EditUserPayload } from "../types/User";
 
-const getUser = async () => {
+const getUser = async (): Promise<UserResponse> => {
     try {
         const res = await fetch(`${prodEndpoint}api/auth/me`, {
             credentials: "include",
         });
 
-        if (!res.ok) return null;
+        if (!res.ok) { throw new Error("Failed to update user"); }
+        ;
 
         return await res.json();
-    } catch {
-        return null;
+    } catch (err) {
+        throw new Error("Failed to update user");;
     }
 };
 
-const editUser = async (payload: EditUserPayload) => {
+const editUser = async (payload: EditUserPayload): Promise<AuthResponse> => {
     try {
         const res = await fetch(`${prodEndpoint}api/auth/edit-user`, {
             method: "PUT",
@@ -32,7 +34,6 @@ const editUser = async (payload: EditUserPayload) => {
 
         return await res.json();
     } catch (err) {
-        console.error(err);
         throw new Error("Failed to update user");
     }
 };

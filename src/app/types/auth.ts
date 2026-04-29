@@ -13,3 +13,11 @@ export interface LoginPayload {
 export interface AuthResponse {
     message: string;
 }
+export interface UserResponse {
+    user: {
+        username: string,
+        email: string,
+        picture: string
+
+    }
+}
