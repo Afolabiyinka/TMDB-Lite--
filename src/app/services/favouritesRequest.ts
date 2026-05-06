@@ -20,7 +20,7 @@ const getFavourites = async (page: number): Promise<Favourites> => {
 }
 
 
-const inFavourites = async (id: string | number): Promise<boolean> => {
+const inFavourites = async (id: string | number) => {
     const res = await fetch(`${prodEndpoint}api/favourites/inFavourites/${id}`, {
         method: "GET",
         credentials: "include",

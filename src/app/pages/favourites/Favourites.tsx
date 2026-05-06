@@ -70,7 +70,7 @@ const Favourites = () => {
           </motion.div>
         </div>
       ) : (
-        <div className="py-3 flex flex-col items-center  h-full w-screen p-10">
+        <div className="py-3 flex flex-col items-center  h-full w-screen p-2 md:p-10">
           <h1 className="text-4xl mb-3">
             {data?.total} Movies added to Favourites
           </h1>

@@ -59,7 +59,7 @@ export const useFavourites = ({ id }: { id?: string | number }) => {
     retry: false
   });
 
-  const isFavourite = favouriteData ?? false;
+  const isFavourite = favouriteData?.inFavourites ?? false;
 
   return { favourites, isLoading, error, isFavourite, currentPage, handleNextPage, handlePrevPage, data, checking };
 };
