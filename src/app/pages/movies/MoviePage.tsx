@@ -1,14 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
-  ThumbsUp,
-  Calendar,
-  Star,
   Heart,
-  Play,
   RefreshCcw,
   Loader2,
 } from "lucide-react";
+
+import { PlayIcon, StarIcon, CalendarIcon, ThumbsUpIcon } from "@phosphor-icons/react"
 import errorAnimation from "@/Assets/ErrorAnimation.json";
 
 import Lottie from "lottie-react";
@@ -159,7 +157,7 @@ const MoviePage = () => {
                 color="secondary"
                 variant="ghost"
               >
-                <Star className="text-yellow-400 mr-1 stroke-[1px]" />
+                <StarIcon className="text-yellow-400 mr-1 stroke-[1px]" />
                 <p>{movie?.vote_average?.toFixed(1)}</p>
               </Chip>
               {formattedDate && (
@@ -168,7 +166,7 @@ const MoviePage = () => {
                   color="secondary"
                   variant="ghost"
                 >
-                  <Calendar className="w-4 h-4 text-blue-400 mr-1" />
+                  <CalendarIcon className="w-4 h-4 text-blue-400 mr-1" />
                   {formattedDate}
                 </Chip>
               )}
@@ -187,7 +185,7 @@ const MoviePage = () => {
                       color="secondary"
                       size="xl"
                     >
-                      <ThumbsUp size={40} className="stroke-[1px]" />
+                      <ThumbsUpIcon size={40} className="stroke-[1px]" />
                     </IconButton>
                   </Tooltip.Trigger>
                   <Tooltip.Content>
@@ -232,7 +230,7 @@ const MoviePage = () => {
                 className="w-full"
                 onClick={() => setTrailerOpen(!trailerOpen)}
               >
-                <Play className="mr-2 h-7 w-7 stroke-[1px]" />
+                <PlayIcon className="mr-2 h-7 w-7 stroke-[1px]" />
                 <p className="text-xl">Watch trailer</p>
               </Button>
             </div>

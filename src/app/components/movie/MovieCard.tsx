@@ -4,7 +4,7 @@ import {
 
   Chip,
 } from "@material-tailwind/react";
-import { Star } from "lucide-react";
+import { StarIcon } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
 import type { MovieType } from "../../types/movie";
 import { useState } from "react";
@@ -33,7 +33,7 @@ const MovieCard = ({ movie }: { movie: MovieType }) => {
               color="secondary"
               variant="solid"
             >
-              <Star className="text-yellow-400 h-4 w-4 stroke-[1px]" />
+              <StarIcon className="text-yellow-400 h-4 w-4 stroke-[1px]" />
               <p className="font-bold">{movie?.vote_average?.toFixed(1)}</p>
             </Chip>
           </span>

@@ -1,22 +1,23 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Search, Home, X, Menu, Clapperboard } from "lucide-react";
+import { Search, X, Menu, } from "lucide-react";
 import { ModeToggle } from "@/app/components/ModeToggle.tsx";
 import tmdbLogo from "@/Assets/the real logo.svg";
 import { Avatar } from "@material-tailwind/react";
 import { useSearchStore } from "@/app/store/searchStore.ts";
 import CustomInput from "@/app/components/ui/custom-input";
 import { useUser } from "@/app/hooks/user/useUser";
+import { HouseIcon, HeartIcon, MagnifyingGlassIcon } from "@phosphor-icons/react"
 
 const LINKS = [
   {
-    icon: Home,
+    icon: HouseIcon,
     title: "Home",
     href: "/",
   },
   {
-    icon: Clapperboard,
-    title: "Want to watch",
+    icon: HeartIcon,
+    title: "Favourites",
     href: "/want-to-watch",
   },
 ];
@@ -26,29 +27,35 @@ function NavList({ closeMenu }: { closeMenu: () => void }) {
 
   return (
     <ul className="mt-4 flex flex-col gap-y-3 lg:mt-0 lg:flex-row lg:items-center lg:gap-x-6">
-      {LINKS.map(({ icon: Icon, title, href }) => (
-        <li key={title}>
-          <Link
-            to={href}
-            onClick={closeMenu}
-            className="flex items-center gap-x-2 p-2 text-sm font-medium transition-colors duration-100 group"
-          >
-            <div
-              className={`"flex items-center justify-center" ${location.pathname === href
-                ? "rounded-full bg-black text-white p-2 transition-all duration-500 dark:bg-white dark:text-black "
-                : ""
-                }`}
+      {LINKS.map(({ icon: Icon, title, href }) => {
+        const isActive = location.pathname === href;
+
+        return (
+          <li key={title}>
+            <Link
+              to={href}
+              onClick={closeMenu}
+              className="flex items-center gap-x-2 p-2 text-sm font-medium transition-colors duration-100 group"
             >
-              <Icon className="h-4 w-4" fill="none" strokeWidth={2} />
-            </div>
-            <span
-              className={`ml-1 transition-transform duration-300 group-hover:translate-x-1 `}
-            >
-              {title}
-            </span>
-          </Link>
-        </li>
-      ))}
+              <div
+                className={`flex items-center justify-center ${isActive
+                  ? "rounded-full bg-black text-white p-2 transition-all duration-500 dark:bg-white dark:text-black"
+                  : ""
+                  }`}
+              >
+                <Icon
+                  size={20}
+                  weight={isActive ? "fill" : "regular"}
+                />
+              </div>
+
+              <span className="ml-1 transition-transform duration-300 group-hover:translate-x-1">
+                {title}
+              </span>
+            </Link>
+          </li>
+        );
+      })}
     </ul>
   );
 }
@@ -127,7 +134,7 @@ export default function NavBar() {
 
             <CustomInput
               placeholder="Search here..."
-              icon={<Search />}
+              icon={<MagnifyingGlassIcon size={20} />}
               type="search"
               className="hidden lg:flex"
               value={searchQuery}
@@ -144,7 +151,7 @@ export default function NavBar() {
             >
               <CustomInput
                 placeholder="Search here..."
-                icon={<Search />}
+                icon={<MagnifyingGlassIcon size={20} />}
                 type="search"
                 className=""
                 value={searchQuery}
