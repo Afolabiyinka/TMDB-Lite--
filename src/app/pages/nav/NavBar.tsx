@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Search, X, Menu, } from "lucide-react";
 import { ModeToggle } from "@/app/components/ModeToggle.tsx";
 import tmdbLogo from "@/Assets/the real logo.svg";
-import { Avatar } from "@material-tailwind/react";
+import { Avatar, Spinner } from "@material-tailwind/react";
 import { useSearchStore } from "@/app/store/searchStore.ts";
 import CustomInput from "@/app/components/ui/custom-input";
 import { useUser } from "@/app/hooks/user/useUser";
@@ -67,7 +67,8 @@ export default function NavBar() {
   const [showSearchInput, setShowSearchInput] = useState(false);
   const { searchQuery, setSearchQuery } = useSearchStore();
 
-  const { fetchedUser } = useUser()
+  const { fetchedUser, userLoading: isUserLoading } = useUser()
+
   useEffect(() => {
     const trimmedQuery = searchQuery.trim();
     if (trimmedQuery.length > 0) {
@@ -167,12 +168,21 @@ export default function NavBar() {
             >
               <Search className="h-6 w-6" />
             </button>
-            {/* //Profile pic */}
+            {/* Profile pic */}
 
-            {fetchedUser && <Avatar
-              src={fetchedUser?.picture || `https://api.dicebear.com/9.x/micah/svg?seed=${fetchedUser?.username}`} onClick={() => navigate("/account")}
-              className="hidden md:block cursor-pointer"
-            />}
+            {isUserLoading ? (
+              <span className="rounded-full animate-pulse bg-gray-400 h-12 w-16">
+              </span>
+            ) : (
+              fetchedUser && (
+                <Avatar
+                  src={fetchedUser?.picture || `https://api.dicebear.com/9.x/micah/svg?seed=${fetchedUser?.username}`}
+                  onClick={() => navigate("/account")}
+                  className="hidden md:block cursor-pointer border"
+                />
+              )
+            )}
+
             {/* Theme toggle */}
             <div className="">
               <ModeToggle />
@@ -200,15 +210,24 @@ export default function NavBar() {
             }`}
         >
           <NavList closeMenu={closeMenu} />
-          {fetchedUser && <Avatar
-            src={fetchedUser?.picture || `https://api.dicebear.com/9.x/micah/svg?seed=${fetchedUser?.username}`} onClick={() => {
-              closeMenu();
-              navigate("/account");
-            }}
-            className="mt-3"
-          />}
+          {isUserLoading ? (
+            <div className="flex items-center justify-center w-10 h-10 mt-3 rounded-full bg-gray-200 dark:bg-gray-800">
+              <Spinner className="h-5 w-5" />
+            </div>
+          ) : (
+            fetchedUser && (
+              <Avatar
+                src={fetchedUser?.picture || `https://api.dicebear.com/9.x/micah/svg?seed=${fetchedUser?.username}`}
+                onClick={() => {
+                  closeMenu();
+                  navigate("/account");
+                }}
+                className="mt-3 cursor-pointer"
+              />
+            )
+          )}
         </div>
       </div>
-    </nav>
+    </nav >
   );
 }

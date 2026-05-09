@@ -14,6 +14,8 @@ export const useLogin = () => {
   });
 
   const navigate = useNavigate();
+
+
   const { toastError, toastLoading, toastSuccess } = useToastMessage()
 
   const { mutate, isPending } = useMutation({
@@ -23,7 +25,11 @@ export const useLogin = () => {
         queryKey: ["user"],
       });
       toastSuccess(data.message);
-      navigate("/");
+      if (window.history.state && window.history.state.idx > 0) {
+        navigate(-1);
+      } else {
+        navigate("/");
+      }
     },
     onError: (error: any) => {
       toastError(error.message);
