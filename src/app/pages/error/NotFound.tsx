@@ -21,7 +21,7 @@ function NotFound() {
           Opps! <br />
           Page not Found!
         </Typography>
-        <Typography className="mt-4 mb-10 text-lg text-gray-500 md:max-w-md">
+        <Typography className="mt-4 mb-10 text-lg text-gray-500 md:text-gray-300 md:max-w-md">
           Don&apos;t worry, our team is already on it. Please refresh the page
           or try again later.
         </Typography>
