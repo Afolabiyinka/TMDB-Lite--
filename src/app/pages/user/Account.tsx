@@ -31,7 +31,7 @@ const AccountPage: React.FC = () => {
       <div className="p-6 w-full max-w-sm text-center space-y-2">
 
         <img
-          src={fetchedUser?.picture || `https://api.dicebear.com/9.x/micah/svg?seed=${fetchedUser?.username}`}
+          src={fetchedUser?.picture || `https://api.dicebear.com/10.x/thumbs/svg?seed=felix`}
           alt={fetchedUser?.username || "User avatar"}
           className="w-24 h-24 rounded-full mx-auto object-cover"
         />

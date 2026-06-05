@@ -19,7 +19,7 @@ export function ModeToggle() {
           <span>
             <IconButton
               color="secondary"
-              variant="outline"
+              variant="ghost"
               isCircular={true}
               size="lg"
               onClick={() => setIsOpen(true)}

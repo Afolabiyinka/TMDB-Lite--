@@ -13,11 +13,16 @@ const Favourites = () => {
   const { currentPage, error, favourites, handleNextPage, handlePrevPage, isLoading, data } = useFavourites({})
   if (isLoading || error) {
     return (
-      <div className="h-full w-full grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center items-center md:px-10 p-4">
-        {Array.from({ length: 10 }).map((_, index) => (
-          <MovieCardSkeleton key={index} />
-        ))}
-      </div>
+      <div className="flex flex-col items-center justify-center  gap-6 relative overflow-hidden w-full mt-4">
+        <h1 className="bg-gray-300 dark:bg-gray-700 animate-pulse h-10 rounded-full md:w-[40%] w-full">
+        </h1>
+        <div className="h-full w-full grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center items-center md:px-10 p-4">
+
+
+          {Array.from({ length: 10 }).map((_, index) => (
+            <MovieCardSkeleton key={index} />
+          ))}
+        </div></div>
     );
   }
 

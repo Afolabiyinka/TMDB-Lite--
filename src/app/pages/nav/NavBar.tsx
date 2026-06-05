@@ -171,12 +171,13 @@ export default function NavBar() {
             {/* Profile pic */}
 
             {isUserLoading ? (
-              <span className="rounded-full animate-pulse bg-gray-400 h-12 w-16">
-              </span>
+              <div className="hidden md:flex items-center justify-center w-20 h-14 rounded-full bg-gray-200 dark:bg-gray-800">
+                <Spinner className="h-5 w-5" />
+              </div>
             ) : (
               fetchedUser && (
                 <Avatar
-                  src={fetchedUser?.picture || `https://api.dicebear.com/9.x/micah/svg?seed=${fetchedUser?.username}`}
+                  src={fetchedUser?.picture || `https://api.dicebear.com/10.x/thumbs/svg?seed=felix`}
                   onClick={() => navigate("/account")}
                   className="hidden md:block cursor-pointer border"
                 />
@@ -217,7 +218,7 @@ export default function NavBar() {
           ) : (
             fetchedUser && (
               <Avatar
-                src={fetchedUser?.picture || `https://api.dicebear.com/9.x/micah/svg?seed=${fetchedUser?.username}`}
+                src={fetchedUser?.picture || `https://api.dicebear.com/10.x/thumbs/svg?seed=felix`}
                 onClick={() => {
                   closeMenu();
                   navigate("/account");
