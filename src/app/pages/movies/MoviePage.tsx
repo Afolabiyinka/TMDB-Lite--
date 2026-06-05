@@ -76,6 +76,10 @@ const MoviePage = () => {
 
   const movieInFavorites = isFavourite
 
+  useEffect(() => {
+    if (movie) document.title = `${movie.title}`;
+  }, [movie]);
+
   const [trailerOpen, setTrailerOpen] = useState(false);
 
   useEffect(() => {
