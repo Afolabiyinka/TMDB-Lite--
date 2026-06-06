@@ -26,7 +26,7 @@ const App = () => {
 
   const { } = useUser()
   return (
-    <div className="font-[Inter]">
+    <div className="font-[Inter] w-full">
       <RoutesConfig />
       <Toaster
         theme={theme}

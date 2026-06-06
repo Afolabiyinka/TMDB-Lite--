@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Search, X, Menu, } from "lucide-react";
 import { ModeToggle } from "@/app/components/ModeToggle.tsx";
 import tmdbLogo from "@/Assets/the real logo.svg";
-import { Avatar, Spinner } from "@material-tailwind/react";
+import { Avatar, IconButton } from "@material-tailwind/react";
 import { useSearchStore } from "@/app/store/searchStore.ts";
 import CustomInput from "@/app/components/ui/custom-input";
 import { useUser } from "@/app/hooks/user/useUser";
@@ -171,9 +171,8 @@ export default function NavBar() {
             {/* Profile pic */}
 
             {isUserLoading ? (
-              <div className="hidden md:flex items-center justify-center w-20 h-14 rounded-full bg-gray-200 dark:bg-gray-800">
-                <Spinner className="h-5 w-5" />
-              </div>
+              <IconButton className="hidden md:flex items-center  animate-pulse justify-center " disabled color="secondary" isCircular size="lg" >
+              </IconButton>
             ) : (
               fetchedUser && (
                 <Avatar
@@ -212,9 +211,8 @@ export default function NavBar() {
         >
           <NavList closeMenu={closeMenu} />
           {isUserLoading ? (
-            <div className="flex items-center justify-center w-10 h-10 mt-3 rounded-full bg-gray-200 dark:bg-gray-800">
-              <Spinner className="h-5 w-5" />
-            </div>
+            <IconButton className="hidden md:flex items-center  animate-pulse justify-center " disabled color="secondary" isCircular size="lg" >
+            </IconButton>
           ) : (
             fetchedUser && (
               <Avatar

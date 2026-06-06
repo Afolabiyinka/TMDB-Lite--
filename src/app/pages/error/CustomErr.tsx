@@ -35,17 +35,19 @@ const CustomError = ({ message }: { message?: string }) => {
                 )}
 
                 <div className="flex flex-col md:flex-row gap-3  items-center justify-center">
-                    <Button onClick={() => window.location.reload()} size={`lg`}>
-                        <Loader2 />
+                    <Button onClick={() => window.location.reload()} size={`lg`} isPill>
+                        <Loader2 className="mr-2" />
                         Try again
                     </Button>
 
                     <Button
+                        isPill
                         size={`lg`}
                         variant="outline"
                         onClick={() => navigate("/dashboard")}
+
                     >
-                        <Home />
+                        <Home className="mr-2" />
                         Go home
                     </Button>
                 </div>

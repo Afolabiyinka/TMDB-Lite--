@@ -20,7 +20,7 @@ const HomePage = () => {
   } = useMovies();
 
   return (
-    <div className="w-full h-full flex justify-center items-center flex-col">
+    <div className="w-full h-full flex justify-center  flex-col">
       <div className={`flex flex-col justify-center items-center h-fit`}>
         {isLoading ? (
           <div className="h-full w-full grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center items-center md:px-10 p-4">
@@ -43,7 +43,7 @@ const HomePage = () => {
         ) : (
           <div className="w-full flex flex-col justify-center items-center space-y-4">
 
-            <div className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center p-3 md:px-8 items-center">
+            <div className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center p-3 md:px-8 items-center w-full">
               {movies.map((movie: MovieType) => (
                 <MovieCard movie={movie} key={movie.id} />
               ))}
