@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useSignup } from "../../hooks/auth/useSignUp";
 
 const SignUp = () => {
-  const { handleSignup, setSignUpData, signupData } = useSignup();
+  const { handleSignup, setSignUpData, signupData, loading } = useSignup();
   return (
     <div className="h-full w-full flex flex-col justify-center items-center p-4  md:px-8">
       <div className="w-full md:max-w-sm flex flex-col gap-6">
@@ -48,7 +48,7 @@ const SignUp = () => {
             onChange={(e) => setSignUpData({ ...signupData, password: e })}
           />
 
-          <Button isPill type="submit" size="xl">
+          <Button isPill type="submit" size="xl" disabled={loading}>
             Create Account
             <ArrowRight size={18} className="ml-2" />
           </Button>

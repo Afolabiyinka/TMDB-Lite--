@@ -1,34 +1,40 @@
-import { useLocation } from "react-router-dom";
-import { useSearchStore } from "../../store/searchStore";
-import { useEffect } from "react";
-import { searchMovies } from "../../services/movieRequest";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { searchMovies } from "@/app/services/movieRequest";
+import { useDebounce } from "../useDebounce";
 
 export const useSearch = () => {
-  const { searchQuery, setSearchQuery } = useSearchStore();
-
   const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const query = queryParams.get("q") || "";
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (query?.trim()) {
-      setSearchQuery(query);
-    }
-  }, [query, setSearchQuery]);
+  const query = useMemo(() => {
+    return new URLSearchParams(location.search).get("q") || "";
+  }, [location.search]);
+
+  // local input state (for instant typing UX)
+  const setQuery = (value: string) => {
+    navigate(`/search?q=${encodeURIComponent(value)}`);
+  };
+
+  const debouncedQuery = useDebounce(query, 700);
 
   const {
-    data: searchresults = [],
+    data: searchresults,
     error: searchError,
     isLoading: searchLoading,
   } = useQuery({
-    queryKey: ["Searchresults", searchQuery],
-    queryFn: () => searchMovies(searchQuery),
-    enabled: !!searchQuery.trim(),
+    queryKey: ["search-results", debouncedQuery],
+    queryFn: () => searchMovies(debouncedQuery),
+    enabled: !!debouncedQuery.trim(),
+    retry: false,
+    refetchOnWindowFocus: false,
   });
   return {
     searchLoading,
     searchresults,
     searchError,
+    query,
+    setQuery,
   };
 };

@@ -11,10 +11,8 @@ const SearchPage = () => {
 
   return (
     <div
-      className="w-full p-10 flex flex-col
-    "
-    >
-      <span>
+      className="w-full md:p-10 flex flex-col items-center md:justify-start justify-center">
+      <span className="w-full md:ml-12 flex justify-start p-3">
         <BackButton />
       </span>
       {searchLoading ? (
@@ -26,11 +24,11 @@ const SearchPage = () => {
       ) : searchError ? (
         <NoResults />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 w-full">
-          {searchresults.length === 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 w-full justify-center items-center">
+          {searchresults?.length === 0 ? (
             <NoResults />
           ) : (
-            searchresults.map((searchresult: MovieType) => (
+            searchresults?.map((searchresult: MovieType) => (
               <MovieCard movie={searchresult} />
             ))
           )}

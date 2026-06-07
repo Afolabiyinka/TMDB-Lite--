@@ -6,11 +6,11 @@ import {
   Loader2,
 } from "lucide-react";
 
-import { PlayIcon, StarIcon, CalendarIcon, ThumbsUpIcon } from "@phosphor-icons/react"
+import { PlayIcon, StarIcon, CalendarIcon, ThumbsUpIcon, } from "@phosphor-icons/react"
 import errorAnimation from "@/Assets/ErrorAnimation.json";
 
 import Lottie from "lottie-react";
-import { Button, Chip, IconButton, Tooltip } from "@material-tailwind/react";
+import { Button, Chip, IconButton, Tooltip, } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 
 import Recommendations from "@/app/components/movie/movies-pages/recommendations";
@@ -98,14 +98,15 @@ const MoviePage = () => {
 
   if (movieError)
     return (
-      <div className="flex justify-center h-screen w-screen items-center flex-col gap-4">
+      <div className="flex justify-center items-center flex-col min-h-screen gap-4">
         <Lottie
           animationData={errorAnimation}
-          style={{ width: "200px", height: "200px" }}
+          style={{ width: "150px", height: "150px" }}
         />
-        <h1 className="text-4xl">{movieError.message} movie details</h1>
-        <Button isPill size="xl" onClick={() => refetch()}>
-          <RefreshCcw className="h-5 w-6 mr-2" /> Refresh
+        <h1 className={`text-3xl`}>O'ops Something went wrong</h1>
+        <Button size="xl" isPill onClick={() => refetch()}>
+          <RefreshCcw className="mr-3 stroke-[1.25px]" />
+          Retry
         </Button>
       </div>
     );

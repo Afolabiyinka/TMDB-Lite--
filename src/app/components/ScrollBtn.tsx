@@ -1,5 +1,5 @@
 import { IconButton } from "@material-tailwind/react";
-import { ChevronUp } from "lucide-react";
+import { ArrowUpIcon } from "@phosphor-icons/react"
 import { useState, useEffect } from "react";
 export default function ScrollBtn() {
   const [isVisible, setIsVisible] = useState(false);
@@ -31,7 +31,7 @@ export default function ScrollBtn() {
         className="fixed bottom-12 right-5  z-50 cursor-pointer"
         onClick={scrollToTop}
       >
-        <ChevronUp size={20} />
+        <ArrowUpIcon size={20} />
       </IconButton>
     )
   );

@@ -1,5 +1,5 @@
 import { IconButton, Typography } from "@material-tailwind/react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeftIcon, ArrowRightIcon } from "@phosphor-icons/react";
 
 interface PaginationProps {
   currentPage: number;
@@ -15,7 +15,6 @@ const Pagination = ({
 }: PaginationProps) => {
   return (
     <div className="flex items-center gap-6 justify-center py-4">
-      {/* Previous Button */}
       <IconButton
         onClick={handlePrevPage}
         color="secondary"
@@ -25,14 +24,13 @@ const Pagination = ({
         disabled={currentPage === 1}
         className="disabled:bg-gray-400 rounded-3xl"
       >
-        <ArrowLeft className="h-6 w-6" />
+        <ArrowLeftIcon className="h-6 w-6" />
       </IconButton>
 
       <Typography className="pointer-events-none" disabled>
         {currentPage}
       </Typography>
 
-      {/* Next Button */}
       <IconButton
         isCircular
         onClick={handleNextPage}
@@ -42,7 +40,7 @@ const Pagination = ({
         disabled={currentPage === maxPages}
         className="disabled:bg-gray-400  rounded-3xl "
       >
-        <ArrowRight className="h-6 w-6" />
+        <ArrowRightIcon className="h-6 w-6" />
       </IconButton>
     </div>
   );

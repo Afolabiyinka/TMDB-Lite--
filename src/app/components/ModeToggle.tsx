@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Moon, Sun, Laptop } from "lucide-react";
+import { MoonIcon, SunIcon, LaptopIcon } from "@phosphor-icons/react"
 import { useThemeStore, type Theme } from "../store/themeStore";
 
 import { Menu, IconButton } from "@material-tailwind/react";
@@ -24,7 +24,7 @@ export function ModeToggle() {
               size="lg"
               onClick={() => setIsOpen(true)}
             >
-              {theme === "light" ? <Sun /> : <Moon />}
+              {theme === "light" ? <SunIcon size={25} /> : <MoonIcon size={25} />}
             </IconButton>
           </span>
         </Menu.Trigger>
@@ -32,15 +32,15 @@ export function ModeToggle() {
         {isOpen && (
           <Menu.Content className="z-50" color="secondary">
             <Menu.Item onClick={() => handleClick("light")}>
-              <Sun className="mr-2 h-[18px] w-[18px]" /> Light
+              <SunIcon className="mr-2 h-[18px] w-[18px]" /> Light
             </Menu.Item>
 
             <Menu.Item onClick={() => handleClick("dark")}>
-              <Moon className="mr-2 h-[18px] w-[18px]" /> Dark
+              <MoonIcon className="mr-2 h-[18px] w-[18px]" /> Dark
             </Menu.Item>
 
             <Menu.Item onClick={() => handleClick("system")}>
-              <Laptop className="mr-2 h-[18px] w-[18px]" /> System
+              <LaptopIcon className="mr-2 h-[18px] w-[18px]" /> System
             </Menu.Item>
           </Menu.Content>
         )}

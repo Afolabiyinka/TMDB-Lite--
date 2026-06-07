@@ -20,8 +20,8 @@ const HomePage = () => {
   } = useMovies();
 
   return (
-    <div className="w-full h-full flex justify-center  flex-col">
-      <div className={`flex flex-col justify-center items-center h-fit`}>
+    <div className="w-full h-full flex justify-center items-center flex-col">
+      <div className={`flex flex-col justify-center items-center h-fit w-full`}>
         {isLoading ? (
           <div className="h-full w-full grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center items-center md:px-10 p-4">
             {Array.from({ length: 10 }).map((_, index) => (
@@ -29,14 +29,14 @@ const HomePage = () => {
             ))}
           </div>
         ) : error ? (
-          <div className="flex justify-center items-center flex-col min-h-screen gap-4">
+          <div className="flex justify-center items-center flex-col min-h-screen gap-4 text-center">
             <Lottie
               animationData={errorAnimation}
-              style={{ width: "200px", height: "200px" }}
+              style={{ width: "150px", height: "150px" }}
             />
-            <h1 className={`text-3xl`}>Something went wrong</h1>
+            <h1 className={`md:text-3xl text-xl`}>O'ops Something went wrong</h1>
             <Button size="xl" isPill onClick={() => refetch()}>
-              <RefreshCcw className="mr-3" />
+              <RefreshCcw className="mr-3 stroke-[1.25px]" />
               Retry
             </Button>
           </div>

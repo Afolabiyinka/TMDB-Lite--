@@ -18,7 +18,6 @@ const Recommendations = ({
     <motion.div
       initial={{ x: -100, opacity: 0.7 }}
       animate={{ x: 1, opacity: 1 }}
-      // viewport={{ amount: 0.5 }}
       transition={{ duration: 1 }}
     >
       {recLoading ? (

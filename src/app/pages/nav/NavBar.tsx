@@ -136,38 +136,43 @@ export default function NavBar() {
             <CustomInput
               placeholder="Search here..."
               icon={<MagnifyingGlassIcon size={20} />}
-              type="search"
+              type="text"
               className="hidden lg:flex"
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e);
               }}
+              searchClear={() => setSearchQuery("")}
             />
+
             {/* Mobile Search Input */}
             <div
-              className={`absolute left-0 z-50 top-16 w-full px-4 py-3 shadow-md transition-all duration-300 ${showSearchInput
-                ? "translate-y-0 bg-white dark:bg-transparent dark:backdrop-blur-lg"
+              className={`absolute left-0 z-50 top-16 w-full px-4 py-3  transition-all duration-300 ${showSearchInput
+                ? "translate-y-0 bg-white dark:bg-[#0f0e0e]"
                 : "-translate-y-full opacity-0 pointer-events-none"
                 }`}
             >
               <CustomInput
                 placeholder="Search here..."
                 icon={<MagnifyingGlassIcon size={20} />}
-                type="search"
-                className=""
+                type="text"
                 value={searchQuery}
+                searchClear={() => setSearchQuery("")}
                 onChange={(e) => {
                   setSearchQuery(e);
                 }}
               />
             </div>
             {/* Mobile search button */}
-            <button
+            <IconButton
+              isCircular
+              variant="ghost"
+              color="secondary"
               onClick={toggleSearchInput}
-              className="rounded-full p-2 ml-4 lg:hidden"
+              className="rounded-full  lg:hidden"
             >
-              <Search className="h-6 w-6" />
-            </button>
+              <Search />
+            </IconButton>
             {/* Profile pic */}
 
             {isUserLoading ? (
@@ -188,19 +193,21 @@ export default function NavBar() {
               <ModeToggle />
             </div>
             {/* Mobile menu button */}
-            <button
+            <IconButton
+              isCircular
+              variant="ghost"
               onClick={() => {
                 setOpenNav(!openNav);
                 setShowSearchInput(false);
               }}
-              className="rounded-full p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200 lg:hidden"
+              className="lg:hidden"
             >
               {openNav ? (
-                <X className="h-5 w-5" />
+                <X />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu />
               )}
-            </button>
+            </IconButton>
           </div>
         </div>
 

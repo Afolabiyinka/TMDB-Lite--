@@ -1,4 +1,4 @@
-import { AlertTriangle, Home, Loader2 } from "lucide-react";
+import { Home, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@material-tailwind/react";
@@ -14,9 +14,9 @@ const CustomError = ({ message }: { message?: string }) => {
                 className="w-full max-w-md p-8 text-center space-y-6"
             >
                 <div className="flex justify-center">
-                    <div className="p-4 rounded-full bg-destructive/10 text-destructive">
+                    {/* <div className="p-4 rounded-full bg-destructive/10 text-destructive">
                         <AlertTriangle />
-                    </div>
+                    </div> */}
                 </div>
 
                 <div>
@@ -36,18 +36,18 @@ const CustomError = ({ message }: { message?: string }) => {
 
                 <div className="flex flex-col md:flex-row gap-3  items-center justify-center">
                     <Button onClick={() => window.location.reload()} size={`lg`} isPill>
-                        <Loader2 className="mr-2" />
+                        <Loader2 className="mr-2 h-4 w-4" />
                         Try again
                     </Button>
 
                     <Button
                         isPill
                         size={`lg`}
-                        variant="outline"
+                        color="secondary"
                         onClick={() => navigate("/dashboard")}
 
                     >
-                        <Home className="mr-2" />
+                        <Home className="mr-2 h-4 w-4" />
                         Go home
                     </Button>
                 </div>

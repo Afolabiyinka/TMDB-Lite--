@@ -65,9 +65,6 @@ https://tmdb-lite.vercel.app/
 
 ## 🧠 Future Improvements
 
-- Watchlist feature
-- User authentication
 - Genre filtering
-- Pagination for search results
 
 ---

@@ -1,3 +1,4 @@
+import { LoginModal } from "@/app/components/LoginModal";
 import CustomError from "@/app/pages/error/CustomErr";
 import { lazy, useEffect } from "react";
 import { Outlet, useMatches, type RouteObject } from "react-router-dom";
@@ -86,6 +87,10 @@ export const routes: RouteObject[] = [
             Component: AccountPage,
             handle: { title: "Account" },
           },
+          {
+            path: "loginnn",
+            element: <LoginModal open onClose={() => { }} />
+          }
         ],
       },
     ],
