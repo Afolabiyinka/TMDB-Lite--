@@ -34,7 +34,9 @@ const HomePage = () => {
               animationData={errorAnimation}
               style={{ width: "150px", height: "150px" }}
             />
-            <h1 className={`md:text-3xl text-xl`}>O'ops Something went wrong</h1>
+            <h1 className={`md:text-3xl text-xl`}>
+              O'ops Something went wrong
+            </h1>
             <Button size="xl" isPill onClick={() => refetch()}>
               <RefreshCcw className="mr-3 stroke-[1.25px]" />
               Retry
@@ -42,7 +44,6 @@ const HomePage = () => {
           </div>
         ) : (
           <div className="w-full flex flex-col justify-center items-center space-y-4">
-
             <div className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center p-3 md:px-8 items-center w-full">
               {movies.map((movie: MovieType) => (
                 <MovieCard movie={movie} key={movie.id} />

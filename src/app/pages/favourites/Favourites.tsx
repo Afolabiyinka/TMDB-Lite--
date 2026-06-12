@@ -8,29 +8,35 @@ import Pagination from "@/app/components/Pagination";
 import { useFavourites } from "@/app/hooks/favourites/useFavourites";
 
 const Favourites = () => {
-
-
-  const { currentPage, error, favourites, handleNextPage, handlePrevPage, isLoading, data } = useFavourites({})
-  if (isLoading || error) {
+  const {
+    currentPage,
+    error,
+    favourites,
+    handleNextPage,
+    handlePrevPage,
+    isLoading,
+    data,
+  } = useFavourites({});
+  if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center  gap-6 relative overflow-hidden w-full mt-4">
-        <h1 className="bg-gray-300 dark:bg-gray-700 animate-pulse h-10 rounded-full md:w-[40%] w-[80%] mx-2">
-        </h1>
+        <h1 className="bg-gray-300 dark:bg-gray-700 animate-pulse h-10 rounded-full md:w-[40%] w-[80%] mx-2"></h1>
         <div className="h-full w-full grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center items-center md:px-10 p-4">
-
-
           {Array.from({ length: 10 }).map((_, index) => (
             <MovieCardSkeleton key={index} />
           ))}
-        </div></div>
+        </div>
+      </div>
     );
   }
 
+  if (error) {
+    return <div>Something went Wrong</div>;
+  }
   return (
     <div className="text-center flex justify-center items-center w-full">
       {favourites?.length === 0 ? (
         <div className="flex flex-col items-center justify-center h-screen gap-6 relative overflow-hidden w-full">
-
           <motion.div
             initial={{ opacity: 0, scale: 0.7, rotate: -5 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -39,7 +45,11 @@ const Favourites = () => {
           >
             <div className="rounded-full  border shadow-2xl flex items-center justify-center relative overflow-hidden p-10">
               {/* Icon */}
-              <Heart size={64} className="text-red-500 stroke-[1px]" fill="red" />
+              <Heart
+                size={64}
+                className="text-red-500 stroke-[1px]"
+                fill="red"
+              />
             </div>
           </motion.div>
 
@@ -94,7 +104,6 @@ const Favourites = () => {
             handleNextPage={handleNextPage}
           />
         </div>
-
       )}
     </div>
   );

@@ -1,16 +1,17 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import {
-  Heart,
-  RefreshCcw,
-  Loader2,
-} from "lucide-react";
+import { Heart, RefreshCcw, Loader2 } from "lucide-react";
 
-import { PlayIcon, StarIcon, CalendarIcon, ThumbsUpIcon, } from "@phosphor-icons/react"
+import {
+  PlayIcon,
+  StarIcon,
+  CalendarIcon,
+  ThumbsUpIcon,
+} from "@phosphor-icons/react";
 import errorAnimation from "@/Assets/ErrorAnimation.json";
 
 import Lottie from "lottie-react";
-import { Button, Chip, IconButton, Tooltip, } from "@material-tailwind/react";
+import { Button, Chip, IconButton, Tooltip } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 
 import Recommendations from "@/app/components/movie/movies-pages/recommendations";
@@ -29,8 +30,7 @@ import { useRemoveFavourite } from "@/app/hooks/favourites/useRemoveFavourite";
 const MoviePage = () => {
   const { id } = useParams();
   const movieId = Number(id);
-  const { fetchedUser, userLoading } = useUser()
-
+  const { fetchedUser, userLoading } = useUser();
 
   const {
     movieLoading,
@@ -49,21 +49,21 @@ const MoviePage = () => {
 
   //Favourites Stuff
 
-  const [openLogin, setOpenLogin] = useState(false)
+  const [openLogin, setOpenLogin] = useState(false);
 
   const { isFavourite, checking } = useFavourites({ id: movieId });
 
-  const { handleAdd, isPending } = useAddFavourites({ id: movieId })
-  const { handleRemove, removingFavourite } = useRemoveFavourite({ id: movieId })
-
-
+  const { handleAdd, isPending } = useAddFavourites({ id: movieId });
+  const { handleRemove, removingFavourite } = useRemoveFavourite({
+    id: movieId,
+  });
 
   const handleFavouriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
 
     if (!fetchedUser && !userLoading) {
-      setOpenLogin(true)
-      return
+      setOpenLogin(true);
+      return;
     }
     if (!movie) return;
 
@@ -74,7 +74,7 @@ const MoviePage = () => {
     }
   };
 
-  const movieInFavorites = isFavourite
+  const movieInFavorites = isFavourite;
 
   useEffect(() => {
     if (movie) document.title = `${movie.title}`;
@@ -115,10 +115,10 @@ const MoviePage = () => {
 
   const formattedDate = movie?.release_date
     ? new Date(movie.release_date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    })
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
     : null;
 
   return (
@@ -127,9 +127,9 @@ const MoviePage = () => {
 
       <motion.div
         className="w-full h-full p-6 md:p-20"
-        initial={{ y: 100 }}
-        animate={{ y: 1 }}
-        transition={{ duration: 0.6 }}
+        // initial={{ y: 100 }}
+        // animate={{ y: 1 }}
+        // transition={{ duration: 0.6 }}
       >
         <BackButton />
         <div className="flex flex-col md:flex-row gap-10 min-h-screen">
@@ -206,15 +206,20 @@ const MoviePage = () => {
                       color="secondary"
                       className="flex items-center justify-center w-16 h-16"
                       onClick={handleFavouriteClick}
-                      disabled={(isPending || checking || removingFavourite)}
+                      disabled={isPending || checking || removingFavourite}
                     >
-                      {(isPending || checking || removingFavourite) ? <Loader2 size={40} className="animate-spin" /> : <Heart
-                        size={40}
-                        className={`transition-all duration-300 stroke-[1px] ${isFavourite
-                          ? "text-red-500 fill-red-500 scale-110"
-                          : ""
+                      {isPending || checking || removingFavourite ? (
+                        <Loader2 size={40} className="animate-spin" />
+                      ) : (
+                        <Heart
+                          size={40}
+                          className={`transition-all duration-300 stroke-[1px] ${
+                            isFavourite
+                              ? "text-red-500 fill-red-500 scale-110"
+                              : ""
                           }`}
-                      />}
+                        />
+                      )}
                     </IconButton>
                   </Tooltip.Trigger>
                   <Tooltip.Content>
