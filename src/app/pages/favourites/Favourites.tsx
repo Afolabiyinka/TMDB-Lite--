@@ -6,6 +6,7 @@ import { Button } from "@material-tailwind/react";
 import MovieCardSkeleton from "@/app/components/movie/DummyCard";
 import Pagination from "@/app/components/Pagination";
 import { useFavourites } from "@/app/hooks/favourites/useFavourites";
+import { ArrowClockwiseIcon } from "@phosphor-icons/react";
 
 const Favourites = () => {
   const {
@@ -16,6 +17,7 @@ const Favourites = () => {
     handlePrevPage,
     isLoading,
     data,
+    refetchFavourites,
   } = useFavourites({});
   if (isLoading) {
     return (
@@ -31,7 +33,15 @@ const Favourites = () => {
   }
 
   if (error) {
-    return <div>Something went Wrong</div>;
+    return (
+      <div className="h-screen flex flex-col gap-4 items-center justify-center">
+        Something went Wrong
+        <Button isPill size="lg" onClick={() => refetchFavourites()}>
+          <ArrowClockwiseIcon className="mr-3" />
+          Retry
+        </Button>
+      </div>
+    );
   }
   return (
     <div className="text-center flex justify-center items-center w-full">
@@ -43,7 +53,7 @@ const Favourites = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="relative z-10"
           >
-            <div className="rounded-full  border shadow-2xl flex items-center justify-center relative overflow-hidden p-10">
+            <div className="rounded-full flex items-center justify-center relative overflow-hidden p-10">
               {/* Icon */}
               <Heart
                 size={64}

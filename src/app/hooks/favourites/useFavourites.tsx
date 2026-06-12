@@ -1,15 +1,11 @@
-import {
-  getFavourites,
-  inFavourites,
-} from "@/app/services/favouritesRequest";
+import { getFavourites, inFavourites } from "@/app/services/favouritesRequest";
 import type { MovieType } from "@/app/types/movie";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 
 export const useFavourites = ({ id }: { id?: string | number }) => {
-
-  const location = useLocation()
+  const location = useLocation();
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -19,7 +15,6 @@ export const useFavourites = ({ id }: { id?: string | number }) => {
   const handlePrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const handleNextPage = () => setCurrentPage((prev) => prev + 1);
   const [favourites, setFavourites] = useState<MovieType[]>([]);
-
 
   useEffect(() => {
     const allowedPaths = ["/want-to-watch"];
@@ -32,11 +27,10 @@ export const useFavourites = ({ id }: { id?: string | number }) => {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   }, [currentPage]);
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["favourites", currentPage],
     queryFn: () => getFavourites(currentPage),
   });
-
 
   useEffect(() => {
     try {
@@ -48,18 +42,29 @@ export const useFavourites = ({ id }: { id?: string | number }) => {
     }
   }, [data]);
 
-
   // Checking if its in favourites
   const { data: favouriteData, isLoading: checking } = useQuery({
     queryKey: ["favourite", id],
     queryFn: () => {
       if (!id) throw new Error("Movie id is required");
       return inFavourites(id);
-    }, enabled: !!id,
-    retry: false
+    },
+    enabled: !!id,
+    retry: false,
   });
 
   const isFavourite = favouriteData?.inFavourites ?? false;
 
-  return { favourites, isLoading, error, isFavourite, currentPage, handleNextPage, handlePrevPage, data, checking };
+  return {
+    favourites,
+    isLoading,
+    error,
+    isFavourite,
+    currentPage,
+    handleNextPage,
+    handlePrevPage,
+    data,
+    checking,
+    refetchFavourites: refetch,
+  };
 };
