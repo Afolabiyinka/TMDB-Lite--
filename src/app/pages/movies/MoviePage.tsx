@@ -108,7 +108,11 @@ const MoviePage = () => {
 
   return (
     <>
-      <LoginModal open={openLogin} onClose={() => setOpenLogin(false)} />
+      <LoginModal
+        open={openLogin}
+        onClose={() => setOpenLogin(false)}
+        context="favourite"
+      />
 
       <motion.div
         className="w-full h-full p-6 md:p-20"

@@ -17,7 +17,9 @@ const AccountPage: React.FC = () => {
   }
 
   if (!fetchedUser) {
-    return <LoginModal open onClose={() => {}} />;
+    return (
+      <LoginModal open={!fetchedUser} onClose={() => {}} context="account" />
+    );
   }
 
   return (

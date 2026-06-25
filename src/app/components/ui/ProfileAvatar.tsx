@@ -1,8 +1,11 @@
 import { useUser } from "@/app/hooks/user/useUser";
 import { Avatar, IconButton } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 
 const ProfileAvatar = () => {
   const { fetchedUser, userLoading: isUserLoading } = useUser();
+
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -17,11 +20,12 @@ const ProfileAvatar = () => {
       ) : (
         fetchedUser && (
           <Avatar
+            onClick={() => navigate("/account")}
             src={
               fetchedUser?.picture ||
               `https://api.dicebear.com/10.x/thumbs/svg?seed=felix`
             }
-            className="mt-3 cursor-pointer"
+            className="cursor-pointer"
           />
         )
       )}
