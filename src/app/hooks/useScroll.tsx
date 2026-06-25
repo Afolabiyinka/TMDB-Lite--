@@ -1,35 +1,18 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 
-export function useScrollableContainer() {
-  const [showLeftScroll, setShowLeftScroll] = React.useState(false);
-  const [showRightScroll, setShowRightScroll] = React.useState(true);
-  const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+export const useScrollNav = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 1);
+    };
 
-  const handleScroll = () => {
-    if (!scrollContainerRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-    setShowLeftScroll(scrollLeft > 0);
-    setShowRightScroll(scrollLeft + clientWidth < scrollWidth - 10);
-  };
+    window.addEventListener("scroll", handleScroll);
 
-  const scroll = (direction: "left" | "right") => {
-    if (!scrollContainerRef.current) return;
-    const scrollAmount = 300;
-    scrollContainerRef.current.scrollTo({
-      left:
-        scrollContainerRef.current.scrollLeft +
-        (direction === "left" ? -scrollAmount : scrollAmount),
-      behavior: "smooth",
-    });
-  };
-
-  React.useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-    container.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => container.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
-
-  return { scrollContainerRef, showLeftScroll, showRightScroll, scroll };
-}
+  return { isScrolled, setIsScrolled };
+};

@@ -1,8 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Github, Twitter, Heart } from "lucide-react";
-import tmdbLogo from "../../../Assets/the real logo.svg";
 import { Chip, IconButton } from "@material-tailwind/react";
+import { GithubLogoIcon, XLogoIcon, UserIcon } from "@phosphor-icons/react";
+import { HeartIcon } from "lucide-react";
+import Logo from "@/app/components/ui/Logo";
 
 const LINKS = [
   { title: "About Us", href: "#" },
@@ -20,17 +19,12 @@ const GENRES = [
   "Animation",
 ];
 
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
     <footer className="w-full bg-inherit  mt-20">
       <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-3 gap-12">
         <div className="flex flex-col gap-4">
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center">
-              <div className="relative mr-2"></div>
-              <img src={tmdbLogo} className="h-8 w-[10rem]" alt="Tmdb-Logo" />
-            </Link>
-          </div>
+          <Logo />
           <p className="text-sm leading-relaxed max-w-[220px]">
             Discover, explore, and obsess over films. Powered by TMDB.
           </p>
@@ -41,13 +35,22 @@ const Footer: React.FC = () => {
               rel="noreferrer"
             >
               <IconButton isCircular variant="outline">
-                <Github size={18} />
+                <GithubLogoIcon size={18} />
               </IconButton>
             </a>
 
             <a href="https://twitter.com" target="_blank" rel="noreferrer">
               <IconButton isCircular variant="outline">
-                <Twitter size={15} />
+                <XLogoIcon size={15} />
+              </IconButton>
+            </a>
+            <a
+              href="https://olayinka-portfolio1.vercel.app"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <IconButton isCircular variant="outline">
+                <UserIcon size={15} />
               </IconButton>
             </a>
           </div>
@@ -107,8 +110,9 @@ const Footer: React.FC = () => {
           © {new Date().getFullYear()} TMDB-Mini. All rights reserved.
         </p>
         <p className="/20 text-sm flex items-center gap-1">
-          Made with <Heart size={14} className="text-red-500 fill-red-500" />{" "}
-          using the TMDB API
+          Made with{" "}
+          <HeartIcon size={14} className="text-red-500 fill-red-500" /> using
+          the TMDB API
         </p>
       </div>
     </footer>

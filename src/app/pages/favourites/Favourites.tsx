@@ -6,7 +6,8 @@ import { Button } from "@material-tailwind/react";
 import MovieCardSkeleton from "@/app/components/movie/DummyCard";
 import Pagination from "@/app/components/Pagination";
 import { useFavourites } from "@/app/hooks/favourites/useFavourites";
-import { ArrowClockwiseIcon } from "@phosphor-icons/react";
+import { containerVariants, itemVariants } from "@/app/libs/motion-variants";
+import ErrorPage from "@/app/components/ui/ErrorPage";
 
 const Favourites = () => {
   const {
@@ -21,27 +22,29 @@ const Favourites = () => {
   } = useFavourites({});
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center  gap-6 relative overflow-hidden w-full mt-4">
-        <h1 className="bg-gray-300 dark:bg-gray-700 animate-pulse h-10 rounded-full md:w-[40%] w-[80%] mx-2"></h1>
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="flex flex-col items-center justify-center  gap-6 relative overflow-hidden w-full mt-4"
+      >
+        <motion.h1
+          variants={itemVariants}
+          className="bg-gray-300 dark:bg-gray-700 animate-pulse h-10 rounded-full md:w-[40%] w-[80%] mx-2"
+        ></motion.h1>
         <div className="h-full w-full grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center items-center md:px-10 p-4">
-          {Array.from({ length: 10 }).map((_, index) => (
-            <MovieCardSkeleton key={index} />
+          {Array.from({ length: 12 }).map((_, index) => (
+            <motion.div key={index} variants={itemVariants}>
+              <MovieCardSkeleton key={index} />
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   if (error) {
-    return (
-      <div className="h-screen flex flex-col gap-4 items-center justify-center">
-        Something went Wrong
-        <Button isPill size="lg" onClick={() => refetchFavourites()}>
-          <ArrowClockwiseIcon className="mr-3" />
-          Retry
-        </Button>
-      </div>
-    );
+    return <ErrorPage onRetry={() => refetchFavourites()} />;
   }
   return (
     <div className="text-center flex justify-center items-center w-full">
@@ -63,7 +66,6 @@ const Favourites = () => {
             </div>
           </motion.div>
 
-          {/* Text */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -95,17 +97,19 @@ const Favourites = () => {
           </motion.div>
         </div>
       ) : (
-        <div className="py-3 flex flex-col items-center  h-full w-screen p-2 md:p-10">
-          <h1 className="text-4xl mb-3">
+        <motion.div className="py-3 flex flex-col items-center  h-full w-screen p-2 md:p-10">
+          <motion.h1 variants={itemVariants} className="text-4xl mb-3">
             {data?.total} Movies added to Favourites
-          </h1>
+          </motion.h1>
 
           <div className="w-full flex flex-col">
-            <div className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center p-3 md:px-8 items-center">
-              {favourites.map((movie) => (
-                <MovieCard movie={movie} key={movie.id} />
+            <motion.div className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center p-3 md:px-8 items-center">
+              {favourites.map((movie, i) => (
+                <motion.div key={i} variants={itemVariants}>
+                  <MovieCard movie={movie} key={movie.id} />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
           <Pagination
             currentPage={currentPage}
@@ -113,7 +117,7 @@ const Favourites = () => {
             maxPages={data?.totalPages}
             handleNextPage={handleNextPage}
           />
-        </div>
+        </motion.div>
       )}
     </div>
   );

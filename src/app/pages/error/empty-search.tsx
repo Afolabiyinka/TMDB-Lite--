@@ -1,13 +1,12 @@
-import { useSearchStore } from "@/app/store/searchStore";
+import { useSearch } from "@/app/hooks/search/useSearch";
 import { Button } from "@material-tailwind/react";
 import { SearchSlash } from "lucide-react";
 
 export function NoResults() {
-  const { setSearchQuery } = useSearchStore();
+  const { setQuery } = useSearch();
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center gap-0 text-center">
       <div className="w-16 h-16 rounded-full border  flex items-center justify-center mb-6">
-
         <SearchSlash />
       </div>
 
@@ -18,7 +17,7 @@ export function NoResults() {
         The reel is empty — try a different search
       </p>
 
-      <Button onClick={() => setSearchQuery("")} isPill size="lg">
+      <Button onClick={() => setQuery("")} isPill size="lg">
         Clear search
       </Button>
     </div>

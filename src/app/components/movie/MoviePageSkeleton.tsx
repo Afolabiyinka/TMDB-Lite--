@@ -3,15 +3,8 @@ import BackButton from "../ui/BackButton";
 
 const MoviePageSkeleton = () => {
   return (
-    <motion.div
-      className="w-full h-full p-6 md:p-20"
-      //   initial={{ y: -50 }}
-      //   animate={{ y: 1 }}
-      //   transition={{ duration: 0.6 }}
-    >
-      {/* Back Button */}
-      {/* <div className="h-9 w-24 rounded-full bg-gray-300 dark:bg-gray-700 animate-pulse mb-6" /> */}
-      <BackButton />
+    <motion.div className="w-full h-full p-6 md:p-20">
+      <BackButton whereTo="back" />
 
       <div className="flex flex-col md:flex-row gap-10 min-h-screen">
         {/* Poster */}

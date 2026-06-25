@@ -1,9 +1,4 @@
-import {
-  Card,
-  Typography,
-
-  Chip,
-} from "@material-tailwind/react";
+import { Card, Typography, Chip } from "@material-tailwind/react";
 import { StarIcon } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
 import type { MovieType } from "../../types/movie";
@@ -13,9 +8,7 @@ import { LoginModal } from "../LoginModal";
 const MovieCard = ({ movie }: { movie: MovieType }) => {
   const navigate = useNavigate();
 
-  const [openLogin, setOpenLogin] = useState(false)
-
-
+  const [openLogin, setOpenLogin] = useState(false);
 
   return (
     <>
@@ -25,8 +18,7 @@ const MovieCard = ({ movie }: { movie: MovieType }) => {
         className="overflow-hidden shadow-none relative border-none hover:border rounded-3xl bg-inherit cursor-pointer hover:scale-[1.02] transition-transform duration-300 w-full"
         onClick={() => navigate(`/movie/${movie.id}`)}
       >
-
-        <div className="flex items-center justify-between absolute top-2 w-full p-1 z-30">
+        <div className="flex items-center justify-between absolute top-2 w-full p-1">
           <span>
             <Chip
               className="flex items-center  p-1.5 px-3"
@@ -37,7 +29,6 @@ const MovieCard = ({ movie }: { movie: MovieType }) => {
               <p className="font-bold">{movie?.vote_average?.toFixed(1)}</p>
             </Chip>
           </span>
-
         </div>
         <div className="h-[21rem] w-full overflow-hidden">
           {movie.poster_path ? (
@@ -77,7 +68,6 @@ const MovieCard = ({ movie }: { movie: MovieType }) => {
       </Card>
     </>
   );
-
 };
 
 export default MovieCard;

@@ -1,5 +1,5 @@
-import { LoginModal } from "@/app/components/LoginModal";
 import CustomError from "@/app/pages/error/CustomErr";
+import { NoResults } from "@/app/pages/error/empty-search";
 import { lazy, useEffect } from "react";
 import { Outlet, useMatches, type RouteObject } from "react-router-dom";
 
@@ -17,14 +17,12 @@ const HomePage = lazy(() => import("../app/pages/movies/HomePage"));
 const Searchresults = lazy(() => import("../app/pages/search/SearchPage"));
 const NotFound = lazy(() => import("../app/pages/error/NotFound"));
 
-
-
 const RootWrapper = () => {
   const matches = useMatches();
   useEffect(() => {
-    const currentMatch = [...matches].reverse().find((m) =>
-      (m.handle as { title?: string })?.title
-    );
+    const currentMatch = [...matches]
+      .reverse()
+      .find((m) => (m.handle as { title?: string })?.title);
     const pageTitle = (currentMatch?.handle as { title?: string })?.title || "";
     document.title = `TMDB Mini | ${pageTitle}`;
   }, [matches]);
@@ -88,9 +86,9 @@ export const routes: RouteObject[] = [
             handle: { title: "Account" },
           },
           {
-            path: "loginnn",
-            element: <LoginModal open onClose={() => { }} />
-          }
+            path: "error",
+            element: <NoResults />,
+          },
         ],
       },
     ],
