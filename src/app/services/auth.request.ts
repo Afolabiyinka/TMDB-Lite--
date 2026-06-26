@@ -3,7 +3,7 @@ import type { AuthResponse } from "../types/auth.types";
 
 const googleLogin = async (payload: { credential?: string }) => {
     try {
-        const res = await apiClient.post<AuthResponse>("/auth/google-login", payload)
+        const res = await apiClient.post<AuthResponse>("/auth/google-login", payload, { withCredentials: true })
         return res.data
     }
     catch (err) { throw err; }

@@ -20,9 +20,10 @@ const DesktopNav = () => {
         <Logo />
 
         <div className="flex items-center gap-6">
-          {LINKS.map(({ href, icon: Icon, title }) => {
+          {LINKS.map(({ href, icon: Icon, title }, i) => {
             return (
               <NavLink
+                key={i}
                 to={href}
                 className="flex items-center gap-x-2 p-2 text-sm font-medium transition-colors duration-100 group"
               >

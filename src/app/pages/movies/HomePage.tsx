@@ -26,10 +26,14 @@ const HomePage = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="h-full w-full grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center items-center md:px-10 p-4"
+            className="flex"
           >
             {Array.from({ length: 12 }).map((_, index) => (
-              <motion.div key={index} variants={itemVariants}>
+              <motion.div
+                className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center p-3 md:px-8 items-center w-full"
+                key={index}
+                variants={itemVariants}
+              >
                 <MovieCardSkeleton key={index} />
               </motion.div>
             ))}
