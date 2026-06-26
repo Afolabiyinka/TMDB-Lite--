@@ -2,7 +2,7 @@ import { ModeToggle } from "@/app/components/ModeToggle";
 import Logo from "@/app/components/ui/Logo";
 import NavIcon from "@/app/components/ui/NavIcon";
 import ProfileAvatar from "@/app/components/ui/ProfileAvatar";
-import { useScrollNav } from "@/app/hooks/useScroll";
+import { useScrollNav } from "@/app/hooks/search/useScroll";
 import { LINKS } from "@/app/libs/nav";
 import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 import { NavLink } from "react-router-dom";

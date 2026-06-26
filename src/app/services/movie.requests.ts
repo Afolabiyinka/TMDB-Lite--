@@ -1,5 +1,5 @@
 import { BASE_URL } from "../constants/api-data";
-import type { MovieType } from "../types/movie";
+import type { MovieType } from "../types/movie.types";
 
 const token = import.meta.env.VITE_BEARER_TOKEN!;
 

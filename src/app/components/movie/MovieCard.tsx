@@ -1,7 +1,7 @@
 import { Card, Typography, Chip } from "@material-tailwind/react";
 import { StarIcon } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
-import type { MovieType } from "../../types/movie";
+import type { MovieType } from "../../types/movie.types";
 import { useState } from "react";
 import { LoginModal } from "../LoginModal";
 

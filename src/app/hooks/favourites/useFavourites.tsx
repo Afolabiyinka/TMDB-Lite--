@@ -1,5 +1,5 @@
-import { getFavourites, inFavourites } from "@/app/services/favouritesRequest";
-import type { MovieType } from "@/app/types/movie";
+import { getFavourites, inFavourites } from "@/app/services/favourites.request";
+import type { MovieType } from "@/app/types/movie.types";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";

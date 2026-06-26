@@ -1,4 +1,4 @@
-import type { MovieType } from "../../types/movie";
+import type { MovieType } from "../../types/movie.types";
 import MovieCard from "../../components/movie/MovieCard";
 import BackButton from "../../components/ui/BackButton";
 import { useSearch } from "../../hooks/search/useSearch";

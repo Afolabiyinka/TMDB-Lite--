@@ -1,4 +1,4 @@
-import { useIsMobile } from "@/app/hooks/useMobile";
+import { useIsMobile } from "@/app/hooks/search/useMobile";
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 

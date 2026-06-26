@@ -22,7 +22,7 @@ const ProfileAvatar = () => {
           <Avatar
             onClick={() => navigate("/account")}
             src={
-              fetchedUser?.picture ||
+              fetchedUser?.profilePic ||
               `https://api.dicebear.com/10.x/thumbs/svg?seed=felix`
             }
             className="cursor-pointer"

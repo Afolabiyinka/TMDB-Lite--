@@ -1,20 +1,11 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { searchMovies } from "@/app/services/movieRequest";
-import { useDebounce } from "../useDebounce";
+import { searchMovies } from "@/app/services/movie.requests";
+import { useDebounce } from "../shared/useDebounce";
 
 export const useSearch = () => {
 
   const [query, setQuery] = useState("")
-
-  // const query = useMemo(() => {
-  //   return new URLSearchParams(location.search).get("q") || "";
-  // }, [location.search]);
-
-  // // local input state (for instant typing UX)
-  // const setQuery = (value: string) => {
-  //   navigate(`/search?q=${encodeURIComponent(value)}`);
-  // };
 
   const debouncedQuery = useDebounce(query, 700);
 

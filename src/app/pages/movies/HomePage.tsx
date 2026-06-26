@@ -1,7 +1,7 @@
 import Pagination from "@/app/components/Pagination";
 import MovieCard from "@/app/components/movie/MovieCard";
 import useMovies from "@/app/hooks/movies/useMovies";
-import type { MovieType } from "@/app/types/movie";
+import type { MovieType } from "@/app/types/movie.types";
 import MovieCardSkeleton from "@/app/components/movie/DummyCard";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/app/libs/motion-variants";
@@ -52,11 +52,13 @@ const HomePage = () => {
             </motion.div>
           </motion.div>
         )}
-        <Pagination
-          currentPage={currentPage}
-          handlePrevPage={handlePrevPage}
-          handleNextPage={handleNextPage}
-        />
+        {movies && !error && (
+          <Pagination
+            currentPage={currentPage}
+            handlePrevPage={handlePrevPage}
+            handleNextPage={handleNextPage}
+          />
+        )}
       </div>
     </div>
   );

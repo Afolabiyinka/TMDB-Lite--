@@ -17,6 +17,6 @@ export interface UserResponse {
     user: {
         username: string,
         email: string,
-        picture: string
+        profilePic: string
     }
 }

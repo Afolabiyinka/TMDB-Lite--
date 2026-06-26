@@ -1,5 +1,5 @@
 import { Chip } from "@material-tailwind/react";
-import type { MovieType } from "../../../types/movie";
+import type { MovieType } from "../../../types/movie.types";
 
 const Genres = ({ movie }: { movie: MovieType }) => {
   return (

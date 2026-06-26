@@ -1,12 +1,14 @@
-import { LoginModal } from "@/app/components/LoginModal";
 import { useLogout } from "@/app/hooks/user/useLogout";
 import { useUser } from "@/app/hooks/user/useUser";
 import { Button } from "@material-tailwind/react";
+import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Loader2, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const AccountPage: React.FC = () => {
   const { fetchedUser, userLoading } = useUser();
   const { handleLogout } = useLogout();
+  const navigate = useNavigate();
 
   if (userLoading) {
     return (
@@ -18,7 +20,12 @@ const AccountPage: React.FC = () => {
 
   if (!fetchedUser) {
     return (
-      <LoginModal open={!fetchedUser} onClose={() => {}} context="account" />
+      <div className="h-screen flex flex-col gap-3 w-full justify-center items-center">
+        <h1 className="text-3xl"> Your Not Logged In</h1>
+        <Button isPill size="xl" onClick={() => navigate("/login")}>
+          Log In <ArrowRightIcon className="ml-3" />
+        </Button>
+      </div>
     );
   }
 
@@ -27,7 +34,7 @@ const AccountPage: React.FC = () => {
       <div className="p-6 w-full max-w-sm text-center space-y-2">
         <img
           src={
-            fetchedUser?.picture ||
+            fetchedUser?.profilePic ||
             `https://api.dicebear.com/10.x/thumbs/svg?seed=felix`
           }
           alt={fetchedUser?.username || "User avatar"}
