@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Heart, RefreshCcw, Loader2 } from "lucide-react";
+import { Heart, Loader2 } from "lucide-react";
 
 import {
   PlayIcon,
@@ -8,9 +8,7 @@ import {
   CalendarIcon,
   ThumbsUpIcon,
 } from "@phosphor-icons/react";
-import errorAnimation from "@/Assets/ErrorAnimation.json";
 
-import Lottie from "lottie-react";
 import { Button, Chip, IconButton, Tooltip } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 
@@ -26,6 +24,7 @@ import { useUser } from "@/app/hooks/user/useUser";
 import { LoginModal } from "@/app/components/LoginModal";
 import { useAddFavourites } from "@/app/hooks/favourites/useAddFavourites";
 import { useRemoveFavourite } from "@/app/hooks/favourites/useRemoveFavourite";
+import ErrorPage from "@/app/components/ui/ErrorPage";
 
 const MoviePage = () => {
   const { id } = useParams();
@@ -96,21 +95,7 @@ const MoviePage = () => {
 
   if (movieLoading) return <MoviePageSkeleton />;
 
-  if (movieError)
-    return (
-      <div className="flex justify-center items-center flex-col min-h-screen gap-4">
-        <Lottie
-          animationData={errorAnimation}
-          style={{ width: "150px", height: "150px" }}
-        />
-        <h1 className={`text-3xl`}>O'ops Something went wrong</h1>
-        <Button size="xl" isPill onClick={() => refetch()}>
-          <RefreshCcw className="mr-3 stroke-[1.25px]" />
-          Retry
-        </Button>
-      </div>
-    );
-
+  if (movieError) return <ErrorPage onRetry={() => refetch()} />;
   if (!movie) return null;
 
   const formattedDate = movie?.release_date
@@ -123,15 +108,19 @@ const MoviePage = () => {
 
   return (
     <>
-      <LoginModal open={openLogin} onClose={() => setOpenLogin(false)} />
+      <LoginModal
+        open={openLogin}
+        onClose={() => setOpenLogin(false)}
+        context="favourite"
+      />
 
       <motion.div
         className="w-full h-full p-6 md:p-20"
-        // initial={{ y: 100 }}
-        // animate={{ y: 1 }}
-        // transition={{ duration: 0.6 }}
+        initial={{ y: 100 }}
+        animate={{ y: 1 }}
+        transition={{ duration: 0.6 }}
       >
-        <BackButton />
+        <BackButton whereTo="back" />
         <div className="flex flex-col md:flex-row gap-10 min-h-screen">
           {/* Poster */}
           <div className="w-full md:w-1/3 rounded-xl overflow-hidden">

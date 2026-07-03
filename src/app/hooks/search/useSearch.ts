@@ -1,28 +1,18 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { useMemo } from "react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { searchMovies } from "@/app/services/movieRequest";
-import { useDebounce } from "../useDebounce";
+import { searchMovies } from "@/app/services/movie.requests";
+import { useDebounce } from "../shared/useDebounce";
 
 export const useSearch = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
 
-  const query = useMemo(() => {
-    return new URLSearchParams(location.search).get("q") || "";
-  }, [location.search]);
-
-  // local input state (for instant typing UX)
-  const setQuery = (value: string) => {
-    navigate(`/search?q=${encodeURIComponent(value)}`);
-  };
+  const [query, setQuery] = useState("")
 
   const debouncedQuery = useDebounce(query, 700);
 
   const {
     data: searchresults,
     error: searchError,
-    isLoading: searchLoading,
+    isLoading: searchLoading, refetch
   } = useQuery({
     queryKey: ["search-results", debouncedQuery],
     queryFn: () => searchMovies(debouncedQuery),
@@ -36,5 +26,6 @@ export const useSearch = () => {
     searchError,
     query,
     setQuery,
+    refetch
   };
 };

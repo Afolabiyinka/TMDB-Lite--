@@ -1,4 +1,4 @@
-import type { MovieType } from "./movie";
+import type { MovieType } from "./movie.types";
 
 export interface Favourites {
     favourites: MovieType[];

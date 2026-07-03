@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useScrollableContainer } from "../hooks/useScroll";
+import { useScrollableContainer } from "../hooks/search/useScroll";
 
 interface Props {
   children: React.ReactNode;

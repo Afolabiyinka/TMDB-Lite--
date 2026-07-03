@@ -1,8 +1,8 @@
 import { Toaster } from "sonner";
-import RoutesConfig from "./routes/routes-config";
 import { useThemeStore } from "./app/store/themeStore";
 import { useEffect } from "react";
 import { useUser } from "./app/hooks/user/useUser";
+import RoutesConfig from "./app/routes/routes-config";
 
 const App = () => {
   const { theme } = useThemeStore();
@@ -23,8 +23,7 @@ const App = () => {
     }
   }, [theme]);
 
-
-  const { } = useUser()
+  const {} = useUser();
   return (
     <div className="font-[Inter] w-full">
       <RoutesConfig />
@@ -33,7 +32,7 @@ const App = () => {
         position="top-center"
         toastOptions={{
           style: {
-            borderRadius: "100px",
+            borderRadius: "50px",
           },
         }}
         richColors

@@ -1,4 +1,4 @@
-import type { MovieType } from "../../../types/movie";
+import type { MovieType } from "../../../types/movie.types";
 import Loader from "../../ui/Loader";
 import MovieCard from "../MovieCard";
 import { motion } from "framer-motion";

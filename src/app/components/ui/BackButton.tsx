@@ -1,11 +1,12 @@
 import { Button } from "@material-tailwind/react";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-const BackButton = () => {
+
+const BackButton = ({ whereTo }: { whereTo: "home" | "back" }) => {
   const navigate = useNavigate();
   return (
     <Button
-      onClick={() => navigate(-1)}
+      onClick={() => (whereTo === "home" ? navigate("/") : navigate(-1))}
       variant="solid"
       isPill
       size="lg"

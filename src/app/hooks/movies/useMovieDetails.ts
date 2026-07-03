@@ -1,4 +1,4 @@
-import { getMovieCredits, getMovieDetails, getMovieTrailer, getParticularRecomendations } from "@/app/services/movieRequest";
+import { getMovieCredits, getMovieDetails, getMovieTrailer, getParticularRecomendations } from "@/app/services/movie.requests";
 import { useQuery } from "@tanstack/react-query";
 
 export const useMovieDetails = ({ id }: { id: number }) => {

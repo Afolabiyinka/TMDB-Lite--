@@ -1,11 +1,11 @@
-import { Mail, Lock, LogIn } from "lucide-react";
-import CustomInput from "../../components/ui/custom-input";
-import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
-import { useLogin } from "../../hooks/auth/useLogin";
+import { GoogleLogin } from "@react-oauth/google";
+import { SpinnerGapIcon } from "@phosphor-icons/react";
+import { useGoogleLogin } from "@/app/hooks/auth/useGoogleLogin";
 
 const Login = () => {
-  const { handleLogin, loginData, setLoginData, loading } = useLogin();
+  const { handleGoogleLogin, googleLoading } = useGoogleLogin();
+
   return (
     <div className="h-full w-full flex flex-col justify-center items-center p-4  md:px-8">
       <div className="w-full md:max-w-sm flex flex-col gap-6">
@@ -20,33 +20,25 @@ const Login = () => {
           className="flex flex-col gap-4"
           onSubmit={(e) => {
             e.preventDefault();
-            handleLogin();
           }}
         >
-          <CustomInput
-            value={loginData.email}
-            onChange={(e) => setLoginData({ ...loginData, email: e })}
-            id="email"
-            placeholder="Email"
-            type="email"
-            icon={<Mail size={18} />}
-          />
-          <CustomInput
-            value={loginData.password}
-            onChange={(e) => setLoginData({ ...loginData, password: e })}
-            id="password"
-            placeholder="Password"
-            type="password"
-            icon={<Lock size={18} />}
-          />
-
-          <Button isPill type="submit" size="xl" disabled={loading}>
-            <LogIn size={18} className="mr-4" />
-            Sign in
-          </Button>
+          <div className="w-full pt-2">
+            {googleLoading ? (
+              <span className="p-3 rounded-full border border-border flex justify-center items-center">
+                <SpinnerGapIcon className="animate-spin" />
+              </span>
+            ) : (
+              <GoogleLogin
+                shape="pill"
+                size="large"
+                theme="filled_black"
+                text="signin_with"
+                onSuccess={(data) => handleGoogleLogin(data)}
+              />
+            )}
+          </div>
         </form>
 
-        {/* Footer */}
         <p className="text-sm text-center text-gray-500">
           Don't have an account?{" "}
           <Link to="/sign-up" className="font-medium underline">

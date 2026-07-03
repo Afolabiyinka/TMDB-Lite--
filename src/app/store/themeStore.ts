@@ -8,9 +8,9 @@ interface ThemeStore {
 }
 
 export const useThemeStore = create<ThemeStore>((set) => ({
-  theme: (localStorage.getItem("theme") as Theme) || "light",
+  theme: (localStorage.getItem("tmdb-theme") as Theme) || "light",
   setTheme: (theme) => {
-    localStorage.setItem("theme", theme);
+    localStorage.setItem("tmdb-theme", theme);
     set({ theme });
   },
 }));
