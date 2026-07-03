@@ -13,16 +13,20 @@ interface Props {
   link?: string;
   onClick?: () => void;
 }
-const NavIcon = ({ icon: Icon, link, tooltip }: Props) => {
+const NavIcon = ({ icon: Icon, link, tooltip, onClick }: Props) => {
   const location = useLocation();
   const isActive = location.pathname === link;
   const navigate = useNavigate();
+
+  function goToLink() {
+    navigate(`${link}`);
+  }
 
   return (
     <Tooltip>
       <TooltipTrigger>
         <div
-          onClick={() => navigate(`${link}`)}
+          onClick={link ? goToLink : onClick}
           className={`flex items-center justify-center p-2  ${
             isActive
               ? "rounded-full bg-black text-white transition-all duration-700 dark:bg-white dark:text-black"

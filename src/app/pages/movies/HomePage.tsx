@@ -20,17 +20,19 @@ const HomePage = () => {
 
   return (
     <div className="w-full h-full flex justify-center items-center flex-col">
-      <div className={`flex flex-col justify-center items-center h-fit w-full`}>
+      <div
+        className={`flex flex-col justify-center items-center h-full  w-full`}
+      >
         {isLoading ? (
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="flex"
+            className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center p-3 md:px-8 items-center w-full"
           >
             {Array.from({ length: 12 }).map((_, index) => (
               <motion.div
-                className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center p-3 md:px-8 items-center w-full"
+                className="w-full"
                 key={index}
                 variants={itemVariants}
               >

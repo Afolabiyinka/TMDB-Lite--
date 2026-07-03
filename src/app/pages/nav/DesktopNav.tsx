@@ -28,13 +28,13 @@ const DesktopNav = () => {
                 className="flex items-center gap-x-2 p-2 text-sm font-medium transition-colors duration-100 group"
               >
                 <NavIcon icon={Icon} link={href} />
-                <p className="">{title}</p>
+                <p className="ml-2">{title}</p>
               </NavLink>
             );
           })}
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-5">
           <ProfileAvatar />
           <NavIcon link="/search" icon={MagnifyingGlassIcon} tooltip="Search" />
           <ModeToggle />

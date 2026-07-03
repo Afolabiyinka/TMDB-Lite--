@@ -1,36 +1,29 @@
 import { ListIcon, MagnifyingGlassIcon, XIcon } from "@phosphor-icons/react";
 import { useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "@/app/components/ui/Logo";
 import { LINKS } from "@/app/libs/nav";
 import { ModeToggle } from "@/app/components/ModeToggle";
 import ProfileAvatar from "@/app/components/ui/ProfileAvatar";
+import NavIcon from "@/app/components/ui/NavIcon";
 
 const MobileNav = () => {
   const [openNav, setOpenNav] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
 
   return (
     <div className={`w-full p-4 fixed z-50 top-0 bg-white dark:bg-[#0f0e0e]`}>
       <div className="flex justify-between items-center">
         <Logo />
 
-        <div className="flex gap-6 items-center  justify-center p-1">
-          <MagnifyingGlassIcon
-            size={30}
-            weight="regular"
-            onClick={() => navigate("/search")}
-          />
+        <div className="flex gap-3 items-center  justify-center p-1">
+          <NavIcon link="/search" icon={MagnifyingGlassIcon} tooltip="Search" />
           <ModeToggle />
-          <div onClick={() => setOpenNav(!openNav)}>
-            {openNav ? (
-              <XIcon size={30} weight="regular" />
-            ) : (
-              <ListIcon size={30} weight="regular" />
-            )}
-          </div>
+          <NavIcon
+            onClick={() => setOpenNav(!openNav)}
+            icon={openNav ? XIcon : ListIcon}
+          />
         </div>
       </div>
 
