@@ -1,4 +1,4 @@
-import tmdbLogo from "@/assets/Images/tmdb_logo.svg";
+import tmdbLogo from "@/assets/tmdb_logo.svg";
 import { Link } from "react-router-dom";
 
 const Logo = () => {
