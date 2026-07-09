@@ -32,7 +32,7 @@ const App = () => {
         position="top-center"
         toastOptions={{
           style: {
-            borderRadius: "50px",
+            borderRadius: "20px",
           },
         }}
         richColors

@@ -1,8 +1,6 @@
 import CustomError from "@/app/pages/error/CustomErr";
-import { NoResults } from "@/app/pages/error/empty-search";
 import { lazy, useEffect } from "react";
 import { Outlet, useMatches, type RouteObject } from "react-router-dom";
-import ComingSoonSection from "../pages/error/Coming Soon";
 
 //Auth Routes
 const Login = lazy(() => import("../pages/auth/Login"));
@@ -85,10 +83,6 @@ export const routes: RouteObject[] = [
             path: "account",
             Component: AccountPage,
             handle: { title: "Account" },
-          },
-          {
-            path: "error",
-            element: <ComingSoonSection />,
           },
         ],
       },

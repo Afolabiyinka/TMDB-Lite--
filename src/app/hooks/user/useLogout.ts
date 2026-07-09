@@ -7,7 +7,7 @@ export const useLogout = () => {
 
     async function handleLogout() {
         try {
-            const res = await fetch(`${prodEndpoint}api/auth/logout`, {
+            const res = await fetch(`${prodEndpoint}/auth/logout`, {
                 credentials: "include",
                 method: "POST",
             });

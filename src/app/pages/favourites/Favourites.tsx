@@ -8,6 +8,8 @@ import Pagination from "@/app/components/Pagination";
 import { useFavourites } from "@/app/hooks/favourites/useFavourites";
 import { containerVariants, itemVariants } from "@/app/libs/motion-variants";
 import ErrorPage from "@/app/components/ui/ErrorPage";
+import { useUser } from "@/app/hooks/user/useUser";
+import LoginPopup from "@/app/components/LoginPopup";
 
 const Favourites = () => {
   const {
@@ -20,6 +22,11 @@ const Favourites = () => {
     data,
     refetchFavourites,
   } = useFavourites({});
+  const { fetchedUser, userLoading } = useUser();
+  if (!fetchedUser && !userLoading) {
+    return <LoginPopup context="account" />;
+  }
+
   if (isLoading) {
     return (
       <motion.div

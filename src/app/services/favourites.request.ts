@@ -7,9 +7,8 @@ const getFavourites = async (page: number): Promise<Favourites> => {
     try {
         const res = await apiClient.get(`/favourites?page=${page}`)
         return res.data
-    } catch (err) {
-        throw err
-    }
+    } catch (err) { throw new Error(); }
+
 }
 
 
@@ -18,7 +17,7 @@ const inFavourites = async (id: number | string) => {
         const res = await apiClient.get(`/favourites/inFavourites/${id}`)
         return res.data
     }
-    catch (err) { throw err; }
+    catch (err) { throw new Error(); }
 
 }
 const addToFavourites = async (movie: MovieType): Promise<ResponseType> => {
@@ -26,7 +25,7 @@ const addToFavourites = async (movie: MovieType): Promise<ResponseType> => {
         const res = await apiClient.post<ResponseType>(`/favourites/add`, movie)
         return res.data
     }
-    catch (err) { throw err; }
+    catch (err) { throw new Error(); }
 }
 
 const removeFromFavourites = async (id: string | number) => {
@@ -35,7 +34,7 @@ const removeFromFavourites = async (id: string | number) => {
         const res = await apiClient.delete<ResponseType>(`favourites/remove/${id}`)
         return res.data
     }
-    catch (err) { throw err; }
+    catch (err) { throw new Error(); }
 }
 
 

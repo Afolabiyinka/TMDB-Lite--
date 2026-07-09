@@ -21,10 +21,10 @@ import { useMovieDetails } from "@/app/hooks/movies/useMovieDetails";
 import MoviePageSkeleton from "@/app/components/movie/MoviePageSkeleton";
 import { useFavourites } from "@/app/hooks/favourites/useFavourites";
 import { useUser } from "@/app/hooks/user/useUser";
-import { LoginModal } from "@/app/components/LoginModal";
 import { useAddFavourites } from "@/app/hooks/favourites/useAddFavourites";
 import { useRemoveFavourite } from "@/app/hooks/favourites/useRemoveFavourite";
 import ErrorPage from "@/app/components/ui/ErrorPage";
+import LoginPopup from "@/app/components/LoginPopup";
 
 const MoviePage = () => {
   const { id } = useParams();
@@ -108,12 +108,7 @@ const MoviePage = () => {
 
   return (
     <>
-      <LoginModal
-        open={openLogin}
-        onClose={() => setOpenLogin(false)}
-        context="favourite"
-      />
-
+      {openLogin && <LoginPopup context="favourite" />}
       <motion.div
         className="w-full h-full p-6 md:p-20"
         initial={{ y: 100 }}

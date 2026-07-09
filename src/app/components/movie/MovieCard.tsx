@@ -3,17 +3,12 @@ import { StarIcon } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
 import type { MovieType } from "../../types/movie.types";
 import { useState } from "react";
-import { LoginModal } from "../LoginModal";
 
 const MovieCard = ({ movie }: { movie: MovieType }) => {
   const navigate = useNavigate();
 
-  const [openLogin, setOpenLogin] = useState(false);
-
   return (
     <>
-      <LoginModal open={openLogin} onClose={() => setOpenLogin(false)} />
-
       <Card
         className="overflow-hidden shadow-none relative border-none hover:border rounded-3xl bg-inherit cursor-pointer hover:scale-[1.02] transition-transform duration-300 w-full"
         onClick={() => navigate(`/movie/${movie.id}`)}
