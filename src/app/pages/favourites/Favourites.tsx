@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import MovieCard from "../../components/movie/MovieCard";
 import { Link } from "react-router-dom";
-import { Film, Heart } from "lucide-react";
+import { ArrowLeft, Heart } from "lucide-react";
 import { Button } from "@material-tailwind/react";
 import MovieCardSkeleton from "@/app/components/movie/DummyCard";
 import Pagination from "@/app/components/Pagination";
@@ -97,7 +97,7 @@ const Favourites = () => {
           >
             <Link to="/">
               <Button size="xl" isPill>
-                <Film size={18} className="mr-2" />
+                <ArrowLeft className="mr-2" size={18} />
                 Browse Movies
               </Button>
             </Link>

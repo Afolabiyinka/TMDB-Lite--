@@ -61,7 +61,7 @@ const MoviePage = () => {
     e.stopPropagation();
 
     if (!fetchedUser && !userLoading) {
-      setOpenLogin(true);
+      setOpenLogin(!openLogin);
       return;
     }
     if (!movie) return;
@@ -167,15 +167,15 @@ const MoviePage = () => {
             <div className="flex flex-col md:flex-row gap-4 mt-4 w-full p-2">
               <div className="flex items-center gap-3 border rounded-full px-4 w-max">
                 <Tooltip>
-                  <Tooltip.Trigger>
-                    <IconButton
+                  <Tooltip.Trigger aschild="true">
+                    {/* <IconButton
                       variant="ghost"
                       isCircular
                       color="secondary"
                       size="xl"
-                    >
-                      <ThumbsUpIcon size={40} className="stroke-[1px]" />
-                    </IconButton>
+                    > */}
+                    <ThumbsUpIcon size={40} className="stroke-[1px]" />
+                    {/* </IconButton> */}
                   </Tooltip.Trigger>
                   <Tooltip.Content>
                     <p>Like this movie</p>

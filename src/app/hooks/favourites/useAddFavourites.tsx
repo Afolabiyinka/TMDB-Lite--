@@ -1,7 +1,7 @@
+import { queryClient } from "@/app/constants/api-data";
 import useToastMessage from "@/app/libs/useToastMsg";
 import { addToFavourites } from "@/app/services/favourites.request";
 import type { MovieType } from "@/app/types/movie.types";
-import { queryClient } from "@/main";
 import { useMutation } from "@tanstack/react-query";
 
 export const useAddFavourites = ({ id }: { id: string | number }) => {

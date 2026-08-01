@@ -1,6 +1,6 @@
+import { queryClient } from "@/app/constants/api-data";
 import useToastMessage from "@/app/libs/useToastMsg";
 import { removeFromFavourites } from "@/app/services/favourites.request";
-import { queryClient } from "@/main";
 import { useMutation } from "@tanstack/react-query";
 
 export const useRemoveFavourite = ({ id }: { id: string | number }) => {

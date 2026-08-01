@@ -1,10 +1,11 @@
-import { Home, Loader2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { AlertTriangle } from "lucide-react";
+import { useNavigate, useRouteError } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@material-tailwind/react";
 
-const CustomError = ({ message }: { message?: string }) => {
+const CustomError = () => {
   const navigate = useNavigate();
+  const error = useRouteError() as Error;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-6">
@@ -14,9 +15,9 @@ const CustomError = ({ message }: { message?: string }) => {
         className="w-full max-w-md p-8 text-center space-y-6"
       >
         <div className="flex justify-center">
-          {/* <div className="p-4 rounded-full bg-destructive/10 text-destructive">
-                        <AlertTriangle />
-                    </div> */}
+          <div className="p-4 rounded-full  text-destructive">
+            <AlertTriangle />
+          </div>
         </div>
 
         <div>
@@ -26,25 +27,24 @@ const CustomError = ({ message }: { message?: string }) => {
           </p>
         </div>
 
-        {message && (
+        {error && (
           <div className="text-xs text-muted-foreground bg-muted/50 border rounded-lg p-3 wrap-break-word">
-            {message}
+            {error.message}
           </div>
         )}
 
         <div className="flex flex-col md:flex-row gap-3  items-center justify-center">
           <Button onClick={() => window.location.reload()} size={`lg`} isPill>
-            <Loader2 className="mr-2 h-4 w-4" />
             Try again
           </Button>
 
           <Button
             isPill
             size={`lg`}
-            color="secondary"
-            onClick={() => navigate("/")}
+            variant="outline"
+            onClick={() => navigate("/dashboard")}
           >
-            <Home className="mr-2 h-4 w-4" />
+            {/* <Home /> */}
             Go home
           </Button>
         </div>

@@ -31,13 +31,7 @@ const HomePage = () => {
             className="grid gap-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-3 justify-center p-3 md:px-8 items-center w-full"
           >
             {Array.from({ length: 12 }).map((_, index) => (
-              <motion.div
-                className="w-full"
-                key={index}
-                variants={itemVariants}
-              >
-                <MovieCardSkeleton key={index} />
-              </motion.div>
+              <MovieCardSkeleton key={index} />
             ))}
           </motion.div>
         ) : error ? (

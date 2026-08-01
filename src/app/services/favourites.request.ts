@@ -1,4 +1,5 @@
 import { apiClient } from "../api/axios-config";
+import { getErrorMessage } from "../libs/errorMsg";
 import type { Favourites, ResponseType, } from "../types/favourites.types";
 import type { MovieType } from "../types/movie.types";
 
@@ -17,7 +18,9 @@ const inFavourites = async (id: number | string) => {
         const res = await apiClient.get(`/favourites/inFavourites/${id}`)
         return res.data
     }
-    catch (err) { throw new Error(); }
+    catch (err) {
+        throw new Error(getErrorMessage(err))
+    }
 
 }
 const addToFavourites = async (movie: MovieType): Promise<ResponseType> => {
@@ -25,7 +28,9 @@ const addToFavourites = async (movie: MovieType): Promise<ResponseType> => {
         const res = await apiClient.post<ResponseType>(`/favourites/add`, movie)
         return res.data
     }
-    catch (err) { throw new Error(); }
+    catch (err) {
+        throw new Error(getErrorMessage(err))
+    }
 }
 
 const removeFromFavourites = async (id: string | number) => {
@@ -34,7 +39,9 @@ const removeFromFavourites = async (id: string | number) => {
         const res = await apiClient.delete<ResponseType>(`favourites/remove/${id}`)
         return res.data
     }
-    catch (err) { throw new Error(); }
+    catch (err) {
+        throw new Error(getErrorMessage(err))
+    }
 }
 
 

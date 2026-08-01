@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import useToastMessage from "@/app/libs/useToastMsg";
 import { googleLogin } from "@/app/services/auth.request";
-import { queryClient } from "@/main";
+import { queryClient } from "@/app/constants/api-data";
 
 export const useGoogleLogin = () => {
    const { toastError, toastSuccess } = useToastMessage();
