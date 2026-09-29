@@ -1,7 +1,7 @@
 import { AlertTriangle } from "lucide-react";
 import { useNavigate, useRouteError } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Button } from "@material-tailwind/react";
+import CustomBtn from "@/app/components/ui/CustomBtn";
 
 const CustomError = () => {
   const navigate = useNavigate();
@@ -34,19 +34,17 @@ const CustomError = () => {
         )}
 
         <div className="flex flex-col md:flex-row gap-3  items-center justify-center">
-          <Button onClick={() => window.location.reload()} size={`lg`} isPill>
+          <CustomBtn onClick={() => window.location.reload()} size="lg">
             Try again
-          </Button>
+          </CustomBtn>
 
-          <Button
-            isPill
-            size={`lg`}
+          <CustomBtn
+            size="lg"
             variant="outline"
             onClick={() => navigate("/dashboard")}
           >
-            {/* <Home /> */}
             Go home
-          </Button>
+          </CustomBtn>
         </div>
       </motion.div>
     </div>

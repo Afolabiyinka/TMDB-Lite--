@@ -7,9 +7,10 @@ import {
   StarIcon,
   CalendarIcon,
   ThumbsUpIcon,
+  ClockIcon,
 } from "@phosphor-icons/react";
 
-import { Button, Chip, IconButton, Tooltip } from "@material-tailwind/react";
+import { Chip, IconButton, Tooltip } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 
 import Recommendations from "@/app/components/movie/movies-pages/recommendations";
@@ -25,6 +26,7 @@ import { useAddFavourites } from "@/app/hooks/favourites/useAddFavourites";
 import { useRemoveFavourite } from "@/app/hooks/favourites/useRemoveFavourite";
 import ErrorPage from "@/app/components/ui/ErrorPage";
 import LoginPopup from "@/app/components/LoginPopup";
+import CustomBtn from "@/app/components/ui/CustomBtn";
 
 const MoviePage = () => {
   const { id } = useParams();
@@ -46,12 +48,8 @@ const MoviePage = () => {
     trailerLoading,
   } = useMovieDetails({ id: movieId });
 
-  //Favourites Stuff
-
   const [openLogin, setOpenLogin] = useState(false);
-
   const { isFavourite, checking } = useFavourites({ id: movieId });
-
   const { handleAdd, isPending } = useAddFavourites({ id: movieId });
   const { handleRemove, removingFavourite } = useRemoveFavourite({
     id: movieId,
@@ -59,30 +57,22 @@ const MoviePage = () => {
 
   const handleFavouriteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-
     if (!fetchedUser && !userLoading) {
       setOpenLogin(!openLogin);
       return;
     }
     if (!movie) return;
-
-    if (isFavourite) {
-      handleRemove(movie.id);
-    } else {
-      handleAdd(movie);
-    }
+    isFavourite ? handleRemove(movie.id) : handleAdd(movie);
   };
 
-  const movieInFavorites = isFavourite;
+  const [trailerOpen, setTrailerOpen] = useState(false);
 
   useEffect(() => {
     if (movie) document.title = `${movie.title}`;
   }, [movie]);
 
-  const [trailerOpen, setTrailerOpen] = useState(false);
-
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, [id]);
 
   if (!movieId || isNaN(movieId)) {
@@ -94,7 +84,6 @@ const MoviePage = () => {
   }
 
   if (movieLoading) return <MoviePageSkeleton />;
-
   if (movieError) return <ErrorPage onRetry={() => refetch()} />;
   if (!movie) return null;
 
@@ -106,163 +95,217 @@ const MoviePage = () => {
       })
     : null;
 
+  const runtime = movie?.runtime
+    ? `${Math.floor(movie.runtime / 60)}h ${movie.runtime % 60}m`
+    : null;
+
   return (
-    <>
+    <div className="">
       {openLogin && <LoginPopup context="favourite" />}
-      <motion.div
-        className="w-full h-full p-6 md:p-20"
-        initial={{ y: 100 }}
-        animate={{ y: 1 }}
-        transition={{ duration: 0.6 }}
-      >
-        <BackButton whereTo="back" />
-        <div className="flex flex-col md:flex-row gap-10 min-h-screen">
-          {/* Poster */}
-          <div className="w-full md:w-1/3 rounded-xl overflow-hidden">
-            {movie?.poster_path ? (
-              <img
-                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                alt="Poster"
-                className="w-full object-cover rounded-xl"
-              />
-            ) : (
-              <div className="w-full h-full dark:bg-gray-800 flex items-center justify-center">
-                No poster available
+
+      <div className="relative min-h-screen w-full">
+        {movie?.backdrop_path && (
+          // <div className="absolute inset-x-0 top-0 -z-10 max-h-[90vh] overflow-hidden">
+          //   <img
+          //     src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+          //     alt=""
+          //     className="h-full w-full scale-110 object-cover blur-[2px] opacity-70"
+          //   />
+          //   <div className="absolute inset-0 bg-black/65" />
+          //   <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-transparent" />
+          // </div>
+          <span></span>
+        )}
+
+        <div className="w-full px-6 md:px-20  pt-10">
+          <BackButton whereTo="back" />
+
+          <motion.div
+            className="flex flex-col md:flex-row gap-10"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            {/* Poster */}
+            <div className="w-40 md:w-1/4 mx-auto md:mx-0 shrink-0">
+              <div className="rounded-xl overflow-hidden shadow-2xl shadow-black/50 ring-1 ring-white/10">
+                {movie?.poster_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                    alt="Poster"
+                    className="w-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full aspect-[2/3] bg-gray-800 flex items-center justify-center text-sm text-gray-400">
+                    No poster available
+                  </div>
+                )}
               </div>
-            )}
-          </div>
+            </div>
 
-          {/* Info */}
-          <div className="flex-1 flex flex-col gap-6 w-full lg:w-1/2">
-            <h1 className="text-3xl md:text-5xl tracking-wider font-bold font-[Bebas Neue]">
-              {movie?.title || movie?.name}
-            </h1>
+            {/* Info */}
+            <div className="flex-1 flex flex-col gap-5">
+              <h1 className="text-3xl md:text-6xl tracking-wide font-bold  leading-tight">
+                {movie?.title || movie?.name}
+              </h1>
 
-            <Genres movie={movie} />
+              <Genres movie={movie} />
 
-            <div className="flex gap-4 text-sm">
-              <Chip
-                className="flex items-center p-2 px-4"
-                color="secondary"
-                variant="ghost"
-              >
-                <StarIcon className="text-yellow-400 mr-1 stroke-[1px]" />
-                <p>{movie?.vote_average?.toFixed(1)}</p>
-              </Chip>
-              {formattedDate && (
+              <div className="flex  gap-3 text-sm">
                 <Chip
-                  className="flex items-center px-6 py-1"
+                  className="flex items-center gap-1.5 px-4 py-1.5"
                   color="secondary"
                   variant="ghost"
                 >
-                  <CalendarIcon className="w-4 h-4 text-blue-400 mr-1" />
-                  {formattedDate}
+                  <StarIcon weight="fill" className="text-yellow-400 w-4 h-4" />
+                  <p className="font-medium">
+                    {movie?.vote_average?.toFixed(1)}
+                  </p>
                 </Chip>
-              )}
-            </div>
 
-            <p className="leading-relaxed text-xl">{movie?.overview}</p>
+                {formattedDate && (
+                  <Chip
+                    className="flex items-center gap-1.5 px-4 py-1.5"
+                    color="secondary"
+                    variant="ghost"
+                  >
+                    <CalendarIcon className="w-4 h-4 text-blue-400" />
+                    {formattedDate}
+                  </Chip>
+                )}
 
-            {/* Action Buttons */}
-            <div className="flex flex-col md:flex-row gap-4 mt-4 w-full p-2">
-              <div className="flex items-center gap-3 border rounded-full px-4 w-max">
-                <Tooltip>
-                  <Tooltip.Trigger aschild="true">
-                    {/* <IconButton
-                      variant="ghost"
-                      isCircular
-                      color="secondary"
-                      size="xl"
-                    > */}
-                    <ThumbsUpIcon size={40} className="stroke-[1px]" />
-                    {/* </IconButton> */}
-                  </Tooltip.Trigger>
-                  <Tooltip.Content>
-                    <p>Like this movie</p>
-                  </Tooltip.Content>
-                </Tooltip>
+                {runtime && (
+                  <Chip
+                    className="flex items-center gap-1.5 px-4 py-1.5"
+                    color="secondary"
+                    variant="ghost"
+                  >
+                    <ClockIcon className="w-4 h-4" />
+                    {runtime}
+                  </Chip>
+                )}
+              </div>
+              <p className="text-lg font-medium">{movie?.tagline}</p>
 
-                <Tooltip>
-                  <Tooltip.Trigger>
-                    <IconButton
-                      variant="ghost"
-                      isCircular
-                      color="secondary"
-                      className="flex items-center justify-center w-16 h-16"
-                      onClick={handleFavouriteClick}
-                      disabled={isPending || checking || removingFavourite}
-                    >
-                      {isPending || checking || removingFavourite ? (
-                        <Loader2 size={40} className="animate-spin" />
-                      ) : (
-                        <Heart
-                          size={40}
-                          className={`transition-all duration-300 stroke-[1px] ${
-                            isFavourite
-                              ? "text-red-500 fill-red-500 scale-110"
-                              : ""
-                          }`}
-                        />
-                      )}
-                    </IconButton>
-                  </Tooltip.Trigger>
-                  <Tooltip.Content>
-                    <p>
-                      {movieInFavorites
-                        ? "Remove from favourite"
-                        : "Add to favourite"}
-                    </p>
-                  </Tooltip.Content>
-                </Tooltip>
+              <p className="leading-relaxed text-base md:text-lg max-w-2xl">
+                {movie?.overview}
+              </p>
+
+              {/* Action Buttons */}
+
+              <div className="flex items-center gap-4 mt-2">
+                <div className="flex items-center gap-5 rounded-full p-2">
+                  <Tooltip>
+                    <Tooltip.Trigger aschild="true">
+                      <IconButton variant="ghost" isCircular color="secondary">
+                        <ThumbsUpIcon size={30} className="stroke-[1px]" />
+                      </IconButton>
+                    </Tooltip.Trigger>
+                    <Tooltip.Content>
+                      <p>Like this movie</p>
+                    </Tooltip.Content>
+                  </Tooltip>
+
+                  <Tooltip>
+                    <Tooltip.Trigger>
+                      <IconButton
+                        variant="ghost"
+                        isCircular
+                        color="secondary"
+                        onClick={handleFavouriteClick}
+                        disabled={isPending || checking || removingFavourite}
+                      >
+                        {isPending || checking || removingFavourite ? (
+                          <Loader2 size={30} className="animate-spin" />
+                        ) : (
+                          <Heart
+                            size={30}
+                            className={`transition-all duration-300 stroke-[1px] ${
+                              isFavourite
+                                ? "text-red-500 fill-red-500 scale-110"
+                                : ""
+                            }`}
+                          />
+                        )}
+                      </IconButton>
+                    </Tooltip.Trigger>
+                    <Tooltip.Content>
+                      <p>
+                        {isFavourite
+                          ? "Remove from favourite"
+                          : "Add to favourite"}
+                      </p>
+                    </Tooltip.Content>
+                  </Tooltip>
+                </div>
+
+                <CustomBtn
+                  size="lg"
+                  variant="solid"
+                  color="primary"
+                  // className="rounded-full px-8"
+                  onClick={() => setTrailerOpen(!trailerOpen)}
+                  icon={PlayIcon}
+                >
+                  Watch trailer
+                </CustomBtn>
               </div>
 
-              <Button
-                isPill
-                size="md"
-                variant="solid"
-                color="primary"
-                className="w-full"
-                onClick={() => setTrailerOpen(!trailerOpen)}
-              >
-                <PlayIcon className="mr-2 h-7 w-7 stroke-[1px]" />
-                <p className="text-xl">Watch trailer</p>
-              </Button>
+              <div className="max-w-4xl">
+                <Cast
+                  casts={casts}
+                  castsLoading={castsLoading}
+                  noCast={noCast}
+                />
+              </div>
             </div>
+          </motion.div>
 
-            <Cast casts={casts} castsLoading={castsLoading} noCast={noCast} />
+          <div className="mt-14 flex flex-col gap-14">
             <Recommendations
               recommendations={recommendations}
               recLoading={recLoading}
               recError={recError}
             />
           </div>
-        </div>
 
-        {/* Production Companies */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-4 p-6 mt-8">
-          {movie?.production_companies.map(
-            (company: { id: number; logo_path: string; name: string }) => (
-              <div
-                key={company.id}
-                className="flex items-center gap-3 p-4 w-full border-none"
-              >
-                {company.logo_path ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w200${company.logo_path}`}
-                    alt={company.name}
-                    className="h-6 w-auto max-w-[80px] object-contain bg-white rounded"
-                  />
-                ) : (
-                  <div className="h-6 w-[80px] bg-white rounded" />
+          {/* Production Companies */}
+          {movie?.production_companies?.length > 0 && (
+            <div className="mt-16 pt-8 border-t border-white/10">
+              <p className="text-sm mb-4 uppercase tracking-wider">
+                Production
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                {movie.production_companies.map(
+                  (company: {
+                    id: number;
+                    logo_path: string;
+                    name: string;
+                  }) => (
+                    <div
+                      key={company.id}
+                      className="flex items-center gap-3 p-3 rounded-lg bg-white/5"
+                    >
+                      {company.logo_path ? (
+                        <img
+                          src={`https://image.tmdb.org/t/p/w200${company.logo_path}`}
+                          alt={company.name}
+                          className="h-6 w-auto max-w-[70px] object-contain bg-white rounded p-0.5"
+                        />
+                      ) : (
+                        <div className="h-6 w-[70px] bg-white rounded" />
+                      )}
+                      <p className="text-xs font-medium whitespace-nowrap truncate">
+                        {company.name}
+                      </p>
+                    </div>
+                  ),
                 )}
-                <p className="text-sm font-medium whitespace-nowrap">
-                  {company.name}
-                </p>
               </div>
-            ),
+            </div>
           )}
         </div>
-      </motion.div>
+      </div>
 
       {trailerOpen && (
         <TrailerModal
@@ -272,7 +315,7 @@ const MoviePage = () => {
           trialerClose={() => setTrailerOpen(false)}
         />
       )}
-    </>
+    </div>
   );
 };
 

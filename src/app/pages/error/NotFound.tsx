@@ -1,8 +1,9 @@
-import { Typography, Button } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { SmileyMeltingIcon } from "@phosphor-icons/react";
 import { ArrowLeftIcon } from "lucide-react";
+import CustomBtn from "@/app/components/ui/CustomBtn";
 
 function NotFound() {
   const navigate = useNavigate();
@@ -26,10 +27,9 @@ function NotFound() {
           Don&apos;t worry, our team is already on it. Please refresh the page
           or try again later.
         </Typography>
-        <Button isPill size="xl" onClick={() => navigate("/")}>
-          <ArrowLeftIcon className="mr-3" />
+        <CustomBtn size="xl" onClick={() => navigate("/")} icon={ArrowLeftIcon}>
           Back Home
-        </Button>
+        </CustomBtn>
       </motion.div>
     </div>
   );

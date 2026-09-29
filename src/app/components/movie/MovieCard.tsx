@@ -2,7 +2,6 @@ import { Card, Typography, Chip } from "@material-tailwind/react";
 import { StarIcon } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
 import type { MovieType } from "../../types/movie.types";
-import { useState } from "react";
 
 const MovieCard = ({ movie }: { movie: MovieType }) => {
   const navigate = useNavigate();
@@ -10,7 +9,7 @@ const MovieCard = ({ movie }: { movie: MovieType }) => {
   return (
     <>
       <Card
-        className="overflow-hidden shadow-none relative border-none hover:border rounded-3xl bg-inherit cursor-pointer hover:scale-[1.02] transition-transform duration-300 w-full"
+        className="overflow-hidden shadow-none relative border-none hover:border  bg-inherit cursor-pointer hover:scale-[1.02] transition-transform duration-300 w-full rounded-3xl"
         onClick={() => navigate(`/movie/${movie.id}`)}
       >
         <div className="flex items-center justify-between absolute top-2 w-full p-1">
@@ -25,7 +24,7 @@ const MovieCard = ({ movie }: { movie: MovieType }) => {
             </Chip>
           </span>
         </div>
-        <div className="h-[21rem] w-full overflow-hidden">
+        <div className="h-[25rem] w-full overflow-hidden">
           {movie.poster_path ? (
             <img
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
@@ -48,7 +47,7 @@ const MovieCard = ({ movie }: { movie: MovieType }) => {
           <div className="p-3 text-left flex flex-col items-start">
             <Typography
               variant="h5"
-              className="text-gray-800 dark:text-gray-100 text-xl font-medium break-words truncate font-[Bebas Neue]"
+              className="text-gray-800 dark:text-gray-100 text-xl font-semibold break-words truncate font-[Bebas Neue]"
             >
               {movie.title}
             </Typography>

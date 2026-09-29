@@ -9,7 +9,7 @@ const MoviePageSkeleton = () => {
       <div className="flex flex-col md:flex-row gap-10 min-h-screen">
         {/* Poster */}
         <div className="w-full md:w-1/3 rounded-xl overflow-hidden">
-          <div className="w-full h-[500px] bg-gray-300 dark:bg-gray-700 animate-pulse rounded-xl" />
+          <div className="w-full h-[700px] bg-gray-300 dark:bg-gray-700 animate-pulse rounded-xl" />
         </div>
 
         {/* Info */}

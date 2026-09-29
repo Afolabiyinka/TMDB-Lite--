@@ -1,4 +1,4 @@
-import { HeartIcon, HouseIcon } from "@phosphor-icons/react";
+import {  BookmarkSimpleIcon,  HouseIcon } from "@phosphor-icons/react";
 
 export const LINKS = [
    {
@@ -7,7 +7,7 @@ export const LINKS = [
       href: "/",
    },
    {
-      icon: HeartIcon,
+      icon: BookmarkSimpleIcon,
       title: "Favourites",
       href: "/want-to-watch",
    },

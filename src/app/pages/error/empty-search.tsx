@@ -1,6 +1,6 @@
 import { useSearch } from "@/app/hooks/search/useSearch";
-import { Button } from "@material-tailwind/react";
 import { SearchSlash } from "lucide-react";
+import CustomBtn from "@/app/components/ui/CustomBtn";
 
 export function NoResults() {
   const { setQuery } = useSearch();
@@ -17,9 +17,9 @@ export function NoResults() {
         The reel is empty — try a different search
       </p>
 
-      <Button onClick={() => setQuery("")} isPill size="lg">
+      <CustomBtn onClick={() => setQuery("")} size="lg">
         Clear search
-      </Button>
+      </CustomBtn>
     </div>
   );
 }

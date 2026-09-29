@@ -6,7 +6,7 @@ const NavLayout = () => {
   const isMobile = useIsMobile();
 
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full border">
       <DesktopNav />
 
       {isMobile && <MobileNav />}
