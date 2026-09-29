@@ -6,6 +6,7 @@ import {
 } from "@material-tailwind/react";
 import type { IconProps } from "@phosphor-icons/react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 interface Props {
   icon: React.ForwardRefExoticComponent<IconProps>;
@@ -25,7 +26,8 @@ const NavIcon = ({ icon: Icon, link, tooltip, onClick }: Props) => {
   return (
     <Tooltip>
       <TooltipTrigger>
-        <div
+        <motion.div
+          whileTap={{ scale: 0.8 }}
           onClick={link ? goToLink : onClick}
           className={`flex items-center justify-center p-2  ${
             isActive
@@ -34,7 +36,7 @@ const NavIcon = ({ icon: Icon, link, tooltip, onClick }: Props) => {
           }`}
         >
           <Icon size={25} weight={isActive ? "fill" : "regular"} />
-        </div>
+        </motion.div>
       </TooltipTrigger>
       {tooltip && (
         <TooltipContent>

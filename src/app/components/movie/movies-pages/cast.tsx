@@ -42,7 +42,9 @@ const Cast = ({ casts, castsLoading, noCast }: CastsProps) => {
                   />
                   <div className="flex flex-col items-center text-center">
                     <p className="font-semibold text-sm">{cast.name}</p>
-                    <p className="text-xs text-gray-500">as {cast.character}</p>
+                    <p className="text-xs text-gray-500 line-clamp-1">
+                      as {cast.character}
+                    </p>
                   </div>
                 </div>
               </a>

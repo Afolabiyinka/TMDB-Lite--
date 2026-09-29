@@ -1,8 +1,9 @@
 import CustomInput from "@/app/components/ui/custom-input";
-import { Typography, Button } from "@material-tailwind/react";
+import { Typography } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "react-router-dom";
+import CustomBtn from "@/app/components/ui/CustomBtn";
 
 const ComingSoonSection: React.FC = () => {
   return (
@@ -27,9 +28,9 @@ const ComingSoonSection: React.FC = () => {
               placeholder="someone@example.com"
               className="placeholder:text-white/60 text-white"
             />
-            <Button size="lg" color="primary" isPill>
+            <CustomBtn size="lg" color="primary">
               Notify Me
-            </Button>
+            </CustomBtn>
           </div>
         </motion.div>
         <Link to={`/movies`}>

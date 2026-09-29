@@ -1,7 +1,8 @@
-import { Button, IconButton } from "@material-tailwind/react";
+import { IconButton } from "@material-tailwind/react";
 import { ArrowLeft, ArrowRight, Loader2, X } from "lucide-react";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
+import CustomBtn from "@/app/components/ui/CustomBtn";
 
 interface TrailerModalProps {
   trailer: any[];
@@ -48,16 +49,15 @@ const TrailerModal = ({
   return (
     <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
       {/* Close Button */}
-      <Button
+      <CustomBtn
         variant="solid"
-        isPill
         color="primary"
         onClick={trialerClose}
+        icon={X}
         className="flex items-center gap-2 text-xl rounded-xl fixed top-6 right-6 z-[100]"
       >
-        <X size={30} className="stroke-[1px] text-red-800" />
         Close
-      </Button>
+      </CustomBtn>
 
       {/* Responsive Trailer Container */}
       <Swiper

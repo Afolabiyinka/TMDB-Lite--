@@ -6,7 +6,7 @@ export function ModeToggle() {
 
   return (
     <NavIcon
-      tooltip="Change Theme"
+      // tooltip="Change Theme"
       icon={theme === "light" ? SunIcon : MoonIcon}
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
     />
